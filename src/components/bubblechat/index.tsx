@@ -5,6 +5,7 @@ import React from 'react'
 import ProfileContact from './components/profile'
 
 interface BubbleConfig {
+  image?: string
   username?: string
   cargo?: string
   color: string
@@ -14,6 +15,7 @@ interface BubbleConfig {
 }
 
 const BubbleChat: React.FC<BubbleConfig> = ({
+  image,
   username,
   cargo,
   color,
@@ -28,7 +30,9 @@ const BubbleChat: React.FC<BubbleConfig> = ({
         gap: '5px',
       }}
     >
-      {chatprivate && <ProfileContact username={username} cargo={cargo} />}
+      {!chatprivate && (
+        <ProfileContact image={image} username={username} cargo={cargo} />
+      )}
       <Flex
         vertical
         style={{

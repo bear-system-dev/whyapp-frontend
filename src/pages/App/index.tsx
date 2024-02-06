@@ -22,23 +22,25 @@ export function App() {
         <Flex vertical>
           <BubbleChat
             color="#3F7B40"
-            chatprivate={false}
+            chatprivate={true}
             mensage="Hello everyone guys 😊 this is component chat conversation!"
             time="20:58"
           />
           <BubbleChat
+            image="031b68882265722dede1080a200f015a.jpg"
             username="calvão buena"
             cargo="admin"
             color="#434455"
-            chatprivate={true}
+            chatprivate={false}
             mensage="Hello everyone guys 😊 this is a component chat conversation!"
             time="20:58"
           />
           <BubbleChat
+            image="031b68882265722dede1080a200f015a.jpg"
             username="motoplay_br"
             cargo="member"
             color="#3F7B40"
-            chatprivate={true}
+            chatprivate={false}
             mensage="Hello everyone guys 😊 this is a component chat conversation!"
             time="20:58"
           />
