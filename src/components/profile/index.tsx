@@ -12,10 +12,10 @@ interface CargoPofile {
 const ProfileContact: React.FC<CargoPofile> = ({ image, username, cargo }) => {
   return (
     <Flex align="center">
-      <ImageProfile image={image} />
+      <ImageProfile size='2rem' image={image} />
       <Flex vertical>
         <CargoProfile cargo={cargo} />
-        <NameProfile user={username} />
+        <NameProfile colortext="black" user={username} />
       </Flex>
     </Flex>
   )

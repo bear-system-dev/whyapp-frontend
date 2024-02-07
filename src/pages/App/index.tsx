@@ -3,11 +3,13 @@ import { useState } from 'react'
 import Login from '../Login/Login'
 import BubbleChat from '@/components/bubblechat'
 import { Flex } from 'antd'
+import HeaderChat from '@/layout/header'
 
 export function App() {
   const [loggedIn] = useState<boolean>(false)
   return (
     <div>
+      <HeaderChat />
       <Flex align="center" justify="center" gap={200}>
         <Flex vertical align="center">
           {loggedIn ? (

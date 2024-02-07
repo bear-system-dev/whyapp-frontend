@@ -2,7 +2,7 @@ import { Flex } from 'antd'
 import MensageContent from './components/mensage'
 import SendedAt from './components/sendedAt'
 import React from 'react'
-import ProfileContact from './components/profile'
+import ProfileContact from '../profile'
 
 interface BubbleConfig {
   image?: string
