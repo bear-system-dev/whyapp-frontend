@@ -1,0 +1,107 @@
+*:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+  border: none;
+  border-color: transparent;
+  outline: none;
+}
+
+*, *:focus, *:hover{
+  box-shadow: none;
+  outline: none !important;
+}
+
+.input-bar__background {
+  align-items: center;
+  background: #17212B;
+  display: flex;
+  padding: 0 1rem;
+}
+
+.emoji-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  height: 100%;
+}
+
+.emoji-button:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+  background: transparent;
+}
+
+.input-bar__container {
+  align-items: center;
+  display: flex;
+  height: 5rem;
+  padding-left: 2rem;
+  width: 100%;
+}
+
+.input-bar {
+  background:linear-gradient(to bottom right, #C9C9C94D, #C4C4C41A) padding-box, linear-gradient(to bottom right, #FFFFFF4D, #D3D3D31A) border-box;
+  border: 1px solid transparent;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  height: 100%;
+  max-height: 3rem;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.input-bar input::placeholder {
+  color: #FFFFFF80;
+}
+
+.input-bar:hover, .input-bar:focus, .input-bar:focus-within {
+  background:linear-gradient(to bottom right, #C9C9C94D, #C4C4C41A) padding-box, linear-gradient(to bottom right, #FFFFFF4D, #D3D3D31A) border-box;
+  box-shadow: none;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+.input-bar .ant-input {
+  margin-left: 0.5rem;
+}
+
+.attach-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.attach-button:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+  background: transparent;
+}
+
+.attach-button svg {
+  color: #E1E1E1;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.attach-button svg:hover {
+  color: #FFFFFF;
+}
+
+.send-button:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-lg.ant-btn-icon-only {
+  background: linear-gradient(to bottom right, #C9C9C94D, #C4C4C41A) padding-box, 
+              linear-gradient(to bottom left, #FFFFFF4D, #D3D3D31A) border-box;
+  border: 1px solid transparent;
+  border-left: none;
+  height: 100%;
+  max-height: 3rem;
+  width: 6rem;
+  max-width: 10vw;
+  transition: all 0.3s ease-in-out;
+}
+
+.send-button:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-lg.ant-btn-icon-only:hover {
+  background: linear-gradient(to bottom right, #C9C9C980, #C4C4C433) padding-box, 
+              linear-gradient(to bottom left, #FFFFFF80, #D3D3D333) border-box;
+}
+
+.send-button svg {
+  color: #E1E1E1;
+}
+
+.send-button svg:hover {
+  color: #FFFFFF;
+}
