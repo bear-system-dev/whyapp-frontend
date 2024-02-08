@@ -8,7 +8,7 @@ import './styles.css'
 const mainAsideContainer: React.CSSProperties = {
   background: 'linear-gradient(to bottom right, #00000040, #C4C4C41A)',
   height: '100%',
-  padding: '1.5rem 0 1rem',
+  padding: '1.5rem 0 1.5rem',
 }
 
 const avatarButtonStyle: React.CSSProperties = {
@@ -20,7 +20,7 @@ const avatarButtonStyle: React.CSSProperties = {
 }
 
 const userChatContainerStyle: React.CSSProperties = {
-  maxHeight: 648,
+  maxHeight: '70vh',
   overflowY: 'auto',
   scrollbarGutter: 'stable',
   width: '100%',
