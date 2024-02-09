@@ -1,12 +1,12 @@
 import { Flex } from 'antd'
-import MensageContent from './components/mensage'
-import SendedAt from './components/sendedAt'
 import React from 'react'
 import ProfileContact from '../profile'
+import MensageContent from './components/mensage'
+import SendedAt from './components/sendedAt'
 
 interface BubbleConfig {
   image?: string
-  username?: string
+  username: string
   cargo?: string
   color: string
   chatprivate: boolean
@@ -27,7 +27,7 @@ const BubbleChat: React.FC<BubbleConfig> = ({
     <Flex
       vertical
       style={{
-        gap: '5px',
+        gap: '0.5rem',
       }}
     >
       {!chatprivate && (
@@ -37,7 +37,7 @@ const BubbleChat: React.FC<BubbleConfig> = ({
         vertical
         style={{
           width: 'fit-content',
-          padding: '14px',
+          padding: '1rem',
           backgroundColor: `${color}`,
           borderRadius: '14px',
           marginLeft: '4rem',
