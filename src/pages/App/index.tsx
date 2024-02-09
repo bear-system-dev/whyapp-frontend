@@ -1,19 +1,11 @@
 import { ButtonExample } from '@/components/Button'
-import { useState } from 'react'
-import Login from '../Login/Login'
+import './app.css'
 
-export function App() {
-  const [loggedIn] = useState<boolean>(false)
+export default function App() {
   return (
-    <div>
-      {loggedIn ? (
-        <>
-          <h1>Hello, World!</h1>
-          <ButtonExample />
-        </>
-      ) : (
-        <Login />
-      )}
+    <div id="app">
+      <h1>Hello, World!</h1>
+      <ButtonExample />
     </div>
   )
 }
