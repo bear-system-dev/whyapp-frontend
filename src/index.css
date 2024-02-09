@@ -9,6 +9,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Reset CSS */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+/* scrollbar styles */
 ::-webkit-scrollbar {
   width: 0.1vw;
   height: 0.1vw;
