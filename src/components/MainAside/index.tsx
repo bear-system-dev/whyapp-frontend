@@ -1,8 +1,8 @@
 import defaultAvatar from '@/assets/defaultAvatar.svg'
 import whyAppLogo from '@/assets/whyAppLogo.png'
+import { users } from '@/mocks/mockUserArray'
 import { SearchOutlined, SettingOutlined } from '@ant-design/icons'
 import { Button, Divider, Flex } from 'antd'
-import { users } from './mockUserArray'
 import './styles.css'
 
 const mainAsideContainer: React.CSSProperties = {
@@ -50,7 +50,7 @@ export const MainAside = () => {
   return (
     <Flex vertical style={mainAsideContainer}>
       <Flex style={userChatContainerStyle} vertical align="center" gap={16}>
-        {users.map((user: number) => {
+        {users.map((user: string) => {
           return (
             <Button
               shape="circle"
