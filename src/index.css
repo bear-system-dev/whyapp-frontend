@@ -8,3 +8,27 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+::-webkit-scrollbar {
+  width: 0.1vw;
+  height: 0.1vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFFFFFBF;
+  width: 1px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #FFFFFFBF;
+  width: 1px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-track {
+  background-clip: content-box;
+}
+::-webkit-scrollbar-track:window-inactive {
+  background-clip: content-box;
+}
