@@ -1,18 +1,19 @@
 import chatBackground from '@/assets/chatBackground.svg'
 import { InputBar } from '@/components/InputBar'
 import { MainAside } from '@/components/MainAside'
+import HeaderChat from '@/components/header'
+import { ChatContainer } from '@/mocks/chats-mocks'
 import { Layout } from 'antd'
 import Sider from 'antd/es/layout/Sider'
 import { Content, Footer, Header } from 'antd/es/layout/layout'
 
 const headerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
+  maxHeight: '104px',
   height: '100%',
-  maxHeight: 104,
-  paddingInline: 48,
-  lineHeight: '64px',
-  backgroundColor: 'red',
+  margin: 0,
+  padding: '0 4rem',
+  backgroundColor: '#17212B',
+  zIndex: 3,
 }
 
 const contentStyle: React.CSSProperties = {
@@ -21,7 +22,7 @@ const contentStyle: React.CSSProperties = {
   lineHeight: '120px',
   color: '#fff',
   background: 'transparent',
-  zIndex: 3,
+  zIndex: 2,
 }
 
 const chatBackgroundStyle: React.CSSProperties = {
@@ -38,7 +39,7 @@ const chatDoodleBackgroundStyle: React.CSSProperties = {
   backgroundSize: '50%',
   height: '100%',
   opacity: 0.2,
-  position: 'absolute',
+  position: 'fixed',
   width: '100%',
   zIndex: 2,
 }
@@ -61,8 +62,8 @@ const footerStyle: React.CSSProperties = {
 
 const layoutStyle: React.CSSProperties = {
   borderRadius: 8,
-  overflow: 'hidden',
-  height: '98vh',
+  height: '100vh',
+  width: '100vw',
 }
 
 export const AppLayout = () => {
@@ -72,10 +73,13 @@ export const AppLayout = () => {
         <MainAside />
       </Sider>
       <Layout>
-        <Header style={headerStyle}>Header</Header>
+        <Header style={headerStyle}>
+          <HeaderChat />
+        </Header>
         <Content style={contentStyle}>
+          <ChatContainer />
           <div style={chatDoodleBackgroundStyle} />
-          <div style={chatBackgroundStyle} />
+          <div style={chatBackgroundStyle}></div>
         </Content>
         <Footer style={footerStyle}>
           <InputBar />
