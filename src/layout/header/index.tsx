@@ -23,7 +23,6 @@ const HeaderChat = () => {
         <Flex
           align="center"
           style={{
-            paddingLeft: '64px',
             gap: '24px',
           }}
         >
@@ -42,7 +41,6 @@ const HeaderChat = () => {
             color: 'white',
             fontWeight: '700',
             fontSize: '1.4rem',
-            paddingRight: '2em',
           }}
         />
       </Conteiner>

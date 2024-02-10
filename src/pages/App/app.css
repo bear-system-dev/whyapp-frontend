@@ -1,5 +1,16 @@
-#app{
+#App{
  height: 100vh;
  max-height: 100vh;
  box-sizing: border-box;
+}
+#main{
+  position: relative;
+}
+#chat{
+  overflow-y: scroll;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }

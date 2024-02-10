@@ -1,30 +1,29 @@
-import { Flex } from 'antd'
+import { Flex, Form } from 'antd'
 import styles from './Register.module.css'
 import logo from '@/assets/logowhy@2x.png'
 import Auth from '../../components/Auth/Auth'
-import { useEffect, useState } from 'react'
 
 const Register = () => {
-  const [values, setValues] = useState<object | null>(null)
-  const [submitted, setSubmitted] = useState<boolean>(false)
+  const [form] = Form.useForm()
 
-  useEffect(() => {
-    if (values) {
-      setSubmitted(true)
-      console.log(values)
-      setValues(null)
-    }
-  }, [values])
+  const handleSubmit = (values: object | null) => {
+    console.log(values)
+    form.resetFields()
+  }
 
   return (
     <Flex
       vertical
       justify="center"
-      gap={60}
+      gap={40}
       className={styles.register_container}
     >
-      <div className={styles.register_background}></div>
-      <Flex style={{ minHeight: '200px' }} vertical justify="end">
+      <Flex
+        style={{ minHeight: '200px' }}
+        vertical
+        justify="end"
+        align="center"
+      >
         <div className={styles.register_logo}>
           <img src={logo} alt="logo" />
         </div>
@@ -32,11 +31,11 @@ const Register = () => {
       <Flex flex={1} vertical align="center" justify="start">
         <Auth
           type="register"
-          submitted={submitted}
-          setValues={setValues}
-          authWithGoogle={() => {}}
-          authWithFacebook={() => {}}
-          authWithApple={() => {}}
+          handleForm={form}
+          onSubmit={handleSubmit}
+          authWithGoogle={() => console.log('register with google')}
+          authWithFacebook={() => console.log('register with facebook')}
+          authWithApple={() => console.log('register with apple')}
         />
       </Flex>
     </Flex>

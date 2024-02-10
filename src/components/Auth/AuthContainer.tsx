@@ -6,7 +6,7 @@ type Props = {
 }
 const AuthContainer = (props: Props) => {
   return (
-    <Flex vertical className={styles.auth_container}>
+    <Flex vertical className={styles.auth_container} gap={10}>
       {props.children}
     </Flex>
   )

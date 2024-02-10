@@ -8,7 +8,6 @@ const Header = ({ children }: { children: ReactNode }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: '60px',
         padding: '8px',
       }}
     >
