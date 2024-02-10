@@ -9,9 +9,10 @@ const MensageContent: React.FC<Text> = ({ text }) => {
     <p
       style={{
         color: 'white',
-        paddingRight: '24px',
-        maxWidth: '250px',
-        fontSize: '.8rem',
+        paddingRight: '1.5rem',
+        maxWidth: '16rem',
+        fontSize: '1rem',
+        lineHeight: 1.5,
         margin: '0px',
       }}
     >

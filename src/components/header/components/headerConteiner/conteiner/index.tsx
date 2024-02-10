@@ -6,7 +6,8 @@ const Conteiner = ({ children }: { children: ReactNode }) => {
       style={{
         display: 'flex',
         justifyContent: 'space-between',
-        alignContent: 'center',
+        minHeight: '104px',
+        alignItems: 'center',
         width: '100%',
       }}
     >

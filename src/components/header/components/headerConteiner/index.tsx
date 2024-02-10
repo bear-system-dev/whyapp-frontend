@@ -8,7 +8,11 @@ const Header = ({ children }: { children: ReactNode }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+<<<<<<< HEAD:src/layout/header/components/headerConteiner/index.tsx
         padding: '8px',
+=======
+        maxHeight: '104px',
+>>>>>>> upstream/main:src/components/header/components/headerConteiner/index.tsx
       }}
     >
       {children}
