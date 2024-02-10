@@ -1,9 +1,9 @@
 import { Flex, Form } from 'antd'
-import styles from './Login.module.css'
+import styles from './Register.module.css'
 import logo from '@/assets/logowhy@2x.png'
 import Auth from '../../components/Auth/Auth'
 
-const Login = () => {
+const Register = () => {
   const [form] = Form.useForm()
 
   const handleSubmit = (values: object | null) => {
@@ -12,28 +12,33 @@ const Login = () => {
   }
 
   return (
-    <Flex vertical justify="center" gap={40} className={styles.login_container}>
+    <Flex
+      vertical
+      justify="center"
+      gap={40}
+      className={styles.register_container}
+    >
       <Flex
         style={{ minHeight: '200px' }}
         vertical
         justify="end"
         align="center"
       >
-        <div className={styles.login_logo}>
+        <div className={styles.register_logo}>
           <img src={logo} alt="logo" />
         </div>
       </Flex>
-      <Flex flex={2} vertical align="center" justify="start">
+      <Flex flex={1} vertical align="center" justify="start">
         <Auth
-          type="login"
+          type="register"
           handleForm={form}
           onSubmit={handleSubmit}
-          authWithGoogle={() => console.log('login with google')}
-          authWithFacebook={() => console.log('login with facebook')}
-          authWithApple={() => console.log('login with apple')}
+          authWithGoogle={() => console.log('register with google')}
+          authWithFacebook={() => console.log('register with facebook')}
+          authWithApple={() => console.log('register with apple')}
         />
       </Flex>
     </Flex>
   )
 }
-export default Login
+export default Register

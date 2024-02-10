@@ -1,0 +1,46 @@
+.auth_description{
+  font-size: 15px;
+  color:#ffffffaf;
+}
+.label label {
+  color: #fff !important;
+  font-size: 15px !important;
+  font-weight: 500;
+}
+.label_col {
+  padding: 0 !important;
+}
+.input {
+  background: rgb(241, 241, 241);
+  background: linear-gradient(90deg, rgba(241, 241, 241, 0.386) 0%, rgba(176, 176, 176, 0) 101%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.input::placeholder,
+.input input::placeholder,
+.input svg {
+  color: #ffffff92 !important;
+}
+
+.submit{
+  background-color: #39FF14 !important;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 14px !important;
+  color: black !important;
+  border: none !important;
+}
+.submit:hover{
+  background-color: #88ff74 !important;
+}
+/* .input:hover{
+  background: rgb(241, 241, 241);
+  background: linear-gradient(90deg, rgba(241, 241, 241, 0.386) 0%, rgba(176, 176, 176, 0) 51%);
+  border: none;
+}
+.input:focus{
+  background: rgb(241, 241, 241);
+  background: linear-gradient(90deg, rgba(241, 241, 241, 0.386) 0%, rgba(176, 176, 176, 0) 51%);
+  border: none;
+} */
