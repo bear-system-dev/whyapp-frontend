@@ -3,11 +3,14 @@ import { ChatContainer } from '@/components/ChatContainer'
 import { InputBar } from '@/components/InputBar'
 import { MainAside } from '@/components/MainAside'
 import HeaderChat from '@/components/header'
+import MenuGroup from '@/components/menuGroup'
+import OpenMenu from '@/components/menuGroup/openMenu'
 import { MockChats } from '@/mocks/chats-mocks'
-
 import { Layout } from 'antd'
 import Sider from 'antd/es/layout/Sider'
 import { Content, Footer, Header } from 'antd/es/layout/layout'
+import React, { useState } from 'react'
+import './index.css'
 
 const headerStyle: React.CSSProperties = {
   maxHeight: '104px',
@@ -51,7 +54,7 @@ const siderStyle: React.CSSProperties = {
   lineHeight: '120px',
   color: '#fff',
   backgroundColor: '#17212B',
-  zIndex: 3,
+  zIndex: 4,
 }
 
 const footerStyle: React.CSSProperties = {
@@ -70,15 +73,33 @@ const layoutStyle: React.CSSProperties = {
   width: '100vw',
 }
 
+const asideGroup: React.CSSProperties = {
+  zIndex: '3',
+}
+
 export const AppLayout = () => {
+  const [activeAside, setActiveAside] = useState(true)
+
   return (
     <Layout style={layoutStyle}>
       <Sider width={96} style={siderStyle}>
         <MainAside />
       </Sider>
+      {activeAside && (
+        <Sider width={380} style={asideGroup}>
+          <MenuGroup activeMenu={activeAside} setActiveMenu={setActiveAside} />
+        </Sider>
+      )}
       <Layout>
         <Header style={headerStyle}>
           <HeaderChat />
+          {!activeAside && (
+            <OpenMenu
+              classname={`${activeAside ? 'open' : 'close'}`}
+              activeMenu={activeAside}
+              setActiveMenu={setActiveAside}
+            />
+          )}
         </Header>
         <Content style={contentStyle}>
           <ChatContainer>

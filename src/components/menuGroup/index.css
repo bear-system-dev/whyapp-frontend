@@ -1,0 +1,5 @@
+.menugroup {
+    background-color: rgba(18, 29, 40, 0.75);
+    height: 100vh;
+    z-index: 3;
+}

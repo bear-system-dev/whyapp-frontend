@@ -9,6 +9,7 @@ const ImageProfile: React.FC<Image> = ({ image, size }) => {
     <img
       style={{
         width: size,
+        height: size,
         borderRadius: '100%',
         marginRight: '1rem',
       }}
