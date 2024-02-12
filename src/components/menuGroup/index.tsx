@@ -12,7 +12,8 @@ const scrollConteiner: React.CSSProperties = {
 
 const menuConteiner: React.CSSProperties = {
   overflowY: 'scroll',
-  backgroundColor: 'rgba(18, 29, 40, 0.75)',
+  backgroundColor: 'rgba(18, 29, 40, 0.9)',
+  backdropFilter: 'blur(2px)',
   height: '100vh',
   zIndex: '3',
 }

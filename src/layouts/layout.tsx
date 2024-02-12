@@ -74,30 +74,30 @@ const layoutStyle: React.CSSProperties = {
 
 const asideGroup: React.CSSProperties = {
   zIndex: '3',
+  position: 'static',
   left: '0',
-  transition: 'left .3s ease',
+  transition: 'left .5s ease',
 }
 
 const openAsideGroup: React.CSSProperties = {
-  zIndex: '3',
   left: '0px',
 }
 const closeAsideGroup: React.CSSProperties = {
-  zIndex: '3',
+  position: 'absolute',
   left: '-380px',
 }
 
 export const AppLayout = () => {
-  const [activeAside, setActiveAside] = useState(true)
+  const [activeAside, setActiveAside] = useState(false)
   return (
     <Layout style={layoutStyle}>
       <Sider width={96} style={siderStyle}>
         <MainAside />
       </Sider>
       <Sider
-        color="transparent"
         width={380}
         style={{
+          background: 'transparent',
           ...asideGroup,
           ...(activeAside ? openAsideGroup : closeAsideGroup),
         }}
