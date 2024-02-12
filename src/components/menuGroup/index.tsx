@@ -1,9 +1,21 @@
 import { Flex } from 'antd'
-import './index.css'
 import HeaderMenu from './headermenu'
 import Contact from './contact'
 import { Members } from '@/mocks/mockMemberGroup'
-import { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
+import OnlineConteiner from './OnlineConteiner'
+import OfflineConteiner from './OfflineConteiner'
+
+const scrollConteiner: React.CSSProperties = {
+  overflowY: 'scroll',
+}
+
+const menuConteiner: React.CSSProperties = {
+  overflowY: 'scroll',
+  backgroundColor: 'rgba(18, 29, 40, 0.75)',
+  height: '100vh',
+  zIndex: '3',
+}
 
 interface AsideMenuProps {
   activeMenu: boolean
@@ -12,29 +24,14 @@ interface AsideMenuProps {
 
 const MenuGroup: React.FC<AsideMenuProps> = ({ activeMenu, setActiveMenu }) => {
   return (
-    <Flex className="menugroup" vertical>
+    <Flex style={menuConteiner} vertical>
       <HeaderMenu
         name="calin do grau"
         activeMenu={activeMenu}
         setActiveMenu={setActiveMenu}
       />
-      <Flex
-        vertical
-        style={{
-          overflowY: 'scroll',
-        }}
-      >
-        <div style={{ borderBottom: '1px solid #8D8686' }}>
-          <p
-            style={{
-              color: '#FFFFFF',
-              fontSize: '1.2rem',
-              fontWeight: '700',
-              padding: '10px 20px',
-            }}
-          >
-            online
-          </p>
+      <Flex vertical style={scrollConteiner}>
+        <OnlineConteiner>
           {Members.filter((data) => data.status === true).map((data, index) => (
             <Contact
               key={index}
@@ -44,18 +41,8 @@ const MenuGroup: React.FC<AsideMenuProps> = ({ activeMenu, setActiveMenu }) => {
               image={data.image}
             />
           ))}
-        </div>
-        <div>
-          <p
-            style={{
-              color: '#8D8686',
-              fontSize: '1.2rem',
-              fontWeight: '700',
-              padding: '10px 20px',
-            }}
-          >
-            offline
-          </p>
+        </OnlineConteiner>
+        <OfflineConteiner>
           {Members.filter((data) => data.status === false).map(
             (data, index) => (
               <Contact
@@ -67,7 +54,7 @@ const MenuGroup: React.FC<AsideMenuProps> = ({ activeMenu, setActiveMenu }) => {
               />
             ),
           )}
-        </div>
+        </OfflineConteiner>
       </Flex>
     </Flex>
   )
