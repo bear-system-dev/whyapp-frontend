@@ -2,16 +2,10 @@ import { RightOutlined } from '@ant-design/icons'
 import { Dispatch, SetStateAction } from 'react'
 
 type openMenuProps = {
-  activeMenu: boolean
   setActiveMenu: Dispatch<SetStateAction<boolean>>
-  classname: string
 }
 
-const OpenMenu: React.FC<openMenuProps> = ({
-  classname,
-  activeMenu,
-  setActiveMenu,
-}) => {
+const OpenMenu: React.FC<openMenuProps> = ({ setActiveMenu }) => {
   return (
     <RightOutlined
       style={{
@@ -24,8 +18,7 @@ const OpenMenu: React.FC<openMenuProps> = ({
         fontSize: '2rem',
         borderRadius: ' 0 0 10px 0px',
       }}
-      className={classname}
-      onClick={() => setActiveMenu(!activeMenu)}
+      onClick={() => setActiveMenu(true)}
     />
   )
 }
