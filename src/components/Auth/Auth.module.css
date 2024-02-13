@@ -34,13 +34,3 @@
 .submit:hover{
   background-color: #88ff74 !important;
 }
-/* .input:hover{
-  background: rgb(241, 241, 241);
-  background: linear-gradient(90deg, rgba(241, 241, 241, 0.386) 0%, rgba(176, 176, 176, 0) 51%);
-  border: none;
-}
-.input:focus{
-  background: rgb(241, 241, 241);
-  background: linear-gradient(90deg, rgba(241, 241, 241, 0.386) 0%, rgba(176, 176, 176, 0) 51%);
-  border: none;
-} */

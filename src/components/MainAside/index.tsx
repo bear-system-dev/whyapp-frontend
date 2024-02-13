@@ -1,22 +1,22 @@
-import defaultAvatar from '@/assets/defaultAvatar.svg'
+// import defaultAvatar from '@/assets/defaultAvatar.svg'
 import whyAppLogo from '@/assets/whyAppLogo.png'
-import { users } from '@/mocks/mockUserArray'
+// import { users } from '@/mocks/mockUserArray'
 import { SearchOutlined, SettingOutlined } from '@ant-design/icons'
-import { Button, Divider, Flex } from 'antd'
+import { Avatar, Button, Divider, Flex } from 'antd'
 import './styles.css'
 
 const mainAsideContainer: React.CSSProperties = {
   background: 'linear-gradient(to bottom right, #00000040, #C4C4C41A)',
   height: '100%',
   padding: '1.5rem 0 1.5rem',
+  width: '100%',
 }
 
 const avatarButtonStyle: React.CSSProperties = {
   background: 'transparent',
   border: 'none',
   padding: '0',
-  height: 'auto',
-  width: '100%',
+  height: 50,
 }
 
 const userChatContainerStyle: React.CSSProperties = {
@@ -28,43 +28,41 @@ const userChatContainerStyle: React.CSSProperties = {
 
 const dividerStyle: React.CSSProperties = {
   background: '#FFFFFFBF',
+  margin: 0,
 }
 
 const searchButtonStyle: React.CSSProperties = {
   background: 'transparent',
   border: 'none',
   color: '#E6E6E6',
-  height: 'auto',
-  width: '100%',
 }
 
 const settingsButtonStyle: React.CSSProperties = {
   background: 'transparent',
   border: 'none',
   color: '#E6E6E6',
-  height: 'auto',
-  width: '100%',
 }
 
 export const MainAside = () => {
+  const chats = Array.from({ length: 40 }, (_, index) => index)
+
   return (
     <Flex vertical style={mainAsideContainer}>
-      <Flex style={userChatContainerStyle} vertical align="center" gap={16}>
-        {users.map((user: string) => {
+      <Flex style={userChatContainerStyle} vertical align="center" gap={8}>
+        {chats.map((i: number) => {
           return (
             <Button
               shape="circle"
-              key={user}
-              icon={
-                <img
-                  src={defaultAvatar}
-                  alt="user avatar"
-                  height={60}
-                  width={60}
-                />
-              }
+              key={i}
               style={avatarButtonStyle}
-            />
+              onClick={() => console.log('Chat ' + i)}
+            >
+              <Avatar
+                style={{ backgroundColor: '#fff' }}
+                src={'https://api.dicebear.com/7.x/miniavs/svg?seed=' + i}
+                size={50}
+              />
+            </Button>
           )
         })}
       </Flex>
@@ -75,8 +73,9 @@ export const MainAside = () => {
           className="search-button"
           style={searchButtonStyle}
           shape="circle"
-          icon={<SearchOutlined />}
-        />
+        >
+          <SearchOutlined />
+        </Button>
 
         <Button
           className="general-settings-button"

@@ -1,22 +1,19 @@
+import { Flex } from 'antd'
 import { ReactNode } from 'react'
 
 const Header = ({ children }: { children: ReactNode }) => {
   return (
-    <header
+    <Flex
+      flex={1}
       style={{
         backgroundColor: '#17212B',
-        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '0 20px',
         alignItems: 'center',
-        justifyContent: 'center',
-<<<<<<< HEAD:src/layout/header/components/headerConteiner/index.tsx
-        padding: '8px',
-=======
-        maxHeight: '104px',
->>>>>>> upstream/main:src/components/header/components/headerConteiner/index.tsx
       }}
     >
       {children}
-    </header>
+    </Flex>
   )
 }
 export default Header

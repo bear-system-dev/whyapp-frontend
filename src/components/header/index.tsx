@@ -5,52 +5,62 @@ import { Button, Flex } from 'antd'
 import { username, users } from '@/mocks/mockUserArray'
 import { MoreOutlined } from '@ant-design/icons'
 import ContactGroup from './components/contactsgroups'
-import Header from './components/headerConteiner'
-import Conteiner from './components/headerConteiner/conteiner'
+import HeaderContainer from './components/headerConteiner'
+import { resetButtonStyles } from './../../mocks/mockUserArray'
 
 const HeaderChat = () => {
   return (
-    <Header>
-      <Conteiner>
-        <Flex
-          align="center"
+    <HeaderContainer>
+      <Flex
+        align="center"
+        style={{
+          gap: '20px',
+        }}
+      >
+        <Button
+          shape="circle"
           style={{
-            gap: '24px',
+            ...resetButtonStyles,
+            height: '45px',
+            width: '45px',
           }}
+          onClick={() => console.log('abrir info')}
         >
           <ImageProfile
-            size={'60px'}
+            size={'45px'}
             image="031b68882265722dede1080a200f015a.jpg"
           />
-          <div>
+        </Button>
+        <div
+          onClick={() => console.log('abrir info')}
+          style={{ cursor: 'pointer', userSelect: 'none' }}
+        >
+          <Flex vertical gap={5}>
             <NameProfile user={username} colortext="#FFFFFF" />
             {/* <StatusContact status="online" /> */}
             <ContactGroup contact={users} />
-          </div>
-        </Flex>
-        <Button
+          </Flex>
+        </div>
+      </Flex>
+      <Button
+        shape="circle"
+        style={{
+          ...resetButtonStyles,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        onClick={() => console.log('abrir info')}
+      >
+        <MoreOutlined
           style={{
-<<<<<<< HEAD:src/layout/header/index.tsx
-            color: 'white',
-            fontWeight: '700',
-            fontSize: '1.4rem',
-=======
-            all: 'unset',
-            display: 'flex',
->>>>>>> upstream/main:src/components/header/index.tsx
+            color: '#FFFFFF',
+            fontWeight: '800',
+            fontSize: '20px',
           }}
-          icon={
-            <MoreOutlined
-              style={{
-                color: '#FFFFFF',
-                fontWeight: '700',
-                fontSize: '2.5rem',
-              }}
-            />
-          }
         />
-      </Conteiner>
-    </Header>
+      </Button>
+    </HeaderContainer>
   )
 }
 export default HeaderChat
