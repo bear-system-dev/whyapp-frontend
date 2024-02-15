@@ -7,12 +7,12 @@ interface Contact {
 const ContactGroup: React.FC<Contact> = ({ contact }) => {
   const containerStyle: React.CSSProperties = {
     display: 'flex',
-    gap: '1rem',
-    fontSize: '1rem',
+    gap: '5px',
+    fontSize: '14px',
     width: '77.5vw',
     color: '#FFFFFF66',
-    fontWeight: 500,
-    lineHeight: 1.5,
+    fontWeight: 400,
+    lineHeight: '100%',
     overflow: 'hidden',
   }
 
