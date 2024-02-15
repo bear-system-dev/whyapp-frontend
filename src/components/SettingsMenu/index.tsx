@@ -95,7 +95,6 @@ export const SettingsMenu = () => {
         placement="left"
         closable={false}
         onClose={onClose}
-        width={'408px'}
         open={settingsMenuOpen}
         getContainer={document.body}
         style={drawerStyles}
