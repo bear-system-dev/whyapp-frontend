@@ -17,7 +17,7 @@ export const ChatContainer = ({ children }: ChatContainerProps) => {
         height: '100%',
         width: '100%',
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column-reverse',
         alignItems: 'center',
         zIndex: 10,
       }}
@@ -27,7 +27,7 @@ export const ChatContainer = ({ children }: ChatContainerProps) => {
           width: '100%',
           maxWidth: '1500px',
           display: 'flex',
-          flexDirection: 'column-reverse',
+          flexDirection: 'column',
           gap: '2rem',
           padding: '20px',
         }}
