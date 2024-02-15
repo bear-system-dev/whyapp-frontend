@@ -1,8 +1,9 @@
 // import defaultAvatar from '@/assets/defaultAvatar.svg'
 import whyAppLogo from '@/assets/whyAppLogo.png'
 // import { users } from '@/mocks/mockUserArray'
-import { SearchOutlined, SettingOutlined } from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import { Avatar, Button, Divider, Flex } from 'antd'
+import { SettingsMenu } from '../SettingsMenu'
 import './styles.css'
 
 const mainAsideContainer: React.CSSProperties = {
@@ -32,12 +33,6 @@ const dividerStyle: React.CSSProperties = {
 }
 
 const searchButtonStyle: React.CSSProperties = {
-  background: 'transparent',
-  border: 'none',
-  color: '#E6E6E6',
-}
-
-const settingsButtonStyle: React.CSSProperties = {
   background: 'transparent',
   border: 'none',
   color: '#E6E6E6',
@@ -76,13 +71,7 @@ export const MainAside = () => {
         >
           <SearchOutlined />
         </Button>
-
-        <Button
-          className="general-settings-button"
-          style={settingsButtonStyle}
-          shape="circle"
-          icon={<SettingOutlined />}
-        />
+        <SettingsMenu />
         <img src={whyAppLogo} alt="WhyApp Logo" height={24} width={24} />
       </Flex>
     </Flex>

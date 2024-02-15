@@ -16,16 +16,14 @@ const settingsButtonStyle: React.CSSProperties = {
   background: 'transparent',
   border: 'none',
   color: '#E6E6E6',
-  height: 'auto',
-  width: '100%',
 }
 
 const drawerStyles: React.CSSProperties = {
   background: '#1E2C39',
   borderRadius: '8px',
   position: 'absolute',
-  bottom: 8,
-  left: 8,
+  bottom: 6,
+  left: 6,
   height: '360px',
   width: '400px',
 }
@@ -84,7 +82,7 @@ export const SettingsMenu = () => {
   }
 
   return (
-    <div>
+    <>
       <Button
         className="general-settings-button"
         style={settingsButtonStyle}
@@ -191,6 +189,6 @@ export const SettingsMenu = () => {
           </Col>
         </Row>
       </Drawer>
-    </div>
+    </>
   )
 }
