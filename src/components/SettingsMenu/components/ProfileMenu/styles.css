@@ -30,12 +30,13 @@ input-container {
   color: #FFFFFF;
   font-size: 1rem;
   line-height: 1.5;
-  max-width: 11.5vw;
+  max-width: 13.5vw;
   padding: 0;
   text-align: center;
   transition: all 0.5s ease;
   text-overflow: ellipsis;
   position: absolute;
+  flex-grow: 1;
 }
 
 .user-name-edit-input:hover, .user-name-edit-input:focus {
@@ -47,6 +48,7 @@ input-container {
   transition: all 1s ease !important;
   position: absolute !important;
   right: 0 !important;
+  flex-shrink: 0;
 }
 
 .input-container:hover .edit-button {

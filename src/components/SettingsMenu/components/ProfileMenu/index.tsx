@@ -123,14 +123,6 @@ export const ProfileMenu = () => {
           align="center"
           justify="center"
         >
-          {!isEditing && (
-            <Button
-              className="edit-button"
-              style={editButtonStyles}
-              icon={<EditOutlined />}
-              onClick={handleEditUserNameButtonClick}
-            />
-          )}
           <Input
             value={userName}
             className="user-name-edit-input"
@@ -142,6 +134,14 @@ export const ProfileMenu = () => {
             readOnly={!isEditing}
             ref={userNameInputRef}
           />
+          {!isEditing && (
+            <Button
+              className="edit-button"
+              style={editButtonStyles}
+              icon={<EditOutlined />}
+              onClick={handleEditUserNameButtonClick}
+            />
+          )}
         </Flex>
         <Flex
           vertical
