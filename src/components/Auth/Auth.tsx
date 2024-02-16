@@ -4,6 +4,7 @@ import { Dispatch, MouseEventHandler } from 'react'
 import AuthContainer from './AuthContainer'
 import { Link } from 'react-router-dom'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { PiIdentificationCard } from 'react-icons/pi'
 
 const authButtonStyles = {
   display: 'flex',
@@ -64,7 +65,10 @@ const Auth = ({
               placeholder="Digite seu nome"
               size="large"
               className={styles.input}
-              autoComplete="off"
+              name="wa-name"
+              id="wa-name"
+              autoComplete="wa-name"
+              prefix={<PiIdentificationCard />}
             />
           </Form.Item>
         )}
@@ -82,8 +86,10 @@ const Auth = ({
             placeholder="Digite seu e-mail"
             size="large"
             className={styles.input}
-            prefix={type === 'login' && <UserOutlined />}
-            autoComplete="off"
+            id="wa-email"
+            autoComplete="wa-email"
+            name="wa-email"
+            prefix={<UserOutlined />}
           />
         </Form.Item>
         <Flex vertical style={{ position: 'relative' }}>
@@ -105,7 +111,10 @@ const Auth = ({
               placeholder="Digite sua senha"
               size="large"
               className={styles.input}
-              prefix={type === 'login' && <LockOutlined />}
+              name="wa-password"
+              id="wa-password"
+              autoComplete="wa-password"
+              prefix={<LockOutlined />}
             />
           </Form.Item>
           {type === 'login' && (
@@ -139,6 +148,10 @@ const Auth = ({
               placeholder="Confirme sua senha"
               size="large"
               className={styles.input}
+              name="wa-confirm-password"
+              id="wa-confirm-password"
+              autoComplete="wa-confirm-password"
+              prefix={<LockOutlined />}
             />
           </Form.Item>
         )}

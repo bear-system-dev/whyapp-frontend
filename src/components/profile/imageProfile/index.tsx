@@ -11,7 +11,6 @@ const ImageProfile: React.FC<Image> = ({ image, size }) => {
         width: size,
         height: size,
         borderRadius: '100%',
-        marginRight: '1rem',
       }}
       src={image}
       alt="image profile"

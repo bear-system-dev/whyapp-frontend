@@ -50,3 +50,10 @@ export const users = [
 ]
 
 export const username = 'carlin do grau'
+
+export const resetButtonStyles = {
+  backgroundColor: 'transparent',
+  border: 'none',
+  padding: '0',
+  cursor: 'pointer',
+}

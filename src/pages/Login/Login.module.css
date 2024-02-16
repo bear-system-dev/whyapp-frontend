@@ -6,7 +6,7 @@
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
-  background-image: url("../../assets/background.png");
+  background-image: url("../../assets/background.webp");
   background-size: cover;
   padding: 0 15px;
 
