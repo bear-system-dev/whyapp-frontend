@@ -7,7 +7,7 @@ const ConteinerContact = ({ children }: { children: ReactNode }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '20px 28px',
+        padding: '12px 28px',
       }}
     >
       {children}

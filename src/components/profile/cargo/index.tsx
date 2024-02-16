@@ -8,7 +8,7 @@ const CargoProfile: React.FC<Cargo> = ({ cargo }) => {
     <p
       style={{
         fontWeight: '700',
-        fontSize: '0.8rem',
+        fontSize: '0.6rem',
         lineHeight: 1,
         margin: '0',
         color: '#FFFFFF',

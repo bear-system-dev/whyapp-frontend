@@ -6,7 +6,7 @@ const OnlineConteiner = ({ children }: { children: ReactNode }) => {
       <p
         style={{
           color: '#FFFFFF',
-          fontSize: '1.2rem',
+          fontSize: '1rem',
           fontWeight: '700',
           padding: '10px 20px',
         }}

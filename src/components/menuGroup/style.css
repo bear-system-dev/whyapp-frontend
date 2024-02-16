@@ -1,0 +1,19 @@
+.ant-drawer-content-wrapper {
+    box-shadow: none !important;
+    z-index: 1;
+}
+  
+.ant-drawer-body {
+padding: 0 !important;
+z-index: 1;
+}
+.option-button-container {
+display: flex !important;
+flex: 1 !important;
+padding: 0.5rem 0 0.5rem 1rem;
+transition: all 0.5s ease !important;
+}
+
+.option-button-container:hover, .option-button-container.active {
+background-color: #FFFFFF4D !important;
+}

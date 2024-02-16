@@ -7,7 +7,7 @@ const NameContact: React.FC<NameContactProps> = ({ color, name }) => {
     <p
       style={{
         color,
-        fontSize: '1.2rem',
+        fontSize: '.9rem',
         fontWeight: '600',
       }}
     >

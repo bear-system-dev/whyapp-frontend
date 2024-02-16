@@ -1,63 +1,93 @@
-import { Flex } from 'antd'
+import { Button, Drawer, Flex } from 'antd'
+import React, { useState } from 'react'
+import './style.css'
+import OpenMenu from './openMenu'
 import HeaderMenu from './headermenu'
-import Contact from './contact'
-import { Members } from '@/mocks/mockMemberGroup'
-import React, { Dispatch, SetStateAction } from 'react'
 import OnlineConteiner from './OnlineConteiner'
+import { Members } from '@/mocks/mockMemberGroup'
+import Contact from './contact'
 import OfflineConteiner from './OfflineConteiner'
-
-const scrollConteiner: React.CSSProperties = {
-  overflowY: 'scroll',
-}
 
 const menuConteiner: React.CSSProperties = {
   overflowY: 'scroll',
   backgroundColor: 'rgba(18, 29, 40, 0.9)',
   backdropFilter: 'blur(2px)',
-  height: '100vh',
-  zIndex: '3',
+  position: 'fixed',
+  left: '66px',
+  bottom: '0',
+  width: '300px',
+  zIndex: 1,
 }
 
-interface AsideMenuProps {
-  activeMenu: boolean
-  setActiveMenu: Dispatch<SetStateAction<boolean>>
+const settingsButtonStyle: React.CSSProperties = {
+  background: 'transparent',
+  position: 'fixed',
+  left: '65px',
+  top: '55px',
+  zIndex: '999',
 }
 
-const MenuGroup: React.FC<AsideMenuProps> = ({ activeMenu, setActiveMenu }) => {
+const MenuGroup = () => {
+  const [settingsMenuOpen, setSettingsMenuOpen] = useState(false)
+
+  const showDrawer = () => {
+    setSettingsMenuOpen(true)
+  }
+
+  const onClose = () => {
+    setSettingsMenuOpen(false)
+  }
   return (
-    <Flex style={menuConteiner} vertical>
-      <HeaderMenu
-        name="calin do grau"
-        activeMenu={activeMenu}
-        setActiveMenu={setActiveMenu}
+    <>
+      <Button
+        className="general-settings-button"
+        style={settingsButtonStyle}
+        shape="circle"
+        icon={<OpenMenu />}
+        type="primary"
+        onClick={showDrawer}
       />
-      <Flex vertical style={scrollConteiner}>
-        <OnlineConteiner>
-          {Members.filter((data) => data.status === true).map((data, index) => (
-            <Contact
-              key={index}
-              name={data.name}
-              status={data.status}
-              cargo={data.cargo}
-              image={data.image}
-            />
-          ))}
-        </OnlineConteiner>
-        <OfflineConteiner>
-          {Members.filter((data) => data.status === false).map(
-            (data, index) => (
-              <Contact
-                key={index}
-                status={data.status}
-                name={data.name}
-                cargo={data.cargo}
-                image={data.image}
-              />
-            ),
-          )}
-        </OfflineConteiner>
-      </Flex>
-    </Flex>
+      <Drawer
+        className="ant-drawer-body"
+        placement="left"
+        closable={false}
+        onClose={onClose}
+        open={settingsMenuOpen}
+        getContainer={document.body}
+        style={menuConteiner}
+      >
+        <HeaderMenu name="Carlin do grau CIA" />
+        <Flex vertical style={{ marginTop: '60px' }}>
+          <OnlineConteiner>
+            {Members.filter((member) => member.status === true).map(
+              (member, index) => (
+                <Contact
+                  key={index}
+                  image={member.image}
+                  name={member.name}
+                  cargo={member.cargo}
+                  status={member.status}
+                />
+              ),
+            )}
+            ,
+          </OnlineConteiner>
+          <OfflineConteiner>
+            {Members.filter((member) => member.status === false).map(
+              (member, index) => (
+                <Contact
+                  key={index}
+                  image={member.image}
+                  name={member.name}
+                  cargo={member.cargo}
+                  status={member.status}
+                />
+              ),
+            )}
+          </OfflineConteiner>
+        </Flex>
+      </Drawer>
+    </>
   )
 }
 export default MenuGroup

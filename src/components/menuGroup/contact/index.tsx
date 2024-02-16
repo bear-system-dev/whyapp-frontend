@@ -11,14 +11,17 @@ interface ContactProps {
   cargo: string
   status: boolean
 }
-
+const conteinerCaontactStyle: React.CSSProperties = {
+  alignItems: 'center',
+  gap: '1rem',
+}
 const Contact: React.FC<ContactProps> = ({ status, image, name, cargo }) => {
   return (
     <>
       {status ? (
         <ConteinerContact>
-          <Flex>
-            <ImageProfile image={image} size="3rem" />
+          <Flex style={conteinerCaontactStyle}>
+            <ImageProfile image={image} size="2.5rem" />
             <Flex vertical>
               <NameContact color={'#FFFFFF'} name={name} />
               <CargoProfile cargo={cargo} />
@@ -26,8 +29,8 @@ const Contact: React.FC<ContactProps> = ({ status, image, name, cargo }) => {
           </Flex>
           <div
             style={{
-              height: '18px',
-              width: '18px',
+              height: '12px',
+              width: '12px',
               borderRadius: '100%',
               backgroundColor: '#00FF04',
             }}
@@ -35,8 +38,8 @@ const Contact: React.FC<ContactProps> = ({ status, image, name, cargo }) => {
         </ConteinerContact>
       ) : (
         <ConteinerContact>
-          <Flex>
-            <ImageProfile image={image} size="3rem" />
+          <Flex style={conteinerCaontactStyle}>
+            <ImageProfile image={image} size="2.5rem" />
             <Flex vertical>
               <NameContact color={'#8D8686'} name={name} />
               <CargoProfile cargo={cargo} />
@@ -44,10 +47,10 @@ const Contact: React.FC<ContactProps> = ({ status, image, name, cargo }) => {
           </Flex>
           <div
             style={{
-              height: '18px',
-              width: '18px',
+              height: '12px',
+              width: '12px',
               borderRadius: '100%',
-              border: '6px solid #8D8686',
+              border: '3px solid #8D8686',
             }}
           ></div>
         </ConteinerContact>

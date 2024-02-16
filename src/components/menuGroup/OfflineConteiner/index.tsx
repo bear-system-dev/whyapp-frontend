@@ -6,7 +6,7 @@ const OfflineConteiner = ({ children }: { children: ReactNode }) => {
       <p
         style={{
           color: '#8D8686',
-          fontSize: '1.2rem',
+          fontSize: '1rem',
           fontWeight: '700',
           padding: '10px 20px',
         }}

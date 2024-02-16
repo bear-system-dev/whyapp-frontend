@@ -6,7 +6,7 @@ const NameGroup: React.FC<NameGroupProps> = ({ name }) => {
     <p
       style={{
         color: '#FFFFFF',
-        fontSize: '1.6rem',
+        fontSize: '1rem',
         fontWeight: '700',
       }}
     >
