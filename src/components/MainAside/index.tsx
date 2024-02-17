@@ -2,6 +2,7 @@
 import whyAppLogo from '@/assets/whyAppLogo.png'
 // import { users } from '@/mocks/mockUserArray'
 import { Avatar, Button, Divider, Flex } from 'antd'
+import { NewChat } from '../NewChat'
 import { Search } from '../Search'
 import { SettingsMenu } from '../SettingsMenu'
 import './styles.css'
@@ -58,6 +59,7 @@ export const MainAside = () => {
       <Divider style={dividerStyle} />
 
       <Flex vertical flex={1} align="center" justify="end" gap={24}>
+        <NewChat />
         <Search />
         <SettingsMenu />
         <img src={whyAppLogo} alt="WhyApp Logo" height={24} width={24} />

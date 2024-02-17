@@ -1,3 +1,4 @@
+import { SearchContext } from '@/contexts/searchContext'
 import {
   CloseOutlined,
   DownOutlined,
@@ -5,7 +6,7 @@ import {
   UpOutlined,
 } from '@ant-design/icons'
 import { Button, Divider, Drawer, Flex, Input } from 'antd'
-import { useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 
 const searchButtonStyle: React.CSSProperties = {
   background: 'transparent',
@@ -15,7 +16,7 @@ const searchButtonStyle: React.CSSProperties = {
 
 const drawerStyles: React.CSSProperties = {
   background: '#1E2C39',
-  borderRadius: '8px',
+  borderRadius: '0 8px 8px 0',
   position: 'absolute',
   bottom: 60,
   left: 64,
@@ -43,6 +44,7 @@ const controlButtonStyles: React.CSSProperties = {
 }
 
 export const Search = () => {
+  // Search drawer functions
   const [searchBarOpen, setSearchBarOpen] = useState(false)
 
   const showDrawer = () => {
@@ -52,6 +54,15 @@ export const Search = () => {
   const onClose = () => {
     setSearchBarOpen(false)
   }
+
+  // Search input functions
+  const { searchTerm, setSearchTerm } = useContext(SearchContext)
+
+  const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value
+    setSearchTerm(searchTerm)
+  }
+
   return (
     <>
       <Button
@@ -76,7 +87,15 @@ export const Search = () => {
           gap={8}
           style={{ height: '100%', padding: '0.5rem' }}
         >
-          <Input className="searchInputBar" style={searchInputBarStyles} />
+          <Input
+            type="text"
+            value={searchTerm}
+            className="searchInputBar"
+            placeholder="Digite para buscar..."
+            autoFocus
+            style={searchInputBarStyles}
+            onChange={handleSearchInputChange}
+          />
           <Flex gap={8}>
             <Button icon={<UpOutlined />} style={controlButtonStyles} />
             <Button icon={<DownOutlined />} style={controlButtonStyles} />

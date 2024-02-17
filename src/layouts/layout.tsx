@@ -1,10 +1,10 @@
 import chatBackground from '@/assets/chatBackgroundRepeat.webp'
+import { Chat } from '@/components/Chat'
 import { ChatContainer } from '@/components/ChatContainer'
 import { InputBar } from '@/components/InputBar'
 import { MainAside } from '@/components/MainAside'
 import HeaderChat from '@/components/header'
 import MenuGroup from '@/components/menuGroup'
-import { MockChats } from '@/mocks/chats-mocks'
 import { Flex } from 'antd'
 import React from 'react'
 
@@ -66,7 +66,7 @@ export const AppLayout = () => {
           }}
         >
           <ChatContainer>
-            <MockChats />
+            <Chat />
           </ChatContainer>
           <div style={chatDoodleBackgroundStyle}></div>
         </Flex>

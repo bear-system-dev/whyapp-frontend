@@ -1,7 +1,6 @@
 import { Flex } from 'antd'
 import React from 'react'
 import ProfileContact from '../profile'
-import MensageContent from './components/mensage'
 import SendedAt from './components/sendedAt'
 
 interface BubbleConfig {
@@ -9,9 +8,9 @@ interface BubbleConfig {
   username: string
   cargo?: string
   color: string
-  chatprivate: boolean
-  mensage: string
+  chatPrivate: boolean
   time: string
+  children?: React.ReactNode
 }
 
 const BubbleChat: React.FC<BubbleConfig> = ({
@@ -19,9 +18,9 @@ const BubbleChat: React.FC<BubbleConfig> = ({
   username,
   cargo,
   color,
-  chatprivate,
-  mensage,
+  chatPrivate,
   time,
+  children,
 }) => {
   return (
     <Flex
@@ -30,7 +29,7 @@ const BubbleChat: React.FC<BubbleConfig> = ({
         gap: '0.5rem',
       }}
     >
-      {!chatprivate && (
+      {!chatPrivate && (
         <ProfileContact image={image} username={username} cargo={cargo} />
       )}
       <Flex
@@ -43,7 +42,7 @@ const BubbleChat: React.FC<BubbleConfig> = ({
           marginLeft: '4rem',
         }}
       >
-        <MensageContent text={mensage} />
+        {children}
         <SendedAt time={time} />
       </Flex>
     </Flex>
