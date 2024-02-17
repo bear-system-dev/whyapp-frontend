@@ -3,8 +3,10 @@ import { ChatContainer } from '@/components/ChatContainer'
 import { InputBar } from '@/components/InputBar'
 import { MainAside } from '@/components/MainAside'
 import HeaderChat from '@/components/header'
+import MenuGroup from '@/components/menuGroup'
 import { MockChats } from '@/mocks/chats-mocks'
 import { Flex } from 'antd'
+import React from 'react'
 
 const chatDoodleBackgroundStyle: React.CSSProperties = {
   background: `url(${chatBackground}) center/cover`,
@@ -21,7 +23,7 @@ const siderStyle: React.CSSProperties = {
   lineHeight: '120px',
   color: '#fff',
   backgroundColor: '#17212B',
-  zIndex: 3,
+  zIndex: 4,
   width: 65,
 }
 
@@ -33,6 +35,7 @@ const footerStyle: React.CSSProperties = {
 }
 
 const layoutStyle: React.CSSProperties = {
+  zIndex: '3',
   borderRadius: 8,
   boxSizing: 'border-box',
   height: '100vh',
@@ -47,6 +50,7 @@ export const AppLayout = () => {
       <Flex style={siderStyle}>
         <MainAside />
       </Flex>
+      <MenuGroup />
       <Flex vertical flex={1}>
         <Flex vertical style={{ height: 60 }}>
           <HeaderChat />
