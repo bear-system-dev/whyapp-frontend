@@ -22,7 +22,7 @@ const drawerStyles: React.CSSProperties = {
   bottom: 60,
   left: 64,
   height: '40px',
-  width: '320px',
+  width: '360px',
 }
 
 const searchInputBarStyles: React.CSSProperties = {
@@ -33,7 +33,7 @@ const searchInputBarStyles: React.CSSProperties = {
   padding: '0 1rem',
   boxSizing: 'border-box',
   height: '24px',
-  width: '100%',
+  width: 'auto',
   gap: '20px',
   alignItems: 'center',
 }
@@ -65,6 +65,8 @@ export const Search = () => {
   // useSearch custom hook
   const {
     searchTerm,
+    activeIndex,
+    totalMatches,
     handleSearchInputChange,
     handleNextHighlight,
     handlePrevHighlight,
@@ -108,6 +110,12 @@ export const Search = () => {
             style={searchInputBarStyles}
             onChange={handleSearchInputChange}
           />
+          <span
+            className="matches-total-matches-counter"
+            style={{
+              visibility: !searchTerm ? 'hidden' : 'visible',
+            }}
+          >{`${activeIndex === -1 ? 0 : activeIndex + 1} de ${totalMatches}`}</span>
           <Flex gap={8}>
             <Button
               icon={<UpOutlined />}

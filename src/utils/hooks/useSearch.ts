@@ -15,6 +15,10 @@ export const useSearch = () => {
   const matchCounts = getMatchCounts(chatData, searchTerm)
   const totalMatches = matchCounts.reduce((a, b) => a + b, 0)
 
+  if (!totalMatches) {
+    setActiveIndex(0)
+  }
+
   const handleNextHighlight = () => {
     if (activeIndex < totalMatches - 1) {
       setActiveIndex(activeIndex + 1)
@@ -45,5 +49,7 @@ export const useSearch = () => {
     handlePrevHighlight,
     isNextDisabled,
     isPrevDisabled,
+    activeIndex,
+    totalMatches,
   }
 }
