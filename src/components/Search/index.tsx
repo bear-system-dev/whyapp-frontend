@@ -5,8 +5,8 @@ import {
   SearchOutlined,
   UpOutlined,
 } from '@ant-design/icons'
-import { Button, Divider, Drawer, Flex, Input } from 'antd'
-import { useState } from 'react'
+import { Button, Divider, Drawer, Flex, Input, InputRef } from 'antd'
+import { useRef, useState } from 'react'
 import './styles.css'
 
 const searchButtonStyle: React.CSSProperties = {
@@ -48,8 +48,14 @@ export const Search = () => {
   // Search drawer functions
   const [searchBarOpen, setSearchBarOpen] = useState(false)
 
+  const inputRef = useRef<InputRef | null>(null)
+
   const showDrawer = () => {
     setSearchBarOpen(true)
+  }
+
+  const handleInputAutoFocus = () => {
+    inputRef.current && inputRef.current.focus()
   }
 
   const onClose = () => {
@@ -84,6 +90,7 @@ export const Search = () => {
         getContainer={document.body}
         mask={false}
         style={drawerStyles}
+        afterOpenChange={handleInputAutoFocus}
       >
         <Flex
           align="center"
@@ -94,9 +101,10 @@ export const Search = () => {
           <Input
             type="text"
             value={searchTerm}
+            ref={inputRef}
+            autoFocus
             className="search-input-bar"
             placeholder="Digite para buscar..."
-            autoFocus
             style={searchInputBarStyles}
             onChange={handleSearchInputChange}
           />
