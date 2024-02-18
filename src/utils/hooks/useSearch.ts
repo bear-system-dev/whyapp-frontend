@@ -1,4 +1,3 @@
-// searchHelper.ts
 import { SearchContext } from '@/contexts/searchContext'
 import { chatData } from '@/mocks/chats-mocks'
 import { getMatchCounts } from '@/utils/helpers/activeIndex'
@@ -19,12 +18,20 @@ export const useSearch = () => {
   const handleNextHighlight = () => {
     if (activeIndex < totalMatches - 1) {
       setActiveIndex(activeIndex + 1)
+      document.querySelector('.Active')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      })
     }
   }
 
   const handlePrevHighlight = () => {
     if (activeIndex > 0) {
       setActiveIndex(activeIndex - 1)
+      document.querySelector('.Active')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      })
     }
   }
 
