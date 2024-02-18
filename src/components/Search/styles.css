@@ -1,0 +1,8 @@
+.search-input-bar::placeholder {
+  color: #FFFFFF80 !important;
+}
+
+.search-button-next:disabled, .search-button-prev:disabled {
+  color: #FFFFFF40 !important;
+  cursor: auto !important;
+}

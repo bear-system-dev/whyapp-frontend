@@ -1,4 +1,4 @@
-import { SearchContext } from '@/contexts/searchContext'
+import { useSearch } from '@/utils/hooks/useSearch'
 import {
   CloseOutlined,
   DownOutlined,
@@ -6,7 +6,8 @@ import {
   UpOutlined,
 } from '@ant-design/icons'
 import { Button, Divider, Drawer, Flex, Input } from 'antd'
-import { ChangeEvent, useContext, useState } from 'react'
+import { useState } from 'react'
+import './styles.css'
 
 const searchButtonStyle: React.CSSProperties = {
   background: 'transparent',
@@ -55,13 +56,15 @@ export const Search = () => {
     setSearchBarOpen(false)
   }
 
-  // Search input functions
-  const { searchTerm, setSearchTerm } = useContext(SearchContext)
-
-  const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = event.target.value
-    setSearchTerm(searchTerm)
-  }
+  // useSearch custom hook
+  const {
+    searchTerm,
+    handleSearchInputChange,
+    handleNextHighlight,
+    handlePrevHighlight,
+    isNextDisabled,
+    isPrevDisabled,
+  } = useSearch()
 
   return (
     <>
@@ -79,6 +82,7 @@ export const Search = () => {
         onClose={onClose}
         open={searchBarOpen}
         getContainer={document.body}
+        mask={false}
         style={drawerStyles}
       >
         <Flex
@@ -90,15 +94,27 @@ export const Search = () => {
           <Input
             type="text"
             value={searchTerm}
-            className="searchInputBar"
+            className="search-input-bar"
             placeholder="Digite para buscar..."
             autoFocus
             style={searchInputBarStyles}
             onChange={handleSearchInputChange}
           />
           <Flex gap={8}>
-            <Button icon={<UpOutlined />} style={controlButtonStyles} />
-            <Button icon={<DownOutlined />} style={controlButtonStyles} />
+            <Button
+              icon={<UpOutlined />}
+              className="search-button-next"
+              style={controlButtonStyles}
+              onClick={handleNextHighlight}
+              disabled={isNextDisabled}
+            />
+            <Button
+              icon={<DownOutlined />}
+              className="search-button-prev"
+              style={controlButtonStyles}
+              onClick={handlePrevHighlight}
+              disabled={isPrevDisabled}
+            />
             <Divider type="vertical" style={{ margin: 0 }} />
             <Button
               icon={<CloseOutlined />}

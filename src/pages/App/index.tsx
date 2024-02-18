@@ -1,13 +1,11 @@
-import { SearchContext } from '@/contexts/searchContext'
+import { SearchProvider } from '@/contexts/searchProvider'
 import { AppLayout } from '@/layouts/layout'
-import { useState } from 'react'
+import './app.css'
 
 export default function App() {
-  const [searchTerm, setSearchTerm] = useState('')
-
   return (
-    <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
+    <SearchProvider>
       <AppLayout />
-    </SearchContext.Provider>
+    </SearchProvider>
   )
 }
