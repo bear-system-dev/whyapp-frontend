@@ -13,8 +13,6 @@ import './styles.css'
 export const Chat = () => {
   const { searchTerm, activeIndex } = useContext(SearchContext)
 
-  const searchWords = searchTerm.split(/\s/).filter((word) => word)
-
   const matchCounts = getMatchCounts(chatData, searchTerm)
 
   return (
@@ -50,8 +48,9 @@ export const Chat = () => {
                   }}
                   activeClassName="Active"
                   activeIndex={localActiveIndex}
+                  autoEscape={true}
                   highlightClassName="Highlight"
-                  searchWords={searchWords}
+                  searchWords={[searchTerm]}
                   textToHighlight={chat.message}
                 />
               </BubbleChat>

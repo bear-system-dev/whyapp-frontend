@@ -7,16 +7,20 @@ export const useSearch = () => {
   const { searchTerm, setSearchTerm, activeIndex, setActiveIndex } =
     useContext(SearchContext)
 
-  const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = event.target.value
-    setSearchTerm(searchTerm)
-  }
-
   const matchCounts = getMatchCounts(chatData, searchTerm)
   const totalMatches = matchCounts.reduce((a, b) => a + b, 0)
 
-  if (!totalMatches) {
-    setActiveIndex(0)
+  const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value
+    setSearchTerm(searchTerm)
+
+    if (!totalMatches || totalMatches === 0) {
+      setActiveIndex(0)
+    }
+
+    if (totalMatches || totalMatches > 0) {
+      setActiveIndex(1)
+    }
   }
 
   const handleNextHighlight = () => {

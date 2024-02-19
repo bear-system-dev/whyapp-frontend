@@ -115,7 +115,7 @@ export const Search = () => {
             style={{
               visibility: !searchTerm ? 'hidden' : 'visible',
             }}
-          >{`${activeIndex === -1 ? 0 : activeIndex + 1} de ${totalMatches}`}</span>
+          >{`${activeIndex === -1 ? 0 : !totalMatches ? 0 : 1} de ${totalMatches}`}</span>
           <Flex gap={8}>
             <Button
               icon={<UpOutlined />}

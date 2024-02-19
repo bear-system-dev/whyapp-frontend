@@ -11,7 +11,9 @@ export const getMatchCounts = (
   searchTerm: string,
 ): number[] => {
   return chatData.map(
-    (chat) => (chat.message.match(new RegExp(searchTerm, 'gi')) || []).length,
+    (chat) =>
+      (chat.message.match(new RegExp(`\\b${searchTerm}\\b`, 'gi')) || [])
+        .length,
   )
 }
 
