@@ -1,0 +1,13 @@
+.search-input-bar::placeholder {
+  color: #FFFFFF80 !important;
+}
+
+.matches-total-matches-counter {
+  color: #FFFFFF;
+  font-size: 0.75rem;
+}
+
+.search-button-next:disabled, .search-button-prev:disabled {
+  color: #FFFFFF40 !important;
+  cursor: auto !important;
+}

@@ -1,0 +1,92 @@
+.edit-user-avatar-container {
+  cursor: pointer;  
+  position: relative;
+  display: inline-block;
+}
+
+.edit-user-avatar-container:hover .edit-user-avatar {
+  opacity: 0.5;
+}
+
+.edit-user-avatar-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.edit-user-avatar-container:hover .edit-user-avatar-icon {
+  display: block;
+}
+
+input-container {
+  position: relative !important;
+}
+
+.user-name-edit-input {
+  background-color: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 13.5vw;
+  padding: 0;
+  text-align: center;
+  transition: all 0.5s ease;
+  text-overflow: ellipsis;
+  position: absolute;
+  flex-grow: 1;
+}
+
+.user-name-edit-input:hover, .user-name-edit-input:focus {
+  background-color: #273544FF;
+}
+
+.edit-button {
+  opacity: 0 !important;
+  transition: all 1s ease !important;
+  position: absolute !important;
+  right: 0 !important;
+  flex-shrink: 0;
+}
+
+.input-container:hover .edit-button {
+  opacity: 1 !important;
+}
+
+.edit-button:hover + .user-name-edit-input {
+  background-color: #273544FF;
+}
+
+
+
+.description-textarea {
+    background: #273544;
+    box-shadow: 1px 3px 3px 0px rgba(0,0,0,0.25);
+    border: none;
+    height: 120px;
+    transition: all 0.3s ease-in-out;
+  }
+
+.description-textarea:active, .description-textarea:hover, .description-textarea:focus-within {
+    background: #273544;
+    box-shadow: 1px 1px 1px 0px rgba(255, 255, 255, 0.50);
+}
+
+.description-textarea.description-textarea::placeholder {
+  color: #FFFFFF !important;
+}
+
+textarea {
+ color: #FFFFFF !important;
+}
+
+textarea::placeholder {
+  color: #FFFFFF4D !important;
+}
+
+.ant-input-data-count {
+  color: #FFFFFF !important;
+  font-size: 0.75rem;
+}

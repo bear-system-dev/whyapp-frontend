@@ -1,8 +1,10 @@
 // import defaultAvatar from '@/assets/defaultAvatar.svg'
 import whyAppLogo from '@/assets/whyAppLogo.png'
 // import { users } from '@/mocks/mockUserArray'
-import { SearchOutlined, SettingOutlined } from '@ant-design/icons'
 import { Avatar, Button, Divider, Flex } from 'antd'
+import { NewChat } from '../NewChat'
+import { Search } from '../Search'
+import { SettingsMenu } from '../SettingsMenu'
 import './styles.css'
 
 const mainAsideContainer: React.CSSProperties = {
@@ -31,18 +33,6 @@ const dividerStyle: React.CSSProperties = {
   margin: 0,
 }
 
-const searchButtonStyle: React.CSSProperties = {
-  background: 'transparent',
-  border: 'none',
-  color: '#E6E6E6',
-}
-
-const settingsButtonStyle: React.CSSProperties = {
-  background: 'transparent',
-  border: 'none',
-  color: '#E6E6E6',
-}
-
 export const MainAside = () => {
   const chats = Array.from({ length: 40 }, (_, index) => index)
 
@@ -69,20 +59,9 @@ export const MainAside = () => {
       <Divider style={dividerStyle} />
 
       <Flex vertical flex={1} align="center" justify="end" gap={24}>
-        <Button
-          className="search-button"
-          style={searchButtonStyle}
-          shape="circle"
-        >
-          <SearchOutlined />
-        </Button>
-
-        <Button
-          className="general-settings-button"
-          style={settingsButtonStyle}
-          shape="circle"
-          icon={<SettingOutlined />}
-        />
+        <NewChat />
+        <Search />
+        <SettingsMenu />
         <img src={whyAppLogo} alt="WhyApp Logo" height={24} width={24} />
       </Flex>
     </Flex>

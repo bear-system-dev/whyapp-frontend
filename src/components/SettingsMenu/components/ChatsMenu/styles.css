@@ -1,0 +1,29 @@
+.confirm-action-modal .ant-modal-content {
+  background: #1E2C39;
+}
+
+.confirm-action-modal .ant-modal-confirm-title, .confirm-action-modal .ant-modal-confirm-content {
+  color: #FFFFFF;
+}
+
+.confirm-action-modal svg {
+  color: #B49E35;
+}
+
+.confirm-action-modal .ant-btn-primary {
+  background-color: #FF4D4F;
+  border: none;
+}
+
+.confirm-action-modal .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+  background-color: #FF7875;
+  border: none;
+}
+
+.confirm-action-modal .ant-btn-default {
+  border: none
+}
+
+.confirm-action-modal .ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+  border: none
+}
