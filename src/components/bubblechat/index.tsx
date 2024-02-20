@@ -1,19 +1,20 @@
 import { Flex } from 'antd'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import ProfileContact from '../profile'
 import SendedAt from './components/sendedAt'
 
-interface BubbleConfig {
+export interface ChatMessageProps {
   image?: string
   username: string
   cargo?: string
   color: string
   chatPrivate: boolean
   time: string
-  children?: React.ReactNode
+  message?: string
+  children?: ReactNode
 }
 
-const BubbleChat: React.FC<BubbleConfig> = ({
+const BubbleChat: React.FC<ChatMessageProps> = ({
   image,
   username,
   cargo,

@@ -17,7 +17,7 @@ export const ChatContainer = ({ children }: ChatContainerProps) => {
         height: '100%',
         width: '100%',
         display: 'flex',
-        flexDirection: 'column-reverse',
+        flexDirection: 'column',
         alignItems: 'center',
         zIndex: 10,
       }}
