@@ -41,6 +41,7 @@ const BubbleChat: React.FC<ChatMessageProps> = ({
           backgroundColor: `${color}`,
           borderRadius: '14px',
           marginLeft: '4rem',
+          wordWrap: 'break-word',
         }}
       >
         {children}

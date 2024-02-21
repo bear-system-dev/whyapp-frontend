@@ -1,5 +1,9 @@
 import emojiIcon from '@/assets/emojiIcon.png'
 import { ChatContext } from '@/contexts/chatContext'
+import {
+  currentHours,
+  currentMinutes,
+} from '@/utils/helpers/dateInHoursAndMinutes'
 import { PaperClipOutlined, SendOutlined } from '@ant-design/icons'
 import { Button, Flex, Input, Space } from 'antd'
 import { ChangeEvent, KeyboardEvent, useContext, useState } from 'react'
@@ -15,7 +19,7 @@ export function InputBar() {
       addMessage({
         username: 'user1',
         message: inputValue,
-        time: Date.now().toString(),
+        time: `${currentHours}:${currentMinutes}`,
         chatPrivate: true,
         color: '#3F7B40',
       })
