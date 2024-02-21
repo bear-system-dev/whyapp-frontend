@@ -1,8 +1,5 @@
-import { v4 as uuidv4 } from 'uuid'
-
 export const chatData = [
   {
-    id: uuidv4(),
     username: 'calvão buena',
     color: '#3F7B40',
     chatPrivate: true,
@@ -10,7 +7,6 @@ export const chatData = [
     time: '08:00',
   },
   {
-    id: uuidv4(),
     username: 'calvão buena',
     color: '#3F7B40',
     chatPrivate: true,
@@ -18,7 +14,6 @@ export const chatData = [
     time: '08:30',
   },
   {
-    id: uuidv4(),
     image: '031b68882265722dede1080a200f015a.jpg',
     username: 'calvão buena',
     cargo: 'admin',
@@ -28,7 +23,6 @@ export const chatData = [
     time: '09:00',
   },
   {
-    id: uuidv4(),
     image: '031b68882265722dede1080a200f015a.jpg',
     username: 'motoplay_br',
     cargo: 'member',
@@ -38,7 +32,6 @@ export const chatData = [
     time: '09:45',
   },
   {
-    id: uuidv4(),
     username: 'calvão buena',
     color: '#3F7B40',
     chatPrivate: true,
@@ -46,7 +39,6 @@ export const chatData = [
     time: '11:00',
   },
   {
-    id: uuidv4(),
     image: '031b68882265722dede1080a200f015a.jpg',
     username: 'calvão buena',
     cargo: 'admin',
@@ -56,7 +48,6 @@ export const chatData = [
     time: '12:00',
   },
   {
-    id: uuidv4(),
     image: '031b68882265722dede1080a200f015a.jpg',
     username: 'calvão buena',
     cargo: 'admin',
@@ -66,7 +57,6 @@ export const chatData = [
     time: '12:30',
   },
   {
-    id: uuidv4(),
     image: '031b68882265722dede1080a200f015a.jpg',
     username: 'motoplay_br',
     cargo: 'member',
@@ -76,7 +66,6 @@ export const chatData = [
     time: '13:30',
   },
   {
-    id: uuidv4(),
     username: 'calvão buena',
     color: '#3F7B40',
     chatPrivate: true,
@@ -84,7 +73,6 @@ export const chatData = [
     time: '14:00',
   },
   {
-    id: uuidv4(),
     username: 'calvão buena',
     color: '#3F7B40',
     chatPrivate: true,
@@ -92,7 +80,6 @@ export const chatData = [
     time: '16:30',
   },
   {
-    id: uuidv4(),
     username: 'calvão buena',
     color: '#3F7B40',
     chatPrivate: true,
@@ -100,7 +87,6 @@ export const chatData = [
     time: '17:00',
   },
   {
-    id: uuidv4(),
     image: '031b68882265722dede1080a200f015a.jpg',
     username: 'calvão buena',
     cargo: 'admin',
@@ -110,7 +96,6 @@ export const chatData = [
     time: '18:00',
   },
   {
-    id: uuidv4(),
     image: '031b68882265722dede1080a200f015a.jpg',
     username: 'motoplay_br',
     cargo: 'member',
