@@ -1,7 +1,6 @@
 import BubbleChat from '@/components/bubblechat'
 import { ChatContext } from '@/contexts/chatContext'
 import { SearchContext } from '@/contexts/searchContext'
-import { chatData } from '@/mocks/chats-mocks'
 import {
   getLocalActiveIndex,
   getMatchCounts,
@@ -22,7 +21,7 @@ export const Chat = () => {
 
   const { searchTerm, activeIndex } = useContext(SearchContext)
 
-  const matchCounts = getMatchCounts(chatData, searchTerm)
+  const matchCounts = getMatchCounts(messages, searchTerm)
 
   return (
     <>

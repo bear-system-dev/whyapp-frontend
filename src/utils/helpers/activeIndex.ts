@@ -1,20 +1,13 @@
-interface ChatDataType {
-  username: string
-  color: string
-  chatPrivate: boolean
-  message: string
-  time: string
-}
+import { ChatMessageProps } from '@/components/bubblechat'
 
 export const getMatchCounts = (
-  chatData: ChatDataType[],
+  messages: ChatMessageProps[],
   searchTerm: string,
 ): number[] => {
-  return chatData.map(
-    (chat) =>
-      (chat.message.match(new RegExp(`\\b${searchTerm}\\b`, 'gi')) || [])
-        .length,
-  )
+  return messages.map((chat) => {
+    return (chat.message?.match(new RegExp(`\\b${searchTerm}\\b`, 'gi')) || [])
+      .length
+  })
 }
 
 export const getLocalActiveIndex = (
@@ -22,7 +15,11 @@ export const getLocalActiveIndex = (
   matchCounts: number[],
   index: number,
 ): number => {
-  return activeIndex < matchCounts.slice(0, index).reduce((a, b) => a + b, 0)
+  const reversedMatchCounts = [...matchCounts].reverse()
+  const reversedIndex = matchCounts.length - index - 1
+  return activeIndex <
+    reversedMatchCounts.slice(0, reversedIndex).reduce((a, b) => a + b, 0)
     ? -1
-    : activeIndex - matchCounts.slice(0, index).reduce((a, b) => a + b, 0)
+    : activeIndex -
+        reversedMatchCounts.slice(0, reversedIndex).reduce((a, b) => a + b, 0)
 }
