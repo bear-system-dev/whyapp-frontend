@@ -3,8 +3,9 @@ import {
   UserAddOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons'
-import { Button, Divider, Drawer, Flex, Input } from 'antd'
+import { Button, Divider, Drawer, Flex } from 'antd'
 import { useState } from 'react'
+import { FindUser } from './components/FindUser'
 
 const newChatButtonStyle: React.CSSProperties = {
   background: 'transparent',
@@ -20,19 +21,6 @@ const drawerStyles: React.CSSProperties = {
   left: 64,
   height: 'calc(100vh - 120px)',
   width: '320px',
-}
-
-const searchInputBarStyles: React.CSSProperties = {
-  background:
-    'linear-gradient(to bottom right, #C9C9C94D, #C4C4C41A) padding-box, linear-gradient(to bottom left, #FFFFFF4D, #D3D3D31A) border-box',
-  color: '#FFFFFF',
-  display: 'flex',
-  padding: '0 1rem',
-  boxSizing: 'border-box',
-  height: '24px',
-  width: '100%',
-  gap: '20px',
-  alignItems: 'center',
 }
 
 const controlButtonStyles: React.CSSProperties = {
@@ -95,7 +83,7 @@ export const NewChat = () => {
               />
             </Flex>
           </Flex>
-          <Input className="searchInputBar" style={searchInputBarStyles} />
+          <FindUser />
         </Flex>
       </Drawer>
     </>
