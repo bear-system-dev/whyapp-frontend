@@ -3,18 +3,57 @@ import { PaperClipOutlined, SendOutlined } from '@ant-design/icons'
 import { Button, Flex, Input, Space } from 'antd'
 import './style.css'
 import { resetButtonStyles } from './../../mocks/mockUserArray'
+import { useState } from 'react'
+import { EmojiClickData } from 'emoji-picker-react'
+import { EmojiLibrary } from './emojiPicker'
 
 export function InputBar() {
+  const [inputValue, setInputValue] = useState<string>('')
+  const [showEmojis, setShowEmojis] = useState(false)
+  const [emojidata, setemojidata] = useState([])
+
+  const handleEmoji = (emojiData: EmojiClickData) => {
+    const emoji = emojiData.emoji.split(',')
+    setemojidata([...emojidata, emoji])
+  }
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value)
+  }
+
   return (
     <div className="input-bar__background">
       <Flex align="center" gap={10}>
-        <Button
-          className="emoji-button"
-          type="text"
-          style={{ ...resetButtonStyles, height: 30 }}
-        >
-          <img src={emojiIcon} alt="emoji icon" height={'100%'} />
-        </Button>
+        {showEmojis ? (
+          <>
+            <EmojiLibrary handleEmoji={handleEmoji} />
+            <Button
+              className="emoji-button"
+              type="text"
+              style={{ ...resetButtonStyles, height: 30 }}
+            >
+              <img
+                src={emojiIcon}
+                alt="emoji icon"
+                height={'100%'}
+                onClick={() => setShowEmojis(!showEmojis)}
+              />
+            </Button>
+          </>
+        ) : (
+          <Button
+            className="emoji-button"
+            type="text"
+            style={{ ...resetButtonStyles, height: 30 }}
+          >
+            <img
+              src={emojiIcon}
+              alt="emoji icon"
+              height={'100%'}
+              onClick={() => setShowEmojis(!showEmojis)}
+            />
+          </Button>
+        )}
         <Button
           className="attach-button"
           icon={<PaperClipOutlined style={{ fontSize: 25 }} />}
@@ -27,7 +66,12 @@ export function InputBar() {
         />
       </Flex>
       <Space.Compact className="input-bar__container">
-        <Input placeholder="type a message..." className="input-bar" />
+        <Input
+          placeholder="type a message..."
+          className="input-bar"
+          value={inputValue + emojidata}
+          onChange={handleInputChange}
+        />
         <Button
           className="send-button"
           icon={<SendOutlined />}
