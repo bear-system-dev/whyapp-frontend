@@ -1,8 +1,8 @@
 import React from 'react'
 
 interface Image {
-  image: string
-  size: string
+  image?: string
+  size?: string
 }
 const ImageProfile: React.FC<Image> = ({ image, size }) => {
   return (

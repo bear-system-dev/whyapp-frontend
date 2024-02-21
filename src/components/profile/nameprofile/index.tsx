@@ -1,8 +1,8 @@
 import React from 'react'
 
 interface Profile {
-  user: string
-  colortext: string
+  user?: string
+  colortext?: string
 }
 const NameProfile: React.FC<Profile> = ({ user, colortext }) => {
   return (

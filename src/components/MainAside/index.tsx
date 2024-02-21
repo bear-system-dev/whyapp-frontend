@@ -1,7 +1,10 @@
 // import defaultAvatar from '@/assets/defaultAvatar.svg'
 import whyAppLogo from '@/assets/whyAppLogo.png'
 // import { users } from '@/mocks/mockUserArray'
+import { ChatContext } from '@/contexts/chatContext'
+import { chatData } from '@/mocks/chats-mocks'
 import { Avatar, Button, Divider, Flex } from 'antd'
+import { useContext } from 'react'
 import { NewChat } from '../NewChat'
 import { Search } from '../Search'
 import { SettingsMenu } from '../SettingsMenu'
@@ -30,26 +33,36 @@ const userChatContainerStyle: React.CSSProperties = {
 
 const dividerStyle: React.CSSProperties = {
   background: '#FFFFFFBF',
-  margin: 0,
+  margin: '1rem 0',
 }
 
 export const MainAside = () => {
-  const chats = Array.from({ length: 40 }, (_, index) => index)
+  const { setCurrentUser } = useContext(ChatContext)
 
   return (
     <Flex vertical style={mainAsideContainer}>
-      <Flex style={userChatContainerStyle} vertical align="center" gap={8}>
-        {chats.map((i: number) => {
+      <Flex style={userChatContainerStyle} vertical align="center" gap={16}>
+        {chatData.map((user) => {
           return (
             <Button
               shape="circle"
-              key={i}
+              key={user.userId}
               style={avatarButtonStyle}
-              onClick={() => console.log('Chat ' + i)}
+              onClick={() => {
+                setCurrentUser({
+                  userId: user.userId,
+                  username: user.username,
+                  image: user.image,
+                  color: user.color,
+                  chatPrivate: user.chatPrivate,
+                  privateMessages: user.privateMessages,
+                  groupMessages: user.groupMessages,
+                })
+              }}
             >
               <Avatar
                 style={{ backgroundColor: '#fff' }}
-                src={'https://api.dicebear.com/7.x/miniavs/svg?seed=' + i}
+                src={user.image}
                 size={50}
               />
             </Button>
