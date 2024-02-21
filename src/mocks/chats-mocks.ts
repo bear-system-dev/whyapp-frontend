@@ -1,107 +1,115 @@
 export const chatData = [
   {
-    username: 'calvão buena',
-    color: '#3F7B40',
-    chatPrivate: true,
-    message: 'Vamos começar a semana com energia!',
-    time: '08:00',
-  },
-  {
-    username: 'calvão buena',
-    color: '#3F7B40',
-    chatPrivate: true,
-    message: 'Bom dia a todos! 😊',
-    time: '08:30',
-  },
-  {
+    userId: 1,
+    username: 'Jão dos pilar',
     image: '031b68882265722dede1080a200f015a.jpg',
-    username: 'calvão buena',
-    cargo: 'admin',
-    color: '#434455',
-    chatPrivate: false,
-    message: 'Reunião de equipe às 10h, não se esqueçam.',
-    time: '09:00',
-  },
-  {
-    image: '031b68882265722dede1080a200f015a.jpg',
-    username: 'motoplay_br',
-    cargo: 'member',
     color: '#3F7B40',
     chatPrivate: true,
-    message: 'Estou pronto para a reunião!',
-    time: '09:45',
+    privateMessages: [
+      {
+        message: 'Vamos começar a semana com energia!',
+        time: '08:00',
+      },
+      {
+        message: 'Reunião de equipe às 10h, não se esqueçam.',
+        time: '09:00',
+      },
+    ],
+    groupMessages: [
+      {
+        message: 'Vamos começar a semana com energia!',
+        time: '08:00',
+      },
+      {
+        message: 'Olá! Como você está?',
+        time: '08:05',
+      },
+      {
+        message: 'Espero que tenha tido um bom fim de semana.',
+        time: '10:15',
+      },
+      {
+        message: 'Precisamos discutir o projeto até o final do dia.',
+        time: '14:30',
+      },
+      {
+        message: 'Você viu o e-mail que enviei esta manhã?',
+        time: '16:45',
+      },
+      {
+        message: 'Tenha uma ótima noite!',
+        time: '20:00',
+      },
+    ],
   },
   {
+    userId: 2,
     username: 'calvão buena',
+    image: '031b68882265722dede1080a200f015a.jpg',
     color: '#3F7B40',
     chatPrivate: true,
-    message: 'Ótima reunião, pessoal. Vamos continuar assim!',
-    time: '11:00',
+    privateMessages: [
+      {
+        message: 'Bom dia! Vamos começar com tudo hoje.',
+        time: '08:00',
+      },
+      {
+        message: 'Estou revisando o relatório agora.',
+        time: '10:30',
+      },
+      {
+        message: 'Precisamos marcar uma reunião para discutir os detalhes.',
+        time: '13:45',
+      },
+      {
+        message: 'O que você acha da proposta que enviei ontem?',
+        time: '15:20',
+      },
+      {
+        message: 'Tenha uma excelente tarde!',
+        time: '17:50',
+      },
+    ],
+    groupMessages: [
+      {
+        message: 'Vamos começar a semana com energia!',
+        time: '08:00',
+      },
+    ],
   },
   {
-    image: '031b68882265722dede1080a200f015a.jpg',
-    username: 'calvão buena',
-    cargo: 'admin',
-    color: '#434455',
-    chatPrivate: false,
-    message: 'Almoço, alguém?',
-    time: '12:00',
-  },
-  {
-    image: '031b68882265722dede1080a200f015a.jpg',
-    username: 'calvão buena',
-    cargo: 'admin',
-    color: '#434455',
-    chatPrivate: true,
-    message: 'Hora do almoço. Até mais tarde!',
-    time: '12:30',
-  },
-  {
-    image: '031b68882265722dede1080a200f015a.jpg',
-    username: 'motoplay_br',
-    cargo: 'member',
-    color: '#434455',
-    chatPrivate: true,
-    message: 'De volta ao trabalho. Vamos lá!',
-    time: '13:30',
-  },
-  {
-    username: 'calvão buena',
-    color: '#3F7B40',
-    chatPrivate: true,
-    message: 'Vamos fazer um ótimo trabalho hoje!',
-    time: '14:00',
-  },
-  {
-    username: 'calvão buena',
-    color: '#3F7B40',
-    chatPrivate: true,
-    message: 'Estou impressionado com o progresso de hoje. Continuem assim!',
-    time: '16:30',
-  },
-  {
-    username: 'calvão buena',
-    color: '#3F7B40',
-    chatPrivate: true,
-    message: 'Ótimo trabalho hoje, equipe!',
-    time: '17:00',
-  },
-  {
-    image: '031b68882265722dede1080a200f015a.jpg',
-    username: 'calvão buena',
-    cargo: 'admin',
-    color: '#434455',
-    chatPrivate: false,
-    message: 'Hora de encerrar o dia. Até amanhã!',
-    time: '18:00',
-  },
-  {
+    userId: 3,
     image: '031b68882265722dede1080a200f015a.jpg',
     username: 'motoplay_br',
-    cargo: 'member',
-    color: '#3F7B40',
-    chatPrivate: false,
-    message: 'Boa noite a todos. Até amanhã!',
-    time: '18:30',
+    color: '#434455',
+    chatPrivate: true,
+    privateMessages: [
+      {
+        message: 'E aí, tudo bem?',
+        time: '09:00',
+      },
+      {
+        message: 'Estou animado com os projetos que estamos trabalhando.',
+        time: '11:10',
+      },
+      {
+        message: 'Você viu a atualização no site?',
+        time: '14:25',
+      },
+      {
+        message: 'Acho que podemos melhorar a interface.',
+        time: '16:30',
+      },
+      {
+        message: 'Boa noite! Nos falamos amanhã.',
+        time: '21:00',
+      },
+    ],
+    groupMessages: [
+      {
+        message: 'Vamos começar a semana com energia!',
+        time: '08:00',
+      },
+    ],
   },
 ]

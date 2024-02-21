@@ -1,4 +1,4 @@
-import { ChatMessageProps } from '@/components/bubblechat'
+import { UserProps } from '@/components/bubblechat'
 import { chatData } from '@/mocks/chats-mocks'
 import { ReactNode, useState } from 'react'
 import { ChatContext } from './chatContext'
@@ -8,14 +8,17 @@ interface ChatProviderProps {
 }
 
 export const ChatProvider = ({ children }: ChatProviderProps) => {
-  const [messages, setMessages] = useState<ChatMessageProps[]>(chatData)
+  const [messages, setMessages] = useState<UserProps[]>(chatData)
+  const [currentUser, setCurrentUser] = useState<UserProps | null>(null)
 
-  const addMessage = (message: ChatMessageProps) => {
+  const addMessage = (message: UserProps) => {
     setMessages((prevMessages) => [...prevMessages, message])
   }
 
   return (
-    <ChatContext.Provider value={{ messages, addMessage }}>
+    <ChatContext.Provider
+      value={{ messages, addMessage, currentUser, setCurrentUser }}
+    >
       {children}
     </ChatContext.Provider>
   )

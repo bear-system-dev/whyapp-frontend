@@ -1,6 +1,7 @@
-import { Members } from '@/mocks/mockMemberGroup'
+import { ChatContext } from '@/contexts/chatContext'
+import { chatData } from '@/mocks/chats-mocks'
 import { Flex, Input } from 'antd'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 import { UserCard } from '../UserCard'
 import './styles.css'
 
@@ -19,14 +20,17 @@ const searchInputBarStyles: React.CSSProperties = {
 
 export const FindUser = () => {
   const [userNameSearchedList, setUserNameSearchedList] = useState('')
+  const { setCurrentUser } = useContext(ChatContext)
 
   const onFindInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const findUserNameValue = event?.target.value
     setUserNameSearchedList(findUserNameValue)
   }
 
-  const filteredUserNameList = Members.filter((user) => {
-    return user.name.toLowerCase().includes(userNameSearchedList.toLowerCase())
+  const filteredUserNameList = chatData.filter((user) => {
+    return user.username
+      .toLowerCase()
+      .includes(userNameSearchedList.toLowerCase())
   })
 
   return (
@@ -37,11 +41,26 @@ export const FindUser = () => {
         onChange={onFindInputChange}
         placeholder="busque por um usuário ou grupo..."
       />
-      <Flex vertical style={{ height: '100%', width: '100%' }}>
+      <Flex vertical style={{ gap: '1.5rem', height: '100%', width: '100%' }}>
         {userNameSearchedList &&
-          filteredUserNameList.map((user) => {
+          filteredUserNameList.map((user, index) => {
             return (
-              <UserCard key={user.id} name={user.name} image={user.image} />
+              <UserCard
+                key={index}
+                name={user.username}
+                image={user.image}
+                onClick={() => {
+                  setCurrentUser({
+                    userId: user.userId,
+                    username: user.username,
+                    image: user.image,
+                    color: user.color,
+                    chatPrivate: user.chatPrivate,
+                    privateMessages: user.privateMessages,
+                    groupMessages: user.groupMessages,
+                  })
+                }}
+              />
             )
           })}
       </Flex>

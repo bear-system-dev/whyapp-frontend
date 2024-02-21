@@ -1,28 +1,25 @@
 import { Flex } from 'antd'
 import React, { ReactNode } from 'react'
-import ProfileContact from '../profile'
 import SendedAt from './components/sendedAt'
 
-export interface ChatMessageProps {
+export interface UserProps {
+  userId?: number
   image?: string
   username: string
   cargo?: string
-  color: string
-  chatPrivate: boolean
+  color?: string
+  chatPrivate?: boolean
+  privateMessages?: { message: string; time: string }[]
+  groupMessages?: { message: string; time: string }[]
+}
+
+interface BubbleChatProps {
+  message: string
   time: string
-  message?: string
   children?: ReactNode
 }
 
-const BubbleChat: React.FC<ChatMessageProps> = ({
-  image,
-  username,
-  cargo,
-  color,
-  chatPrivate,
-  time,
-  children,
-}) => {
+const BubbleChat: React.FC<BubbleChatProps> = ({ message, time }) => {
   return (
     <Flex
       vertical
@@ -30,21 +27,19 @@ const BubbleChat: React.FC<ChatMessageProps> = ({
         gap: '0.5rem',
       }}
     >
-      {!chatPrivate && (
-        <ProfileContact image={image} username={username} cargo={cargo} />
-      )}
       <Flex
         vertical
         style={{
           width: 'fit-content',
           padding: '1rem',
-          backgroundColor: `${color}`,
+          backgroundColor: '#434455',
           borderRadius: '14px',
+          color: '#FFFFFF',
           marginLeft: '4rem',
           wordWrap: 'break-word',
         }}
       >
-        {children}
+        {message}
         <SendedAt time={time} />
       </Flex>
     </Flex>

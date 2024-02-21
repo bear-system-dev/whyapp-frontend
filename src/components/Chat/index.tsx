@@ -11,7 +11,7 @@ import Highlighter from 'react-highlight-words'
 import './styles.css'
 
 export const Chat = () => {
-  const { messages } = useContext(ChatContext)
+  const { messages, currentUser } = useContext(ChatContext)
 
   const endOfMessagesRef = useRef<HTMLDivElement>(null)
 
@@ -25,45 +25,39 @@ export const Chat = () => {
 
   return (
     <>
-      {messages.map((chat, index) => {
-        const localActiveIndex = getLocalActiveIndex(
-          activeIndex,
-          matchCounts,
-          index,
-        )
-        return (
-          <Flex
-            key={index}
-            style={{ alignSelf: chat.color === '#3F7B40' ? 'end' : 'start' }}
-          >
-            <BubbleChat
-              image={chat.image}
-              username={chat.username}
-              cargo={chat.cargo}
-              color={chat.color}
-              chatPrivate={chat.chatPrivate}
-              time={chat.time}
+      {currentUser &&
+        currentUser.privateMessages?.map((chat, index) => {
+          const localActiveIndex = getLocalActiveIndex(
+            activeIndex,
+            matchCounts,
+            index,
+          )
+          return (
+            <Flex
+              key={index}
+              // style={{ alignSelf: chat.color === '#3F7B40' ? 'end' : 'start' }}
             >
-              <Highlighter
-                style={{
-                  color: 'white',
-                  paddingRight: '1.5rem',
-                  maxWidth: '16rem',
-                  fontSize: '1rem',
-                  lineHeight: 1.5,
-                  margin: '0px',
-                }}
-                activeClassName="Active"
-                activeIndex={localActiveIndex}
-                autoEscape={true}
-                highlightClassName="Highlight"
-                searchWords={[searchTerm]}
-                textToHighlight={chat.message || ''}
-              />
-            </BubbleChat>
-          </Flex>
-        )
-      })}
+              <BubbleChat message={chat.message} time={chat.time}>
+                <Highlighter
+                  style={{
+                    color: '#FFFFFF',
+                    paddingRight: '1.5rem',
+                    maxWidth: '16rem',
+                    fontSize: '1rem',
+                    lineHeight: 1.5,
+                    margin: '0px',
+                  }}
+                  activeClassName="Active"
+                  activeIndex={localActiveIndex}
+                  autoEscape={true}
+                  highlightClassName="Highlight"
+                  searchWords={[searchTerm]}
+                  textToHighlight={chat.message || ''}
+                />
+              </BubbleChat>
+            </Flex>
+          )
+        })}
       <div ref={endOfMessagesRef} />
     </>
   )
