@@ -10,15 +10,17 @@ import { EmojiLibrary } from './emojiPicker'
 export function InputBar() {
   const [inputValue, setInputValue] = useState<string>('')
   const [showEmojis, setShowEmojis] = useState(false)
-  const [emojidata, setemojidata] = useState([])
+  const [emojidata, setemojidata] = useState('')
 
   const handleEmoji = (emojiData: EmojiClickData) => {
-    const emoji = emojiData.emoji.split(',')
-    setemojidata([...emojidata, emoji])
+    const emoji = emojiData.emoji
+    setemojidata((prevInput) => prevInput + emoji)
   }
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value)
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Backspace' && emojidata.length > 0) {
+      setemojidata((prevInput) => prevInput.slice(0, -1))
+    }
   }
 
   return (
@@ -70,7 +72,8 @@ export function InputBar() {
           placeholder="type a message..."
           className="input-bar"
           value={inputValue + emojidata}
-          onChange={handleInputChange}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <Button
           className="send-button"
