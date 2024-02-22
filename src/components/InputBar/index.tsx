@@ -11,17 +11,21 @@ import { resetButtonStyles } from './../../mocks/mockUserArray'
 import './style.css'
 
 export function InputBar() {
-  const { addMessage } = useContext(ChatContext)
+  const { addMessage, currentUser } = useContext(ChatContext)
   const [inputValue, setINputValue] = useState('')
 
   const handleSendMessage = () => {
     if (inputValue.trim() !== '') {
       addMessage({
         username: 'user1',
-        message: inputValue,
-        time: `${currentHours}:${currentMinutes}`,
+        privateMessages: [
+          {
+            message: inputValue,
+            time: `${currentHours}:${currentMinutes}`,
+            sentByUser: true,
+          },
+        ],
         chatPrivate: true,
-        color: '#3F7B40',
       })
 
       setINputValue('')
@@ -43,6 +47,7 @@ export function InputBar() {
           className="emoji-button"
           type="text"
           style={{ ...resetButtonStyles, height: 30 }}
+          disabled={!currentUser}
         >
           <img src={emojiIcon} alt="emoji icon" height={'100%'} />
         </Button>
@@ -55,6 +60,7 @@ export function InputBar() {
             alignItems: 'center',
             justifyContent: 'center',
           }}
+          disabled={!currentUser}
         />
       </Flex>
       <Space.Compact className="input-bar__container">
@@ -64,6 +70,7 @@ export function InputBar() {
           value={inputValue}
           onChange={handleInputOnChange}
           onKeyDown={handleKeyboardEnter}
+          disabled={!currentUser}
         />
         <Button
           className="send-button"
@@ -71,6 +78,7 @@ export function InputBar() {
           size="large"
           type="text"
           onClick={handleSendMessage}
+          disabled={!currentUser}
         />
       </Space.Compact>
     </div>

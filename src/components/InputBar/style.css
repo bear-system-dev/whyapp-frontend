@@ -45,6 +45,10 @@
   background: transparent;
 }
 
+.emoji-button:disabled {
+  cursor: not-allowed !important;
+}
+
 .input-bar__container {
   align-items: center;
   display: flex;
@@ -70,7 +74,7 @@
   color: #FFFFFF80;
 }
 
-.input-bar:hover, .input-bar:focus, .input-bar:focus-within {
+.input-bar:hover, .input-bar:focus, .input-bar:focus-within, .input-bar:disabled {
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.268) 0%, rgba(0,0,0,0) 100%);
   border: 2px solid #454c56;
   border-right: none;

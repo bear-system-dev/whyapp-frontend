@@ -35,9 +35,15 @@ export const Chat = () => {
           return (
             <Flex
               key={index}
-              // style={{ alignSelf: chat.color === '#3F7B40' ? 'end' : 'start' }}
+              style={{
+                alignSelf: chat.sentByUser ? 'end' : 'start',
+              }}
             >
-              <BubbleChat message={chat.message} time={chat.time}>
+              <BubbleChat
+                message={chat.message}
+                time={chat.time}
+                isUserMessage={chat.sentByUser}
+              >
                 <Highlighter
                   style={{
                     color: '#FFFFFF',

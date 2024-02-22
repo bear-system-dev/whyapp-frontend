@@ -7,19 +7,23 @@ export interface UserProps {
   image?: string
   username: string
   cargo?: string
-  color?: string
   chatPrivate?: boolean
-  privateMessages?: { message: string; time: string }[]
-  groupMessages?: { message: string; time: string }[]
+  privateMessages?: { message: string; time: string; sentByUser?: boolean }[]
+  groupMessages?: { message: string; time: string; sentByUser?: boolean }[]
 }
 
 interface BubbleChatProps {
   message: string
   time: string
+  isUserMessage?: boolean
   children?: ReactNode
 }
 
-const BubbleChat: React.FC<BubbleChatProps> = ({ message, time }) => {
+const BubbleChat: React.FC<BubbleChatProps> = ({
+  message,
+  time,
+  isUserMessage,
+}) => {
   return (
     <Flex
       vertical
@@ -32,7 +36,7 @@ const BubbleChat: React.FC<BubbleChatProps> = ({ message, time }) => {
         style={{
           width: 'fit-content',
           padding: '1rem',
-          backgroundColor: '#434455',
+          backgroundColor: `${isUserMessage ? '#3F7B40' : '#434455'}`,
           borderRadius: '14px',
           color: '#FFFFFF',
           marginLeft: '4rem',

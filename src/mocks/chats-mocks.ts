@@ -3,7 +3,6 @@ export const chatData = [
     userId: 1,
     username: 'Faustão desempregado',
     image: 'fausto.jpg',
-    color: '#3F7B40',
     chatPrivate: true,
     privateMessages: [
       {
@@ -46,7 +45,6 @@ export const chatData = [
     userId: 2,
     username: 'calvão buena',
     image: 'calvao.jpg',
-    color: '#3F7B40',
     chatPrivate: true,
     privateMessages: [
       {
@@ -81,7 +79,6 @@ export const chatData = [
     userId: 3,
     image: '031b68882265722dede1080a200f015a.jpg',
     username: 'motoplay_br',
-    color: '#434455',
     chatPrivate: true,
     privateMessages: [
       {
@@ -113,3 +110,5 @@ export const chatData = [
     ],
   },
 ]
+
+export const myUserId = 2392313918

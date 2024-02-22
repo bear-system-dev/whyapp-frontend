@@ -20,46 +20,52 @@ const HeaderChat = () => {
           gap: '20px',
         }}
       >
+        {currentUser && (
+          <>
+            <Button
+              shape="circle"
+              style={{
+                ...resetButtonStyles,
+                height: '45px',
+                width: '45px',
+              }}
+              onClick={() => console.log('abrir info')}
+            >
+              <ImageProfile size={'45px'} image={currentUser?.image} />
+            </Button>
+            <div
+              onClick={() => console.log('abrir info')}
+              style={{ cursor: 'pointer', userSelect: 'none' }}
+            >
+              <Flex vertical gap={5}>
+                <NameProfile user={currentUser?.username} colortext="#FFFFFF" />
+                <StatusContact status="online" />
+                {/* <ContactGroup contact={users} /> */}
+              </Flex>
+            </div>
+          </>
+        )}
+      </Flex>
+      {currentUser && (
         <Button
           shape="circle"
           style={{
             ...resetButtonStyles,
-            height: '45px',
-            width: '45px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
           onClick={() => console.log('abrir info')}
         >
-          <ImageProfile size={'45px'} image={currentUser?.image} />
+          <MoreOutlined
+            style={{
+              color: '#FFFFFF',
+              fontWeight: '800',
+              fontSize: '20px',
+            }}
+          />
         </Button>
-        <div
-          onClick={() => console.log('abrir info')}
-          style={{ cursor: 'pointer', userSelect: 'none' }}
-        >
-          <Flex vertical gap={5}>
-            <NameProfile user={currentUser?.username} colortext="#FFFFFF" />
-            <StatusContact status="online" />
-            {/* <ContactGroup contact={users} /> */}
-          </Flex>
-        </div>
-      </Flex>
-      <Button
-        shape="circle"
-        style={{
-          ...resetButtonStyles,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        onClick={() => console.log('abrir info')}
-      >
-        <MoreOutlined
-          style={{
-            color: '#FFFFFF',
-            fontWeight: '800',
-            fontSize: '20px',
-          }}
-        />
-      </Button>
+      )}
     </HeaderContainer>
   )
 }
