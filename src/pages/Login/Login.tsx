@@ -1,13 +1,29 @@
-import { Flex, Form } from 'antd'
-import styles from './Login.module.css'
 import logo from '@/assets/logowhy@2x.png'
+import { api } from '@/lib/api'
+import { Flex, Form } from 'antd'
+import Cookies from 'js-cookie'
 import Auth from '../../components/Auth/Auth'
+import { FormValues } from '../Register/Register'
+import styles from './Login.module.css'
 
 const Login = () => {
   const [form] = Form.useForm()
 
-  const handleSubmit = (values: object | null) => {
-    console.log(values)
+  const handleSubmit = async (values: FormValues) => {
+    try {
+      const response = await api.post('auth/entrar', {
+        email: values.email,
+        senha: values.password,
+      })
+      const inTenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000)
+      Cookies.set('token', `${response.data.token}`, { expires: inTenMinutes })
+      Cookies.set('userId', response.data.userId)
+      console.log(response.data)
+      alert('Login feito com sucesso! Redirecionando para o app!')
+      window.location.href = 'http://localhost:5173/'
+    } catch (error) {
+      console.error('Erro ao criar o usuário:', error)
+    }
     form.resetFields()
   }
 

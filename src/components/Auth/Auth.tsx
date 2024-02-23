@@ -1,10 +1,11 @@
-import { Button, Flex, Form, FormInstance, Input, Space } from 'antd'
-import styles from './Auth.module.css'
-import { Dispatch, MouseEventHandler } from 'react'
-import AuthContainer from './AuthContainer'
-import { Link } from 'react-router-dom'
+import { FormValues } from '@/pages/Register/Register'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { Button, Flex, Form, FormInstance, Input, Space } from 'antd'
+import { Dispatch, MouseEventHandler } from 'react'
 import { PiIdentificationCard } from 'react-icons/pi'
+import { Link } from 'react-router-dom'
+import styles from './Auth.module.css'
+import AuthContainer from './AuthContainer'
 
 const authButtonStyles = {
   display: 'flex',
@@ -13,8 +14,8 @@ const authButtonStyles = {
 }
 type Props = {
   type: string
-  handleForm: FormInstance<null>
-  onSubmit: Dispatch<null>
+  handleForm: FormInstance<FormValues>
+  onSubmit: Dispatch<FormValues>
   authWithGoogle: MouseEventHandler<HTMLElement>
   authWithFacebook: MouseEventHandler<HTMLElement>
   authWithApple: MouseEventHandler<HTMLElement>
@@ -140,6 +141,16 @@ const Auth = ({
             rules={[
               { required: true, message: 'Digite sua senha' },
               { min: 8, message: 'Mínimo 8 caracteres' },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve()
+                  }
+                  return Promise.reject(
+                    new Error('A senha que você digitou não corresponde!'),
+                  )
+                },
+              }),
             ]}
             className={styles.label}
             labelCol={{ className: styles.label_col }}
