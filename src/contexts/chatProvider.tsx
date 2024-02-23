@@ -12,7 +12,7 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
   const [currentUser, setCurrentUser] = useState<UserProps | null>(null)
 
   const addMessage = (message: UserProps) => {
-    const newMessage = { ...message, sentByUser: true }
+    const newMessage = { ...message, sentByMe: true }
 
     setMessages((prevMessages) => [...prevMessages, newMessage])
 

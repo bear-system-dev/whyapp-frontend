@@ -36,13 +36,13 @@ export const Chat = () => {
             <Flex
               key={index}
               style={{
-                alignSelf: chat.sentByUser ? 'end' : 'start',
+                alignSelf: chat.sentByMe ? 'end' : 'start',
               }}
             >
               <BubbleChat
                 message={chat.message}
                 time={chat.time}
-                isUserMessage={chat.sentByUser}
+                sentByMe={chat.sentByMe}
               >
                 <Highlighter
                   style={{
