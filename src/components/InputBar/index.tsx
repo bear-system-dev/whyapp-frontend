@@ -25,7 +25,7 @@ export function InputBar() {
           {
             message: inputValue,
             time: `${currentHours}:${currentMinutes}`,
-            sentByUser: true,
+            sentByMe: true,
           },
         ],
         chatPrivate: true,

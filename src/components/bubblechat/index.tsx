@@ -2,28 +2,24 @@ import { Flex } from 'antd'
 import React, { ReactNode } from 'react'
 import SendedAt from './components/sendedAt'
 
+export interface BubbleChatProps {
+  message: string
+  time: string
+  sentByMe?: boolean
+  children?: ReactNode
+}
+
 export interface UserProps {
   userId?: number
   image?: string
   username: string
   cargo?: string
   chatPrivate?: boolean
-  privateMessages?: { message: string; time: string; sentByUser?: boolean }[]
-  groupMessages?: { message: string; time: string; sentByUser?: boolean }[]
+  privateMessages?: BubbleChatProps[]
+  groupMessages?: BubbleChatProps[]
 }
 
-export interface BubbleChatProps {
-  message: string
-  time: string
-  isUserMessage?: boolean
-  children?: ReactNode
-}
-
-const BubbleChat: React.FC<BubbleChatProps> = ({
-  message,
-  time,
-  isUserMessage,
-}) => {
+const BubbleChat: React.FC<BubbleChatProps> = ({ message, time, sentByMe }) => {
   return (
     <Flex
       vertical
@@ -36,7 +32,7 @@ const BubbleChat: React.FC<BubbleChatProps> = ({
         style={{
           width: 'fit-content',
           padding: '1rem',
-          backgroundColor: `${isUserMessage ? '#3F7B40' : '#434455'}`,
+          backgroundColor: `${sentByMe ? '#3F7B40' : '#434455'}`,
           borderRadius: '14px',
           color: '#FFFFFF',
           marginLeft: '4rem',
