@@ -16,7 +16,6 @@ export function InputBar() {
   const { addMessage, currentUser } = useContext(ChatContext)
   const [inputValue, setInputValue] = useState<string>('')
   const [showEmojis, setShowEmojis] = useState(false)
-  const [emojidata, setemojidata] = useState('')
 
   const handleSendMessage = () => {
     if (inputValue.trim() !== '') {
@@ -40,52 +39,31 @@ export function InputBar() {
     setInputValue(event?.target.value)
   }
 
+  const handleOpenEmojiDrawer = () => setShowEmojis(!showEmojis)
+
   const handleEmoji = (emojiData: EmojiClickData) => {
     const emoji = emojiData.emoji
-    setemojidata((prevInput) => prevInput + emoji)
+    setInputValue((prevInput) => prevInput + emoji)
   }
 
   const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     event.key === 'Enter' && handleSendMessage()
-    if (event.key === 'Backspace' && emojidata.length > 0) {
-      setemojidata((prevInput) => prevInput.slice(0, -1))
-    }
   }
 
   return (
     <div className="input-bar__background">
       <Flex align="center" gap={10}>
-        {showEmojis ? (
-          <>
-            <EmojiLibrary handleEmoji={handleEmoji} />
-            <Button
-              className="emoji-button"
-              type="text"
-              style={{ ...resetButtonStyles, height: 30 }}
-            >
-              <img
-                src={emojiIcon}
-                alt="emoji icon"
-                height={'100%'}
-                onClick={() => setShowEmojis(!showEmojis)}
-              />
-            </Button>
-          </>
-        ) : (
-          <Button
-            className="emoji-button"
-            type="text"
-            style={{ ...resetButtonStyles, height: 30 }}
-            disabled={!currentUser}
-          >
-            <img
-              src={emojiIcon}
-              alt="emoji icon"
-              height={'100%'}
-              onClick={() => setShowEmojis(!showEmojis)}
-            />
-          </Button>
-        )}
+        <Button
+          className="emoji-button"
+          type="text"
+          style={{ ...resetButtonStyles, height: 30 }}
+          onClick={handleOpenEmojiDrawer}
+          disabled={!currentUser}
+        >
+          <img src={emojiIcon} alt="emoji icon" height={'100%'} />
+        </Button>
+        <EmojiLibrary open={showEmojis} handleEmoji={handleEmoji} />
+
         <Button
           className="attach-button"
           icon={<PaperClipOutlined style={{ fontSize: 25 }} />}
@@ -102,7 +80,7 @@ export function InputBar() {
         <Input
           placeholder="type a message..."
           className="input-bar"
-          value={inputValue + emojidata}
+          value={inputValue}
           onChange={handleInputOnChange}
           onKeyDown={handleOnKeyDown}
           disabled={!currentUser}
