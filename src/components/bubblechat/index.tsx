@@ -12,7 +12,7 @@ export interface UserProps {
   groupMessages?: { message: string; time: string; sentByUser?: boolean }[]
 }
 
-interface BubbleChatProps {
+export interface BubbleChatProps {
   message: string
   time: string
   isUserMessage?: boolean
