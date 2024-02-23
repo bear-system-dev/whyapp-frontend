@@ -1,3 +1,4 @@
+import { api } from '@/lib/api'
 import {
   BgColorsOutlined,
   CommentOutlined,
@@ -7,6 +8,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import { Button, Col, Divider, Drawer, Row } from 'antd'
+import Cookies from 'js-cookie'
 import React, { useState } from 'react'
 import { ChatsMenu } from './components/ChatsMenu'
 import { ProfileMenu } from './components/ProfileMenu'
@@ -163,11 +165,23 @@ export const SettingsMenu = () => {
                 type="primary"
                 shape="round"
                 style={{ minWidth: '7.5rem' }}
-                onClick={() => {
-                  alert(
-                    'Logout feito com sucesso! Redirecionando para a página de Login...',
-                  )
-                  window.location.href = 'http://localhost:5173/login'
+                onClick={async () => {
+                  try {
+                    const userToken = Cookies.get('token')
+                    const userId = Cookies.get('userId')
+                    const response = await api.post(`auth/sair/${userId}`, {
+                      headers: {
+                        authorization: `Bearer ${userToken}`,
+                      },
+                    })
+                    console.log(response.data)
+                    alert(
+                      'Logout feito com sucesso! Redirecionando para a página de Login...',
+                    )
+                    window.location.href = 'http://localhost:5173/login'
+                  } catch (error) {
+                    console.error(error)
+                  }
                 }}
               >
                 Logout
