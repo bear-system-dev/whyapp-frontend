@@ -9,12 +9,16 @@ const EmojiStyle: React.CSSProperties = {
 }
 type EmojisLibraryProps = {
   handleEmoji: (emojiData: EmojiClickData) => void
+  open: boolean
 }
 
-export const EmojiLibrary: React.FC<EmojisLibraryProps> = ({ handleEmoji }) => {
+export const EmojiLibrary: React.FC<EmojisLibraryProps> = ({
+  handleEmoji,
+  open,
+}) => {
   return (
     <div style={EmojiStyle}>
-      <EmojiPicker theme={Theme.DARK} onEmojiClick={handleEmoji} />
+      <EmojiPicker open={open} theme={Theme.DARK} onEmojiClick={handleEmoji} />
     </div>
   )
 }
