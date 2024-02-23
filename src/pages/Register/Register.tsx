@@ -1,13 +1,31 @@
-import { Flex, Form } from 'antd'
-import styles from './Register.module.css'
 import logo from '@/assets/logowhy@2x.png'
+import { api } from '@/lib/api'
+import { defaultAvatarBase64 } from '@/utils/helpers/toBase64'
+import { Flex, Form } from 'antd'
 import Auth from '../../components/Auth/Auth'
+import styles from './Register.module.css'
+
+export interface FormValues {
+  name: string
+  email: string
+  password: string
+}
 
 const Register = () => {
   const [form] = Form.useForm()
 
-  const handleSubmit = (values: object | null) => {
-    console.log(values)
+  const handleSubmit = async (values: FormValues) => {
+    try {
+      const response = await api.post('auth/cadastrar', {
+        nome: values.name,
+        email: values.email,
+        senha: values.password,
+        avatar: defaultAvatarBase64,
+      })
+      console.log(response.data)
+    } catch (error) {
+      console.error('Erro ao criar o usuário:', error)
+    }
     form.resetFields()
   }
 
