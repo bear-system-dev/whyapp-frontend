@@ -1,13 +1,15 @@
+import { ChatContext } from '@/contexts/chatContext'
 import { SearchContext } from '@/contexts/searchContext'
-import { chatData } from '@/mocks/chats-mocks'
 import { getMatchCounts } from '@/utils/helpers/activeIndex'
-import { ChangeEvent, useContext } from 'react'
+import { ChangeEvent, useContext, useEffect } from 'react'
 
 export const useSearch = () => {
   const { searchTerm, setSearchTerm, activeIndex, setActiveIndex } =
     useContext(SearchContext)
 
-  const matchCounts = getMatchCounts(chatData, searchTerm)
+  const { messages } = useContext(ChatContext)
+
+  const matchCounts = getMatchCounts(messages, searchTerm)
   const totalMatches = matchCounts.reduce((a, b) => a + b, 0)
 
   const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +24,22 @@ export const useSearch = () => {
       setActiveIndex(1)
     }
   }
+
+  useEffect(() => {
+    document.querySelector('.Active')?.scrollIntoView({
+      behavior: 'auto',
+      block: 'center',
+    })
+  }, [activeIndex])
+
+  useEffect(() => {
+    if (searchTerm && totalMatches > 0) {
+      document.querySelector('.Active')?.scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+      })
+    }
+  }, [activeIndex, searchTerm, totalMatches])
 
   const handleNextHighlight = () => {
     if (activeIndex < totalMatches - 1) {
@@ -54,6 +72,6 @@ export const useSearch = () => {
     isNextDisabled,
     isPrevDisabled,
     activeIndex,
-    totalMatches,
+    totalMatches: matchCounts.reduce((acc, curr) => acc + curr, 0),
   }
 }

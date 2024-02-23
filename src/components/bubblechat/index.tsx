@@ -1,26 +1,28 @@
 import { Flex } from 'antd'
-import React from 'react'
-import ProfileContact from '../profile'
+import React, { ReactNode } from 'react'
 import SendedAt from './components/sendedAt'
 
-interface BubbleConfig {
+export interface UserProps {
+  userId?: number
   image?: string
   username: string
   cargo?: string
-  color: string
-  chatPrivate: boolean
-  time: string
-  children?: React.ReactNode
+  chatPrivate?: boolean
+  privateMessages?: { message: string; time: string; sentByUser?: boolean }[]
+  groupMessages?: { message: string; time: string; sentByUser?: boolean }[]
 }
 
-const BubbleChat: React.FC<BubbleConfig> = ({
-  image,
-  username,
-  cargo,
-  color,
-  chatPrivate,
+interface BubbleChatProps {
+  message: string
+  time: string
+  isUserMessage?: boolean
+  children?: ReactNode
+}
+
+const BubbleChat: React.FC<BubbleChatProps> = ({
+  message,
   time,
-  children,
+  isUserMessage,
 }) => {
   return (
     <Flex
@@ -29,20 +31,19 @@ const BubbleChat: React.FC<BubbleConfig> = ({
         gap: '0.5rem',
       }}
     >
-      {!chatPrivate && (
-        <ProfileContact image={image} username={username} cargo={cargo} />
-      )}
       <Flex
         vertical
         style={{
           width: 'fit-content',
           padding: '1rem',
-          backgroundColor: `${color}`,
+          backgroundColor: `${isUserMessage ? '#3F7B40' : '#434455'}`,
           borderRadius: '14px',
+          color: '#FFFFFF',
           marginLeft: '4rem',
+          wordWrap: 'break-word',
         }}
       >
-        {children}
+        {message}
         <SendedAt time={time} />
       </Flex>
     </Flex>

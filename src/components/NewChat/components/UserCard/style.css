@@ -1,0 +1,8 @@
+.user-card-container {
+  transition: all 0.3s ease;
+}
+
+.user-card-container:hover {
+  cursor: pointer !important;
+  opacity: 60%;
+}

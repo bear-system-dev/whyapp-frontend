@@ -1,24 +1,32 @@
 import BubbleChat from '@/components/bubblechat'
+import { ChatContext } from '@/contexts/chatContext'
 import { SearchContext } from '@/contexts/searchContext'
-import { chatData } from '@/mocks/chats-mocks'
 import {
   getLocalActiveIndex,
   getMatchCounts,
 } from '@/utils/helpers/activeIndex'
 import { Flex } from 'antd'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import Highlighter from 'react-highlight-words'
 import './styles.css'
 
 export const Chat = () => {
+  const { messages, currentUser } = useContext(ChatContext)
+
+  const endOfMessagesRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    endOfMessagesRef.current?.scrollIntoView({ behavior: 'auto' })
+  }, [messages])
+
   const { searchTerm, activeIndex } = useContext(SearchContext)
 
-  const matchCounts = getMatchCounts(chatData, searchTerm)
+  const matchCounts = getMatchCounts(messages, searchTerm)
 
   return (
     <>
-      {chatData
-        .map((chat, index) => {
+      {currentUser &&
+        currentUser.privateMessages?.map((chat, index) => {
           const localActiveIndex = getLocalActiveIndex(
             activeIndex,
             matchCounts,
@@ -27,19 +35,18 @@ export const Chat = () => {
           return (
             <Flex
               key={index}
-              style={{ alignSelf: chat.color === '#3F7B40' ? 'end' : 'start' }}
+              style={{
+                alignSelf: chat.sentByUser ? 'end' : 'start',
+              }}
             >
               <BubbleChat
-                image={chat.image}
-                username={chat.username}
-                cargo={chat.cargo}
-                color={chat.color}
-                chatPrivate={chat.chatPrivate}
+                message={chat.message}
                 time={chat.time}
+                isUserMessage={chat.sentByUser}
               >
                 <Highlighter
                   style={{
-                    color: 'white',
+                    color: '#FFFFFF',
                     paddingRight: '1.5rem',
                     maxWidth: '16rem',
                     fontSize: '1rem',
@@ -51,13 +58,13 @@ export const Chat = () => {
                   autoEscape={true}
                   highlightClassName="Highlight"
                   searchWords={[searchTerm]}
-                  textToHighlight={chat.message}
+                  textToHighlight={chat.message || ''}
                 />
               </BubbleChat>
             </Flex>
           )
-        })
-        .reverse()}
+        })}
+      <div ref={endOfMessagesRef} />
     </>
   )
 }

@@ -25,6 +25,7 @@ const siderStyle: React.CSSProperties = {
   backgroundColor: '#17212B',
   zIndex: 4,
   width: 65,
+  minWidth: 65,
 }
 
 const footerStyle: React.CSSProperties = {
