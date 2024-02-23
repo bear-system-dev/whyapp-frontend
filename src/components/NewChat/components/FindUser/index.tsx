@@ -54,7 +54,6 @@ export const FindUser = () => {
                     userId: user.userId,
                     username: user.username,
                     image: user.image,
-                    color: user.color,
                     chatPrivate: user.chatPrivate,
                     privateMessages: user.privateMessages,
                     groupMessages: user.groupMessages,

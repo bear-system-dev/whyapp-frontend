@@ -1,7 +1,7 @@
-import { ChatMessageProps } from '@/components/bubblechat'
+import { BubbleChatProps } from '@/components/bubblechat'
 
 export const getMatchCounts = (
-  messages: ChatMessageProps[],
+  messages: BubbleChatProps[],
   searchTerm: string,
 ): number[] => {
   return messages.map((chat) => {
