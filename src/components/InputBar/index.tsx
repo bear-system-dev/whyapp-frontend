@@ -32,16 +32,12 @@ export function InputBar() {
         chatPrivate: true,
       })
 
-      setINputValue('')
+      setInputValue('')
     }
   }
 
-  const handleKeyboardEnter = (event: KeyboardEvent<HTMLInputElement>) => {
-    event.key === 'Enter' && handleSendMessage()
-  }
-
   const handleInputOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setINputValue(event?.target.value)
+    setInputValue(event?.target.value)
   }
 
   const handleEmoji = (emojiData: EmojiClickData) => {
@@ -49,7 +45,8 @@ export function InputBar() {
     setemojidata((prevInput) => prevInput + emoji)
   }
 
-  const handleBackspaceKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    event.key === 'Enter' && handleSendMessage()
     if (event.key === 'Backspace' && emojidata.length > 0) {
       setemojidata((prevInput) => prevInput.slice(0, -1))
     }
@@ -80,7 +77,7 @@ export function InputBar() {
             type="text"
             style={{ ...resetButtonStyles, height: 30 }}
             disabled={!currentUser}
-        >
+          >
             <img
               src={emojiIcon}
               alt="emoji icon"
@@ -107,7 +104,7 @@ export function InputBar() {
           className="input-bar"
           value={inputValue + emojidata}
           onChange={handleInputOnChange}
-          onKeyDown={handleKeyboardEnter + handleBackspaceKeyDown}
+          onKeyDown={handleOnKeyDown}
           disabled={!currentUser}
         />
         <Button
