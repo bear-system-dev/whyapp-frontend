@@ -29,7 +29,6 @@ export const FindUser = () => {
   })
 
   const dataArray = data ? Object.values(data) : []
-  const dataArray2 = dataArray[0]
 
   const { setCurrentUser } = useContext(ChatContext)
 
@@ -38,8 +37,10 @@ export const FindUser = () => {
     setUserNameSearchedList(findUserNameValue)
   }
 
-  const filteredUserNameList = dataArray2?.filter((user: User) => {
-    return user.nome.toLowerCase().includes(userNameSearchedList.toLowerCase())
+  const filteredUserNameList = dataArray.flat().filter((user: User) => {
+    return user?.nome
+      ?.toLowerCase()
+      .includes(userNameSearchedList.toLowerCase())
   })
 
   return (
