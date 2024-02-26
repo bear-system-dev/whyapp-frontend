@@ -10,7 +10,7 @@ export interface BubbleChatProps {
 }
 
 export interface UserProps {
-  userId?: number
+  userId?: string
   image?: string
   username: string
   cargo?: string
