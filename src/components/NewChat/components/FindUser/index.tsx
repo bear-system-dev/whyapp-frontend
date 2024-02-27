@@ -1,9 +1,11 @@
 import { ChatContext } from '@/contexts/chatContext'
-import { chatData } from '@/mocks/chats-mocks'
 import { Flex, Input } from 'antd'
-import { ChangeEvent, useContext, useState } from 'react'
+import { ChangeEvent, Key, useContext, useState } from 'react'
 import { UserCard } from '../UserCard'
 import './styles.css'
+import { apiFunction } from '@/api/api'
+import { useQuery } from '@tanstack/react-query'
+import { User } from '@/model/UserModel'
 
 const searchInputBarStyles: React.CSSProperties = {
   background:
@@ -20,6 +22,14 @@ const searchInputBarStyles: React.CSSProperties = {
 
 export const FindUser = () => {
   const [userNameSearchedList, setUserNameSearchedList] = useState('')
+
+  const { data, isLoading, isError } = useQuery<User[], Error>({
+    queryKey: ['user-list'],
+    queryFn: apiFunction.getUser,
+  })
+
+  const dataArray = data ? Object.values(data) : []
+
   const { setCurrentUser } = useContext(ChatContext)
 
   const onFindInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,9 +37,9 @@ export const FindUser = () => {
     setUserNameSearchedList(findUserNameValue)
   }
 
-  const filteredUserNameList = chatData.filter((user) => {
-    return user.username
-      .toLowerCase()
+  const filteredUserNameList = dataArray.flat().filter((user: User) => {
+    return user?.nome
+      ?.toLowerCase()
       .includes(userNameSearchedList.toLowerCase())
   })
 
@@ -42,26 +52,31 @@ export const FindUser = () => {
         placeholder="busque por um usuário ou grupo..."
       />
       <Flex vertical style={{ gap: '1.5rem', height: '100%', width: '100%' }}>
+        {isLoading && <h3>carregando...</h3>}
+        {isError && <h3>Algo ocorreu... peun peun peeuun</h3>}
         {userNameSearchedList &&
-          filteredUserNameList.map((user, index) => {
-            return (
-              <UserCard
-                key={index}
-                name={user.username}
-                image={user.image}
-                onClick={() => {
-                  setCurrentUser({
-                    userId: user.userId,
-                    username: user.username,
-                    image: user.image,
-                    chatPrivate: user.chatPrivate,
-                    privateMessages: user.privateMessages,
-                    groupMessages: user.groupMessages,
-                  })
-                }}
-              />
-            )
-          })}
+          filteredUserNameList?.map(
+            (user: User, index: Key | null | undefined) => {
+              return (
+                <UserCard
+                  key={index}
+                  name={user.nome}
+                  image={user.avatar}
+                  onClick={() => {
+                    setCurrentUser({
+                      userId: user.id,
+                      username: user.nome,
+                      image: user.avatar,
+                      chatPrivate: user.ativo,
+                      // chatPrivate: user.chatPrivate,
+                      // privateMessages: user.privateMessages,
+                      // groupMessages: user.groupMessages,
+                    })
+                  }}
+                />
+              )
+            },
+          )}
       </Flex>
     </>
   )

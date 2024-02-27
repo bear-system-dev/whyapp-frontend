@@ -37,6 +37,7 @@ const MenuGroup = () => {
   const onClose = () => {
     setSettingsMenuOpen(false)
   }
+
   return (
     <>
       <Button
