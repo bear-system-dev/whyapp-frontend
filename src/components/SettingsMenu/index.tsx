@@ -175,6 +175,7 @@ export const SettingsMenu = () => {
                       },
                     })
                     console.log(response.data)
+                    Cookies.remove('token')
                     alert(
                       'Logout feito com sucesso! Redirecionando para a página de Login...',
                     )
