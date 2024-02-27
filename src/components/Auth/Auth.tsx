@@ -19,11 +19,13 @@ type Props = {
   authWithGoogle: MouseEventHandler<HTMLElement>
   authWithFacebook: MouseEventHandler<HTMLElement>
   authWithApple: MouseEventHandler<HTMLElement>
+  loading: boolean
 }
 const Auth = ({
   type,
   handleForm,
   onSubmit,
+  loading,
   authWithGoogle,
   authWithFacebook,
   authWithApple,
@@ -171,6 +173,7 @@ const Auth = ({
           style={{ width: '100%' }}
           size="large"
           className={styles.submit}
+          loading={loading}
         >
           {type === 'login' ? 'Entrar' : 'Cadastrar'}
         </Button>
