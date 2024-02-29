@@ -1,12 +1,17 @@
-import { EditOutlined, UserOutlined } from '@ant-design/icons'
+import { apiFunction } from '@/api/api'
+import { User } from '@/model/UserModel'
+import { EditOutlined, SaveOutlined, UserOutlined } from '@ant-design/icons'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Avatar, Button, Flex, Input, InputRef } from 'antd'
 import TextArea, { TextAreaRef } from 'antd/es/input/TextArea'
-import React, { ChangeEvent, KeyboardEvent, useRef, useState } from 'react'
+import React, {
+  ChangeEvent,
+  KeyboardEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import './styles.css'
-
-interface AvatarProps {
-  avatar: string
-}
 
 const editButtonStyles: React.CSSProperties = {
   all: 'unset',
@@ -16,14 +21,23 @@ const editButtonStyles: React.CSSProperties = {
   cursor: 'pointer',
 }
 
-// Initial field values
-const userAvatar: AvatarProps = { avatar: '' }
-const initialUserName = 'Andréia Amâncio'
-const initialUserDescription = ''
-
 export const ProfileMenu = () => {
+  const queryClient = useQueryClient()
+  const { data, isLoading, isError } = useQuery<User, Error>({
+    queryKey: ['my-profile-info'],
+    queryFn: apiFunction.getMyProfileInfo,
+  })
+
+  const userProfileMutation = useMutation<User, Error, Partial<User>>({
+    mutationFn: ({ avatar, nome, descricao }: Partial<User>) => {
+      return apiFunction.updateMyProfileInfo({ avatar, nome, descricao })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['my-profile-info'] })
+    },
+  })
+
   // Edit Avatar Functions
-  const [avatar, setAvatar] = useState(userAvatar.avatar)
   const avatarFileInputRef = useRef<HTMLInputElement>(null)
 
   const handleAvatarFileChangeClick = () => {
@@ -38,7 +52,7 @@ export const ProfileMenu = () => {
       const avatarFileReader = new FileReader()
       avatarFileReader.onloadend = () => {
         if (typeof avatarFileReader.result === 'string') {
-          setAvatar(avatarFileReader.result)
+          userProfileMutation.mutate({ avatar: avatarFileReader.result })
         }
       }
       avatarFileReader.readAsDataURL(avatarFile)
@@ -46,12 +60,12 @@ export const ProfileMenu = () => {
   }
 
   // Edit Username Functions
-  const [userName, setUserName] = useState(initialUserName)
-  const [isEditing, setIsEditing] = useState(false)
+  const [userName, setUserName] = useState(data?.nome || '')
+  const [isEditingUserName, setIsEditingUsername] = useState(false)
   const userNameInputRef = useRef<InputRef | null>(null)
 
   const handleEditUserNameButtonClick = () => {
-    setIsEditing(true)
+    setIsEditingUsername(true)
     userNameInputRef.current?.focus()
   }
 
@@ -68,11 +82,13 @@ export const ProfileMenu = () => {
   }
 
   // Edit Description Functions
-  const [userDescription, setUserDescription] = useState(initialUserDescription)
+  const [userDescription, setUserDescription] = useState(data?.descricao || '')
+  const [isEditingUserDescription, setIsEditingUserDescription] =
+    useState(false)
   const descriptionTextAreaRef = useRef<TextAreaRef | null>(null)
 
   const handleEditUserDescriptionButtonClick = () => {
-    setIsEditing(true)
+    setIsEditingUserDescription(true)
     descriptionTextAreaRef.current?.focus()
   }
 
@@ -91,8 +107,29 @@ export const ProfileMenu = () => {
   }
 
   // General Edit Fields functions
-  const handleOnEditBlur = () => {
-    setIsEditing(false)
+  useEffect(() => {
+    if (data) {
+      setUserName(data.nome)
+      setUserDescription(data.descricao)
+    }
+  }, [data])
+
+  const handleClickSaveEdit = () => {
+    userProfileMutation.mutate({
+      nome: userName,
+      descricao: userDescription,
+    })
+
+    isEditingUserName && setIsEditingUsername(false)
+    isEditingUserDescription && setIsEditingUserDescription(false)
+  }
+
+  if (isLoading) {
+    return <div>carregando...</div>
+  }
+
+  if (isError) {
+    return <div>Ops, algo saiu mal!</div>
   }
 
   return (
@@ -105,7 +142,7 @@ export const ProfileMenu = () => {
         >
           <Avatar
             size={80}
-            src={avatar}
+            src={data?.avatar}
             icon={<UserOutlined />}
             className="edit-user-avatar"
           />
@@ -127,21 +164,23 @@ export const ProfileMenu = () => {
             value={userName}
             className="user-name-edit-input"
             onChange={handleUserNameInputChange}
-            onBlur={handleOnEditBlur}
             type="type"
             autoFocus
             onKeyDown={handleUserNameInputKeyDown}
-            readOnly={!isEditing}
+            readOnly={!isEditingUserName}
             ref={userNameInputRef}
           />
-          {!isEditing && (
-            <Button
-              className="edit-button"
-              style={editButtonStyles}
-              icon={<EditOutlined />}
-              onClick={handleEditUserNameButtonClick}
-            />
-          )}
+
+          <Button
+            className="edit-button"
+            style={editButtonStyles}
+            icon={!isEditingUserName ? <EditOutlined /> : <SaveOutlined />}
+            onClick={
+              !isEditingUserName
+                ? handleEditUserNameButtonClick
+                : handleClickSaveEdit
+            }
+          />
         </Flex>
         <Flex
           vertical
@@ -158,8 +197,14 @@ export const ProfileMenu = () => {
             <Button
               className="edit-button"
               style={editButtonStyles}
-              icon={<EditOutlined />}
-              onClick={handleEditUserDescriptionButtonClick}
+              icon={
+                !isEditingUserDescription ? <EditOutlined /> : <SaveOutlined />
+              }
+              onClick={
+                !isEditingUserDescription
+                  ? handleEditUserDescriptionButtonClick
+                  : handleClickSaveEdit
+              }
             />
           </Flex>
 
@@ -167,7 +212,7 @@ export const ProfileMenu = () => {
             className="description-textarea"
             showCount
             maxLength={120}
-            readOnly={!isEditing}
+            readOnly={!isEditingUserDescription}
             value={userDescription}
             style={{
               resize: 'none',
@@ -176,7 +221,6 @@ export const ProfileMenu = () => {
             ref={descriptionTextAreaRef}
             autoFocus
             onChange={handleUserDescriptionTextAreaChange}
-            onBlur={handleOnEditBlur}
             onKeyDown={handleUserDescriptionTextAreaKeyDown}
           />
         </Flex>
