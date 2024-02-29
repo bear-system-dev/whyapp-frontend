@@ -9,3 +9,7 @@ export interface User {
   updateAt: string
   opcaoenqueteid: string
 }
+
+export interface UserResponse {
+  user: User
+}
