@@ -5,8 +5,7 @@ import {
   getLocalActiveIndex,
   getMatchCounts,
 } from '@/utils/helpers/activeIndex'
-import { useQuery } from '@tanstack/react-query'
-import { Alert, Flex } from 'antd'
+import { Flex } from 'antd'
 import { useContext, useLayoutEffect, useRef } from 'react'
 import Highlighter from 'react-highlight-words'
 import './styles.css'
@@ -14,9 +13,9 @@ import './styles.css'
 export const Chat = () => {
   const { messages, currentUser } = useContext(ChatContext)
 
-  const { isError } = useQuery<Error>({
-    queryKey: ['token'],
-  })
+  // const { isError } = useQuery<Error>({
+  //   queryKey: ['token'],
+  // })
 
   const endOfMessagesRef = useRef<HTMLDivElement>(null)
 
@@ -30,7 +29,7 @@ export const Chat = () => {
 
   return (
     <>
-      {isError && (
+      {/* {isError && (
         <Alert
           message="Token expirado ou inexistente. Por favor, realize o login novamente!"
           type="error"
@@ -44,7 +43,7 @@ export const Chat = () => {
             width: '240px',
           }}
         />
-      )}
+      )} */}
       {currentUser &&
         currentUser.privateMessages?.map((chat, index) => {
           const localActiveIndex = getLocalActiveIndex(
