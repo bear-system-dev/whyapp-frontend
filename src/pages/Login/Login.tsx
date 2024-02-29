@@ -28,7 +28,7 @@ const Login = () => {
         message: 'Login feito com sucesso! Redirecionando para o app!',
         type: 'success',
       })
-      window.location.href = 'http://localhost:5173/'
+      window.location.href = import.meta.env.VITE_APP_HOME_URL
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setAlert({ message: error.response?.data?.message, type: 'error' })

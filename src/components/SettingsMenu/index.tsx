@@ -179,7 +179,7 @@ export const SettingsMenu = () => {
                     alert(
                       'Logout feito com sucesso! Redirecionando para a página de Login...',
                     )
-                    window.location.href = 'http://localhost:5173/login'
+                    window.location.href = `${import.meta.env.VITE_APP_HOME_URL}login`
                   } catch (error) {
                     console.error(error)
                   }
