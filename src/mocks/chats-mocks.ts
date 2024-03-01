@@ -1,6 +1,6 @@
 export const chatData = [
   {
-    userId: 1,
+    userId: '1',
     username: 'Faustão desempregado',
     image: 'fausto.jpg',
     chatPrivate: true,
@@ -42,7 +42,7 @@ export const chatData = [
     ],
   },
   {
-    userId: 2,
+    userId: '2',
     username: 'calvão buena',
     image: 'calvao.jpg',
     chatPrivate: true,
@@ -76,7 +76,7 @@ export const chatData = [
     ],
   },
   {
-    userId: 3,
+    userId: '3',
     image: '031b68882265722dede1080a200f015a.jpg',
     username: 'motoplay_br',
     chatPrivate: true,
@@ -111,4 +111,4 @@ export const chatData = [
   },
 ]
 
-export const myUserId = 2392313918
+export const myUserId = '2392313918'

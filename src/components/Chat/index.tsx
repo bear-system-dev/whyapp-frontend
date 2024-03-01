@@ -5,17 +5,19 @@ import {
   getLocalActiveIndex,
   getMatchCounts,
 } from '@/utils/helpers/activeIndex'
-import { Flex } from 'antd'
-import { useContext, useEffect, useRef } from 'react'
+import { Alert, Flex } from 'antd'
+import Cookies from 'js-cookie'
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words'
 import './styles.css'
 
 export const Chat = () => {
+  const [tokenExpired, setTokenExpired] = useState(false)
   const { messages, currentUser } = useContext(ChatContext)
 
   const endOfMessagesRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'auto' })
   }, [messages])
 
@@ -23,8 +25,36 @@ export const Chat = () => {
 
   const matchCounts = getMatchCounts(messages, searchTerm)
 
+  useEffect(() => {
+    const checkTokenValidity = () => {
+      const token = Cookies.get('token')
+      !token && setTokenExpired(true)
+    }
+
+    checkTokenValidity()
+
+    const checkTokenInterval = setInterval(checkTokenValidity, 5 * 60 * 1000) // 5 minutes
+
+    return () => clearInterval(checkTokenInterval)
+  }, [])
+
   return (
     <>
+      {tokenExpired && (
+        <Alert
+          message="Token expirado ou inexistente. Por favor, realize o login novamente!"
+          type="error"
+          showIcon
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.25rem',
+            placeSelf: 'center',
+            textAlign: 'center',
+            width: '240px',
+          }}
+        />
+      )}
       {currentUser &&
         currentUser.privateMessages?.map((chat, index) => {
           const localActiveIndex = getLocalActiveIndex(
