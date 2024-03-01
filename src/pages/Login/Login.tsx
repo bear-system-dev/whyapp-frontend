@@ -68,6 +68,8 @@ const Login = () => {
           authWithApple={() => console.log('login with apple')}
         />
       </Flex>
+      <div className={styles.login_container_background_color}></div>
+      <div className={styles.login_container_background_image}></div>
     </Flex>
   )
 }

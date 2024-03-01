@@ -77,6 +77,8 @@ const Register = () => {
           authWithApple={() => console.log('register with apple')}
         />
       </Flex>
+      <div className={styles.register_container_background_color}></div>
+      <div className={styles.register_container_background_image}></div>
     </Flex>
   )
 }
