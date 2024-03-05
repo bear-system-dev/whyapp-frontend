@@ -1,7 +1,10 @@
 import App from '@/pages/App'
+import Cookies from 'js-cookie'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Login from '../pages/Login/Login'
 import Register from '../pages/Register/Register'
+
+const loggedIn = Cookies.get('token')
 
 const router = createBrowserRouter([
   {
@@ -10,7 +13,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <App />,
+    element: !loggedIn ? <Login /> : <App />,
   },
   {
     path: '/login',
