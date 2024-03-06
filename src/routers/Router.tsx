@@ -1,4 +1,5 @@
 import App from '@/pages/App'
+import ForgotPassword from '@/pages/ForgotPassword/ForgotPassword'
 import Cookies from 'js-cookie'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Login from '../pages/Login/Login'
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/forgot-password',
+    element: <ForgotPassword />,
   },
   {
     path: '/register',
