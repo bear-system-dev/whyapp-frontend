@@ -19,6 +19,7 @@ import {
   textToggle,
 } from './style/style.tsx'
 import {
+  CloseCircleOutlined,
   DownOutlined,
   UserDeleteOutlined,
   UserOutlined,
@@ -56,6 +57,16 @@ const MenuInfo = () => {
       >
         {currentUser && (
           <Flex vertical style={ConteinerMenuStyle}>
+            <CloseCircleOutlined
+              onClick={onClose}
+              style={{
+                color: 'white',
+                position: 'fixed',
+                top: '10px',
+                left: '10px',
+                fontSize: '1.5rem',
+              }}
+            />
             <Flex vertical style={ImageProfileStyle}>
               <ImageProfile
                 image={currentUser.image}

@@ -20,6 +20,7 @@ export const menuConteiner: React.CSSProperties = {
 }
 export const ImageProfileStyle: React.CSSProperties = {
   margin: '12px 0',
+  marginTop: '24px',
   padding: '10px 44px',
   display: 'flex',
   alignItems: 'center',
