@@ -4,7 +4,11 @@ import React, { useContext, useState } from 'react'
 import { ChatContext } from '@/contexts/chatContext'
 import ImageProfile from '../profile/imageProfile'
 import NameProfile from './components/NameProfile'
-import { DownOutlined, UserOutlined } from '@ant-design/icons'
+import {
+  DownOutlined,
+  UserDeleteOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
 
 const settingsButtonStyle: React.CSSProperties = {
   background: 'transparent',
@@ -57,16 +61,53 @@ const SilenceNotificationsStyle: React.CSSProperties = {
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: '#434455',
-  gap: '28px',
-  borderRadius: '8px',
-  width: '90%',
+  flexDirection: 'column',
+  // gap: '28px',
+  borderRadius: '6px',
+  width: '86%',
 }
 const textToggle: React.CSSProperties = {
   color: 'white',
   padding: '8px 16px',
+  fontSize: '1rem',
+}
+const RadioListStyle: React.CSSProperties = {
+  backgroundColor: '#434455',
+  width: '87%',
+  padding: '10px 30px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '16px',
+  borderRadius: '0  0 14px 14px',
+}
+const conteinerList: React.CSSProperties = {
+  display: 'flex',
+  gap: '14px',
+  fontSize: '.8rem',
+  color: 'white',
+}
+const menuSilenceStyle: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '28px',
+}
+const buttonRemoveStyle: React.CSSProperties = {
+  backgroundColor: '#D0454C',
+  color: 'white',
+  border: 'none',
+  padding: '8px 58px',
+  display: 'flex',
+  gap: '10px',
+  borderRadius: '6px',
+  fontSize: '1rem',
+  position: 'fixed',
+  bottom: '0',
+  marginBottom: '30px',
 }
 const MenuInfo = () => {
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false)
+  const [openSilence, setOpenSilence] = useState(false)
   const { currentUser } = useContext(ChatContext)
 
   const showDrawer = () => {
@@ -119,16 +160,51 @@ const MenuInfo = () => {
                 </div>
               </div>
             </Flex>
-            <div>
-              <p style={LabelStyle}>Descrição</p>
-              <p style={descriptionStyle}>
-                Tá pegando fogo bixo, manda pix ai rapidao pra eu testar um
-                negócio aqui ...
-              </p>
-            </div>
-            <div style={SilenceNotificationsStyle}>
-              <p style={textToggle}>Silenciar notificações</p>
-              <DownOutlined style={{ color: 'white' }} />
+            <div
+              style={{
+                height: '320px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexDirection: 'column',
+              }}
+            >
+              <div>
+                <p style={LabelStyle}>Descrição</p>
+                <p style={descriptionStyle}>
+                  Tá pegando fogo bixo, manda pix ai rapidao pra eu testar um
+                  negócio aqui ...
+                </p>
+              </div>
+              <div style={SilenceNotificationsStyle}>
+                <div style={menuSilenceStyle}>
+                  <p style={textToggle}>Silenciar notificações</p>
+                  <DownOutlined
+                    style={{ color: 'white' }}
+                    onClick={() => setOpenSilence(!openSilence)}
+                  />
+                </div>
+                {openSilence && (
+                  <div style={RadioListStyle}>
+                    <div style={conteinerList}>
+                      <input type="radio" name="min" id="" />
+                      <label htmlFor="min">Por 30 minutos</label>
+                    </div>
+                    <div style={conteinerList}>
+                      <input type="radio" name="hour" id="" />
+                      <label htmlFor="hour">Por 60 minutos</label>
+                    </div>
+                    <div style={conteinerList}>
+                      <input type="radio" name="infinite" id="" />
+                      <label htmlFor="infinite">Para sempre</label>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <button style={buttonRemoveStyle}>
+                <UserDeleteOutlined />
+                remover contato
+              </button>
             </div>
           </Flex>
         )}
