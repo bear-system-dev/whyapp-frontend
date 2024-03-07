@@ -1,110 +1,29 @@
 import { Button, Drawer, Flex } from 'antd'
-import HeaderChat from '../header'
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { ChatContext } from '@/contexts/chatContext'
 import ImageProfile from '../profile/imageProfile'
 import NameProfile from './components/NameProfile'
+import {
+  ConteinerMenuStyle,
+  ImageProfileStyle,
+  LabelStyle,
+  RadioListStyle,
+  SilenceNotificationsStyle,
+  buttonRemoveStyle,
+  conteinerList,
+  descriptionStyle,
+  menuConteiner,
+  menuSilenceStyle,
+  settingsButtonStyle,
+  stutusProfileStyle,
+  textToggle,
+} from './style/style.tsx'
 import {
   DownOutlined,
   UserDeleteOutlined,
   UserOutlined,
 } from '@ant-design/icons'
 
-const settingsButtonStyle: React.CSSProperties = {
-  background: 'transparent',
-  position: 'fixed',
-  width: '100vw',
-  zIndex: 0,
-}
-const menuConteiner: React.CSSProperties = {
-  overflowY: 'scroll',
-  backgroundColor: 'rgba(18, 29, 40, 0.9)',
-  backdropFilter: 'blur(2px)',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  position: 'fixed',
-  right: '0',
-  bottom: '0',
-  width: '300px',
-  zIndex: 1,
-}
-const ImageProfileStyle: React.CSSProperties = {
-  margin: '12px 0',
-  padding: '10px 44px',
-  display: 'flex',
-  alignItems: 'center',
-  borderBottom: '.2px solid #848383',
-  gap: '16px',
-}
-const stutusProfileStyle: React.CSSProperties = {
-  display: 'flex',
-  gap: '8px',
-}
-const ConteinerMenuStyle: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-}
-const LabelStyle: React.CSSProperties = {
-  color: '#A3A3A3',
-  fontSize: '.7rem',
-  fontWeight: 600,
-  paddingLeft: '16px',
-}
-const descriptionStyle: React.CSSProperties = {
-  color: 'white',
-  fontSize: '.8rem',
-  padding: '8px 16px',
-}
-const SilenceNotificationsStyle: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  backgroundColor: '#434455',
-  flexDirection: 'column',
-  // gap: '28px',
-  borderRadius: '6px',
-  width: '86%',
-}
-const textToggle: React.CSSProperties = {
-  color: 'white',
-  padding: '8px 16px',
-  fontSize: '1rem',
-}
-const RadioListStyle: React.CSSProperties = {
-  backgroundColor: '#434455',
-  width: '87%',
-  padding: '10px 30px',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '16px',
-  borderRadius: '0  0 14px 14px',
-}
-const conteinerList: React.CSSProperties = {
-  display: 'flex',
-  gap: '14px',
-  fontSize: '.8rem',
-  color: 'white',
-}
-const menuSilenceStyle: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '28px',
-}
-const buttonRemoveStyle: React.CSSProperties = {
-  backgroundColor: '#D0454C',
-  color: 'white',
-  border: 'none',
-  padding: '8px 58px',
-  display: 'flex',
-  gap: '10px',
-  borderRadius: '6px',
-  fontSize: '1rem',
-  position: 'fixed',
-  bottom: '0',
-  marginBottom: '30px',
-}
 const MenuInfo = () => {
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false)
   const [openSilence, setOpenSilence] = useState(false)
@@ -123,7 +42,6 @@ const MenuInfo = () => {
         className="general-settings-button"
         style={settingsButtonStyle}
         shape="circle"
-        icon={<HeaderChat />}
         type="primary"
         onClick={showDrawer}
       />
