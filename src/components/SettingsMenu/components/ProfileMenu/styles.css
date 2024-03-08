@@ -44,22 +44,15 @@ input-container {
 }
 
 .edit-button {
-  opacity: 0 !important;
   transition: all 1s ease !important;
   position: absolute !important;
   right: 0 !important;
   flex-shrink: 0;
 }
 
-.input-container:hover .edit-button {
-  opacity: 1 !important;
-}
-
 .edit-button:hover + .user-name-edit-input {
   background-color: #273544FF;
 }
-
-
 
 .description-textarea {
     background: #273544;

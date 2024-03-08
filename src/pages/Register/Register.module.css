@@ -6,11 +6,34 @@
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
-  background-image: url("../../assets/background.webp");
-  background-size: cover;
   padding: 0 15px;
 }
 
+.register_container_background_color {
+  width: 100%;
+  height: 100vh;
+  background-color: #17212B;
+  opacity: 1;
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.register_container_background_image {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../assets/background.webp");
+  background-color: #17212B;
+  opacity: 0.3;
+  background-size: cover;
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 
 .register_logo {
   align-items: center;

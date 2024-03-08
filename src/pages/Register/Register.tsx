@@ -1,7 +1,9 @@
 import logo from '@/assets/logowhy@2x.png'
 import { api } from '@/lib/api'
 import { defaultAvatarBase64 } from '@/utils/helpers/toBase64'
-import { Flex, Form } from 'antd'
+import { Alert, AlertProps, Flex, Form } from 'antd'
+import axios from 'axios'
+import { useState } from 'react'
 import Auth from '../../components/Auth/Auth'
 import styles from './Register.module.css'
 
@@ -14,19 +16,29 @@ export interface FormValues {
 const Register = () => {
   const [form] = Form.useForm()
 
+  const [isLoading, setIsLoading] = useState(false)
+  const [alert, setAlert] = useState<AlertProps | null>(null)
+
   const handleSubmit = async (values: FormValues) => {
+    setIsLoading(true)
     try {
-      const response = await api.post('auth/cadastrar', {
+      await api.post('auth/cadastrar', {
         nome: values.name,
         email: values.email,
         senha: values.password,
         avatar: defaultAvatarBase64,
       })
-      console.log(response.data)
+      setAlert({
+        message: 'Registro feito com sucesso! Redirecionando para o login!',
+        type: 'success',
+      })
+      window.location.href = `${import.meta.env.VITE_APP_HOME_URL}login`
     } catch (error) {
-      console.error('Erro ao criar o usuário:', error)
+      if (axios.isAxiosError(error)) {
+        setAlert({ message: error.response?.data?.message, type: 'error' })
+      }
     }
-    form.resetFields()
+    setIsLoading(false)
   }
 
   return (
@@ -47,15 +59,26 @@ const Register = () => {
         </div>
       </Flex>
       <Flex flex={1} vertical align="center" justify="start">
+        {alert && (
+          <Alert
+            message={alert.message}
+            type={alert.type}
+            showIcon
+            style={{ marginBottom: '1rem' }}
+          />
+        )}
         <Auth
           type="register"
           handleForm={form}
           onSubmit={handleSubmit}
+          loading={isLoading}
           authWithGoogle={() => console.log('register with google')}
           authWithFacebook={() => console.log('register with facebook')}
           authWithApple={() => console.log('register with apple')}
         />
       </Flex>
+      <div className={styles.register_container_background_color}></div>
+      <div className={styles.register_container_background_image}></div>
     </Flex>
   )
 }
