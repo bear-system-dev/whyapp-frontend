@@ -1,5 +1,10 @@
+import { resetButtonStyles } from '@/mocks/mockUserArray'
 import { FormValues } from '@/pages/Register/Register'
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import {
+  ArrowLeftOutlined,
+  LockOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
 import { Button, Flex, Form, FormInstance, Input, Space } from 'antd'
 import { Dispatch, MouseEventHandler } from 'react'
 import { PiIdentificationCard } from 'react-icons/pi'
@@ -12,15 +17,17 @@ const authButtonStyles = {
   alignItems: 'center',
   justifyContent: 'center',
 }
+
 type Props = {
   type: string
   handleForm: FormInstance<FormValues>
   onSubmit: Dispatch<FormValues>
-  authWithGoogle: MouseEventHandler<HTMLElement>
-  authWithFacebook: MouseEventHandler<HTMLElement>
-  authWithApple: MouseEventHandler<HTMLElement>
+  authWithGoogle?: MouseEventHandler<HTMLElement>
+  authWithFacebook?: MouseEventHandler<HTMLElement>
+  authWithApple?: MouseEventHandler<HTMLElement>
   loading: boolean
 }
+
 const Auth = ({
   type,
   handleForm,
@@ -32,6 +39,20 @@ const Auth = ({
 }: Props) => {
   return (
     <AuthContainer>
+      {type === 'forgot-password' && (
+        <Link to="/login">
+          <Button
+            style={{
+              ...resetButtonStyles,
+              color: '#39FF14',
+            }}
+            icon={<ArrowLeftOutlined />}
+          >
+            Retornar
+          </Button>
+        </Link>
+      )}
+
       <Space direction="vertical" size={5}>
         <div
           style={{
@@ -39,12 +60,18 @@ const Auth = ({
             textDecoration: 'underline',
           }}
         >
-          {type === 'login' ? 'Entrar' : 'Criar uma conta'}
+          {type === 'login'
+            ? 'Entrar'
+            : type === 'forgot-password'
+              ? 'Redefinir senha'
+              : 'Criar uma conta'}
         </div>
         <div className={styles.auth_description}>
           {type === 'login'
-            ? 'Bem-vindo ao WhyApp! Vamos bater um papo?'
-            : 'Bem-vindo ao WhyApp! Vamos começar?'}
+            ? 'Bem-vindo ao WhyApp! Entre com sua conta para começar:'
+            : type === 'forgot-password'
+              ? 'Esqueceu ou precisa alterar a senha? Sem problemas!'
+              : 'Bem-vindo ao WhyApp! Registre uma conta para começar:'}
         </div>
       </Space>
       <Form
@@ -75,29 +102,32 @@ const Auth = ({
             />
           </Form.Item>
         )}
-        <Form.Item
-          label="E-mail"
-          name="email"
-          rules={[
-            { required: true, message: 'Digite seu e-mail' },
-            { type: 'email', message: 'E-mail inválido' },
-          ]}
-          className={styles.label}
-          labelCol={{ className: styles.label_col }}
-        >
-          <Input
-            placeholder="Digite seu e-mail"
-            size="large"
-            className={styles.input}
-            id="wa-email"
-            autoComplete="wa-email"
-            name="wa-email"
-            prefix={<UserOutlined />}
-          />
-        </Form.Item>
+        {(type === 'register' || type === 'login') && (
+          <Form.Item
+            label="E-mail"
+            name="email"
+            rules={[
+              { required: true, message: 'Digite seu e-mail' },
+              { type: 'email', message: 'E-mail inválido' },
+            ]}
+            className={styles.label}
+            labelCol={{ className: styles.label_col }}
+          >
+            <Input
+              placeholder="Digite seu e-mail"
+              size="large"
+              className={styles.input}
+              id="wa-email"
+              autoComplete="wa-email"
+              name="wa-email"
+              prefix={<UserOutlined />}
+            />
+          </Form.Item>
+        )}
+
         <Flex vertical style={{ position: 'relative' }}>
           <Form.Item
-            label="Senha"
+            label={type === 'forgot-password' ? 'Nova senha' : 'Senha'}
             name="password"
             rules={[
               { required: true, message: 'Digite sua senha' },
@@ -111,7 +141,11 @@ const Auth = ({
             }}
           >
             <Input.Password
-              placeholder="Digite sua senha"
+              placeholder={
+                type === 'forgot-password'
+                  ? 'Digite a nova senha'
+                  : 'Digite sua senha'
+              }
               size="large"
               className={styles.input}
               name="wa-password"
@@ -136,13 +170,16 @@ const Auth = ({
             </Link>
           )}
         </Flex>
-        {type === 'register' && (
+        {(type === 'register' || type === 'forgot-password') && (
           <Form.Item
-            label="Confirmar Senha"
+            label={
+              type === 'forgot-password'
+                ? 'Confirmar nova senha'
+                : 'Confirmar senha'
+            }
             name="confirmPassword"
             rules={[
               { required: true, message: 'Digite sua senha' },
-              { min: 8, message: 'Mínimo 8 caracteres' },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue('password') === value) {
@@ -158,7 +195,11 @@ const Auth = ({
             labelCol={{ className: styles.label_col }}
           >
             <Input.Password
-              placeholder="Confirme sua senha"
+              placeholder={
+                type === 'forgot-password'
+                  ? 'Confirme a nova senha'
+                  : 'Confirme sua senha'
+              }
               size="large"
               className={styles.input}
               name="wa-confirm-password"
@@ -175,66 +216,72 @@ const Auth = ({
           className={styles.submit}
           loading={loading}
         >
-          {type === 'login' ? 'Entrar' : 'Cadastrar'}
+          {type === 'login'
+            ? 'Entrar'
+            : type === 'forgot-password'
+              ? 'confirmar'
+              : 'Cadastrar'}
         </Button>
       </Form>
-      <Flex
-        className={styles.auth_alternative}
-        vertical
-        align="center"
-        gap={10}
-      >
-        <div
-          style={{
-            color: 'rgb(255 255 255 / 81%)',
-            borderBottom: '2px solid rgb(255 255 255 / 51%)',
-            paddingBottom: 5,
-          }}
+      {(type === 'register' || type === 'login') && (
+        <Flex
+          className={styles.auth_alternative}
+          vertical
+          align="center"
+          gap={10}
         >
-          {type === 'login' ? 'Não tem conta?' : 'Ja tem conta?'}{' '}
-          <Link
-            to={type === 'login' ? '/register' : '/login'}
+          <div
             style={{
               color: 'rgb(255 255 255 / 81%)',
-              fontWeight: '600',
+              borderBottom: '2px solid rgb(255 255 255 / 51%)',
+              paddingBottom: 5,
             }}
           >
-            {type === 'login' ? 'Crie uma' : 'Entre'}
-          </Link>
-        </div>
-        <div style={{ fontSize: '.8rem' }}>
-          {type === 'login' ? 'ou entre com' : 'ou cadastre-se com'}
-        </div>
-        <Flex align="center" gap={10}>
-          <Button
-            onClick={authWithGoogle}
-            shape="circle"
-            icon={
-              // eslint-disable-next-line jsx-a11y/alt-text
-              <img src="https://img.icons8.com/fluency/24/google-logo.png" />
-            }
-            style={authButtonStyles}
-          />
-          <Button
-            onClick={authWithFacebook}
-            shape="circle"
-            icon={
-              // eslint-disable-next-line jsx-a11y/alt-text
-              <img src="https://img.icons8.com/color/26/facebook-new.png" />
-            }
-            style={authButtonStyles}
-          />
-          <Button
-            onClick={authWithApple}
-            shape="circle"
-            icon={
-              // eslint-disable-next-line jsx-a11y/alt-text
-              <img src="https://img.icons8.com/ios-glyphs/24/mac-os.png" />
-            }
-            style={authButtonStyles}
-          />
+            {type === 'login' ? 'Não tem conta?' : 'Ja tem conta?'}{' '}
+            <Link
+              to={type === 'login' ? '/register' : '/login'}
+              style={{
+                color: 'rgb(255 255 255 / 81%)',
+                fontWeight: '600',
+              }}
+            >
+              {type === 'login' ? 'Crie uma' : 'Entre'}
+            </Link>
+          </div>
+          <div style={{ fontSize: '.8rem' }}>
+            {type === 'login' ? 'ou entre com' : 'ou cadastre-se com'}
+          </div>
+          <Flex align="center" gap={10}>
+            <Button
+              onClick={authWithGoogle}
+              shape="circle"
+              icon={
+                // eslint-disable-next-line jsx-a11y/alt-text
+                <img src="https://img.icons8.com/fluency/24/google-logo.png" />
+              }
+              style={authButtonStyles}
+            />
+            <Button
+              onClick={authWithFacebook}
+              shape="circle"
+              icon={
+                // eslint-disable-next-line jsx-a11y/alt-text
+                <img src="https://img.icons8.com/color/26/facebook-new.png" />
+              }
+              style={authButtonStyles}
+            />
+            <Button
+              onClick={authWithApple}
+              shape="circle"
+              icon={
+                // eslint-disable-next-line jsx-a11y/alt-text
+                <img src="https://img.icons8.com/ios-glyphs/24/mac-os.png" />
+              }
+              style={authButtonStyles}
+            />
+          </Flex>
         </Flex>
-      </Flex>
+      )}
     </AuthContainer>
   )
 }

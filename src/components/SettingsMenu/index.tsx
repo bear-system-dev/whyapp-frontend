@@ -27,7 +27,7 @@ const drawerStyles: React.CSSProperties = {
   bottom: 6,
   left: 6,
   height: '360px',
-  width: '400px',
+  width: 'fit-content',
 }
 
 const dividerStyles: React.CSSProperties = {
@@ -43,6 +43,7 @@ const optionButtonStyles: React.CSSProperties = {
   alignItems: 'center',
   justifyContent: 'start',
   cursor: 'pointer',
+  margin: '0 1rem',
   width: '100%',
 }
 
@@ -106,7 +107,6 @@ export const SettingsMenu = () => {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              minWidth: '7.5vw',
             }}
           >
             <Row gutter={[0, 8]} style={leftMenuContentStyles}>
@@ -190,9 +190,9 @@ export const SettingsMenu = () => {
             </Row>
           </Col>
           <Divider type="vertical" style={dividerStyles} />
-          <Col flex={1}>
+          <Col>
             <Row style={rightMenuContentStyles}>
-              <Col flex={1}>
+              <Col style={{ width: 'fit-content' }}>
                 {activeButton === 'Gerais' && <></>}
                 {activeButton === 'Perfil' && <ProfileMenu />}
                 {activeButton === 'Chats' && <ChatsMenu />}
