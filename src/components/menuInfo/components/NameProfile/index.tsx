@@ -1,4 +1,6 @@
-const NameProfile = ({ children }: { children: string }) => {
+import { ReactNode } from 'react'
+
+const NameProfile = ({ children }: { children: ReactNode }) => {
   return (
     <p
       style={{

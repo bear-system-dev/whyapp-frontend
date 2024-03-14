@@ -54,6 +54,8 @@ export const SilenceNotificationsStyle: React.CSSProperties = {
   justifyContent: 'center',
   backgroundColor: '#434455',
   flexDirection: 'column',
+  position: 'fixed',
+  bottom: '80px',
   // gap: '28px',
   borderRadius: '6px',
   width: '86%',
