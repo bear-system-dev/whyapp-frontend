@@ -16,6 +16,9 @@ async function getUser(): Promise<User[]> {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      params: {
+        limit: 999,
+      },
     })
     return response.data
   } catch (error) {
@@ -70,8 +73,23 @@ async function updateMyProfileInfo({
   }
 }
 
+async function updateMyPassword({ senha }: Partial<User>): Promise<User> {
+  try {
+    const userId = Cookies.get('userId')
+
+    const response = await api.post<UserResponse>(`/user/update/${userId}`, {
+      senha,
+    })
+    return response.data.user
+  } catch (error) {
+    console.error('Algo saiu mal na requisição:', error)
+    throw error
+  }
+}
+
 export const apiFunction = {
   getUser,
   getMyProfileInfo,
   updateMyProfileInfo,
+  updateMyPassword,
 }
