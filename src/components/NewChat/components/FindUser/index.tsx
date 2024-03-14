@@ -1,11 +1,11 @@
+import { apiFunction } from '@/api/api'
 import { ChatContext } from '@/contexts/chatContext'
+import { User } from '@/model/UserModel'
+import { useQuery } from '@tanstack/react-query'
 import { Flex, Input } from 'antd'
 import { ChangeEvent, Key, useContext, useState } from 'react'
 import { UserCard } from '../UserCard'
 import './styles.css'
-import { apiFunction } from '@/api/api'
-import { useQuery } from '@tanstack/react-query'
-import { User } from '@/model/UserModel'
 
 const searchInputBarStyles: React.CSSProperties = {
   background:
@@ -30,7 +30,7 @@ export const FindUser = () => {
 
   const dataArray = data ? Object.values(data) : []
 
-  const { setCurrentUser } = useContext(ChatContext)
+  const { setRecipient } = useContext(ChatContext)
 
   const onFindInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const findUserNameValue = event?.target.value
@@ -60,17 +60,13 @@ export const FindUser = () => {
               return (
                 <UserCard
                   key={index}
-                  name={user.nome}
-                  image={user.avatar}
+                  name={user.nome || ''}
+                  image={user.avatar || ''}
                   onClick={() => {
-                    setCurrentUser({
-                      userId: user.id,
-                      username: user.nome,
-                      image: user.avatar,
-                      chatPrivate: user.ativo,
-                      // chatPrivate: user.chatPrivate,
-                      // privateMessages: user.privateMessages,
-                      // groupMessages: user.groupMessages,
+                    setRecipient({
+                      id: user.id,
+                      nome: user.nome,
+                      avatar: user.avatar,
                     })
                   }}
                 />

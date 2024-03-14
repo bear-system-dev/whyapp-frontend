@@ -1,8 +1,7 @@
-// import defaultAvatar from '@/assets/defaultAvatar.svg'
+import { apiFunction } from '@/api/api'
 import whyAppLogo from '@/assets/whyAppLogo.png'
-// import { users } from '@/mocks/mockUserArray'
 import { ChatContext } from '@/contexts/chatContext'
-import { chatData } from '@/mocks/chats-mocks'
+import { useQuery } from '@tanstack/react-query'
 import { Avatar, Button, Divider, Flex } from 'antd'
 import { useContext } from 'react'
 import { NewChat } from '../NewChat'
@@ -37,31 +36,40 @@ const dividerStyle: React.CSSProperties = {
 }
 
 export const MainAside = () => {
-  const { setCurrentUser } = useContext(ChatContext)
+  const { setRecipient } = useContext(ChatContext)
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['users'],
+    queryFn: apiFunction.getUser,
+  })
+
+  if (isLoading) return 'Carregando...'
+  if (error) return 'Ocorreu um erro ao buscar os usuários da sua lista'
+
+  const users = data ? Object.values(data) : []
+
+  console.log(users)
 
   return (
     <Flex vertical style={mainAsideContainer}>
       <Flex style={userChatContainerStyle} vertical align="center" gap={16}>
-        {chatData.map((user) => {
+        {users.flat().map((user) => {
           return (
             <Button
               shape="circle"
-              key={user.userId}
+              key={user.id}
               style={avatarButtonStyle}
               onClick={() => {
-                setCurrentUser({
-                  userId: user.userId,
-                  username: user.username,
-                  image: user.image,
-                  chatPrivate: user.chatPrivate,
-                  privateMessages: user.privateMessages,
-                  groupMessages: user.groupMessages,
+                setRecipient({
+                  id: user.id,
+                  nome: user.nome,
+                  avatar: user.avatar,
                 })
               }}
             >
               <Avatar
                 style={{ backgroundColor: '#fff' }}
-                src={user.image}
+                src={user.avatar}
                 size={50}
               />
             </Button>

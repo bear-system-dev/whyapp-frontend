@@ -10,7 +10,7 @@ import HeaderContainer from './components/headerConteiner'
 import StatusContact from './components/statusgroups'
 
 const HeaderChat = () => {
-  const { currentUser } = useContext(ChatContext)
+  const { recipient } = useContext(ChatContext)
 
   return (
     <HeaderContainer>
@@ -20,7 +20,7 @@ const HeaderChat = () => {
           gap: '20px',
         }}
       >
-        {currentUser && (
+        {recipient && (
           <>
             <Button
               shape="circle"
@@ -31,14 +31,14 @@ const HeaderChat = () => {
               }}
               onClick={() => console.log('abrir info')}
             >
-              <ImageProfile size={'45px'} image={currentUser?.image} />
+              <ImageProfile size={'45px'} image={recipient?.avatar} />
             </Button>
             <div
               onClick={() => console.log('abrir info')}
               style={{ cursor: 'pointer', userSelect: 'none' }}
             >
               <Flex vertical gap={5}>
-                <NameProfile user={currentUser?.username} colortext="#FFFFFF" />
+                <NameProfile user={recipient?.nome} colortext="#FFFFFF" />
                 <StatusContact status="online" />
                 {/* <ContactGroup contact={users} /> */}
               </Flex>
@@ -46,7 +46,7 @@ const HeaderChat = () => {
           </>
         )}
       </Flex>
-      {currentUser && (
+      {recipient && (
         <Button
           shape="circle"
           style={{
