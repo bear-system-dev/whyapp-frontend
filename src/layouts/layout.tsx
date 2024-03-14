@@ -56,8 +56,8 @@ export const AppLayout = () => {
       <Flex vertical flex={1}>
         <Flex vertical style={{ height: 60 }}>
           <HeaderChat />
+          <MenuInfo />
         </Flex>
-        <MenuInfo />
         <Flex
           flex={1}
           vertical

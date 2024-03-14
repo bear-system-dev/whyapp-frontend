@@ -31,7 +31,6 @@ const MenuInfo = () => {
       <Button
         className="general-settings-button"
         style={settingsButtonStyle}
-        shape="circle"
         type="primary"
         onClick={showDrawer}
       />

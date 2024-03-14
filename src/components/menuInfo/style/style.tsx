@@ -1,7 +1,8 @@
 export const settingsButtonStyle: React.CSSProperties = {
   background: 'transparent',
-  position: 'fixed',
-  width: '100%',
+  position: 'absolute',
+  top: '-50%',
+  width: '100vw',
   height: '100%',
   zIndex: 0,
 }
@@ -47,6 +48,7 @@ export const descriptionStyle: React.CSSProperties = {
   padding: '8px 16px',
 }
 export const SilenceNotificationsStyle: React.CSSProperties = {
+  cursor: 'pointer',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -83,6 +85,7 @@ export const menuSilenceStyle: React.CSSProperties = {
   gap: '28px',
 }
 export const buttonRemoveStyle: React.CSSProperties = {
+  cursor: 'pointer',
   backgroundColor: '#D0454C',
   color: 'white',
   border: 'none',
