@@ -17,6 +17,9 @@ dependencies:
   axios:
     specifier: ^1.6.7
     version: 1.6.7
+  dayjs:
+    specifier: ^1.11.10
+    version: 1.11.10
   emoji-picker-react:
     specifier: ^4.7.18
     version: 4.7.18(react@18.2.0)
