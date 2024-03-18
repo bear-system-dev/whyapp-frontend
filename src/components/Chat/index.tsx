@@ -1,6 +1,7 @@
 import BubbleChat from '@/components/bubblechat'
 import { ChatContext } from '@/contexts/chatContext'
 import { SearchContext } from '@/contexts/searchContext'
+import { Message } from '@/model/MessageModel'
 import {
   getLocalActiveIndex,
   getMatchCounts,
@@ -8,7 +9,7 @@ import {
 import { useChatSocket } from '@/utils/hooks/useChatSocket'
 import { Alert, Flex } from 'antd'
 import Cookies from 'js-cookie'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words'
 import './styles.css'
 
@@ -16,10 +17,15 @@ export const Chat = () => {
   const [tokenExpired, setTokenExpired] = useState(false)
   const { messages, setMessages } = useContext(ChatContext)
   const { socket, chatId } = useChatSocket()
+  const [isConnected, setIsConnected] = useState(socket.connected)
+
+  const userId = Cookies.get('userId')
 
   const endOfMessagesRef = useRef<HTMLDivElement>(null)
 
-  endOfMessagesRef.current?.scrollIntoView({ behavior: 'instant' })
+  useLayoutEffect(() => {
+    endOfMessagesRef.current?.scrollIntoView({ behavior: 'auto' })
+  }, [])
 
   const { searchTerm, activeIndex } = useContext(SearchContext)
 
@@ -38,18 +44,39 @@ export const Chat = () => {
     return () => clearInterval(checkTokenInterval)
   }, [])
 
-  socket?.emit('getMessages', chatId)
+  socket.emit('getMessages', chatId)
 
   useEffect(() => {
-    if (socket && chatId) {
-      // socket.emit('getMessages', chatId)
-
-      socket.on('messages', (messages) => {
-        console.log(messages)
-        setMessages(messages)
-      })
+    socket.connect()
+    return () => {
+      socket.disconnect()
     }
-  }, [socket, chatId, setMessages, messages])
+  }, [])
+
+  useEffect(() => {
+    function onConnect() {
+      setIsConnected(true)
+    }
+
+    function onDisconnect() {
+      setIsConnected(false)
+    }
+
+    function onIncomingMessages(messages: Message[]) {
+      setMessages(messages)
+    }
+
+    socket.on('connect', onConnect)
+    socket.on('disconnect', onDisconnect)
+    socket.on('messages', onIncomingMessages)
+    console.log(messages)
+
+    return () => {
+      socket.off('connect', onConnect)
+      socket.off('disconnect', onDisconnect)
+      socket.off('message', onIncomingMessages)
+    }
+  }, [chatId])
 
   return (
     <>
@@ -57,6 +84,21 @@ export const Chat = () => {
         <Alert
           message="Token expirado ou inexistente. Por favor, realize o login novamente!"
           type="error"
+          showIcon
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.25rem',
+            placeSelf: 'center',
+            textAlign: 'center',
+            width: '240px',
+          }}
+        />
+      )}
+      {isConnected && (
+        <Alert
+          message="Conectado!!"
+          type="success"
           showIcon
           style={{
             display: 'flex',
@@ -78,13 +120,13 @@ export const Chat = () => {
           <Flex
             key={index}
             style={{
-              alignSelf: chat.enviadoPorMim ? 'end' : 'start',
+              alignSelf: chat.fromUserId === userId ? 'end' : 'start',
             }}
           >
             <BubbleChat
               mensagem={chat.mensagem}
-              horario={chat.horario}
-              enviadoPorMim={chat.enviadoPorMim}
+              createdAt={chat.createdAt}
+              fromUserId={chat.fromUserId}
             >
               <Highlighter
                 style={{
