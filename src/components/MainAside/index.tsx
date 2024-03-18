@@ -48,8 +48,6 @@ export const MainAside = () => {
 
   const users = data ? Object.values(data) : []
 
-  console.log(users)
-
   return (
     <Flex vertical style={mainAsideContainer}>
       <Flex style={userChatContainerStyle} vertical align="center" gap={16}>

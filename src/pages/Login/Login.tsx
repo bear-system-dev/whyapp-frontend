@@ -21,7 +21,9 @@ const Login = () => {
         email: values.email,
         senha: values.password,
       })
-      const inTenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000)
+      const inTenMinutes = new Date(
+        new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+      )
       Cookies.set('token', `${response.data.token}`, { expires: inTenMinutes })
       Cookies.set('userId', response.data.userId)
       setAlert({
