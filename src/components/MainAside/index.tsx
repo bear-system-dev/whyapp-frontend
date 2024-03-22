@@ -1,6 +1,7 @@
 import { apiFunction } from '@/api/api'
 import whyAppLogo from '@/assets/whyAppLogo.png'
 import { ChatContext } from '@/contexts/chatContext'
+import { useChatSocket } from '@/utils/hooks/useChatSocket'
 import { useQuery } from '@tanstack/react-query'
 import { Avatar, Button, Divider, Flex } from 'antd'
 import { useContext } from 'react'
@@ -37,6 +38,7 @@ const dividerStyle: React.CSSProperties = {
 
 export const MainAside = () => {
   const { setRecipient } = useContext(ChatContext)
+  const { userId } = useChatSocket()
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['users'],
@@ -51,28 +53,31 @@ export const MainAside = () => {
   return (
     <Flex vertical style={mainAsideContainer}>
       <Flex style={userChatContainerStyle} vertical align="center" gap={16}>
-        {users.flat().map((user) => {
-          return (
-            <Button
-              shape="circle"
-              key={user.id}
-              style={avatarButtonStyle}
-              onClick={() => {
-                setRecipient({
-                  id: user.id,
-                  nome: user.nome,
-                  avatar: user.avatar,
-                })
-              }}
-            >
-              <Avatar
-                style={{ backgroundColor: '#fff' }}
-                src={user.avatar}
-                size={50}
-              />
-            </Button>
-          )
-        })}
+        {users
+          .flat()
+          .filter((user) => user.id !== userId)
+          .map((user) => {
+            return (
+              <Button
+                shape="circle"
+                key={user.id}
+                style={avatarButtonStyle}
+                onClick={() => {
+                  setRecipient({
+                    id: user.id,
+                    nome: user.nome,
+                    avatar: user.avatar,
+                  })
+                }}
+              >
+                <Avatar
+                  style={{ backgroundColor: '#fff' }}
+                  src={user.avatar}
+                  size={50}
+                />
+              </Button>
+            )
+          })}
       </Flex>
       <Divider style={dividerStyle} />
 

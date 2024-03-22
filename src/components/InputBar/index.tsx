@@ -16,13 +16,10 @@ export function InputBar() {
   const [showEmojis, setShowEmojis] = useState(false)
 
   const handleSendMessage = () => {
-    if (inputValue.trim() !== '') {
-      socket?.emit('newMessage', inputValue, (error: Error) => {
-        if (error) {
-          console.error('Erro ao enviar mensagem:', error)
-        }
-      })
-    }
+    if (!inputValue.trim()) return
+
+    socket?.emit('newMessage', inputValue)
+
     setInputValue('')
   }
 

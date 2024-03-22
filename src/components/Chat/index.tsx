@@ -1,7 +1,6 @@
 import BubbleChat from '@/components/bubblechat'
 import { ChatContext } from '@/contexts/chatContext'
 import { SearchContext } from '@/contexts/searchContext'
-import { Message } from '@/model/MessageModel'
 import {
   getLocalActiveIndex,
   getMatchCounts,
@@ -16,16 +15,13 @@ import './styles.css'
 export const Chat = () => {
   const [tokenExpired, setTokenExpired] = useState(false)
   const { messages, setMessages } = useContext(ChatContext)
-  const { socket, chatId } = useChatSocket()
-  const [isConnected, setIsConnected] = useState(socket.connected)
-
-  const userId = Cookies.get('userId')
+  const { chatId, userId, socket } = useChatSocket()
 
   const endOfMessagesRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'auto' })
-  }, [])
+  }, [messages])
 
   const { searchTerm, activeIndex } = useContext(SearchContext)
 
@@ -37,46 +33,29 @@ export const Chat = () => {
       !token && setTokenExpired(true)
     }
 
-    checkTokenValidity()
-
     const checkTokenInterval = setInterval(checkTokenValidity, 5 * 60 * 1000) // 5 minutes
 
     return () => clearInterval(checkTokenInterval)
   }, [])
 
-  socket.emit('getMessages', chatId)
-
   useEffect(() => {
-    socket.connect()
-    return () => {
-      socket.disconnect()
-    }
-  }, [])
+    setMessages([])
+    socket?.emit('getMessages', chatId)
 
-  useEffect(() => {
-    function onConnect() {
-      setIsConnected(true)
-    }
-
-    function onDisconnect() {
-      setIsConnected(false)
-    }
-
-    function onIncomingMessages(messages: Message[]) {
+    socket?.on('messages', (messages) => {
       setMessages(messages)
-    }
+    })
 
-    socket.on('connect', onConnect)
-    socket.on('disconnect', onDisconnect)
-    socket.on('messages', onIncomingMessages)
-    console.log(messages)
+    socket?.on('newMessage', (message) => {
+      console.log('Nova mensagem recebida:', message)
+      setMessages((previousMessages) => [...previousMessages, message])
+    })
 
     return () => {
-      socket.off('connect', onConnect)
-      socket.off('disconnect', onDisconnect)
-      socket.off('message', onIncomingMessages)
+      socket?.off('messages')
+      socket?.off('newMessage')
     }
-  }, [chatId])
+  }, [socket])
 
   return (
     <>
@@ -95,22 +74,7 @@ export const Chat = () => {
           }}
         />
       )}
-      {isConnected && (
-        <Alert
-          message="Conectado!!"
-          type="success"
-          showIcon
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.25rem',
-            placeSelf: 'center',
-            textAlign: 'center',
-            width: '240px',
-          }}
-        />
-      )}
-      {messages.map((chat, index) => {
+      {messages.flat().map((chat, index) => {
         const localActiveIndex = getLocalActiveIndex(
           activeIndex,
           matchCounts,
