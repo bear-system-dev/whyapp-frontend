@@ -1,8 +1,12 @@
+import { ChatContext } from '@/contexts/chatContext'
+import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Drawer, Flex } from 'antd'
 import { useContext, useState } from 'react'
-import { ChatContext } from '@/contexts/chatContext'
 import ImageProfile from '../profile/imageProfile'
+import { DescriptionUsers } from './components/DescriptionUser/index.tsx'
 import NameProfile from './components/NameProfile'
+import { ButtonRemove } from './components/buttonremove/index.tsx'
+import { SilenceNotifications } from './components/silenceNotification/index.tsx'
 import {
   ConteinerMenuStyle,
   ImageProfileStyle,
@@ -10,14 +14,10 @@ import {
   settingsButtonStyle,
   stutusProfileStyle,
 } from './style/style.tsx'
-import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
-import { SilenceNotifications } from './components/silenceNotification/index.tsx'
-import { DescriptionUsers } from './components/DescriptionUser/index.tsx'
-import { ButtonRemove } from './components/buttonremove/index.tsx'
 
 const MenuInfo = () => {
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false)
-  const { currentUser } = useContext(ChatContext)
+  const { recipient } = useContext(ChatContext)
 
   const showDrawer = () => {
     setSettingsMenuOpen(true)
@@ -43,7 +43,7 @@ const MenuInfo = () => {
         getContainer={document.body}
         style={menuConteiner}
       >
-        {currentUser && (
+        {recipient && (
           <Flex vertical style={ConteinerMenuStyle}>
             <CloseCircleOutlined
               onClick={onClose}
@@ -57,16 +57,16 @@ const MenuInfo = () => {
             />
             <Flex vertical style={ImageProfileStyle}>
               <ImageProfile
-                image={currentUser.image}
-                key={currentUser.userId}
+                image={recipient.avatar}
+                key={recipient.id}
                 size="180px"
               />
               <Flex align="center" vertical>
-                <NameProfile>{currentUser.username}</NameProfile>
+                <NameProfile>{recipient.nome}</NameProfile>
                 <div style={stutusProfileStyle}>
                   <UserOutlined style={{ color: 'white' }} />
                   <p style={{ color: 'white' }}>
-                    {currentUser.chatPrivate ? 'online' : 'offline'}
+                    {recipient ? 'online' : 'offline'}
                   </p>
                 </div>
               </Flex>
