@@ -35,7 +35,7 @@ const BubbleChat: React.FC<BubbleChatProps> = ({
         }}
       >
         {mensagem}
-        <SentAt time={createdAt} />
+        {createdAt && <SentAt time={createdAt} />}
       </Flex>
     </Flex>
   )

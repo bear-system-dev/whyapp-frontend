@@ -1,15 +1,12 @@
-import { UserProps } from '@/components/bubblechat'
+import { Message } from '@/model/MessageModel'
 
 export const getMatchCounts = (
-  messages: UserProps[],
+  messages: Message[],
   searchTerm: string,
 ): number[] => {
   return messages.map((chat) => {
-    return (
-      chat.privateMessages?.flatMap((message) =>
-        message.message.match(new RegExp(`\\b${searchTerm}\\b`, 'gi')),
-      ) || []
-    ).length
+    return (chat.mensagem.match(new RegExp(`\\b${searchTerm}\\b`, 'gi')) || [])
+      .length
   })
 }
 
