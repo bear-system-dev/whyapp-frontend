@@ -1,5 +1,5 @@
 import ImageProfile from '@/components/profile/imageProfile'
-import { Divider, Flex } from 'antd'
+import { Flex } from 'antd'
 import React from 'react'
 import NameContact from './components/NameContact'
 import './style.css'
@@ -12,11 +12,6 @@ interface UserCardProps {
 const userCardStyle: React.CSSProperties = {
   alignItems: 'center',
   gap: '1rem',
-}
-
-const dividerStyles: React.CSSProperties = {
-  background: '#FFFFFF',
-  margin: 0,
 }
 
 export const UserCard = ({ image, name, onClick }: UserCardProps) => {
@@ -32,7 +27,6 @@ export const UserCard = ({ image, name, onClick }: UserCardProps) => {
           <NameContact name={name} />
         </Flex>
       </Flex>
-      <Divider style={dividerStyles} />
     </>
   )
 }

@@ -1,3 +1,17 @@
 .find-input-bar::placeholder {
   color: #FFFFFF80 !important;
 }
+.userCardStyle{
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  padding: 10px 14px;
+  border-radius: 14px;
+  justify-content: space-between;
+}
+.userCardStyle:hover {
+  background-color: #576573;
+}
+.newChatButtonStyle:hover{
+  background-color: #32323d !important;
+}
