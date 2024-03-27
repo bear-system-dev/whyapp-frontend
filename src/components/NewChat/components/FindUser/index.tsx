@@ -1,18 +1,10 @@
 import { apiFunction } from '@/api/api'
 import { ChatContext } from '@/contexts/chatContext'
-import { Button, Flex, Input } from 'antd'
-import { ChangeEvent, Key, useContext, useState } from 'react'
-import { UserCard } from '../UserCard'
-import './styles.css'
-import { apiFunction } from '@/api/api'
-import { useMutation, useQuery } from '@tanstack/react-query'
 import { User } from '@/model/UserModel'
 import { PlusOutlined } from '@ant-design/icons'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { Button, Flex, Input } from 'antd'
 import Cookies from 'js-cookie'
-=======
-import { User } from '@/model/UserModel'
-import { useQuery } from '@tanstack/react-query'
-import { Flex, Input } from 'antd'
 import { ChangeEvent, Key, useContext, useState } from 'react'
 import { UserCard } from '../UserCard'
 import './styles.css'
@@ -37,7 +29,7 @@ const newChatButtonStyle: React.CSSProperties = {
 
 export const FindUser = () => {
   const [userNameSearchedList, setUserNameSearchedList] = useState('')
-  const [userfriend, setUserFriends] = useState<User>()
+  const [userFriend, setUserFriend] = useState<User>()
   const userId = Cookies.get('userId')
 
   const { data, isLoading, isError } = useQuery<User[], Error>({
@@ -46,7 +38,7 @@ export const FindUser = () => {
   })
 
   const { mutate } = useMutation({
-    mutationFn: () => apiFunction.postFriendsUser(userfriend?.id || ''),
+    mutationFn: () => apiFunction.postFriendsUser(userFriend?.id || ''),
   })
 
   const dataArray = data ? Object.values(data) : []
@@ -65,13 +57,12 @@ export const FindUser = () => {
   })
   const onClickUserCard = (user: User) => {
     console.log('esse card foi clicado')
-    setCurrentUser({
-      userId: user.id,
-      username: user.nome,
-      image: user.avatar,
-      chatPrivate: user.ativo,
+    setRecipient({
+      id: user.id,
+      nome: user.nome,
+      avatar: user.avatar,
     })
-    setUserFriends(user)
+    setUserFriend(user)
   }
 
   return (
@@ -108,18 +99,6 @@ export const FindUser = () => {
                     />
                   </div>
                 </>
-                <UserCard
-                  key={index}
-                  name={user.nome || ''}
-                  image={user.avatar || ''}
-                  onClick={() => {
-                    setRecipient({
-                      id: user.id,
-                      nome: user.nome,
-                      avatar: user.avatar,
-                    })
-                  }}
-                />
               )
             })}
       </Flex>

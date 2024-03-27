@@ -109,7 +109,6 @@ async function deleteFriendsUser(friendId: string) {
     console.error('Algo saiu mal na requisição: ', error)
   }
 }
-=======
 async function updateMyPassword({ senha }: Partial<User>): Promise<User> {
   try {
     const userId = Cookies.get('userId')
@@ -124,7 +123,6 @@ async function updateMyPassword({ senha }: Partial<User>): Promise<User> {
   }
 }
 
-
 export const apiFunction = {
   getUser,
   getMyProfileInfo,
@@ -132,5 +130,4 @@ export const apiFunction = {
   postFriendsUser,
   deleteFriendsUser,
   updateMyPassword,
-
 }
