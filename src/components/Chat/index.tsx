@@ -5,6 +5,7 @@ import {
   getLocalActiveIndex,
   getMatchCounts,
 } from '@/utils/helpers/activeIndex'
+import { useChatSocket } from '@/utils/hooks/useChatSocket'
 import { Alert, Flex } from 'antd'
 import Cookies from 'js-cookie'
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -13,7 +14,8 @@ import './styles.css'
 
 export const Chat = () => {
   const [tokenExpired, setTokenExpired] = useState(false)
-  const { messages, currentUser } = useContext(ChatContext)
+  const { messages, setMessages } = useContext(ChatContext)
+  const { chatId, userId, socket } = useChatSocket()
 
   const endOfMessagesRef = useRef<HTMLDivElement>(null)
 
@@ -31,12 +33,29 @@ export const Chat = () => {
       !token && setTokenExpired(true)
     }
 
-    checkTokenValidity()
-
     const checkTokenInterval = setInterval(checkTokenValidity, 5 * 60 * 1000) // 5 minutes
 
     return () => clearInterval(checkTokenInterval)
   }, [])
+
+  useEffect(() => {
+    setMessages([])
+    socket?.emit('getMessages', chatId)
+
+    socket?.on('messages', (messages) => {
+      setMessages(messages)
+    })
+
+    socket?.on('newMessage', (message) => {
+      console.log('Nova mensagem recebida:', message)
+      setMessages((previousMessages) => [...previousMessages, message])
+    })
+
+    return () => {
+      socket?.off('messages')
+      socket?.off('newMessage')
+    }
+  }, [socket])
 
   return (
     <>
@@ -55,45 +74,44 @@ export const Chat = () => {
           }}
         />
       )}
-      {currentUser &&
-        currentUser.privateMessages?.map((chat, index) => {
-          const localActiveIndex = getLocalActiveIndex(
-            activeIndex,
-            matchCounts,
-            index,
-          )
-          return (
-            <Flex
-              key={index}
-              style={{
-                alignSelf: chat.sentByMe ? 'end' : 'start',
-              }}
+      {messages.flat().map((chat, index) => {
+        const localActiveIndex = getLocalActiveIndex(
+          activeIndex,
+          matchCounts,
+          index,
+        )
+        return (
+          <Flex
+            key={index}
+            style={{
+              alignSelf: chat.fromUserId === userId ? 'end' : 'start',
+            }}
+          >
+            <BubbleChat
+              mensagem={chat.mensagem}
+              createdAt={chat.createdAt}
+              fromUserId={chat.fromUserId}
             >
-              <BubbleChat
-                message={chat.message}
-                time={chat.time}
-                sentByMe={chat.sentByMe}
-              >
-                <Highlighter
-                  style={{
-                    color: '#FFFFFF',
-                    paddingRight: '1.5rem',
-                    maxWidth: '16rem',
-                    fontSize: '1rem',
-                    lineHeight: 1.5,
-                    margin: '0px',
-                  }}
-                  activeClassName="Active"
-                  activeIndex={localActiveIndex}
-                  autoEscape={true}
-                  highlightClassName="Highlight"
-                  searchWords={[searchTerm]}
-                  textToHighlight={chat.message || ''}
-                />
-              </BubbleChat>
-            </Flex>
-          )
-        })}
+              <Highlighter
+                style={{
+                  color: '#FFFFFF',
+                  paddingRight: '1.5rem',
+                  maxWidth: '16rem',
+                  fontSize: '1rem',
+                  lineHeight: 1.5,
+                  margin: '0px',
+                }}
+                activeClassName="Active"
+                activeIndex={localActiveIndex}
+                autoEscape={true}
+                highlightClassName="Highlight"
+                searchWords={[searchTerm]}
+                textToHighlight={chat.mensagem || ''}
+              />
+            </BubbleChat>
+          </Flex>
+        )
+      })}
       <div ref={endOfMessagesRef} />
     </>
   )

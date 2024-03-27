@@ -3,6 +3,7 @@ export interface User {
   nome: string
   email: string
   ativo: boolean
+  senha: string
   avatar: string
   descricao: string
   createdAt: string

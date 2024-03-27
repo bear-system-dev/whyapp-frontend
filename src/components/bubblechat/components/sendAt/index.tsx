@@ -1,7 +1,9 @@
-interface Send {
+import dayjs from 'dayjs'
+
+interface SentAt {
   time: string
 }
-const SendedAt: React.FC<Send> = ({ time }) => {
+const SentAt: React.FC<SentAt> = ({ time }) => {
   return (
     <p
       style={{
@@ -12,8 +14,8 @@ const SendedAt: React.FC<Send> = ({ time }) => {
         color: 'white',
       }}
     >
-      {time}
+      {dayjs(time).format('HH:mm')}
     </p>
   )
 }
-export default SendedAt
+export default SentAt

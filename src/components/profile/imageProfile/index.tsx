@@ -1,3 +1,4 @@
+import { Avatar } from 'antd'
 import React from 'react'
 
 interface Image {
@@ -6,7 +7,7 @@ interface Image {
 }
 const ImageProfile: React.FC<Image> = ({ image, size }) => {
   return (
-    <img
+    <Avatar
       style={{
         width: size,
         height: size,

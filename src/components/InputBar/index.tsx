@@ -1,9 +1,6 @@
 import emojiIcon from '@/assets/emojiIcon.png'
 import { ChatContext } from '@/contexts/chatContext'
-import {
-  currentHours,
-  currentMinutes,
-} from '@/utils/helpers/dateInHoursAndMinutes'
+import { useChatSocket } from '@/utils/hooks/useChatSocket'
 import { PaperClipOutlined, SendOutlined } from '@ant-design/icons'
 import { Button, Flex, Input, Space } from 'antd'
 import { EmojiClickData } from 'emoji-picker-react'
@@ -13,26 +10,17 @@ import { EmojiLibrary } from './emojiPicker'
 import './style.css'
 
 export function InputBar() {
-  const { addMessage, currentUser } = useContext(ChatContext)
+  const { recipient } = useContext(ChatContext)
+  const { socket } = useChatSocket()
   const [inputValue, setInputValue] = useState<string>('')
   const [showEmojis, setShowEmojis] = useState(false)
 
   const handleSendMessage = () => {
-    if (inputValue.trim() !== '') {
-      addMessage({
-        username: 'user1',
-        privateMessages: [
-          {
-            message: inputValue,
-            time: `${currentHours}:${currentMinutes}`,
-            sentByMe: true,
-          },
-        ],
-        chatPrivate: true,
-      })
+    if (!inputValue.trim()) return
 
-      setInputValue('')
-    }
+    socket?.emit('newMessage', inputValue)
+
+    setInputValue('')
   }
 
   const handleInputOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +46,7 @@ export function InputBar() {
           type="text"
           style={{ ...resetButtonStyles, height: 30 }}
           onClick={handleOpenEmojiDrawer}
-          disabled={!currentUser}
+          disabled={!recipient}
         >
           <img src={emojiIcon} alt="emoji icon" height={'100%'} />
         </Button>
@@ -73,7 +61,7 @@ export function InputBar() {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-          disabled={!currentUser}
+          disabled={!recipient}
         />
       </Flex>
       <Space.Compact className="input-bar__container">
@@ -83,7 +71,7 @@ export function InputBar() {
           value={inputValue}
           onChange={handleInputOnChange}
           onKeyDown={handleOnKeyDown}
-          disabled={!currentUser}
+          disabled={!recipient}
         />
         <Button
           className="send-button"
@@ -91,7 +79,7 @@ export function InputBar() {
           size="large"
           type="text"
           onClick={handleSendMessage}
-          disabled={!currentUser}
+          disabled={!recipient}
         />
       </Space.Compact>
     </div>

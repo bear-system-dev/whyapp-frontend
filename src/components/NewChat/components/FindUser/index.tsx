@@ -1,3 +1,4 @@
+import { apiFunction } from '@/api/api'
 import { ChatContext } from '@/contexts/chatContext'
 import { Button, Flex, Input } from 'antd'
 import { ChangeEvent, Key, useContext, useState } from 'react'
@@ -8,6 +9,13 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { User } from '@/model/UserModel'
 import { PlusOutlined } from '@ant-design/icons'
 import Cookies from 'js-cookie'
+=======
+import { User } from '@/model/UserModel'
+import { useQuery } from '@tanstack/react-query'
+import { Flex, Input } from 'antd'
+import { ChangeEvent, Key, useContext, useState } from 'react'
+import { UserCard } from '../UserCard'
+import './styles.css'
 
 const searchInputBarStyles: React.CSSProperties = {
   background:
@@ -43,7 +51,7 @@ export const FindUser = () => {
 
   const dataArray = data ? Object.values(data) : []
 
-  const { setCurrentUser } = useContext(ChatContext)
+  const { setRecipient } = useContext(ChatContext)
 
   const onFindInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const findUserNameValue = event?.target.value
@@ -100,6 +108,18 @@ export const FindUser = () => {
                     />
                   </div>
                 </>
+                <UserCard
+                  key={index}
+                  name={user.nome || ''}
+                  image={user.avatar || ''}
+                  onClick={() => {
+                    setRecipient({
+                      id: user.id,
+                      nome: user.nome,
+                      avatar: user.avatar,
+                    })
+                  }}
+                />
               )
             })}
       </Flex>

@@ -1,14 +1,15 @@
-import { UserProps } from '@/components/bubblechat'
+import { Message } from '@/model/MessageModel'
+import { Recipient } from '@/model/RecipientModel'
 import { Dispatch, SetStateAction, createContext } from 'react'
 
 export const ChatContext = createContext<{
-  messages: UserProps[]
-  addMessage: (message: UserProps) => void
-  currentUser: UserProps | null
-  setCurrentUser: Dispatch<SetStateAction<UserProps | null>>
+  messages: Message[]
+  setMessages: Dispatch<SetStateAction<Message[]>>
+  recipient: Recipient | null
+  setRecipient: Dispatch<SetStateAction<Recipient | null>>
 }>({
   messages: [],
-  addMessage: () => {},
-  currentUser: null,
-  setCurrentUser: () => {},
+  setMessages: () => {},
+  recipient: null,
+  setRecipient: () => {},
 })
