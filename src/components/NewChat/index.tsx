@@ -37,6 +37,7 @@ const dividerStyles: React.CSSProperties = {
 }
 
 export const NewChat = () => {
+  const [session, setSession] = useState('Nova conversa')
   const [newChatDrawerOpen, setNewChatDrawerOpen] = useState(false)
 
   const showDrawer = () => {
@@ -70,16 +71,18 @@ export const NewChat = () => {
           style={{ color: '#FFFFFF', height: '100%', padding: '2rem 1rem' }}
         >
           <Flex align="center" justify="space-between">
-            <h2 style={{ fontSize: '1.5rem' }}>Novo chat</h2>
+            <h2 style={{ fontSize: '1.5rem' }}>{session}</h2>
             <Flex gap={16} align="end" justify="center">
               <Button
                 icon={<UserAddOutlined style={{ fontSize: '1.25rem' }} />}
                 style={controlButtonStyles}
+                onClick={() => setSession('Nova conversa')}
               />
               <Divider type="vertical" style={dividerStyles} />
               <Button
                 icon={<UsergroupAddOutlined style={{ fontSize: '1.25rem' }} />}
                 style={controlButtonStyles}
+                onClick={() => setSession('Novo grupo')}
               />
             </Flex>
           </Flex>

@@ -69,9 +69,47 @@ async function updateMyProfileInfo({
     throw error
   }
 }
+async function postFriendsUser(friendId: string) {
+  try {
+    const token = Cookies.get('token')
+    const userId = Cookies.get('userId')
 
+    console.log('token', token)
+    console.log(userId, friendId)
+
+    const response = await api.post('/user/amigos', {
+      params: { userId, friendId },
+      headers: { Authorization: `Bearer ${token}` },
+    })
+
+    return response
+  } catch (error) {
+    console.error('Algo saiu mal na requisição: ', error)
+  }
+}
+
+async function deleteFriendsUser(friendId: string) {
+  try {
+    const token = Cookies.get('token')
+    const userId = Cookies.get('userId')
+
+    console.log('token', token)
+    console.log(userId, friendId)
+
+    const response = await api.delete('/user/amigos', {
+      params: { userId, friendId },
+      headers: { Authorization: `Bearer ${token}` },
+    })
+
+    return response
+  } catch (error) {
+    console.error('Algo saiu mal na requisição: ', error)
+  }
+}
 export const apiFunction = {
   getUser,
   getMyProfileInfo,
   updateMyProfileInfo,
+  postFriendsUser,
+  deleteFriendsUser,
 }
