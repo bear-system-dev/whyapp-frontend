@@ -72,6 +72,7 @@ async function updateMyProfileInfo({
     throw error
   }
 }
+
 async function postFriendsUser(friendId: string) {
   try {
     const token = Cookies.get('token')
