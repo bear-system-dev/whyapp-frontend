@@ -1,8 +1,7 @@
-import { apiFunction } from '@/api/api'
 import whyAppLogo from '@/assets/whyAppLogo.png'
 import { ChatContext } from '@/contexts/chatContext'
-import { useChatSocket } from '@/utils/hooks/useChatSocket'
-import { useQuery } from '@tanstack/react-query'
+import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
+import { useGroups } from '@/utils/hooks/useGroupChats'
 import { Avatar, Button, Divider, Flex } from 'antd'
 import { useContext } from 'react'
 import { NewChat } from '../NewChat'
@@ -37,47 +36,84 @@ const dividerStyle: React.CSSProperties = {
 }
 
 export const MainAside = () => {
-  const { setRecipient } = useContext(ChatContext)
-  const { userId } = useChatSocket()
+  const { setRecipient, setRecipientGroup } = useContext(ChatContext)
+  const { friendsList, usersAndProfileLoading, usersAndProfileError } =
+    useGetUsersAndFriends()
+  const { groups, groupsLoading, groupsError } = useGroups()
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['users'],
-    queryFn: apiFunction.getUser,
-  })
+  if (usersAndProfileLoading) return 'Carregando...'
+  if (usersAndProfileError)
+    return 'Ocorreu um erro ao buscar os usuários da sua lista'
 
-  if (isLoading) return 'Carregando...'
-  if (error) return 'Ocorreu um erro ao buscar os usuários da sua lista'
-
-  const users = data ? Object.values(data) : []
+  if (groupsLoading) return 'Carregando...'
+  if (groupsError) return 'Ocorreu um erro ao buscar os grupos da sua lista'
 
   return (
     <Flex vertical style={mainAsideContainer}>
       <Flex style={userChatContainerStyle} vertical align="center" gap={16}>
-        {users
-          .flat()
-          .filter((user) => user.id !== userId)
-          .map((user) => {
-            return (
-              <Button
-                shape="circle"
-                key={user.id}
-                style={avatarButtonStyle}
-                onClick={() => {
-                  setRecipient({
-                    id: user.id,
-                    nome: user.nome,
-                    avatar: user.avatar,
-                  })
-                }}
-              >
-                <Avatar
-                  style={{ backgroundColor: '#fff' }}
-                  src={user.avatar}
-                  size={50}
-                />
-              </Button>
-            )
-          })}
+        {friendsList?.map((user) => {
+          return (
+            <Button
+              shape="circle"
+              key={user.id}
+              style={avatarButtonStyle}
+              onClick={() => {
+                setRecipient({
+                  id: user.id,
+                  nome: user.nome,
+                  avatar: user.avatar,
+                })
+                setRecipientGroup(null)
+              }}
+            >
+              <Avatar
+                style={{ backgroundColor: '#fff' }}
+                src={user.avatar}
+                size={50}
+              />
+            </Button>
+          )
+        })}
+
+        {groups?.map((group) => {
+          return (
+            <Button
+              shape="circle"
+              key={group.grupo.id}
+              style={avatarButtonStyle}
+              onClick={() => {
+                setRecipientGroup({
+                  id: group.grupo.id,
+                  nome: group.grupo.nome,
+                  foto: group.grupo.foto,
+                  descricao: group.grupo.descricao,
+                  proprietarioId: group.grupo.proprietarioId,
+                  audios: group.grupo.audios,
+                  cargos: group.grupo.cargos,
+                  createdAt: group.grupo.createdAt,
+                  enquetes: group.grupo.enquetes,
+                  imagens: group.grupo.imagens,
+                  mensagens: group.grupo.mensagens,
+                  updatedAt: group.grupo.updatedAt,
+                  usuarios: group.grupo.usuarios.map((usuario) => ({
+                    adicionadoPor: usuario.adicionadoPor,
+                    entrouEm: usuario.entrouEm,
+                    grupoId: usuario.grupoId,
+                    usuarioId: usuario.usuarioId,
+                  })),
+                  videos: group.grupo.videos,
+                })
+                setRecipient(null)
+              }}
+            >
+              <Avatar
+                style={{ backgroundColor: '#fff' }}
+                src={group.grupo.foto}
+                size={50}
+              />
+            </Button>
+          )
+        })}
       </Flex>
       <Divider style={dividerStyle} />
 
