@@ -1,0 +1,32 @@
+.new-group-form-label label {
+  color: #fff !important;
+  font-weight: 500;
+}
+
+.new-group-form-field::placeholder,
+.new-group-form-field input::placeholder {
+  color: #ffffff92 !important;
+}
+
+:where(.upload).ant-form-item .ant-form-item-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-uploader button, .avatar-uploader svg {
+  color: #FFFFFF !important;
+}
+
+.submit{
+  background-color: #39FF14 !important;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 14px !important;
+  color: black !important;
+  border: none !important;
+}
+
+.submit:hover{
+  background-color: #88ff74 !important;
+}

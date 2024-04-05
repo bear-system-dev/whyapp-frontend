@@ -166,22 +166,29 @@ export const SettingsMenu = () => {
                 shape="round"
                 style={{ minWidth: '7.5rem' }}
                 onClick={async () => {
+                  const userId = Cookies.get('userId')
+                  const token = Cookies.get('token')
+
                   try {
-                    const userToken = Cookies.get('token')
-                    const userId = Cookies.get('userId')
-                    const response = await api.post(`auth/sair/${userId}`, {
-                      headers: {
-                        authorization: `Bearer ${userToken}`,
+                    await api.post(
+                      `auth/sair/${userId}`,
+                      { id: userId },
+                      {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
                       },
-                    })
-                    console.log(response.data)
-                    Cookies.remove('token')
+                    )
+
                     alert(
                       'Logout feito com sucesso! Redirecionando para a página de Login...',
                     )
                     window.location.href = `${import.meta.env.VITE_APP_HOME_URL}login`
                   } catch (error) {
-                    console.error(error)
+                    console.error('Validation failed:', error)
+                    alert(
+                      'Não foi possível fazer Logout. Atualize a página, por favor.',
+                    )
                   }
                 }}
               >
