@@ -7,21 +7,16 @@ import './style.css'
 interface UserCardProps {
   image: string
   name: string
-  onClick: () => void
 }
 const userCardStyle: React.CSSProperties = {
   alignItems: 'center',
   gap: '1rem',
 }
 
-export const UserCard = ({ image, name, onClick }: UserCardProps) => {
+export const UserCard = ({ image, name }: UserCardProps) => {
   return (
     <>
-      <Flex
-        className="user-card-container"
-        style={userCardStyle}
-        onClick={onClick}
-      >
+      <Flex className="user-card-container" style={userCardStyle}>
         <ImageProfile image={image} size="2.5rem" />
         <Flex vertical>
           <NameContact name={name} />

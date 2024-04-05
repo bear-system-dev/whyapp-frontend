@@ -1,11 +1,14 @@
-import { apiFunction } from '@/api/api'
 import { ChatContext } from '@/contexts/chatContext'
 import { User } from '@/model/UserModel'
-import { PlusOutlined } from '@ant-design/icons'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import {
+  AddFriendMutation,
+  RemoveFriendMutation,
+} from '@/utils/hooks/useAddAndRemoveFriends'
+import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Flex, Input } from 'antd'
 import Cookies from 'js-cookie'
-import { ChangeEvent, Key, useContext, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 import { UserCard } from '../UserCard'
 import './styles.css'
 
@@ -28,41 +31,27 @@ const newChatButtonStyle: React.CSSProperties = {
 }
 
 export const FindUser = () => {
-  const [userNameSearchedList, setUserNameSearchedList] = useState('')
-  const [userFriend, setUserFriend] = useState<User>()
-  const userId = Cookies.get('userId')
-
-  const { data, isLoading, isError } = useQuery<User[], Error>({
-    queryKey: ['user-list'],
-    queryFn: apiFunction.getUser,
-  })
-
-  const { mutate } = useMutation({
-    mutationFn: () => apiFunction.postFriendsUser(userFriend?.id || ''),
-  })
-
-  const dataArray = data ? Object.values(data) : []
-
   const { setRecipient } = useContext(ChatContext)
+  const [userNameSearchedList, setUserNameSearchedList] = useState('')
+  const userId = Cookies.get('userId')
+  const { users, friendsList, usersAndProfileLoading, usersAndProfileError } =
+    useGetUsersAndFriends()
+  const addFriendMutation = AddFriendMutation()
+  const removeFriendMutation = RemoveFriendMutation()
 
   const onFindInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const findUserNameValue = event?.target.value
     setUserNameSearchedList(findUserNameValue)
   }
 
-  const filteredUserNameList = dataArray.flat().filter((user: User) => {
+  const filteredUserNameList = users?.filter((user: User) => {
     return user?.nome
       ?.toLowerCase()
       .includes(userNameSearchedList.toLowerCase())
   })
-  const onClickUserCard = (user: User) => {
-    console.log('esse card foi clicado')
-    setRecipient({
-      id: user.id,
-      nome: user.nome,
-      avatar: user.avatar,
-    })
-    setUserFriend(user)
+
+  const isFriend = (user: User) => {
+    return friendsList?.some((friend) => friend.id === user.id)
   }
 
   return (
@@ -74,28 +63,49 @@ export const FindUser = () => {
         placeholder="busque por um usuário ou grupo..."
       />
       <Flex vertical style={{ gap: '1.5rem', height: '100%', width: '100%' }}>
-        {isLoading && <h3>carregando...</h3>}
-        {isError && <h3>Algo ocorreu... peun peun peeuun</h3>}
+        {usersAndProfileLoading && <h3>carregando...</h3>}
+        {usersAndProfileError && (
+          <h3>
+            Não foi possível carregar a lista de usuários. Por favor, tente
+            novamente.
+          </h3>
+        )}
         {userNameSearchedList &&
           filteredUserNameList
             ?.filter((userNome) => userNome.id !== userId)
-            .map((user: User, index: Key | null | undefined) => {
+            .map((user: User) => {
               return (
                 <>
                   <div className="userCardStyle">
                     <UserCard
-                      key={index}
+                      key={user.id}
                       name={user.nome}
                       image={user.avatar}
-                      onClick={() => onClickUserCard(user)}
                     />
                     <Button
                       style={newChatButtonStyle}
                       className="newChatButtonStyle"
                       shape="circle"
-                      icon={<PlusOutlined />}
+                      icon={
+                        isFriend(user) ? <MinusOutlined /> : <PlusOutlined />
+                      }
                       typeof="primary"
-                      onClick={() => mutate()}
+                      onClick={() => {
+                        setRecipient(user)
+                        if (userId) {
+                          if (isFriend(user)) {
+                            removeFriendMutation.mutate({
+                              userId,
+                              friendId: user.id,
+                            })
+                          } else {
+                            addFriendMutation.mutate({
+                              userId,
+                              friendId: user.id,
+                            })
+                          }
+                        }
+                      }}
                     />
                   </div>
                 </>
