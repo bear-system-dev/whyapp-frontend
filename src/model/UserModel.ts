@@ -6,6 +6,7 @@ export interface User {
   senha: string
   avatar: string
   descricao: string
+  amigos: string[]
   createdAt: string
   updateAt: string
   opcaoenqueteid: string
