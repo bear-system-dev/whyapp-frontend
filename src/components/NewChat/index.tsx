@@ -88,7 +88,7 @@ export const NewChat = () => {
             </Flex>
           </Flex>
           <FindUser />
-          <CreateNewGroupButton />
+          {session === 'Novo grupo' && <CreateNewGroupButton />}
         </Flex>
       </Drawer>
     </>

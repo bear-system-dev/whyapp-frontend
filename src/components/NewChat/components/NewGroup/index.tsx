@@ -36,12 +36,7 @@ export const CreateNewGroupButton = () => {
   }
 
   return (
-    <Flex
-      vertical
-      gap={24}
-      align="center"
-      style={{ marginBottom: '1rem', width: '100%' }}
-    >
+    <Flex vertical gap={24} align="center">
       <Button
         className="create-new-goup-button"
         type="primary"
