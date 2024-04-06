@@ -2,7 +2,7 @@ import { apiFunction } from '@/api/api'
 import { GroupResponse } from '@/model/GroupModel'
 import { useQuery } from '@tanstack/react-query'
 
-export const useGroups = () => {
+export const useGetGroupsChats = () => {
   const {
     data: groupsData,
     isLoading: groupsLoading,

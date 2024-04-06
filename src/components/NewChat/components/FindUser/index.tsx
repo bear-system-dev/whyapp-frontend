@@ -1,16 +1,19 @@
 import { ChatContext } from '@/contexts/chatContext'
 import { User } from '@/model/UserModel'
-import {
-  AddFriendMutation,
-  RemoveFriendMutation,
-} from '@/utils/hooks/useAddAndRemoveFriends'
+
+import { AddFriendMutation } from '@/utils/hooks/useAddAndRemoveFriends'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
-import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
+import { PlusOutlined } from '@ant-design/icons'
 import { Button, Flex, Input } from 'antd'
 import Cookies from 'js-cookie'
 import { ChangeEvent, useContext, useState } from 'react'
+import '../FindUser/styles.css'
+import { FriendsList } from '../FriendsList'
 import { UserCard } from '../UserCard'
-import './styles.css'
+
+interface FindUserProps {
+  onClose: () => void
+}
 
 const searchInputBarStyles: React.CSSProperties = {
   background:
@@ -30,29 +33,29 @@ const newChatButtonStyle: React.CSSProperties = {
   color: '#E6E6E6',
 }
 
-export const FindUser = () => {
+export const FindUser = ({ onClose }: FindUserProps) => {
   const { setRecipient } = useContext(ChatContext)
   const [userNameSearchedList, setUserNameSearchedList] = useState('')
   const userId = Cookies.get('userId')
   const { users, friendsList, usersAndProfileLoading, usersAndProfileError } =
     useGetUsersAndFriends()
   const addFriendMutation = AddFriendMutation()
-  const removeFriendMutation = RemoveFriendMutation()
 
   const onFindInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const findUserNameValue = event?.target.value
     setUserNameSearchedList(findUserNameValue)
   }
 
-  const filteredUserNameList = users?.filter((user: User) => {
-    return user?.nome
-      ?.toLowerCase()
-      .includes(userNameSearchedList.toLowerCase())
-  })
-
   const isFriend = (user: User) => {
     return friendsList?.some((friend) => friend.id === user.id)
   }
+
+  const filteredUserNameList = users?.filter((user: User) => {
+    return (
+      user?.nome?.toLowerCase().includes(userNameSearchedList.toLowerCase()) &&
+      !isFriend(user)
+    )
+  })
 
   return (
     <>
@@ -60,7 +63,8 @@ export const FindUser = () => {
         className="find-input-bar"
         style={searchInputBarStyles}
         onChange={onFindInputChange}
-        placeholder="busque por um usuário ou grupo..."
+        value={userNameSearchedList}
+        placeholder="busque por um usuário..."
       />
       <Flex vertical style={{ gap: '1.5rem', height: '100%', width: '100%' }}>
         {usersAndProfileLoading && <h3>carregando...</h3>}
@@ -75,43 +79,40 @@ export const FindUser = () => {
             ?.filter((userNome) => userNome.id !== userId)
             .map((user: User) => {
               return (
-                <>
-                  <div className="userCardStyle">
-                    <UserCard
-                      key={user.id}
-                      name={user.nome}
-                      image={user.avatar}
-                    />
-                    <Button
-                      style={newChatButtonStyle}
-                      className="newChatButtonStyle"
-                      shape="circle"
-                      icon={
-                        isFriend(user) ? <MinusOutlined /> : <PlusOutlined />
+                <div key={user.id} className="userCardStyle">
+                  <UserCard
+                    name={user.nome}
+                    image={user.avatar}
+                    onClick={() => {
+                      setRecipient(user)
+                      onClose()
+                    }}
+                  />
+                  <Button
+                    style={newChatButtonStyle}
+                    className="newChatButtonStyle"
+                    shape="circle"
+                    icon={<PlusOutlined />}
+                    typeof="primary"
+                    onClick={() => {
+                      if (userId) {
+                        addFriendMutation.mutate({
+                          userId,
+                          friendId: user.id,
+                        })
                       }
-                      typeof="primary"
-                      onClick={() => {
-                        setRecipient(user)
-                        if (userId) {
-                          if (isFriend(user)) {
-                            removeFriendMutation.mutate({
-                              userId,
-                              friendId: user.id,
-                            })
-                          } else {
-                            addFriendMutation.mutate({
-                              userId,
-                              friendId: user.id,
-                            })
-                          }
-                        }
-                      }}
-                    />
-                  </div>
-                </>
+                      setUserNameSearchedList('')
+                    }}
+                  />
+                </div>
               )
             })}
       </Flex>
+      {!userNameSearchedList && (
+        <Flex vertical gap={16}>
+          <h3>Lista de amigos</h3> <FriendsList onClose={onClose} />
+        </Flex>
+      )}
     </>
   )
 }

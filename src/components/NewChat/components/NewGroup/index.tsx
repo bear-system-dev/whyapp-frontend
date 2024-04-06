@@ -12,7 +12,7 @@ export const CreateNewGroupButton = () => {
   const formRef = useRef<FormInstance<Group> | null>(null)
 
   const handleSubmit = async (values: Partial<Group>) => {
-    apiFunction.createGroup({
+    await apiFunction.createGroup({
       nome: values.nome,
       foto: values.foto,
       descricao: values.descricao,
