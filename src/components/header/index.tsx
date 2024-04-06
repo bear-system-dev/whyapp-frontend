@@ -1,9 +1,9 @@
 import ImageProfile from '@/components/profile/imageProfile'
 import NameProfile from '@/components/profile/nameprofile'
 import { ChatContext } from '@/contexts/chatContext'
-import { MoreOutlined } from '@ant-design/icons'
 import { Button, Flex } from 'antd'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import MenuInfo from '../menuInfo'
 import { resetButtonStyles } from './../../mocks/mockUserArray'
 import ContactGroup from './components/contactsgroups'
 import HeaderContainer from './components/headerConteiner'
@@ -11,6 +11,7 @@ import StatusContact from './components/statusgroups'
 
 const HeaderChat = () => {
   const { recipient, recipientGroup } = useContext(ChatContext)
+  const [profileInfoMenuOpen, setprofileInfoMenuOpen] = useState(false)
 
   return (
     <HeaderContainer>
@@ -29,12 +30,12 @@ const HeaderChat = () => {
                 height: '45px',
                 width: '45px',
               }}
-              onClick={() => console.log('abrir info')}
+              onClick={() => setprofileInfoMenuOpen(true)}
             >
               <ImageProfile size={'45px'} image={recipient?.avatar} />
             </Button>
             <div
-              onClick={() => console.log('abrir info')}
+              onClick={() => setprofileInfoMenuOpen(true)}
               style={{ cursor: 'pointer', userSelect: 'none' }}
             >
               <Flex vertical gap={5}>
@@ -52,12 +53,12 @@ const HeaderChat = () => {
                 height: '45px',
                 width: '45px',
               }}
-              onClick={() => console.log('abrir info')}
+              onClick={() => setprofileInfoMenuOpen(true)}
             >
               <ImageProfile size={'45px'} image={recipientGroup?.foto} />
             </Button>
             <div
-              onClick={() => console.log('abrir info')}
+              onClick={() => setprofileInfoMenuOpen(true)}
               style={{ cursor: 'pointer', userSelect: 'none' }}
             >
               <Flex vertical gap={5}>
@@ -68,26 +69,11 @@ const HeaderChat = () => {
           </>
         ) : null}
       </Flex>
-      {recipient && (
-        <Button
-          shape="circle"
-          style={{
-            ...resetButtonStyles,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          onClick={() => console.log('abrir info')}
-        >
-          <MoreOutlined
-            style={{
-              color: '#FFFFFF',
-              fontWeight: '800',
-              fontSize: '20px',
-            }}
-          />
-        </Button>
-      )}
+
+      <MenuInfo
+        open={profileInfoMenuOpen}
+        onClose={() => setprofileInfoMenuOpen(false)}
+      />
     </HeaderContainer>
   )
 }
