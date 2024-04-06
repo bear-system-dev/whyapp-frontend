@@ -1,12 +1,11 @@
 import emojiIcon from '@/assets/emojiIcon.png'
 import { ChatContext } from '@/contexts/chatContext'
-import { api } from '@/lib/api'
 import { useChatSocket } from '@/utils/hooks/useChatSocket'
 import { useGroupChatSocket } from '@/utils/hooks/useGroupChatSocket'
+import { SendNewGroupMessage } from '@/utils/hooks/useSendNewGroupMessage'
 import { PaperClipOutlined, SendOutlined } from '@ant-design/icons'
 import { Button, Flex, Input, Space } from 'antd'
 import { EmojiClickData } from 'emoji-picker-react'
-import Cookies from 'js-cookie'
 import { ChangeEvent, KeyboardEvent, useContext, useState } from 'react'
 import { resetButtonStyles } from './../../mocks/mockUserArray'
 import { EmojiLibrary } from './emojiPicker'
@@ -14,32 +13,11 @@ import './style.css'
 
 export function InputBar() {
   const { recipient, recipientGroup } = useContext(ChatContext)
-  const { socket, userId } = useChatSocket()
+  const { socket } = useChatSocket()
   const { recipientGroupId } = useGroupChatSocket()
-
   const [inputValue, setInputValue] = useState<string>('')
   const [showEmojis, setShowEmojis] = useState(false)
-
-  const newMessage = async (value: string) => {
-    const token = Cookies.get('token')
-
-    const response = await api.post(
-      'group-messages',
-      {
-        mensagem: value,
-        grupoId: recipientGroupId,
-        usuarioId: userId,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    )
-
-    socket?.emit('newGroupMessage', 'response.data.id')
-    return response
-  }
+  const sendNewGroupMessageMutation = SendNewGroupMessage()
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return
@@ -48,14 +26,12 @@ export function InputBar() {
       socket?.emit('newMessage', inputValue)
     }
 
-    newMessage(inputValue)
-
-    console.log(inputValue)
-
-    // sendNewGroupMessageMutation.mutate({
-    //   mensagem: inputValue,
-    //   groupId: recipientGroupId,
-    // })
+    if (recipientGroupId) {
+      sendNewGroupMessageMutation.mutate({
+        mensagem: inputValue,
+        groupId: recipientGroupId,
+      })
+    }
 
     setInputValue('')
   }

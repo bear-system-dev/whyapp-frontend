@@ -205,8 +205,6 @@ async function sendNewGroupMessage({ mensagem, groupId }: GroupMessage) {
       },
     )
 
-    // socket?.emit('newGroupMessage', response.data.id)
-
     return response
   } catch (error) {
     console.error('Algo saiu mal na requisição:', error)
