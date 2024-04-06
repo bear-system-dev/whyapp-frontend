@@ -154,7 +154,7 @@ async function createGroup({ nome, foto, descricao }: Partial<Group>) {
       },
     )
 
-    return response
+    return response.data
   } catch (error) {
     console.error('Algo saiu mal na requisição:', error)
   }

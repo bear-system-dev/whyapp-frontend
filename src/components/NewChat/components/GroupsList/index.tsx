@@ -39,7 +39,7 @@ export const GroupsList = ({ onClose }: GroupsListProps) => {
           )
         })}
       </Flex>
-      <CreateNewGroupButton />
+      <CreateNewGroupButton onClose={onClose} />
     </Flex>
   )
 }

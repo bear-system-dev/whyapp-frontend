@@ -1,22 +1,36 @@
-import { apiFunction } from '@/api/api'
 import { Group } from '@/model/GroupModel'
+
+import { CreateNewGroupMutation } from '@/utils/hooks/useCreateNewGroup'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { Button, Flex, FormInstance, Modal } from 'antd'
 import { useRef } from 'react'
 import NewGroupForm from './components/NewGroupForm'
 import './styles.css'
 
-export const CreateNewGroupButton = () => {
+interface CreateNewGroupButtonProps {
+  onClose: () => void
+}
+
+export const CreateNewGroupButton = ({
+  onClose,
+}: CreateNewGroupButtonProps) => {
+  const createNewGroupMutation = CreateNewGroupMutation()
   const [modal, contextHolder] = Modal.useModal()
 
   const formRef = useRef<FormInstance<Group> | null>(null)
 
   const handleSubmit = async (values: Partial<Group>) => {
-    await apiFunction.createGroup({
-      nome: values.nome,
-      foto: values.foto,
-      descricao: values.descricao,
-    })
+    if (values.nome && values.foto && values.descricao) {
+      createNewGroupMutation.mutate({
+        nome: values.nome,
+        foto: values.foto,
+        descricao: values.descricao,
+      })
+    }
+
+    console.error(
+      'Algo saiu mal: verifique se nome, foto e descrição foram preenchidos.',
+    )
   }
 
   const NewGroupFormModal = () => {
@@ -29,6 +43,7 @@ export const CreateNewGroupButton = () => {
         if (formRef.current) {
           handleSubmit(formRef.current.getFieldsValue())
         }
+        onClose()
       },
       cancelText: 'Voltar',
       className: 'new-group-form-modal',
