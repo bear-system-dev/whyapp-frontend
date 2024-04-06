@@ -10,10 +10,15 @@
   color: #B49E35;
 }
 
+.ant-modal-confirm-title {
+  font-family: 'Roboto', sans-serif;
+}
+
 .new-group-form-modal .ant-btn-primary {
   background-color: #39FF14;
   color: black;
   border: none;
+  font-family: 'Roboto', sans-serif;
 }
 
 .new-group-form-modal .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
@@ -22,9 +27,16 @@
 }
 
 .new-group-form-modal .ant-btn-default {
-  border: none
+  border: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+.ant-form-item .ant-form-item-explain-error {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.75rem !important;
+  padding-top: 0.25rem;
 }
 
 .new-group-form-modal .ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
-  border: none
+  border: none;
 }

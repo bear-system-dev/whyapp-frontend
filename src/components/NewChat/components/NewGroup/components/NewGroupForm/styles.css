@@ -1,11 +1,24 @@
 .new-group-form-label label {
   color: #fff !important;
-  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  padding-top: 1rem;
+}
+
+.new-group-form-label textarea {
+  color: #fff !important;
+  font-family: 'Roboto', sans-serif;
+  min-height: 9rem !important;
+  height: min-content;
+  padding: 0.25rem 0.5rem;
+  resize: none;
 }
 
 .new-group-form-field::placeholder,
-.new-group-form-field input::placeholder {
+.new-group-form-field input::placeholder,
+.new-group-form-field textarea::placeholder {
   color: #ffffff92 !important;
+  font-weight: 400 !important;
+  font-family: 'Roboto', sans-serif;
 }
 
 :where(.upload).ant-form-item .ant-form-item-control {
@@ -14,11 +27,7 @@
   align-items: center;
 }
 
-.avatar-uploader button, .avatar-uploader svg {
-  color: #FFFFFF !important;
-}
-
-.submit{
+.submit {
   background-color: #39FF14 !important;
   text-transform: uppercase;
   font-weight: 700;
@@ -27,6 +36,6 @@
   border: none !important;
 }
 
-.submit:hover{
+.submit:hover {
   background-color: #88ff74 !important;
 }

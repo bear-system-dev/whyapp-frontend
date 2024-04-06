@@ -2,6 +2,7 @@ import { PlusOutlined } from '@ant-design/icons'
 import type { GetProp, UploadFile, UploadProps } from 'antd'
 import { Image, Upload } from 'antd'
 import { useState } from 'react'
+import './styles.css'
 
 interface UploadAvatarProps {
   onAvatarChange: (fileList: string) => void
