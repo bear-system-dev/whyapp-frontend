@@ -21,7 +21,8 @@ const NewGroupForm = forwardRef<FormInstance<Group>, NewGroupFormProps>(
     const form = Form.useForm()[0]
 
     const handleAvatarChange = (url: string) => {
-      form.setFieldsValue({ avatar: url })
+      form.setFieldsValue({ foto: url })
+      console.log('Avatar changed:', url)
     }
 
     const handleFormSubmit = (values: Group) => {
