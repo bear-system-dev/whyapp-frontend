@@ -1,7 +1,9 @@
 import { apiFunction } from '@/api/api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useGroupChatSocket } from './useGroupChatSocket'
 
 export const SendNewGroupMessage = () => {
+  const { socket } = useGroupChatSocket()
   const queryClient = useQueryClient()
 
   const sendNewGroupMessageMutation = useMutation({
@@ -14,8 +16,14 @@ export const SendNewGroupMessage = () => {
     }) => {
       return apiFunction.sendNewGroupMessage({ mensagem, groupId })
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
+      socket?.emit('newGroupMessage', response?.data.id)
+
       queryClient.invalidateQueries({ queryKey: ['group-messages'] })
+    },
+
+    onError: (error) => {
+      console.error('Algo saiu mal na requisição:', error)
     },
   })
 

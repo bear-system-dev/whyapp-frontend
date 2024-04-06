@@ -17,6 +17,10 @@ export const AddFriendMutation = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['friends'] })
     },
+
+    onError: (error) => {
+      console.error('Algo saiu mal na requisição:', error)
+    },
   })
 
   return addFriendMutation
@@ -37,6 +41,10 @@ export const RemoveFriendMutation = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['friends'] })
+    },
+
+    onError: (error) => {
+      console.error('Algo saiu mal na requisição:', error)
     },
   })
 
