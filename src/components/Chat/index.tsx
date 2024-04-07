@@ -43,24 +43,6 @@ export const Chat = () => {
   }, [])
 
   useEffect(() => {
-    const onMessages = (messages: Message[]) => {
-      setMessages(messages)
-    }
-
-    const onNewMessage = (message: Message) => {
-      setMessages((previousMessages) => [...previousMessages, message])
-    }
-
-    if (recipient) {
-      setMessages([])
-
-      socket?.emit('getMessages', chatId)
-      socket?.emit('join private', chatId)
-
-      socket?.on('messages', onMessages)
-      socket?.on('newMessage', onNewMessage)
-    }
-
     if (recipientGroup) {
       setMessages([])
 
@@ -74,6 +56,26 @@ export const Chat = () => {
       socket?.on('error', (data: { mensagem: string }) => {
         console.log(data)
       })
+    }
+  }, [socket])
+
+  useEffect(() => {
+    const onMessages = (messages: Message[]) => {
+      setMessages(messages)
+    }
+
+    const onNewMessage = (message: Message) => {
+      setMessages((previousMessages) => [...previousMessages, message])
+    }
+
+    if (recipient) {
+      setMessages([])
+
+      socket?.emit('join private', chatId)
+      socket?.emit('getMessages', chatId)
+
+      socket?.on('messages', onMessages)
+      socket?.on('newMessage', onNewMessage)
     }
 
     return () => {

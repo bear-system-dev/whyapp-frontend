@@ -1,11 +1,3 @@
-export const settingsButtonStyle: React.CSSProperties = {
-  background: 'transparent',
-  position: 'absolute',
-  top: '-50%',
-  width: '100vw',
-  height: '100%',
-  zIndex: 0,
-}
 export const menuConteiner: React.CSSProperties = {
   overflowY: 'scroll',
   backgroundColor: 'rgba(18, 29, 40, 0.9)',
@@ -56,7 +48,6 @@ export const SilenceNotificationsStyle: React.CSSProperties = {
   flexDirection: 'column',
   position: 'fixed',
   bottom: '80px',
-  // gap: '28px',
   borderRadius: '6px',
   width: '86%',
 }

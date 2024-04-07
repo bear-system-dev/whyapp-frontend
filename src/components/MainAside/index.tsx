@@ -1,7 +1,7 @@
 import whyAppLogo from '@/assets/whyAppLogo.png'
 import { ChatContext } from '@/contexts/chatContext'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
-import { useGroups } from '@/utils/hooks/useGroupChats'
+import { useGetGroupsChats } from '@/utils/hooks/useGroupChats'
 import { Avatar, Button, Divider, Flex } from 'antd'
 import { useContext } from 'react'
 import { NewChat } from '../NewChat'
@@ -39,7 +39,7 @@ export const MainAside = () => {
   const { setRecipient, setRecipientGroup } = useContext(ChatContext)
   const { friendsList, usersAndProfileLoading, usersAndProfileError } =
     useGetUsersAndFriends()
-  const { groups, groupsLoading, groupsError } = useGroups()
+  const { groups, groupsLoading, groupsError } = useGetGroupsChats()
 
   if (usersAndProfileLoading) return 'Carregando...'
   if (usersAndProfileError)
@@ -82,27 +82,7 @@ export const MainAside = () => {
               key={group.grupo.id}
               style={avatarButtonStyle}
               onClick={() => {
-                setRecipientGroup({
-                  id: group.grupo.id,
-                  nome: group.grupo.nome,
-                  foto: group.grupo.foto,
-                  descricao: group.grupo.descricao,
-                  proprietarioId: group.grupo.proprietarioId,
-                  audios: group.grupo.audios,
-                  cargos: group.grupo.cargos,
-                  createdAt: group.grupo.createdAt,
-                  enquetes: group.grupo.enquetes,
-                  imagens: group.grupo.imagens,
-                  mensagens: group.grupo.mensagens,
-                  updatedAt: group.grupo.updatedAt,
-                  usuarios: group.grupo.usuarios.map((usuario) => ({
-                    adicionadoPor: usuario.adicionadoPor,
-                    entrouEm: usuario.entrouEm,
-                    grupoId: usuario.grupoId,
-                    usuarioId: usuario.usuarioId,
-                  })),
-                  videos: group.grupo.videos,
-                })
+                setRecipientGroup(group.grupo)
                 setRecipient(null)
               }}
             >

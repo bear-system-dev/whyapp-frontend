@@ -1,5 +1,6 @@
 import { Group } from '@/model/GroupModel'
 import { Form, FormInstance, Input } from 'antd'
+import TextArea from 'antd/es/input/TextArea'
 import { Dispatch, forwardRef } from 'react'
 import UploadAvatar from './components/UploadButton'
 import './styles.css'
@@ -12,13 +13,7 @@ const InputFormStyles: React.CSSProperties = {
   background:
     'linear-gradient(to bottom right, #C9C9C94D, #C4C4C41A) padding-box, linear-gradient(to bottom left, #FFFFFF4D, #D3D3D31A) border-box',
   color: '#FFFFFF',
-  display: 'flex',
-  padding: '0 1rem',
-  boxSizing: 'border-box',
-  height: '28px',
   width: '100%',
-  gap: '20px',
-  alignItems: 'center',
 }
 
 const NewGroupForm = forwardRef<FormInstance<Group>, NewGroupFormProps>(
@@ -26,7 +21,8 @@ const NewGroupForm = forwardRef<FormInstance<Group>, NewGroupFormProps>(
     const form = Form.useForm()[0]
 
     const handleAvatarChange = (url: string) => {
-      form.setFieldsValue({ avatar: url })
+      form.setFieldsValue({ foto: url })
+      console.log('Avatar changed:', url)
     }
 
     const handleFormSubmit = (values: Group) => {
@@ -81,8 +77,10 @@ const NewGroupForm = forwardRef<FormInstance<Group>, NewGroupFormProps>(
           ]}
           className="new-group-form-label "
         >
-          <Input
+          <TextArea
             className="new-group-form-field"
+            showCount
+            maxLength={240}
             style={InputFormStyles}
             placeholder="Digite uma descrição para o novo grupo"
           />
