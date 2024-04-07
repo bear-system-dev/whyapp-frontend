@@ -8,6 +8,7 @@ const ConteinerContact = ({ children }: { children: ReactNode }) => {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '12px 28px',
+        width: '100%',
       }}
     >
       {children}

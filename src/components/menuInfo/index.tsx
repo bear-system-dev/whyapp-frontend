@@ -13,6 +13,7 @@ import {
   menuConteiner,
   stutusProfileStyle,
 } from './style/style.tsx'
+import { MenuInfoGroup } from './components/MenuGroup/index.tsx'
 
 interface MenuInfoProps {
   open: boolean
@@ -20,7 +21,7 @@ interface MenuInfoProps {
 }
 
 const MenuInfo = ({ open, onClose }: MenuInfoProps) => {
-  const { recipient } = useContext(ChatContext)
+  const { recipient, recipientGroup } = useContext(ChatContext)
 
   return (
     <Drawer
@@ -74,6 +75,10 @@ const MenuInfo = ({ open, onClose }: MenuInfoProps) => {
           </Flex>
         </Flex>
       )}
+      {recipientGroup && (
+        <MenuInfoGroup onClose={onClose} recipientGroup={recipientGroup} />
+      )}
+      ,
     </Drawer>
   )
 }
