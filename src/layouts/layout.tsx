@@ -5,7 +5,6 @@ import { InputBar } from '@/components/InputBar'
 import { MainAside } from '@/components/MainAside'
 import HeaderChat from '@/components/header'
 import MenuGroup from '@/components/menuGroup'
-import MenuInfo from '@/components/menuInfo'
 import { Flex } from 'antd'
 import React from 'react'
 
@@ -56,7 +55,6 @@ export const AppLayout = () => {
       <Flex vertical flex={1}>
         <Flex vertical style={{ height: 60 }}>
           <HeaderChat />
-          <MenuInfo />
         </Flex>
         <Flex
           flex={1}

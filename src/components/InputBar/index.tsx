@@ -1,6 +1,8 @@
 import emojiIcon from '@/assets/emojiIcon.png'
 import { ChatContext } from '@/contexts/chatContext'
 import { useChatSocket } from '@/utils/hooks/useChatSocket'
+import { useGroupChatSocket } from '@/utils/hooks/useGroupChatSocket'
+import { SendNewGroupMessage } from '@/utils/hooks/useSendNewGroupMessage'
 import { PaperClipOutlined, SendOutlined } from '@ant-design/icons'
 import { Button, Flex, Input, Space } from 'antd'
 import { EmojiClickData } from 'emoji-picker-react'
@@ -10,15 +12,26 @@ import { EmojiLibrary } from './emojiPicker'
 import './style.css'
 
 export function InputBar() {
-  const { recipient } = useContext(ChatContext)
+  const { recipient, recipientGroup } = useContext(ChatContext)
   const { socket } = useChatSocket()
+  const { recipientGroupId } = useGroupChatSocket()
   const [inputValue, setInputValue] = useState<string>('')
   const [showEmojis, setShowEmojis] = useState(false)
+  const sendNewGroupMessageMutation = SendNewGroupMessage()
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return
 
-    socket?.emit('newMessage', inputValue)
+    if (recipient) {
+      socket?.emit('newMessage', inputValue)
+    }
+
+    if (recipientGroupId) {
+      sendNewGroupMessageMutation.mutate({
+        mensagem: inputValue,
+        groupId: recipientGroupId,
+      })
+    }
 
     setInputValue('')
   }
@@ -46,7 +59,7 @@ export function InputBar() {
           type="text"
           style={{ ...resetButtonStyles, height: 30 }}
           onClick={handleOpenEmojiDrawer}
-          disabled={!recipient}
+          disabled={!recipient && !recipientGroup}
         >
           <img src={emojiIcon} alt="emoji icon" height={'100%'} />
         </Button>
@@ -61,7 +74,7 @@ export function InputBar() {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-          disabled={!recipient}
+          disabled={!recipient && !recipientGroup}
         />
       </Flex>
       <Space.Compact className="input-bar__container">
@@ -71,7 +84,7 @@ export function InputBar() {
           value={inputValue}
           onChange={handleInputOnChange}
           onKeyDown={handleOnKeyDown}
-          disabled={!recipient}
+          disabled={!recipient && !recipientGroup}
         />
         <Button
           className="send-button"
@@ -79,7 +92,7 @@ export function InputBar() {
           size="large"
           type="text"
           onClick={handleSendMessage}
-          disabled={!recipient}
+          disabled={!recipient && !recipientGroup}
         />
       </Space.Compact>
     </div>

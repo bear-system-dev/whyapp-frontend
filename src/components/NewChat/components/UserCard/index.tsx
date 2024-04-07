@@ -16,17 +16,15 @@ const userCardStyle: React.CSSProperties = {
 
 export const UserCard = ({ image, name, onClick }: UserCardProps) => {
   return (
-    <>
-      <Flex
-        className="user-card-container"
-        style={userCardStyle}
-        onClick={onClick}
-      >
-        <ImageProfile image={image} size="2.5rem" />
-        <Flex vertical>
-          <NameContact name={name} />
-        </Flex>
+    <Flex
+      className="user-card-container"
+      style={userCardStyle}
+      onClick={onClick}
+    >
+      <ImageProfile image={image} size="2.5rem" />
+      <Flex vertical>
+        <NameContact name={name} />
       </Flex>
-    </>
+    </Flex>
   )
 }

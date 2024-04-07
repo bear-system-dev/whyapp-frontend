@@ -6,6 +6,7 @@ import {
 import { Button, Divider, Drawer, Flex } from 'antd'
 import { useState } from 'react'
 import { FindUser } from './components/FindUser'
+import { GroupsList } from './components/GroupsList'
 
 const newChatButtonStyle: React.CSSProperties = {
   background: 'transparent',
@@ -86,7 +87,8 @@ export const NewChat = () => {
               />
             </Flex>
           </Flex>
-          <FindUser />
+          {session === 'Nova conversa' && <FindUser onClose={onClose} />}
+          {session === 'Novo grupo' && <GroupsList onClose={onClose} />}
         </Flex>
       </Drawer>
     </>

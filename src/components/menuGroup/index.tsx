@@ -1,12 +1,13 @@
+import { ChatContext } from '@/contexts/chatContext'
+import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
 import { Button, Drawer, Flex } from 'antd'
-import React, { useState } from 'react'
-import './style.css'
-import OpenMenu from './openMenu'
-import HeaderMenu from './headermenu'
-import OnlineConteiner from './OnlineConteiner'
-import { Members } from '@/mocks/mockMemberGroup'
-import Contact from './contact'
+import React, { useContext, useState } from 'react'
 import OfflineConteiner from './OfflineConteiner'
+import OnlineConteiner from './OnlineConteiner'
+import Contact from './contact'
+import HeaderMenu from './headermenu'
+import OpenMenu from './openMenu'
+import './style.css'
 
 const menuConteiner: React.CSSProperties = {
   overflowY: 'scroll',
@@ -28,7 +29,9 @@ const settingsButtonStyle: React.CSSProperties = {
 }
 
 const MenuGroup = () => {
+  const { recipientGroup } = useContext(ChatContext)
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false)
+  const { users } = useGetUsersAndFriends()
 
   const showDrawer = () => {
     setSettingsMenuOpen(true)
@@ -38,16 +41,22 @@ const MenuGroup = () => {
     setSettingsMenuOpen(false)
   }
 
+  const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {
+    return users?.find((user) => user.id === groupUser.usuarioId)
+  })
+
   return (
     <>
-      <Button
-        className="general-settings-button"
-        style={settingsButtonStyle}
-        shape="circle"
-        icon={<OpenMenu />}
-        type="primary"
-        onClick={showDrawer}
-      />
+      {recipientGroup !== null && (
+        <Button
+          className="general-settings-button"
+          style={settingsButtonStyle}
+          shape="circle"
+          icon={<OpenMenu />}
+          type="primary"
+          onClick={showDrawer}
+        />
+      )}
       <Drawer
         className="ant-drawer-body"
         placement="left"
@@ -57,33 +66,38 @@ const MenuGroup = () => {
         getContainer={document.body}
         style={menuConteiner}
       >
-        <HeaderMenu name="Carlin do grau CIA" />
+        <HeaderMenu name={recipientGroup?.nome ?? ''} />
         <Flex vertical style={{ marginTop: '60px' }}>
           <OnlineConteiner>
-            {Members.filter((member) => member.status === true).map(
-              (member, index) => (
-                <Contact
-                  key={index}
-                  image={member.image}
-                  name={member.name}
-                  cargo={member.cargo}
-                  status={member.status}
-                />
-              ),
+            {/* {Members.filter((member) => member.status === true) */}
+            {groupUsers?.map(
+              (member) =>
+                member && (
+                  <Contact
+                    key={member.id}
+                    image={member.avatar}
+                    name={member.nome}
+                    cargo=""
+                    status={true}
+                  />
+                ),
             )}
             ,
           </OnlineConteiner>
           <OfflineConteiner>
-            {Members.filter((member) => member.status === false).map(
-              (member, index) => (
-                <Contact
-                  key={index}
-                  image={member.image}
-                  name={member.name}
-                  cargo={member.cargo}
-                  status={member.status}
-                />
-              ),
+            {groupUsers?.map(
+              // .filter((member) => member.status === false)
+
+              (member) =>
+                member && (
+                  <Contact
+                    key={member.id}
+                    image={member.avatar}
+                    name={member.nome}
+                    cargo=""
+                    status={false}
+                  />
+                ),
             )}
           </OfflineConteiner>
         </Flex>

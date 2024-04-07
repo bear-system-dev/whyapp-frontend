@@ -1,11 +1,13 @@
 import BubbleChat from '@/components/bubblechat'
 import { ChatContext } from '@/contexts/chatContext'
 import { SearchContext } from '@/contexts/searchContext'
+import { Message } from '@/model/MessageModel'
 import {
   getLocalActiveIndex,
   getMatchCounts,
 } from '@/utils/helpers/activeIndex'
 import { useChatSocket } from '@/utils/hooks/useChatSocket'
+import { useGroupChatSocket } from '@/utils/hooks/useGroupChatSocket'
 import { Alert, Flex } from 'antd'
 import Cookies from 'js-cookie'
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -14,8 +16,10 @@ import './styles.css'
 
 export const Chat = () => {
   const [tokenExpired, setTokenExpired] = useState(false)
-  const { messages, setMessages } = useContext(ChatContext)
+  const { recipient, recipientGroup, messages, setMessages } =
+    useContext(ChatContext)
   const { chatId, userId, socket } = useChatSocket()
+  const { recipientGroupId } = useGroupChatSocket()
 
   const endOfMessagesRef = useRef<HTMLDivElement>(null)
 
@@ -39,21 +43,45 @@ export const Chat = () => {
   }, [])
 
   useEffect(() => {
-    setMessages([])
-    socket?.emit('getMessages', chatId)
+    if (recipientGroup) {
+      setMessages([])
 
-    socket?.on('messages', (messages) => {
+      socket?.emit('join group', recipientGroupId)
+
+      socket?.on('newGroupMessage', (message) => {
+        setMessages((previousMessages) => [...previousMessages, message])
+        console.log(message)
+      })
+
+      socket?.on('error', (data: { mensagem: string }) => {
+        console.log(data)
+      })
+    }
+  }, [socket])
+
+  useEffect(() => {
+    const onMessages = (messages: Message[]) => {
       setMessages(messages)
-    })
+    }
 
-    socket?.on('newMessage', (message) => {
-      console.log('Nova mensagem recebida:', message)
+    const onNewMessage = (message: Message) => {
       setMessages((previousMessages) => [...previousMessages, message])
-    })
+    }
+
+    if (recipient) {
+      setMessages([])
+
+      socket?.emit('join private', chatId)
+      socket?.emit('getMessages', chatId)
+
+      socket?.on('messages', onMessages)
+      socket?.on('newMessage', onNewMessage)
+    }
 
     return () => {
-      socket?.off('messages')
-      socket?.off('newMessage')
+      if (recipient) {
+        socket?.off('newMessage', onNewMessage)
+      }
     }
   }, [socket])
 

@@ -1,16 +1,17 @@
 import ImageProfile from '@/components/profile/imageProfile'
 import NameProfile from '@/components/profile/nameprofile'
-import { Button, Flex } from 'antd'
-// import StatusContact from './components/statusgroups'
 import { ChatContext } from '@/contexts/chatContext'
-import { MoreOutlined } from '@ant-design/icons'
-import { useContext } from 'react'
+import { Button, Flex } from 'antd'
+import { useContext, useState } from 'react'
+import MenuInfo from '../menuInfo'
 import { resetButtonStyles } from './../../mocks/mockUserArray'
+import ContactGroup from './components/contactsgroups'
 import HeaderContainer from './components/headerConteiner'
 import StatusContact from './components/statusgroups'
 
 const HeaderChat = () => {
-  const { recipient } = useContext(ChatContext)
+  const { recipient, recipientGroup } = useContext(ChatContext)
+  const [profileInfoMenuOpen, setprofileInfoMenuOpen] = useState(false)
 
   return (
     <HeaderContainer>
@@ -20,7 +21,7 @@ const HeaderChat = () => {
           gap: '20px',
         }}
       >
-        {recipient && (
+        {recipient ? (
           <>
             <Button
               shape="circle"
@@ -29,45 +30,51 @@ const HeaderChat = () => {
                 height: '45px',
                 width: '45px',
               }}
-              onClick={() => console.log('abrir info')}
+              onClick={() => setprofileInfoMenuOpen(true)}
             >
               <ImageProfile size={'45px'} image={recipient?.avatar} />
             </Button>
             <div
-              onClick={() => console.log('abrir info')}
+              onClick={() => setprofileInfoMenuOpen(true)}
               style={{ cursor: 'pointer', userSelect: 'none' }}
             >
               <Flex vertical gap={5}>
                 <NameProfile user={recipient?.nome} colortext="#FFFFFF" />
                 <StatusContact status="online" />
-                {/* <ContactGroup contact={users} /> */}
               </Flex>
             </div>
           </>
-        )}
+        ) : recipientGroup ? (
+          <>
+            <Button
+              shape="circle"
+              style={{
+                ...resetButtonStyles,
+                height: '45px',
+                width: '45px',
+              }}
+              onClick={() => setprofileInfoMenuOpen(true)}
+            >
+              <ImageProfile size={'45px'} image={recipientGroup?.foto} />
+            </Button>
+            <div
+              onClick={() => setprofileInfoMenuOpen(true)}
+              style={{ cursor: 'pointer', userSelect: 'none' }}
+            >
+              <Flex vertical gap={5}>
+                <NameProfile user={recipientGroup?.nome} colortext="#FFFFFF" />
+                <ContactGroup />
+              </Flex>
+            </div>
+          </>
+        ) : null}
       </Flex>
-      {recipient && (
-        <Button
-          shape="circle"
-          style={{
-            ...resetButtonStyles,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          onClick={() => console.log('abrir info')}
-        >
-          <MoreOutlined
-            style={{
-              color: '#FFFFFF',
-              fontWeight: '800',
-              fontSize: '20px',
-            }}
-          />
-        </Button>
-      )}
+
+      <MenuInfo
+        open={profileInfoMenuOpen}
+        onClose={() => setprofileInfoMenuOpen(false)}
+      />
     </HeaderContainer>
   )
 }
 export default HeaderChat
-// 17212B
