@@ -16,20 +16,36 @@ import { ButtonRemoveMember } from '../ButtonRemoveMember'
 import { ButtonDeleteGroup } from '../ButtonDeleteGroup'
 import Contact from '@/components/menuGroup/contact'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
+import { Tagmodal } from '@/layouts/layout'
+import { ModalAlert } from '../modalAlert'
 
 interface MenuInfoGroupProps {
   recipientGroup: RecipientGroup
   onClose: () => void
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+  openModal: boolean
+  setTagmodal: React.Dispatch<React.SetStateAction<Tagmodal | undefined>>
 }
 
 export const MenuInfoGroup = ({
   onClose,
   recipientGroup,
+  setOpenModal,
+  openModal,
+  setTagmodal,
 }: MenuInfoGroupProps) => {
   const { users } = useGetUsersAndFriends()
   const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {
     return users?.find((user) => user.id === groupUser.usuarioId)
   })
+  const handleClick = () => {
+    setTagmodal({
+      title: 'Adicionar membros',
+      subtitle: 'Adicione novos membros no grupo para interagir',
+    })
+    setOpenModal(true)
+  }
+
   return (
     <Flex vertical style={ConteinerMenuStyle}>
       <CloseCircleOutlined
@@ -64,12 +80,12 @@ export const MenuInfoGroup = ({
           vertical
           style={{
             width: '100%',
-            padding: '0 34px',
+            padding: '0 10px',
           }}
         >
           <div
             style={{
-              width: '80%',
+              width: '90%',
               textAlign: 'start',
             }}
           >
@@ -98,12 +114,20 @@ export const MenuInfoGroup = ({
           alignItems: 'center',
           gap: '8px',
           width: '100%',
-          padding: '0 34px',
+          padding: '0 18px',
         }}
       >
         <SilenceNotifications />
-        <ButtonAddMember tagButton="Adicionar membros" />
-        <ButtonRemoveMember tagButton="Remover membros" />
+        <ButtonAddMember
+          openmodal={openModal}
+          tagButton="Adicionar membros"
+          onClick={handleClick}
+        />
+        <ButtonRemoveMember
+          setTagmodal={setTagmodal}
+          setOpenModal={setOpenModal}
+          tagButton="Remover membros"
+        />
         <ButtonDeleteGroup />
       </Flex>
     </Flex>

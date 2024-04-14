@@ -1,3 +1,4 @@
+import { FriendsPostProps } from '@/components/menuInfo/components/modalAlert'
 import { api } from '@/lib/api'
 import { GroupMessage } from '@/model/GroupMessageModel'
 import { Group, GroupResponse } from '@/model/GroupModel'
@@ -211,6 +212,47 @@ async function sendNewGroupMessage({ mensagem, groupId }: GroupMessage) {
   }
 }
 
+async function newFriendGroup(
+  groupId: string | undefined,
+  members: FriendsPostProps[],
+) {
+  try {
+    const token = Cookies.get('token')
+    console.log(members)
+    const response = await api.post('/groups/add-members', members, {
+      params: {
+        groupId,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response
+  } catch (error) {
+    console.error('Algo saiu mal na requisição:', error)
+  }
+}
+async function remMembersGroup(
+  groupId: string | undefined,
+  members: FriendsPostProps[],
+) {
+  try {
+    const token = Cookies.get('token')
+    console.log(members)
+    const response = await api.post('/groups/remove-members', members, {
+      params: {
+        groupId,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return response
+  } catch (error) {
+    console.error('Algo saiu mal na requisição:', error)
+  }
+}
+
 export const apiFunction = {
   getUser,
   getMyProfileInfo,
@@ -221,4 +263,6 @@ export const apiFunction = {
   createGroup,
   getUserGroups,
   sendNewGroupMessage,
+  newFriendGroup,
+  remMembersGroup,
 }

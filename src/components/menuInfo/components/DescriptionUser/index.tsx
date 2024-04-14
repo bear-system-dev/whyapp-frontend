@@ -13,7 +13,7 @@ export const DescriptionUsers = () => {
     >
       <div
         style={{
-          width: '80%',
+          width: '98%',
           textAlign: 'start',
         }}
       >

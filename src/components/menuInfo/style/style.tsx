@@ -9,7 +9,7 @@ export const menuConteiner: React.CSSProperties = {
   right: '0',
   bottom: '0',
   width: '360px',
-  zIndex: 1,
+  zIndex: 2,
 }
 export const ImageProfileStyle: React.CSSProperties = {
   margin: '12px 0',
@@ -43,7 +43,7 @@ export const descriptionStyle: React.CSSProperties = {
   color: 'white',
   fontSize: '.8rem',
   padding: '8px 16px',
-  width: '80%',
+  width: '98%',
 }
 export const SilenceNotificationsStyle: React.CSSProperties = {
   cursor: 'pointer',
@@ -89,7 +89,7 @@ export const buttonRemoveStyle: React.CSSProperties = {
   color: 'white',
   border: 'none',
   padding: '10px 58px',
-  minWidth: '260px',
+  minWidth: '100%',
   display: 'flex',
   justifyContent: 'center',
   marginTop: '20px',

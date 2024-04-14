@@ -27,7 +27,7 @@ const searchInputBarStyles: React.CSSProperties = {
   gap: '20px',
   alignItems: 'center',
 }
-const newChatButtonStyle: React.CSSProperties = {
+export const newChatButtonStyle: React.CSSProperties = {
   background: 'transparent',
   border: 'none',
   color: '#E6E6E6',
