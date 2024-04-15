@@ -186,7 +186,7 @@ async function getUserGroups(): Promise<GroupResponse[]> {
   }
 }
 
-async function sendNewGroupMessage({ mensagem, groupId }: GroupMessage) {
+async function sendNewGroupMessage({ mensagem, grupoId }: GroupMessage) {
   try {
     const usuarioId = Cookies.get('userId')
     const token = Cookies.get('token')
@@ -195,7 +195,7 @@ async function sendNewGroupMessage({ mensagem, groupId }: GroupMessage) {
       'group-messages',
       {
         mensagem,
-        groupId,
+        grupoId,
         usuarioId,
       },
       {
@@ -211,6 +211,25 @@ async function sendNewGroupMessage({ mensagem, groupId }: GroupMessage) {
   }
 }
 
+async function getGroupMessage({ grupoId }: GroupMessage) {
+  try {
+    const token = Cookies.get('token')
+
+    const response = await api.get(`group-messages/${grupoId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        limit: 999,
+      },
+    })
+
+    return response.data.data
+  } catch (error) {
+    console.error('Algo saiu mal na requisição:', error)
+  }
+}
+
 export const apiFunction = {
   getUser,
   getMyProfileInfo,
@@ -221,4 +240,5 @@ export const apiFunction = {
   createGroup,
   getUserGroups,
   sendNewGroupMessage,
+  getGroupMessage,
 }
