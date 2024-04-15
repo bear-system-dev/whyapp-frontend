@@ -26,15 +26,18 @@ export const useGroupChatSocket = () => {
   })
 
   useEffect(() => {
+    if (groupMessagesData) {
+      setGroupMessages(groupMessagesData)
+    }
+  }, [groupMessagesData])
+
+  useEffect(() => {
     if (userId && recipientGroupId) {
       const newSocket = io(URL)
 
       newSocket.on('connect', () => {
         if (recipientGroupId) {
           newSocket.emit('join group', recipientGroupId)
-          if (groupMessagesData) {
-            setGroupMessages(groupMessagesData)
-          }
         }
       })
 
@@ -58,7 +61,7 @@ export const useGroupChatSocket = () => {
 
       setSocket(newSocket)
     }
-  }, [groupMessagesData])
+  }, [recipientGroupId])
 
   return {
     recipientGroupId,
