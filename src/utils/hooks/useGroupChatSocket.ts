@@ -73,10 +73,6 @@ export const useGroupChatSocket = () => {
       })
 
       setSocket(newSocket)
-
-      return () => {
-        newSocket.disconnect()
-      }
     }
   }, [recipientGroup, recipientGroupId, groupMessagesData])
 
