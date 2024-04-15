@@ -1,23 +1,22 @@
+import Contact from '@/components/menuGroup/contact'
 import ImageProfile from '@/components/profile/imageProfile'
+import { RecipientGroup } from '@/model/RecipientModel'
+import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
 import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
+import { Tagmodal } from '../..'
 import {
   ConteinerMenuStyle,
   ImageProfileStyle,
   LabelStyle,
   stutusProfileStyle,
 } from '../../style/style'
+import { ButtonAddMember } from '../ButtonAddMember'
+import { ButtonDeleteGroup } from '../ButtonDeleteGroup'
+import { ButtonRemoveMember } from '../ButtonRemoveMember'
 import { DescriptionUsers } from '../DescriptionUser'
 import NameProfile from '../NameProfile'
 import { SilenceNotifications } from '../silenceNotification'
-import { RecipientGroup } from '@/model/RecipientModel'
-import { ButtonAddMember } from '../ButtonAddMember'
-import { ButtonRemoveMember } from '../ButtonRemoveMember'
-import { ButtonDeleteGroup } from '../ButtonDeleteGroup'
-import Contact from '@/components/menuGroup/contact'
-import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
-import { Tagmodal } from '@/layouts/layout'
-import { ModalAlert } from '../modalAlert'
 
 interface MenuInfoGroupProps {
   recipientGroup: RecipientGroup
@@ -31,7 +30,6 @@ export const MenuInfoGroup = ({
   onClose,
   recipientGroup,
   setOpenModal,
-  openModal,
   setTagmodal,
 }: MenuInfoGroupProps) => {
   const { users } = useGetUsersAndFriends()
@@ -75,7 +73,7 @@ export const MenuInfoGroup = ({
         </Flex>
       </Flex>
       <Flex vertical justify="center" align="center" style={{ gap: '30px' }}>
-        <DescriptionUsers />
+        <DescriptionUsers description={recipientGroup.descricao} />
         <Flex
           vertical
           style={{
@@ -118,16 +116,8 @@ export const MenuInfoGroup = ({
         }}
       >
         <SilenceNotifications />
-        <ButtonAddMember
-          openmodal={openModal}
-          tagButton="Adicionar membros"
-          onClick={handleClick}
-        />
-        <ButtonRemoveMember
-          setTagmodal={setTagmodal}
-          setOpenModal={setOpenModal}
-          tagButton="Remover membros"
-        />
+        <ButtonAddMember tagButton="Adicionar membros" onClick={handleClick} />
+        <ButtonRemoveMember tagButton="Remover membros" />
         <ButtonDeleteGroup />
       </Flex>
     </Flex>
