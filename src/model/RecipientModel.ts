@@ -22,7 +22,7 @@ export interface RecipientGroup {
   usuarios?: {
     adicionadoPor?: string
     entrouEm?: string
-    grupoId?: string[]
+    grupoId?: string | string[]
     usuarioId?: string
   }[]
   videos?: []

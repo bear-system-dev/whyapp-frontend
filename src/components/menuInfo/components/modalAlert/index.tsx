@@ -31,9 +31,7 @@ export type FriendsPostProps = {
 type ModalAlertProps = {
   title: string | undefined
   subtitle: string | undefined
-  openModal: boolean
   children: React.ReactNode
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
   setMembers: React.Dispatch<React.SetStateAction<FriendsPostProps[]>>
   members: FriendsPostProps[]
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -43,8 +41,6 @@ type ModalAlertProps = {
 export const ModalAlert = ({
   title,
   subtitle,
-  openModal,
-  setOpenModal,
   children,
   setMembers,
   members,
@@ -81,78 +77,75 @@ export const ModalAlert = ({
   const handleCancel = () => {
     setIsModalOpen(false)
   }
-
   return (
     <>
-      {openModal && (
-        <Modal
-          className="ant-modal-content"
-          closable={false}
-          getContainer={document.body}
-          style={modalConteinerStyle}
-          open={isModalOpen}
-          onCancel={handleCancel}
-        >
-          <Flex vertical align="center" style={modalConteinerStyle}>
-            <Flex vertical style={headerModalStyle}>
-              <Flex justify="space-between">
-                <Flex vertical>
-                  <p style={titleModalStyle}>{title}</p>
-                  <p style={subtitleModalStyle}>{subtitle}</p>
-                </Flex>
-                <CloseCircleOutlined
-                  onClick={() => setOpenModal(false)}
-                  style={{
-                    fontSize: '1.5rem',
-                    color: 'whitesmoke',
-                    cursor: 'pointer',
-                  }}
-                />
+      <Modal
+        className="ant-modal-content"
+        closable={false}
+        getContainer={document.body}
+        style={modalConteinerStyle}
+        open={isModalOpen}
+        onCancel={handleCancel}
+      >
+        <Flex vertical align="center" style={modalConteinerStyle}>
+          <Flex vertical style={headerModalStyle}>
+            <Flex justify="space-between">
+              <Flex vertical>
+                <p style={titleModalStyle}>{title}</p>
+                <p style={subtitleModalStyle}>{subtitle}</p>
               </Flex>
-              <input style={inputStyle} />
+              <CloseCircleOutlined
+                onClick={() => setIsModalOpen(false)}
+                style={{
+                  fontSize: '1.5rem',
+                  color: 'whitesmoke',
+                  cursor: 'pointer',
+                }}
+              />
             </Flex>
-            <Flex vertical style={usersConteinerStyle}>
-              {groupUsers &&
-                friendsList?.map((friend) => (
-                  <div key={friend.id} className="userCardStyle">
-                    <UserCard
-                      name={friend.nome}
-                      image={friend.avatar}
-                      onClick={() => console.log('clicado')}
-                    />
-                    {selectedFriends[friend.id] ? (
-                      <Button
-                        style={newChatButtonStyle}
-                        className="newChatButtonStyle"
-                        ref={buttonRef}
-                        shape="circle"
-                        icon={<MinusOutlined />}
-                        typeof="primary"
-                        onClick={() => targetFriend(friend)}
-                      />
-                    ) : (
-                      <Button
-                        style={newChatButtonStyle}
-                        className="newChatButtonStyle"
-                        shape="circle"
-                        ref={buttonRef}
-                        icon={<PlusOutlined />}
-                        typeof="primary"
-                        onClick={() => targetFriend(friend)}
-                      />
-                    )}
-                  </div>
-                ))}
-            </Flex>
-            <Flex style={conteinerButtonModal} justify="space-around">
-              <button className="remModalButton" style={remModalButton}>
-                Cancelar
-              </button>
-              {children}
-            </Flex>
+            <input style={inputStyle} />
           </Flex>
-        </Modal>
-      )}
+          <Flex vertical style={usersConteinerStyle}>
+            {groupUsers &&
+              friendsList?.map((friend) => (
+                <div key={friend.id} className="userCardStyle">
+                  <UserCard
+                    name={friend.nome}
+                    image={friend.avatar}
+                    onClick={() => console.log('clicado')}
+                  />
+                  {selectedFriends[friend.id] ? (
+                    <Button
+                      style={newChatButtonStyle}
+                      className="newChatButtonStyle"
+                      ref={buttonRef}
+                      shape="circle"
+                      icon={<MinusOutlined />}
+                      typeof="primary"
+                      onClick={() => targetFriend(friend)}
+                    />
+                  ) : (
+                    <Button
+                      style={newChatButtonStyle}
+                      className="newChatButtonStyle"
+                      shape="circle"
+                      ref={buttonRef}
+                      icon={<PlusOutlined />}
+                      typeof="primary"
+                      onClick={() => targetFriend(friend)}
+                    />
+                  )}
+                </div>
+              ))}
+          </Flex>
+          <Flex style={conteinerButtonModal} justify="space-around">
+            <button className="remModalButton" style={remModalButton}>
+              Cancelar
+            </button>
+            {children}
+          </Flex>
+        </Flex>
+      </Modal>
     </>
   )
 }

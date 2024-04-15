@@ -16,34 +16,51 @@ import { ButtonRemoveMember } from '../ButtonRemoveMember'
 import { ButtonDeleteGroup } from '../ButtonDeleteGroup'
 import Contact from '@/components/menuGroup/contact'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
-import { Tagmodal } from '@/layouts/layout'
-import { ModalAlert } from '../modalAlert'
+import { Tagmodal } from '../..'
 
 interface MenuInfoGroupProps {
   recipientGroup: RecipientGroup
   onClose: () => void
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
   openModal: boolean
-  setTagmodal: React.Dispatch<React.SetStateAction<Tagmodal | undefined>>
+  setTagModal: React.Dispatch<React.SetStateAction<Tagmodal | undefined>>
+  setprofileInfoMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const MenuInfoGroup = ({
   onClose,
   recipientGroup,
   setOpenModal,
-  openModal,
-  setTagmodal,
+  setTagModal,
+  setprofileInfoMenuOpen,
+  setIsModalOpen,
 }: MenuInfoGroupProps) => {
   const { users } = useGetUsersAndFriends()
   const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {
     return users?.find((user) => user.id === groupUser.usuarioId)
   })
-  const handleClick = () => {
-    setTagmodal({
+  const showModal = () => {
+    setIsModalOpen(true)
+  }
+  const handleremClick = () => {
+    setTagModal({
+      title: 'Remover membros',
+      subtitle: 'Remova membros do grupos',
+    })
+    setOpenModal(true)
+    setprofileInfoMenuOpen(false)
+    showModal()
+  }
+
+  const handleAddClick = () => {
+    setTagModal({
       title: 'Adicionar membros',
       subtitle: 'Adicione novos membros no grupo para interagir',
     })
     setOpenModal(true)
+    setprofileInfoMenuOpen(false)
+    showModal()
   }
 
   return (
@@ -75,7 +92,7 @@ export const MenuInfoGroup = ({
         </Flex>
       </Flex>
       <Flex vertical justify="center" align="center" style={{ gap: '30px' }}>
-        <DescriptionUsers />
+        <DescriptionUsers description={recipientGroup?.descricao} />
         <Flex
           vertical
           style={{
@@ -119,13 +136,11 @@ export const MenuInfoGroup = ({
       >
         <SilenceNotifications />
         <ButtonAddMember
-          openmodal={openModal}
+          onClick={handleAddClick}
           tagButton="Adicionar membros"
-          onClick={handleClick}
         />
         <ButtonRemoveMember
-          setTagmodal={setTagmodal}
-          setOpenModal={setOpenModal}
+          onClick={handleremClick}
           tagButton="Remover membros"
         />
         <ButtonDeleteGroup />
