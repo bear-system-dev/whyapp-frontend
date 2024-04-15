@@ -41,7 +41,7 @@ export const useGroupChatSocket = () => {
       const newSocket = io(URL, {
         query: {
           userId,
-          recipientGroupId,
+          groupId: recipientGroupId,
         },
       })
 
