@@ -1,3 +1,4 @@
+import { GroupMessage } from '@/model/GroupMessageModel'
 import { Message } from '@/model/MessageModel'
 import { Recipient, RecipientGroup } from '@/model/RecipientModel'
 import { ReactNode, useState } from 'react'
@@ -9,6 +10,7 @@ interface ChatProviderProps {
 
 export const ChatProvider = ({ children }: ChatProviderProps) => {
   const [messages, setMessages] = useState<Message[]>([])
+  const [groupMessages, setGroupMessages] = useState<GroupMessage[]>([])
   const [recipient, setRecipient] = useState<Recipient | null>(null)
   const [recipientGroup, setRecipientGroup] = useState<RecipientGroup | null>(
     null,
@@ -19,6 +21,8 @@ export const ChatProvider = ({ children }: ChatProviderProps) => {
       value={{
         messages,
         setMessages,
+        groupMessages,
+        setGroupMessages,
         recipient,
         setRecipient,
         recipientGroup,
