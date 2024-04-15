@@ -2,6 +2,7 @@ export interface Recipient {
   id: string
   nome?: string
   avatar?: string
+  descricao?: string
 }
 
 export interface RecipientGroup {
@@ -21,7 +22,7 @@ export interface RecipientGroup {
   usuarios?: {
     adicionadoPor?: string
     entrouEm?: string
-    grupoId?: string
+    grupoId?: string[]
     usuarioId?: string
   }[]
   videos?: []
