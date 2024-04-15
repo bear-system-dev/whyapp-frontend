@@ -38,12 +38,7 @@ export const useGroupChatSocket = () => {
 
   useEffect(() => {
     if (userId && recipientGroupId) {
-      const newSocket = io(URL, {
-        query: {
-          userId,
-          groupId: recipientGroupId,
-        },
-      })
+      const newSocket = io(URL)
 
       newSocket.on('connect', () => {
         if (recipientGroupId) {
