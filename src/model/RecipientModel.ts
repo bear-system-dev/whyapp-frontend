@@ -2,6 +2,7 @@ export interface Recipient {
   id: string
   nome?: string
   avatar?: string
+  descricao?: string
 }
 
 export interface RecipientGroup {

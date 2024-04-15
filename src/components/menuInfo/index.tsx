@@ -118,7 +118,7 @@ const MenuInfo = ({
                 </div>
               </Flex>
             </Flex>
-            <DescriptionUsers />
+            <DescriptionUsers description={recipient.descricao} />
             <Flex
               vertical
               align="center"
@@ -172,7 +172,7 @@ const MenuInfo = ({
               align="center"
               style={{ gap: '30px' }}
             >
-              <DescriptionUsers />
+              <DescriptionUsers description={recipientGroup?.descricao} />
               <Flex
                 vertical
                 style={{

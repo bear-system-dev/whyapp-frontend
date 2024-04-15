@@ -1,6 +1,10 @@
 import { LabelStyle, descriptionStyle } from '../../style/style'
 
-export const DescriptionUsers = () => {
+export const DescriptionUsers = ({
+  description,
+}: {
+  description: string | undefined
+}) => {
   return (
     <div
       style={{
@@ -19,10 +23,7 @@ export const DescriptionUsers = () => {
       >
         <p style={LabelStyle}>Descrição</p>
       </div>
-      <p style={descriptionStyle}>
-        Tá pegando fogo bixo, manda pix ai rapidao pra eu testar um negócio aqui
-        ...
-      </p>
+      <p style={descriptionStyle}>{description}</p>
     </div>
   )
 }
