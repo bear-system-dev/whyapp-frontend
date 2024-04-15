@@ -1,7 +1,6 @@
 import BubbleChat from '@/components/bubblechat'
 import { ChatContext } from '@/contexts/chatContext'
 import { SearchContext } from '@/contexts/searchContext'
-import { Message } from '@/model/MessageModel'
 import {
   getLocalActiveIndex,
   getMatchCounts,
@@ -16,16 +15,15 @@ import './styles.css'
 
 export const Chat = () => {
   const [tokenExpired, setTokenExpired] = useState(false)
-  const { recipient, recipientGroup, messages, setMessages } =
-    useContext(ChatContext)
-  const { chatId, userId, socket } = useChatSocket()
+  const { recipient, messages, groupMessages } = useContext(ChatContext)
+  const { userId } = useChatSocket()
   const { recipientGroupId } = useGroupChatSocket()
 
   const endOfMessagesRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'auto' })
-  }, [messages])
+  }, [messages, groupMessages])
 
   const { searchTerm, activeIndex } = useContext(SearchContext)
 
@@ -41,49 +39,6 @@ export const Chat = () => {
 
     return () => clearInterval(checkTokenInterval)
   }, [])
-
-  useEffect(() => {
-    if (recipientGroup) {
-      setMessages([])
-
-      socket?.emit('join group', recipientGroupId)
-
-      socket?.on('newGroupMessage', (message) => {
-        setMessages((previousMessages) => [...previousMessages, message])
-        console.log(message)
-      })
-
-      socket?.on('error', (data: { mensagem: string }) => {
-        console.log(data)
-      })
-    }
-  }, [socket])
-
-  useEffect(() => {
-    const onMessages = (messages: Message[]) => {
-      setMessages(messages)
-    }
-
-    const onNewMessage = (message: Message) => {
-      setMessages((previousMessages) => [...previousMessages, message])
-    }
-
-    if (recipient) {
-      setMessages([])
-
-      socket?.emit('join private', chatId)
-      socket?.emit('getMessages', chatId)
-
-      socket?.on('messages', onMessages)
-      socket?.on('newMessage', onNewMessage)
-    }
-
-    return () => {
-      if (recipient) {
-        socket?.off('newMessage', onNewMessage)
-      }
-    }
-  }, [socket])
 
   return (
     <>
@@ -102,44 +57,86 @@ export const Chat = () => {
           }}
         />
       )}
-      {messages.flat().map((chat, index) => {
-        const localActiveIndex = getLocalActiveIndex(
-          activeIndex,
-          matchCounts,
-          index,
-        )
-        return (
-          <Flex
-            key={index}
-            style={{
-              alignSelf: chat.fromUserId === userId ? 'end' : 'start',
-            }}
-          >
-            <BubbleChat
-              mensagem={chat.mensagem}
-              createdAt={chat.createdAt}
-              fromUserId={chat.fromUserId}
+      {recipient &&
+        messages.flat().map((chat, index) => {
+          const localActiveIndex = getLocalActiveIndex(
+            activeIndex,
+            matchCounts,
+            index,
+          )
+          return (
+            <Flex
+              key={index}
+              style={{
+                alignSelf: chat.fromUserId === userId ? 'end' : 'start',
+              }}
             >
-              <Highlighter
-                style={{
-                  color: '#FFFFFF',
-                  paddingRight: '1.5rem',
-                  maxWidth: '16rem',
-                  fontSize: '1rem',
-                  lineHeight: 1.5,
-                  margin: '0px',
-                }}
-                activeClassName="Active"
-                activeIndex={localActiveIndex}
-                autoEscape={true}
-                highlightClassName="Highlight"
-                searchWords={[searchTerm]}
-                textToHighlight={chat.mensagem || ''}
-              />
-            </BubbleChat>
-          </Flex>
-        )
-      })}
+              <BubbleChat
+                mensagem={chat.mensagem}
+                createdAt={chat.createdAt}
+                fromUserId={chat.fromUserId}
+              >
+                <Highlighter
+                  style={{
+                    color: '#FFFFFF',
+                    paddingRight: '1.5rem',
+                    maxWidth: '16rem',
+                    fontSize: '1rem',
+                    lineHeight: 1.5,
+                    margin: '0px',
+                  }}
+                  activeClassName="Active"
+                  activeIndex={localActiveIndex}
+                  autoEscape={true}
+                  highlightClassName="Highlight"
+                  searchWords={[searchTerm]}
+                  textToHighlight={chat.mensagem || ''}
+                />
+              </BubbleChat>
+            </Flex>
+          )
+        })}
+
+      {recipientGroupId &&
+        groupMessages?.map((chat, index) => {
+          const localActiveIndex = getLocalActiveIndex(
+            activeIndex,
+            matchCounts,
+            index,
+          )
+          return (
+            <Flex
+              key={index}
+              style={{
+                alignSelf: chat.usuarioId === userId ? 'end' : 'start',
+              }}
+            >
+              <BubbleChat
+                mensagem={chat.mensagem || ''}
+                createdAt={chat.createdAt}
+                fromUserId={chat.usuarioId}
+              >
+                <Highlighter
+                  style={{
+                    color: '#FFFFFF',
+                    paddingRight: '1.5rem',
+                    maxWidth: '16rem',
+                    fontSize: '1rem',
+                    lineHeight: 1.5,
+                    margin: '0px',
+                  }}
+                  activeClassName="Active"
+                  activeIndex={localActiveIndex}
+                  autoEscape={true}
+                  highlightClassName="Highlight"
+                  searchWords={[searchTerm]}
+                  textToHighlight={chat.mensagem || ''}
+                />
+              </BubbleChat>
+            </Flex>
+          )
+        })}
+
       <div ref={endOfMessagesRef} />
     </>
   )
