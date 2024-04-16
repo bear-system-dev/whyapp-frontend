@@ -17,7 +17,6 @@ import { ButtonDeleteGroup } from '../ButtonDeleteGroup'
 import Contact from '@/components/menuGroup/contact'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
 import { Tagmodal } from '../..'
-
 interface MenuInfoGroupProps {
   recipientGroup: RecipientGroup
   onClose: () => void

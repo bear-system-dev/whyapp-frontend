@@ -1,6 +1,6 @@
 import { ChatContext } from '@/contexts/chatContext'
-import { Drawer } from 'antd'
-import { useContext, useEffect, useState } from 'react'
+import { Drawer, notification } from 'antd'
+import React, { useContext, useEffect, useState } from 'react'
 import { menuConteiner } from './style/style.tsx'
 import { FriendsPostProps, ModalAlert } from './components/modalAlert/index.tsx'
 import { AddModalButton } from './components/modalAlert/style/style.tsx'
@@ -35,17 +35,38 @@ const MenuInfo = ({
   const [tagModal, setTagModal] = useState<Tagmodal>()
   const addMemberMutation = AddMemberMutation()
   const remMemberMutation = RemMemberMutation()
+  const openNotification = ({
+    title,
+    subtitle,
+  }: {
+    title: string
+    subtitle: string
+  }) => {
+    notification.config({
+      duration: 3,
+    })
+    notification.open({
+      message: title,
+      description: subtitle,
+    })
+  }
+
   useEffect(() => {
-    let timeoutId: number
-
     if (addMemberMutation.isSuccess) {
-      timeoutId = setTimeout(() => {
-        setIsModalOpen(false)
-      }, 3000)
-
-      return () => clearTimeout(timeoutId)
+      setIsModalOpen(!isModalOpen)
+      openNotification({
+        title: 'Adicionados',
+        subtitle: 'Membros foram adicionados ao grupo',
+      })
     }
-  }, [addMemberMutation.isSuccess, setIsModalOpen])
+    if (remMemberMutation.isSuccess) {
+      setIsModalOpen(!isModalOpen)
+      openNotification({
+        title: 'Removidos',
+        subtitle: 'Membros foram removidos do grupo',
+      })
+    }
+  }, [addMemberMutation.isSuccess, remMemberMutation.isSuccess])
 
   return (
     <>
@@ -74,48 +95,6 @@ const MenuInfo = ({
         )}
       </Drawer>
 
-      {addMemberMutation.isSuccess && (
-        <>
-          <p
-            style={{
-              color: 'white',
-              fontSize: '1.1rem',
-              width: 'max-content',
-              position: 'absolute',
-              top: '70px',
-              zIndex: 100,
-              right: '10px',
-              padding: '10px',
-              backgroundColor: '#434455',
-              borderRadius: '8px',
-              fontWeight: '700',
-            }}
-          >
-            Membros adicionados com sucesso
-          </p>
-        </>
-      )}
-      {remMemberMutation.isSuccess && (
-        <>
-          <p
-            style={{
-              color: 'white',
-              fontSize: '1.1rem',
-              width: 'max-content',
-              position: 'absolute',
-              top: '70px',
-              zIndex: 100,
-              right: '10px',
-              padding: '10px',
-              backgroundColor: '#434455',
-              borderRadius: '8px',
-              fontWeight: '700',
-            }}
-          >
-            Membros removidos com sucesso
-          </p>
-        </>
-      )}
       {tagModal?.title === 'Adicionar membros' ? (
         <ModalAlert
           isModalOpen={isModalOpen}
