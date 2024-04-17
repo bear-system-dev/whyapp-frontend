@@ -22,6 +22,7 @@ import { User } from '@/model/UserModel'
 import Cookies from 'js-cookie'
 import { ChatContext } from '@/contexts/chatContext'
 import { newChatButtonStyle } from '@/components/NewChat/components/FindUser'
+import { Tagmodal } from '../..'
 
 export type FriendsPostProps = {
   adicionadoPor: string | undefined
@@ -36,6 +37,7 @@ type ModalAlertProps = {
   members: FriendsPostProps[]
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   isModalOpen: boolean
+  tagModal: Tagmodal | undefined
 }
 
 export const ModalAlert = ({
@@ -43,9 +45,9 @@ export const ModalAlert = ({
   subtitle,
   children,
   setMembers,
-  members,
   isModalOpen,
   setIsModalOpen,
+  tagModal,
 }: ModalAlertProps) => {
   const { recipientGroup } = useContext(ChatContext)
   const userId = Cookies.get('userId')
@@ -61,7 +63,6 @@ export const ModalAlert = ({
       usuarioId: friend.id,
     }
     setMembers((prevfriend) => [...prevfriend, request])
-    console.log(members)
     setSelectedFriends((prevSelected) => ({
       ...prevSelected,
       [friend.id]: true,
@@ -73,7 +74,6 @@ export const ModalAlert = ({
   const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {
     return users?.find((user) => user.id === groupUser.usuarioId)
   })
-
   const handleCancel = () => {
     setIsModalOpen(false)
   }
@@ -106,37 +106,73 @@ export const ModalAlert = ({
             <input style={inputStyle} />
           </Flex>
           <Flex vertical style={usersConteinerStyle}>
-            {groupUsers &&
-              friendsList?.map((friend) => (
-                <div key={friend.id} className="userCardStyle">
-                  <UserCard
-                    name={friend.nome}
-                    image={friend.avatar}
-                    onClick={() => console.log('clicado')}
-                  />
-                  {selectedFriends[friend.id] ? (
-                    <Button
-                      style={newChatButtonStyle}
-                      className="newChatButtonStyle"
-                      ref={buttonRef}
-                      shape="circle"
-                      icon={<MinusOutlined />}
-                      typeof="primary"
-                      onClick={() => targetFriend(friend)}
-                    />
-                  ) : (
-                    <Button
-                      style={newChatButtonStyle}
-                      className="newChatButtonStyle"
-                      shape="circle"
-                      ref={buttonRef}
-                      icon={<PlusOutlined />}
-                      typeof="primary"
-                      onClick={() => targetFriend(friend)}
-                    />
-                  )}
-                </div>
-              ))}
+            {tagModal?.title === 'Adicionar membros'
+              ? friendsList?.map(
+                  (friend) =>
+                    !groupUsers?.some((member) => member?.id === friend.id) && (
+                      <div key={friend.id} className="userCardStyle">
+                        <UserCard
+                          name={friend.nome}
+                          image={friend.avatar}
+                          onClick={() => console.log('clicado')}
+                        />
+                        {selectedFriends[friend.id] ? (
+                          <Button
+                            style={newChatButtonStyle}
+                            className="newChatButtonStyle"
+                            ref={buttonRef}
+                            shape="circle"
+                            icon={<MinusOutlined />}
+                            typeof="primary"
+                            onClick={() => targetFriend(friend)}
+                          />
+                        ) : (
+                          <Button
+                            style={newChatButtonStyle}
+                            className="newChatButtonStyle"
+                            shape="circle"
+                            ref={buttonRef}
+                            icon={<PlusOutlined />}
+                            typeof="primary"
+                            onClick={() => targetFriend(friend)}
+                          />
+                        )}
+                      </div>
+                    ),
+                )
+              : friendsList?.map(
+                  (friend) =>
+                    groupUsers?.some((member) => member?.id === friend.id) && (
+                      <div key={friend.id} className="userCardStyle">
+                        <UserCard
+                          name={friend.nome}
+                          image={friend.avatar}
+                          onClick={() => console.log('clicado')}
+                        />
+                        {selectedFriends[friend.id] ? (
+                          <Button
+                            style={newChatButtonStyle}
+                            className="newChatButtonStyle"
+                            ref={buttonRef}
+                            shape="circle"
+                            icon={<MinusOutlined />}
+                            typeof="primary"
+                            onClick={() => targetFriend(friend)}
+                          />
+                        ) : (
+                          <Button
+                            style={newChatButtonStyle}
+                            className="newChatButtonStyle"
+                            shape="circle"
+                            ref={buttonRef}
+                            icon={<PlusOutlined />}
+                            typeof="primary"
+                            onClick={() => targetFriend(friend)}
+                          />
+                        )}
+                      </div>
+                    ),
+                )}
           </Flex>
           <Flex style={conteinerButtonModal} justify="space-around">
             <button className="remModalButton" style={remModalButton}>

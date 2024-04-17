@@ -97,6 +97,7 @@ const MenuInfo = ({
 
       {tagModal?.title === 'Adicionar membros' ? (
         <ModalAlert
+          tagModal={tagModal}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           members={members}
@@ -119,6 +120,7 @@ const MenuInfo = ({
         </ModalAlert>
       ) : (
         <ModalAlert
+          tagModal={tagModal}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           members={members}
