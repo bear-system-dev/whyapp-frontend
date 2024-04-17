@@ -18,7 +18,6 @@ export const AddMemberMutation = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['members'] })
     },
-
     onError: (error) => {
       console.error('Algo saiu mal na requisição:', error)
     },
