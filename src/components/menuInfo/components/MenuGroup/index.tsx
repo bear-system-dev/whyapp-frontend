@@ -17,31 +17,49 @@ import { ButtonRemoveMember } from '../ButtonRemoveMember'
 import { DescriptionUsers } from '../DescriptionUser'
 import NameProfile from '../NameProfile'
 import { SilenceNotifications } from '../silenceNotification'
-
 interface MenuInfoGroupProps {
   recipientGroup: RecipientGroup
   onClose: () => void
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
   openModal: boolean
-  setTagmodal: React.Dispatch<React.SetStateAction<Tagmodal | undefined>>
+  setTagModal: React.Dispatch<React.SetStateAction<Tagmodal | undefined>>
+  setprofileInfoMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const MenuInfoGroup = ({
   onClose,
   recipientGroup,
   setOpenModal,
-  setTagmodal,
+  setTagModal,
+  setprofileInfoMenuOpen,
+  setIsModalOpen,
 }: MenuInfoGroupProps) => {
   const { users } = useGetUsersAndFriends()
   const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {
     return users?.find((user) => user.id === groupUser.usuarioId)
   })
-  const handleClick = () => {
-    setTagmodal({
+  const showModal = () => {
+    setIsModalOpen(true)
+  }
+  const handleremClick = () => {
+    setTagModal({
+      title: 'Remover membros',
+      subtitle: 'Remova membros do grupos',
+    })
+    setOpenModal(true)
+    setprofileInfoMenuOpen(false)
+    showModal()
+  }
+
+  const handleAddClick = () => {
+    setTagModal({
       title: 'Adicionar membros',
       subtitle: 'Adicione novos membros no grupo para interagir',
     })
     setOpenModal(true)
+    setprofileInfoMenuOpen(false)
+    showModal()
   }
 
   return (
@@ -73,7 +91,7 @@ export const MenuInfoGroup = ({
         </Flex>
       </Flex>
       <Flex vertical justify="center" align="center" style={{ gap: '30px' }}>
-        <DescriptionUsers description={recipientGroup.descricao} />
+        <DescriptionUsers description={recipientGroup?.descricao} />
         <Flex
           vertical
           style={{
@@ -116,8 +134,14 @@ export const MenuInfoGroup = ({
         }}
       >
         <SilenceNotifications />
-        <ButtonAddMember tagButton="Adicionar membros" onClick={handleClick} />
-        <ButtonRemoveMember tagButton="Remover membros" />
+        <ButtonAddMember
+          onClick={handleAddClick}
+          tagButton="Adicionar membros"
+        />
+        <ButtonRemoveMember
+          onClick={handleremClick}
+          tagButton="Remover membros"
+        />
         <ButtonDeleteGroup />
       </Flex>
     </Flex>

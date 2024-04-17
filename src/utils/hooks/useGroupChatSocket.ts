@@ -39,27 +39,31 @@ export const useGroupChatSocket = () => {
         if (recipientGroupId) {
           newSocket.emit('join group', recipientGroupId)
         }
-      })
 
-      newSocket.on('newGroupMessage', (newGroupMessage: GroupMessage) => {
-        setGroupMessages((previousGroupMessages) => {
-          const messageExists = previousGroupMessages.some(
-            (message) => message.id === newGroupMessage.id,
-          )
+        newSocket.on('newGroupMessage', (newGroupMessage: GroupMessage) => {
+          setGroupMessages((previousGroupMessages) => {
+            const messageExists = previousGroupMessages.some(
+              (message) => message.id === newGroupMessage.id,
+            )
 
-          if (messageExists) {
-            return previousGroupMessages
-          }
+            if (messageExists) {
+              return previousGroupMessages
+            }
 
-          return [...previousGroupMessages, newGroupMessage]
+            return [...previousGroupMessages, newGroupMessage]
+          })
+        })
+
+        newSocket.on('error', (data) => {
+          console.log(data)
         })
       })
 
-      newSocket.on('error', (data) => {
-        console.log(data)
-      })
-
       setSocket(newSocket)
+
+      return () => {
+        newSocket.disconnect()
+      }
     }
   }, [recipientGroupId])
 
