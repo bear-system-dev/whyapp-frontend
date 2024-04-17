@@ -21,11 +21,11 @@ const Login = () => {
         email: values.email,
         senha: values.password,
       })
-      const inTenMinutes = new Date(
+      const inSevenDays = new Date(
         new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
       )
-      Cookies.set('token', `${response.data.token}`, { expires: inTenMinutes })
-      Cookies.set('userId', response.data.userId)
+      Cookies.set('token', `${response.data.token}`, { expires: inSevenDays })
+      Cookies.set('userId', response.data.userId, { expires: inSevenDays })
       setAlert({
         message: 'Login feito com sucesso! Redirecionando para o app!',
         type: 'success',

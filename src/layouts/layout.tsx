@@ -6,6 +6,7 @@ import { MainAside } from '@/components/MainAside'
 import HeaderChat from '@/components/header'
 import MenuGroup from '@/components/menuGroup'
 import { Flex } from 'antd'
+import Cookies from 'js-cookie'
 import React, { useState } from 'react'
 
 const chatDoodleBackgroundStyle: React.CSSProperties = {
@@ -45,10 +46,16 @@ const layoutStyle: React.CSSProperties = {
 }
 
 export const AppLayout = () => {
+  const token = Cookies.get('token')
+  const userId = Cookies.get('userId')
+
+  if (!token || !userId) {
+    window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
+  }
+
   const [openModal, setOpenModal] = useState(false)
   return (
     <Flex style={layoutStyle}>
-      {/*  */}
       <Flex style={siderStyle}>
         <MainAside />
       </Flex>
