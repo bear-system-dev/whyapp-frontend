@@ -1,22 +1,29 @@
-.auth_description{
-  font-size: 15px;
+.auth__title {
+  font-size: 32px;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+
+.auth__description{
+  font-size: 1rem;
   color:#ffffffaf;
 }
+
 .label label {
   color: #fff !important;
   font-size: 15px !important;
   font-weight: 500;
 }
-.label_col {
+.label__col {
   padding: 0 !important;
 }
+
 .input {
   background: rgb(241, 241, 241);
   background: linear-gradient(90deg, rgba(241, 241, 241, 0.386) 0%, rgba(176, 176, 176, 0) 101%) !important;
-  color: #fff !important;
+  color: #fff;
   border: none !important;
 }
-
 .input::placeholder,
 .input input::placeholder,
 .input svg {
@@ -24,12 +31,12 @@
 }
 
 .submit{
-  background-color: #39FF14 !important;
+  background-color: rgb(57,255,20);
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 14px !important;
-  color: black !important;
-  border: none !important;
+  font-size: 14px;
+  color: #000;
+  border: none;
 }
 .submit:hover{
   background-color: #88ff74 !important;
