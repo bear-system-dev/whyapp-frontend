@@ -24,6 +24,7 @@
     "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
+    "@iconify/react": "^4.1.1",
     "@rocketseat/eslint-config": "^2.1.0",
     "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.2.54",

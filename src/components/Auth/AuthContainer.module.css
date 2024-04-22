@@ -7,7 +7,5 @@
   background: rgb(0, 0, 0);
   background: linear-gradient(150deg, rgba(0, 0, 0, 0.13) 0%, rgba(249, 249, 249, 0.146) 100%);
   border-radius: 10px;
-  box-sizing: border-box;
   color: #fff;
-
 }
