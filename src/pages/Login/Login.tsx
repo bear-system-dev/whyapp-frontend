@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 import { useState } from 'react'
 import Auth from '../../components/Auth/Auth'
 import { FormValues } from '../Register/Register'
-import styles from './Login.module.css'
+import styles from '../Auth.module.css'
 
 const Login = () => {
   const [form] = Form.useForm()
@@ -40,14 +40,14 @@ const Login = () => {
   }
 
   return (
-    <Flex vertical justify="center" gap={40} className={styles.login_container}>
+    <Flex vertical justify="center" gap={40} className={styles.auth_container}>
       <Flex
         style={{ minHeight: '200px' }}
         vertical
         justify="end"
         align="center"
       >
-        <div className={styles.login_logo}>
+        <div className={styles.auth_logo}>
           <img src={logo} alt="logo" />
         </div>
       </Flex>
@@ -70,8 +70,7 @@ const Login = () => {
           authWithApple={() => console.log('login with apple')}
         />
       </Flex>
-      <div className={styles.login_container_background_color}></div>
-      <div className={styles.login_container_background_image}></div>
+      <div className={styles.auth_container_background_color}></div>
     </Flex>
   )
 }
