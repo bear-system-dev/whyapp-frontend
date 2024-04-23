@@ -1,9 +1,9 @@
-*:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+*.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
   border: none;
   border-color: transparent;
   outline: none;
 }
-*:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-default:not(:disabled):not(.ant-btn-disabled):active {
+*.ant-btn-default:not(:disabled):not(.ant-btn-disabled):active {
   background: linear-gradient(to bottom right, #C9C9C94D, #C4C4C41A) padding-box, 
   linear-gradient(to bottom left, #FFFFFF4D, #D3D3D31A) border-box;
   border: none;
@@ -41,7 +41,7 @@
   transform: scale(1.1);
 }
 
-.emoji-button:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+.emoji-button.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
   background: transparent;
 }
 
@@ -92,7 +92,7 @@
   box-shadow: none;
 }
 
-.attach-button:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover {
+.attach-button.ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover {
   background: transparent;
 }
 
@@ -106,7 +106,7 @@
   transform: scale(1.1);
 }
 
-.send-button:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-lg.ant-btn-icon-only {
+.send-button.ant-btn-lg.ant-btn-icon-only {
   background: #454c56;
   transition: .2s;
   border: 2px solid #454c56;
@@ -118,7 +118,7 @@
 
 }
 
-.send-button:where(.css-dev-only-do-not-override-1rqnfsa).ant-btn-lg.ant-btn-icon-only:hover {
+.send-button.ant-btn-lg.ant-btn-icon-only:hover {
   background: #a7adb79b;
 }
 

@@ -29,7 +29,7 @@ export function InputBar() {
     if (recipientGroupId) {
       sendNewGroupMessageMutation.mutate({
         mensagem: inputValue,
-        groupId: recipientGroupId,
+        grupoId: recipientGroupId,
       })
     }
 

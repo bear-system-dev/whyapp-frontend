@@ -1,80 +1,146 @@
 import { ChatContext } from '@/contexts/chatContext'
-import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
-import { Drawer, Flex } from 'antd'
-import { useContext } from 'react'
-import ImageProfile from '../profile/imageProfile'
-import { DescriptionUsers } from './components/DescriptionUser/index.tsx'
-import NameProfile from './components/NameProfile'
-import { ButtonRemove } from './components/buttonremove/index.tsx'
-import { SilenceNotifications } from './components/silenceNotification/index.tsx'
+import { Drawer, notification } from 'antd'
+import React, { useContext, useEffect, useState } from 'react'
+import { menuConteiner } from './style/style.tsx'
+import { FriendsPostProps, ModalAlert } from './components/modalAlert/index.tsx'
+import { AddModalButton } from './components/modalAlert/style/style.tsx'
 import {
-  ConteinerMenuStyle,
-  ImageProfileStyle,
-  menuConteiner,
-  stutusProfileStyle,
-} from './style/style.tsx'
+  AddMemberMutation,
+  RemMemberMutation,
+} from '@/utils/hooks/useAddAndRemMemberGroup.ts'
+import { MenuInfoGroup } from './components/MenuGroup/index.tsx'
+import { MenuPrivateUSer } from './MenuPrivate/index.tsx'
 
 interface MenuInfoProps {
   open: boolean
   onClose: () => void
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+  openModal: boolean
+  setprofileInfoMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+export interface Tagmodal {
+  title: string
+  subtitle: string
 }
 
-const MenuInfo = ({ open, onClose }: MenuInfoProps) => {
-  const { recipient } = useContext(ChatContext)
+const MenuInfo = ({
+  openModal,
+  open,
+  onClose,
+  setprofileInfoMenuOpen,
+}: MenuInfoProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { recipientGroup, recipient } = useContext(ChatContext)
+  const [members, setMembers] = useState<FriendsPostProps[]>([])
+  const [tagModal, setTagModal] = useState<Tagmodal>()
+  const addMemberMutation = AddMemberMutation()
+  const remMemberMutation = RemMemberMutation()
+  const openNotification = ({
+    title,
+    subtitle,
+  }: {
+    title: string
+    subtitle: string
+  }) => {
+    notification.config({
+      duration: 3,
+    })
+    notification.open({
+      message: title,
+      description: subtitle,
+    })
+  }
+
+  useEffect(() => {
+    if (addMemberMutation.isSuccess) {
+      setIsModalOpen(!isModalOpen)
+      openNotification({
+        title: 'Adicionados',
+        subtitle: 'Membros foram adicionados ao grupo',
+      })
+    }
+    if (remMemberMutation.isSuccess) {
+      setIsModalOpen(!isModalOpen)
+      openNotification({
+        title: 'Removidos',
+        subtitle: 'Membros foram removidos do grupo',
+      })
+    }
+  }, [addMemberMutation.isSuccess, remMemberMutation.isSuccess])
 
   return (
-    <Drawer
-      className="ant-drawer-body"
-      placement="right"
-      closable={false}
-      onClose={onClose}
-      open={open}
-      getContainer={document.body}
-      style={menuConteiner}
-    >
-      {recipient && (
-        <Flex vertical style={ConteinerMenuStyle}>
-          <CloseCircleOutlined
-            onClick={onClose}
-            style={{
-              color: 'white',
-              position: 'fixed',
-              top: '10px',
-              left: '10px',
-              fontSize: '1.5rem',
-            }}
+    <>
+      <Drawer
+        className="ant-drawer-body"
+        placement="right"
+        closable={false}
+        onClose={onClose}
+        open={open}
+        getContainer={document.body}
+        style={menuConteiner}
+      >
+        {recipient && (
+          <MenuPrivateUSer recipient={recipient} onClose={onClose} />
+        )}
+        {recipientGroup && (
+          <MenuInfoGroup
+            recipientGroup={recipientGroup}
+            onClose={onClose}
+            setOpenModal={setIsModalOpen}
+            openModal={openModal}
+            setTagModal={setTagModal}
+            setprofileInfoMenuOpen={setprofileInfoMenuOpen}
+            setIsModalOpen={setIsModalOpen}
           />
-          <Flex vertical style={ImageProfileStyle}>
-            <ImageProfile
-              image={recipient.avatar}
-              key={recipient.id}
-              size="180px"
-            />
-            <Flex align="center" vertical>
-              <NameProfile>{recipient.nome}</NameProfile>
-              <div style={stutusProfileStyle}>
-                <UserOutlined style={{ color: 'white' }} />
-                <p style={{ color: 'white' }}>
-                  {recipient ? 'online' : 'offline'}
-                </p>
-              </div>
-            </Flex>
-          </Flex>
-          <Flex
-            vertical
-            align="center"
-            justify="space-between"
-            style={{
-              height: '320px',
-            }}
+        )}
+      </Drawer>
+
+      {tagModal?.title === 'Adicionar membros' ? (
+        <ModalAlert
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          members={members}
+          setMembers={setMembers}
+          subtitle={tagModal?.subtitle}
+          title={tagModal?.title}
+        >
+          <button
+            onClick={() =>
+              addMemberMutation.mutate({
+                groupId: recipientGroup?.id,
+                members,
+              })
+            }
+            className="addModalButton"
+            style={AddModalButton}
           >
-            <DescriptionUsers />
-            <SilenceNotifications />
-            <ButtonRemove onClose={onClose} />
-          </Flex>
-        </Flex>
+            Adicionar
+          </button>
+        </ModalAlert>
+      ) : (
+        <ModalAlert
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          members={members}
+          setMembers={setMembers}
+          subtitle={tagModal?.subtitle}
+          title={tagModal?.title}
+        >
+          <button
+            onClick={() => {
+              remMemberMutation.mutate({
+                groupId: recipientGroup?.id,
+                members,
+              })
+            }}
+            className="addModalButton"
+            style={AddModalButton}
+          >
+            Remover
+          </button>
+        </ModalAlert>
       )}
-    </Drawer>
+    </>
   )
 }
 export default MenuInfo
