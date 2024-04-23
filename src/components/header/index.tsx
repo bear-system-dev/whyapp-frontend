@@ -9,17 +9,10 @@ import ContactGroup from './components/contactsgroups'
 import HeaderContainer from './components/headerConteiner'
 import StatusContact from './components/statusgroups'
 
-interface HeaderProps {
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
-  openModal: boolean
-}
-
-const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
+const HeaderChat = () => {
   const { recipient, recipientGroup } = useContext(ChatContext)
   const [profileInfoMenuOpen, setprofileInfoMenuOpen] = useState(false)
-  const onCloseMenu = () => {
-    setprofileInfoMenuOpen(!profileInfoMenuOpen)
-  }
+
   return (
     <HeaderContainer>
       <Flex
@@ -78,11 +71,8 @@ const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
       </Flex>
 
       <MenuInfo
-        openModal={openModal}
-        setOpenModal={setOpenModal}
         open={profileInfoMenuOpen}
-        onClose={onCloseMenu}
-        setprofileInfoMenuOpen={setprofileInfoMenuOpen}
+        onClose={() => setprofileInfoMenuOpen(false)}
       />
     </HeaderContainer>
   )

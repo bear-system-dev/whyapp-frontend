@@ -15,7 +15,7 @@ const ForgotPassword = () => {
     setIsLoading(true)
     try {
       console.log(values.password)
-      // const response = await api.post('/auth/entrar', {
+      // const response = await api.post('auth/entrar', {
       //   email: values.email,
       //   senha: values.password,
       // })

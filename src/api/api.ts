@@ -1,4 +1,3 @@
-import { FriendsPostProps } from '@/components/menuInfo/components/modalAlert'
 import { api } from '@/lib/api'
 import { GroupMessage } from '@/model/GroupMessageModel'
 import { Group, GroupResponse } from '@/model/GroupModel'
@@ -16,7 +15,7 @@ async function getUser(): Promise<User[]> {
     if (!token) {
       console.log('não há token')
     }
-    const response = await api.get<User[]>('/user', {
+    const response = await api.get<User[]>('user', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -40,7 +39,7 @@ async function getMyProfileInfo(): Promise<User> {
       console.log('não há token')
     }
 
-    const response = await api.get<UserResponse>(`/user/${userId}`, {
+    const response = await api.get<UserResponse>(`user/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     return response.data.user
@@ -64,7 +63,7 @@ async function updateMyProfileInfo({
     }
 
     const response = await api.post<UserResponse>(
-      `/user/update/${userId}`,
+      `user/update/${userId}`,
       { avatar, nome, descricao },
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -81,7 +80,7 @@ async function updateMyPassword({ senha }: Partial<User>): Promise<User> {
   try {
     const userId = Cookies.get('userId')
 
-    const response = await api.post<UserResponse>(`/user/update/${userId}`, {
+    const response = await api.post<UserResponse>(`user/update/${userId}`, {
       senha,
     })
     return response.data.user
@@ -96,7 +95,7 @@ async function addFriend(userId: string, friendId: string) {
     const token = Cookies.get('token')
 
     const response = await api.post(
-      '/user/amigos',
+      'user/amigos',
       {},
       {
         params: {
@@ -119,7 +118,7 @@ async function removeFriend(userId: string, friendId: string) {
   try {
     const token = Cookies.get('token')
 
-    const response = await api.delete('/user/amigos', {
+    const response = await api.delete('user/amigos', {
       params: {
         userId,
         friendId,
@@ -141,7 +140,7 @@ async function createGroup({ nome, foto, descricao }: Partial<Group>) {
     const token = Cookies.get('token')
 
     const response = await api.post(
-      '/groups',
+      'groups',
       {
         nome,
         foto,
@@ -171,7 +170,7 @@ async function getUserGroups(): Promise<GroupResponse[]> {
     }
 
     const response = await api.get<{ groupsInfo: GroupResponse[] }>(
-      `/groups/user-groups`,
+      `groups/user-groups`,
       {
         params: {
           userId,
@@ -187,16 +186,16 @@ async function getUserGroups(): Promise<GroupResponse[]> {
   }
 }
 
-async function sendNewGroupMessage({ mensagem, grupoId }: GroupMessage) {
+async function sendNewGroupMessage({ mensagem, groupId }: GroupMessage) {
   try {
     const usuarioId = Cookies.get('userId')
     const token = Cookies.get('token')
 
     const response = await api.post(
-      '/group-messages',
+      'group-messages',
       {
         mensagem,
-        grupoId,
+        groupId,
         usuarioId,
       },
       {
@@ -206,66 +205,6 @@ async function sendNewGroupMessage({ mensagem, grupoId }: GroupMessage) {
       },
     )
 
-    return response
-  } catch (error) {
-    console.error('Algo saiu mal na requisição:', error)
-  }
-}
-
-async function getGroupMessage({ grupoId }: GroupMessage) {
-  try {
-    const token = Cookies.get('token')
-
-    const response = await api.get(`/group-messages/${grupoId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      params: {
-        limit: 999,
-      },
-    })
-
-    return response.data.data
-  } catch (error) {
-    console.error('Algo saiu mal na requisição:', error)
-  }
-}
-
-async function newFriendGroup(
-  groupId: string | undefined,
-  members: FriendsPostProps[],
-) {
-  try {
-    const token = Cookies.get('token')
-    console.log(members)
-    const response = await api.post('/groups/add-members', members, {
-      params: {
-        groupId,
-      },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    return response
-  } catch (error) {
-    console.error('Algo saiu mal na requisição:', error)
-  }
-}
-async function remMembersGroup(
-  groupId: string | undefined,
-  members: FriendsPostProps[],
-) {
-  try {
-    const token = Cookies.get('token')
-    console.log(members)
-    const response = await api.post('/groups/remove-members', members, {
-      params: {
-        groupId,
-      },
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
     return response
   } catch (error) {
     console.error('Algo saiu mal na requisição:', error)
@@ -282,7 +221,4 @@ export const apiFunction = {
   createGroup,
   getUserGroups,
   sendNewGroupMessage,
-  getGroupMessage,
-  newFriendGroup,
-  remMembersGroup,
 }

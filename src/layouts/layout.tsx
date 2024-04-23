@@ -6,7 +6,7 @@ import { MainAside } from '@/components/MainAside'
 import HeaderChat from '@/components/header'
 import MenuGroup from '@/components/menuGroup'
 import { Flex } from 'antd'
-import React, { useState } from 'react'
+import React from 'react'
 
 const chatDoodleBackgroundStyle: React.CSSProperties = {
   background: `url(${chatBackground}) center/cover`,
@@ -45,7 +45,6 @@ const layoutStyle: React.CSSProperties = {
 }
 
 export const AppLayout = () => {
-  const [openModal, setOpenModal] = useState(false)
   return (
     <Flex style={layoutStyle}>
       {/*  */}
@@ -55,7 +54,7 @@ export const AppLayout = () => {
       <MenuGroup />
       <Flex vertical flex={1}>
         <Flex vertical style={{ height: 60 }}>
-          <HeaderChat openModal={openModal} setOpenModal={setOpenModal} />
+          <HeaderChat />
         </Flex>
         <Flex
           flex={1}

@@ -9,17 +9,15 @@ export const SendNewGroupMessage = () => {
   const sendNewGroupMessageMutation = useMutation({
     mutationFn: ({
       mensagem,
-      grupoId,
+      groupId,
     }: {
       mensagem: string
-      grupoId: string
+      groupId: string
     }) => {
-      return apiFunction.sendNewGroupMessage({ mensagem, grupoId })
+      return apiFunction.sendNewGroupMessage({ mensagem, groupId })
     },
     onSuccess: (response) => {
-      if (socket && socket.connected) {
-        socket.emit('newGroupMessage', response?.data.data.id)
-      }
+      socket?.emit('newGroupMessage', response?.data.id)
 
       queryClient.invalidateQueries({ queryKey: ['group-messages'] })
     },

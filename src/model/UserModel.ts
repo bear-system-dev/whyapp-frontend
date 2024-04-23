@@ -7,7 +7,6 @@ export interface User {
   avatar: string
   descricao: string
   amigos: string[]
-  grupos: string[]
   createdAt: string
   updateAt: string
   opcaoenqueteid: string

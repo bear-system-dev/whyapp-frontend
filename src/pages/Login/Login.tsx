@@ -17,7 +17,7 @@ const Login = () => {
   const handleSubmit = async (values: FormValues) => {
     setIsLoading(true)
     try {
-      const response = await api.post('/auth/entrar', {
+      const response = await api.post('auth/entrar', {
         email: values.email,
         senha: values.password,
       })

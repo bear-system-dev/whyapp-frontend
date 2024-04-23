@@ -22,7 +22,7 @@ const Register = () => {
   const handleSubmit = async (values: FormValues) => {
     setIsLoading(true)
     try {
-      await api.post('/auth/cadastrar', {
+      await api.post('auth/cadastrar', {
         nome: values.name,
         email: values.email,
         senha: values.password,
@@ -32,7 +32,7 @@ const Register = () => {
         message: 'Registro feito com sucesso! Redirecionando para o login!',
         type: 'success',
       })
-      window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
+      window.location.href = `${import.meta.env.VITE_APP_HOME_URL}login`
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setAlert({ message: error.response?.data?.message, type: 'error' })
