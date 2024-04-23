@@ -5,6 +5,7 @@ import {
   LockOutlined,
   UserOutlined,
 } from '@ant-design/icons'
+import { Icon } from '@iconify/react';
 import { Button, Flex, Form, FormInstance, Input, Space } from 'antd'
 import { Dispatch, MouseEventHandler } from 'react'
 import { PiIdentificationCard } from 'react-icons/pi'
@@ -54,28 +55,25 @@ const Auth = ({
       )}
 
       <Space direction="vertical" size={5}>
-        <div
-          style={{
-            fontSize: 30,
-            textDecoration: 'underline',
-          }}
+        <h1
+          className={styles.auth__title}
         >
           {type === 'login'
             ? 'Entrar'
             : type === 'forgot-password'
               ? 'Redefinir senha'
               : 'Criar uma conta'}
-        </div>
-        <div className={styles.auth_description}>
+        </h1>
+        <div className={styles.auth__description}>
           {type === 'login'
-            ? 'Bem-vindo ao WhyApp! Entre com sua conta para começar:'
+            ? 'Bem-vindo ao WhyApp! Entre com sua conta para retomar suas conversas'
             : type === 'forgot-password'
               ? 'Esqueceu ou precisa alterar a senha? Sem problemas!'
-              : 'Bem-vindo ao WhyApp! Registre uma conta para começar:'}
+              : 'Bem-vindo ao WhyApp! Registre-se para que possa começar a conversar'}
         </div>
       </Space>
       <Form
-        className={styles.login_form}
+        
         form={handleForm}
         onFinish={onSubmit}
         layout="vertical"
@@ -134,7 +132,7 @@ const Auth = ({
               { min: 8, message: 'Mínimo 8 caracteres' },
             ]}
             className={styles.label}
-            labelCol={{ className: styles.label_col }}
+            labelCol={{ className: styles.label__col }}
             style={{
               position: 'relative',
               marginBottom: type === 'login' ? 30 : '',
@@ -192,7 +190,7 @@ const Auth = ({
               }),
             ]}
             className={styles.label}
-            labelCol={{ className: styles.label_col }}
+            labelCol={{ className: styles.label__col }}
           >
             <Input.Password
               placeholder={
@@ -254,28 +252,28 @@ const Auth = ({
           <Flex align="center" gap={10}>
             <Button
               onClick={authWithGoogle}
+              size={'large'}
               shape="circle"
               icon={
-                // eslint-disable-next-line jsx-a11y/alt-text
-                <img src="https://img.icons8.com/fluency/24/google-logo.png" />
+                <Icon icon="mdi:google" />
               }
               style={authButtonStyles}
             />
             <Button
               onClick={authWithFacebook}
               shape="circle"
+              size={'large'}
               icon={
-                // eslint-disable-next-line jsx-a11y/alt-text
-                <img src="https://img.icons8.com/color/26/facebook-new.png" />
+                <Icon icon="mdi:facebook" />
               }
               style={authButtonStyles}
             />
             <Button
               onClick={authWithApple}
               shape="circle"
+              size={'large'}
               icon={
-                // eslint-disable-next-line jsx-a11y/alt-text
-                <img src="https://img.icons8.com/ios-glyphs/24/mac-os.png" />
+                <Icon icon="mdi:apple" /> 
               }
               style={authButtonStyles}
             />

@@ -1,17 +1,17 @@
 :root {
-  font-family: 'Roboto', 'Montserrat', sans-serif;
+  font-family: "Roboto", "Montserrat", sans-serif;
   line-height: 1.5;
-  font-weight: 400;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* scrollbar styles */
@@ -20,21 +20,14 @@ box-sizing: border-box;
   height: 0.1vw;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #FFFFFFBF;
-  width: 1px;
-  height: 1px;
-}
-
+::-webkit-scrollbar-thumb,
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: #FFFFFFBF;
+  background: #ffffffbf;
   width: 1px;
   height: 1px;
 }
 
-::-webkit-scrollbar-track {
-  background-clip: content-box;
-}
+::-webkit-scrollbar-track,
 ::-webkit-scrollbar-track:window-inactive {
   background-clip: content-box;
 }
