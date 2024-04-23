@@ -63,7 +63,6 @@ export const AppLayout = () => {
       <Flex vertical flex={1}>
         <Flex vertical style={{ height: 60 }}>
           <HeaderChat openModal={openModal} setOpenModal={setOpenModal} />
-          <HeaderChat openModal={openModal} setOpenModal={setOpenModal} />
         </Flex>
         <Flex
           flex={1}
