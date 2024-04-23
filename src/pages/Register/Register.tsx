@@ -5,7 +5,7 @@ import { Alert, AlertProps, Flex, Form } from 'antd'
 import axios from 'axios'
 import { useState } from 'react'
 import Auth from '../../components/Auth/Auth'
-import styles from './Register.module.css'
+import styles from '../Auth.module.css'
 
 export interface FormValues {
   name: string
@@ -46,7 +46,7 @@ const Register = () => {
       vertical
       justify="center"
       gap={40}
-      className={styles.register_container}
+      className={styles.auth_container}
     >
       <Flex
         style={{ minHeight: '200px' }}
@@ -54,7 +54,7 @@ const Register = () => {
         justify="end"
         align="center"
       >
-        <div className={styles.register_logo}>
+        <div className={styles.auth_logo}>
           <img src={logo} alt="logo" />
         </div>
       </Flex>
@@ -77,8 +77,7 @@ const Register = () => {
           authWithApple={() => console.log('register with apple')}
         />
       </Flex>
-      <div className={styles.register_container_background_color}></div>
-      <div className={styles.register_container_background_image}></div>
+      <div className={styles.auth_container_background_color}></div>
     </Flex>
   )
 }
