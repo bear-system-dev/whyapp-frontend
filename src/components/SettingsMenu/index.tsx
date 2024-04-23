@@ -171,7 +171,7 @@ export const SettingsMenu = () => {
 
                   try {
                     await api.post(
-                      `auth/sair/${userId}`,
+                      `/auth/sair/${userId}`,
                       { id: userId },
                       {
                         headers: {
@@ -179,16 +179,17 @@ export const SettingsMenu = () => {
                         },
                       },
                     )
-
+                    Cookies.remove('token')
                     alert(
                       'Logout feito com sucesso! Redirecionando para a página de Login...',
                     )
-                    window.location.href = `${import.meta.env.VITE_APP_HOME_URL}login`
+                    window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
                   } catch (error) {
                     console.error('Validation failed:', error)
                     alert(
-                      'Não foi possível fazer Logout. Atualize a página, por favor.',
+                      'Não foi possível fazer Logout. Redirecionando para a página de Login...',
                     )
+                    window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
                   }
                 }}
               >

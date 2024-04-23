@@ -1,5 +1,7 @@
 export interface GroupMessage {
-  mensagem: string
-  groupId?: string
+  id?: string
+  mensagem?: string
+  grupoId?: string
   usuarioId?: string
+  createdAt?: string
 }

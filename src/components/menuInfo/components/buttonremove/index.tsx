@@ -29,7 +29,7 @@ export const ButtonRemove = ({ onClose }: ButtonRemoveProps) => {
       }}
     >
       <UserDeleteOutlined />
-      remover contato
+      Remover contato
     </button>
   )
 }

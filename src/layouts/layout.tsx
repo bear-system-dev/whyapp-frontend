@@ -6,7 +6,8 @@ import { MainAside } from '@/components/MainAside'
 import HeaderChat from '@/components/header'
 import MenuGroup from '@/components/menuGroup'
 import { Flex } from 'antd'
-import React from 'react'
+import Cookies from 'js-cookie'
+import React, { useState } from 'react'
 
 const chatDoodleBackgroundStyle: React.CSSProperties = {
   background: `url(${chatBackground}) center/cover`,
@@ -45,16 +46,23 @@ const layoutStyle: React.CSSProperties = {
 }
 
 export const AppLayout = () => {
+  const token = Cookies.get('token')
+  const userId = Cookies.get('userId')
+
+  if (!token || !userId) {
+    window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
+  }
+
+  const [openModal, setOpenModal] = useState(false)
   return (
     <Flex style={layoutStyle}>
-      {/*  */}
       <Flex style={siderStyle}>
         <MainAside />
       </Flex>
       <MenuGroup />
       <Flex vertical flex={1}>
         <Flex vertical style={{ height: 60 }}>
-          <HeaderChat />
+          <HeaderChat openModal={openModal} setOpenModal={setOpenModal} />
         </Flex>
         <Flex
           flex={1}
