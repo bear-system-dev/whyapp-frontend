@@ -1,22 +1,32 @@
 import defaultAvatar from '@/assets/defaultAvatar.svg'
+import { ChatContext } from '@/contexts/chatContext'
+import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
 import { Flex } from 'antd'
+import { useContext } from 'react'
 import CargoProfile from './cargo'
 import ImageProfile from './imageProfile'
 import NameProfile from './nameprofile'
 
-interface CargoPofile {
-  image?: string
-  username: string
-  cargo?: string
+interface ProfileContactProps {
+  fromUserId: string | undefined
 }
 
-const ProfileContact: React.FC<CargoPofile> = ({ image, username, cargo }) => {
+const ProfileContact = ({ fromUserId }: ProfileContactProps) => {
+  const { recipientGroup } = useContext(ChatContext)
+  const { users } = useGetUsersAndFriends()
+
+  const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {
+    return users?.find((user) => user.id === groupUser.usuarioId)
+  })
+
+  const fromUser = groupUsers?.find((user) => user?.id === fromUserId)
+
   return (
-    <Flex align="center">
-      <ImageProfile size="2.5rem" image={image || defaultAvatar} />
+    <Flex key={fromUser?.id} align="center" gap="0.5rem">
+      <ImageProfile size="2.5rem" image={fromUser?.avatar || defaultAvatar} />
       <Flex vertical align="start">
-        <CargoProfile cargo={cargo || 'member'} />
-        <NameProfile colortext="#FFF" user={username} />
+        <CargoProfile cargo={'member'} />
+        <NameProfile colortext="#FFF" user={fromUser?.nome} />
       </Flex>
     </Flex>
   )

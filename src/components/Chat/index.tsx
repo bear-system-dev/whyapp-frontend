@@ -11,6 +11,7 @@ import { Alert, Flex } from 'antd'
 import Cookies from 'js-cookie'
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words'
+import GroupChatBubble from '../bubblechat/GroupChatBubble'
 import './styles.css'
 
 export const Chat = () => {
@@ -39,6 +40,8 @@ export const Chat = () => {
 
     return () => clearInterval(checkTokenInterval)
   }, [])
+
+  const previousUserIdRef = useRef<string | undefined>()
 
   return (
     <>
@@ -104,6 +107,10 @@ export const Chat = () => {
             matchCounts,
             index,
           )
+          const showProfileContact =
+            chat.usuarioId !== previousUserIdRef.current
+          previousUserIdRef.current = chat.usuarioId
+
           return (
             <Flex
               key={index}
@@ -111,10 +118,11 @@ export const Chat = () => {
                 alignSelf: chat.usuarioId === userId ? 'end' : 'start',
               }}
             >
-              <BubbleChat
+              <GroupChatBubble
                 mensagem={chat.mensagem || ''}
                 createdAt={chat.createdAt}
-                fromUserId={chat.usuarioId}
+                usuarioId={chat.usuarioId}
+                showProfileContact={showProfileContact}
               >
                 <Highlighter
                   style={{
@@ -132,7 +140,7 @@ export const Chat = () => {
                   searchWords={[searchTerm]}
                   textToHighlight={chat.mensagem || ''}
                 />
-              </BubbleChat>
+              </GroupChatBubble>
             </Flex>
           )
         })}
