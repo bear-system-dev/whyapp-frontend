@@ -1,5 +1,42 @@
 :root {
-  font-family: "Roboto", "Montserrat", sans-serif;
+  --pure-primary: #39ff14;
+  --pure-secundary: #1481ff;
+  --pure-alert: #ffab14;
+  --pure-warn: #ff142f;
+
+  /*== Tints ==*/
+  --t-primary-10: #64ff47;
+  --t-primary-20: #A0ff8f;
+  --t-primary-30: #bfffb2;
+  --t-primary-40: #e1fff0;
+  --t-primary-50: #f2fff0;
+
+  --t-alert-10: #ffbd47;
+  --t-alert-20: #ffd78f;
+  --t-alert-30: #ffe4b2;
+  --t-alert-40: #fff2db;
+  --t-alert-50: #fffaf0;
+
+  --t-warn-10: #ff475c;
+  --t-warn-20: #ff8f9c;
+  --t-warn-30: #ffb2bb;
+  --t-warn-40: #ffdbdf;
+
+  /* Fonts */
+  --primary-font: Roboto, system-ui;
+  --secundary-font: Montserrat, system-ui;
+
+
+  /*== Neutral pallete ==*/
+  --neutral-900: #151719;
+  --neutral-800: #1c1e22;
+  --neutral-500: #474E57;
+  --neutral-400: #4C545D;
+  --neutral-100: #9aa3ac;
+  --neutral-50: #c1c6cd;
+
+
+  font-family: "Roboto", "Montserrat", system-ui, sans-serif;
   line-height: 1.5;
 
   font-synthesis: none;
@@ -12,6 +49,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  max-width: 100vw;
+  overflow: hidden scroll;
 }
 
 /* scrollbar styles */
