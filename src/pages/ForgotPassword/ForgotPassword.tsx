@@ -3,7 +3,7 @@ import { Alert, AlertProps, Flex, Form } from 'antd'
 import { useState } from 'react'
 import Auth from '../../components/Auth/Auth'
 import { FormValues } from '../Register/Register'
-import styles from './ForgotPassword.module.css'
+import styles from '../Auth.module.css';
 
 const ForgotPassword = () => {
   const [form] = Form.useForm()
@@ -40,7 +40,7 @@ const ForgotPassword = () => {
       vertical
       justify="center"
       gap={40}
-      className={styles.forgot_password_container}
+      className={styles.auth_container}
     >
       <Flex
         style={{ minHeight: '200px' }}
@@ -48,7 +48,7 @@ const ForgotPassword = () => {
         justify="end"
         align="center"
       >
-        <div className={styles.forgot_password_logo}>
+        <div className={styles.auth_logo}>
           <img src={logo} alt="logo" />
         </div>
       </Flex>
@@ -69,7 +69,6 @@ const ForgotPassword = () => {
         />
       </Flex>
       <div className={styles.forgot_password_container_background_color}></div>
-      <div className={styles.forgot_password_container_background_image}></div>
     </Flex>
   )
 }
