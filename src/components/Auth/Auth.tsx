@@ -13,12 +13,6 @@ import { Link } from 'react-router-dom'
 import styles from './Auth.module.css'
 import AuthContainer from './AuthContainer'
 
-const authButtonStyles = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}
-
 type Props = {
   type: string
   handleForm: FormInstance<FormValues>
@@ -45,7 +39,7 @@ const Auth = ({
           <Button
             style={{
               ...resetButtonStyles,
-              color: '#39FF14',
+              color: 'var(--pure-primary)',
             }}
             icon={<ArrowLeftOutlined />}
           >
@@ -54,7 +48,8 @@ const Auth = ({
         </Link>
       )}
 
-      <Space direction="vertical" size={5}>
+      {/* Title and subtitle */}
+      <Flex vertical gap={8}>
         <h1
           className={styles.auth__title}
         >
@@ -64,20 +59,20 @@ const Auth = ({
               ? 'Redefinir senha'
               : 'Criar uma conta'}
         </h1>
-        <div className={styles.auth__description}>
+        <p className={styles.auth__description}>
           {type === 'login'
             ? 'Bem-vindo ao WhyApp! Entre com sua conta para retomar suas conversas'
             : type === 'forgot-password'
               ? 'Esqueceu ou precisa alterar a senha? Sem problemas!'
               : 'Bem-vindo ao WhyApp! Registre-se para que possa começar a conversar'}
-        </div>
-      </Space>
+        </p>
+      </Flex>
       <Form
-        
         form={handleForm}
         onFinish={onSubmit}
         layout="vertical"
       >
+        {/* username */}
         {type === 'register' && (
           <Form.Item
             label="Nome"
@@ -100,9 +95,10 @@ const Auth = ({
             />
           </Form.Item>
         )}
+        {/* email */}
         {(type === 'register' || type === 'login') && (
           <Form.Item
-            label="E-mail"
+            label="Email"
             name="email"
             rules={[
               { required: true, message: 'Digite seu e-mail' },
@@ -122,8 +118,8 @@ const Auth = ({
             />
           </Form.Item>
         )}
-
-        <Flex vertical style={{ position: 'relative' }}>
+        {/* password and forgot password link */}
+        <Flex vertical>
           <Form.Item
             label={type === 'forgot-password' ? 'Nova senha' : 'Senha'}
             name="password"
@@ -133,11 +129,8 @@ const Auth = ({
             ]}
             className={styles.label}
             labelCol={{ className: styles.label__col }}
-            style={{
-              position: 'relative',
-              marginBottom: type === 'login' ? 30 : '',
-            }}
           >
+            {/* confirm password or enter new password */}
             <Input.Password
               placeholder={
                 type === 'forgot-password'
@@ -152,22 +145,15 @@ const Auth = ({
               prefix={<LockOutlined />}
             />
           </Form.Item>
+          {/* forgot password link */}
           {type === 'login' && (
-            <Link
-              to="/forgot-password"
-              style={{
-                color: '#39FF14',
-                textDecoration: 'underline',
-                position: 'absolute',
-                right: 0,
-                bottom: 10,
-                fontSize: '.8rem',
-              }}
-            >
+            <Link className={styles.auth__forgot_password}
+              to="/forgot-password">
               Esqueci minha senha
             </Link>
           )}
         </Flex>
+        {/* confirm password */}
         {(type === 'register' || type === 'forgot-password') && (
           <Form.Item
             label={
@@ -184,7 +170,7 @@ const Auth = ({
                     return Promise.resolve()
                   }
                   return Promise.reject(
-                    new Error('A senha que você digitou não corresponde!'),
+                    new Error('Email ou senha incorretos.'),
                   )
                 },
               }),
@@ -221,63 +207,52 @@ const Auth = ({
               : 'Cadastrar'}
         </Button>
       </Form>
+      {/* login thirty party */}
       {(type === 'register' || type === 'login') && (
-        <Flex
-          className={styles.auth_alternative}
-          vertical
-          align="center"
-          gap={10}
-        >
-          <div
-            style={{
-              color: 'rgb(255 255 255 / 81%)',
-              borderBottom: '2px solid rgb(255 255 255 / 51%)',
-              paddingBottom: 5,
-            }}
-          >
-            {type === 'login' ? 'Não tem conta?' : 'Ja tem conta?'}{' '}
-            <Link
-              to={type === 'login' ? '/register' : '/login'}
-              style={{
-                color: 'rgb(255 255 255 / 81%)',
-                fontWeight: '600',
-              }}
-            >
-              {type === 'login' ? 'Crie uma' : 'Entre'}
-            </Link>
-          </div>
-          <div style={{ fontSize: '.8rem' }}>
-            {type === 'login' ? 'ou entre com' : 'ou cadastre-se com'}
-          </div>
-          <Flex align="center" gap={10}>
-            <Button
-              onClick={authWithGoogle}
-              size={'large'}
-              shape="circle"
-              icon={
-                <Icon icon="mdi:google" />
-              }
-              style={authButtonStyles}
-            />
-            <Button
-              onClick={authWithFacebook}
-              shape="circle"
-              size={'large'}
-              icon={
-                <Icon icon="mdi:facebook" />
-              }
-              style={authButtonStyles}
-            />
-            <Button
-              onClick={authWithApple}
-              shape="circle"
-              size={'large'}
-              icon={
-                <Icon icon="mdi:apple" /> 
-              }
-              style={authButtonStyles}
-            />
-          </Flex>
+          <Flex vertical gap={24}>
+            <div className={styles.auth__secundary_action}>
+              {type === 'login' ? 'Não tem conta?' : 'Já tem conta?'}{' '}
+              <Link
+                to={type === 'login' ? '/register' : '/login'}
+                className={styles.auth__link}
+              >
+                {type === 'login' ? 'Crie uma' : 'Entre'}
+              </Link>
+            </div>
+            <Flex align='center' vertical gap={8}>
+              <div className={styles.auth__login_thirty_party_label}>
+                {type === 'login' ? 'ou entre com' : 'ou cadastre-se com'}
+              </div>
+              <Flex align="center" style={{ width: '100%' }} gap={8}>
+                <Button
+                  block
+                  onClick={authWithGoogle}
+                  size={'large'}
+                  icon={
+                    <Icon fontSize={20} icon="mdi:google" />
+                  }
+                  className={styles.auth__login_thirty_party}
+                />
+                <Button
+                  onClick={authWithFacebook}
+                  block
+                  size={'large'}
+                  icon={
+                    <Icon fontSize={20} icon="mdi:facebook" />
+                  }
+                  className={styles.auth__login_thirty_party}
+                />
+                <Button
+                  onClick={authWithApple}
+                  size={'large'}
+                  block
+                  icon={
+                    <Icon fontSize={20} icon="mdi:apple" />
+                  }
+                  className={styles.auth__login_thirty_party}
+                />
+              </Flex>
+            </Flex>
         </Flex>
       )}
     </AuthContainer>
