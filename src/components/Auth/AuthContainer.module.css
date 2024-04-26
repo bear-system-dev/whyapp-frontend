@@ -12,5 +12,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .auth_container {background: var(--neutral-800)}
+  .auth_container {
+    background: var(--neutral-800)
+  }
 }
