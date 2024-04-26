@@ -6,7 +6,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons'
 import { Icon } from '@iconify/react';
-import { Button, Flex, Form, FormInstance, Input, Space } from 'antd'
+import { Button, Flex, Form, FormInstance, Input } from 'antd'
 import { Dispatch, MouseEventHandler } from 'react'
 import { PiIdentificationCard } from 'react-icons/pi'
 import { Link } from 'react-router-dom'
@@ -14,7 +14,7 @@ import styles from './Auth.module.css'
 import AuthContainer from './AuthContainer'
 
 type Props = {
-  type: string
+  type: 'register' | 'login' | 'forgot-password'
   handleForm: FormInstance<FormValues>
   onSubmit: Dispatch<FormValues>
   authWithGoogle?: MouseEventHandler<HTMLElement>
@@ -47,9 +47,10 @@ const Auth = ({
           </Button>
         </Link>
       )}
-
+      
       {/* Title and subtitle */}
-      <Flex vertical gap={8}>
+      <Flex style={{ fontFamily: 'var(--secondary-font)' }}
+        vertical gap={10}>
         <h1
           className={styles.auth__title}
         >
@@ -209,50 +210,50 @@ const Auth = ({
       </Form>
       {/* login thirty party */}
       {(type === 'register' || type === 'login') && (
-          <Flex vertical gap={24}>
-            <div className={styles.auth__secundary_action}>
-              {type === 'login' ? 'Não tem conta?' : 'Já tem conta?'}{' '}
-              <Link
-                to={type === 'login' ? '/register' : '/login'}
-                className={styles.auth__link}
-              >
-                {type === 'login' ? 'Crie uma' : 'Entre'}
-              </Link>
+        <Flex vertical gap={24}>
+          <div className={styles.auth__secundary_action}>
+            {type === 'login' ? 'Não tem conta?' : 'Já tem conta?'}{' '}
+            <Link
+              to={type === 'login' ? '/register' : '/login'}
+              className={styles.auth__link}
+            >
+              {type === 'login' ? 'Crie uma' : 'Entre'}
+            </Link>
+          </div>
+          <Flex align='center' vertical gap={8}>
+            <div className={styles.auth__login_thirty_party_label}>
+              {type === 'login' ? 'ou entre com' : 'ou cadastre-se com'}
             </div>
-            <Flex align='center' vertical gap={8}>
-              <div className={styles.auth__login_thirty_party_label}>
-                {type === 'login' ? 'ou entre com' : 'ou cadastre-se com'}
-              </div>
-              <Flex align="center" style={{ width: '100%' }} gap={8}>
-                <Button
-                  block
-                  onClick={authWithGoogle}
-                  size={'large'}
-                  icon={
-                    <Icon fontSize={20} icon="mdi:google" />
-                  }
-                  className={styles.auth__login_thirty_party}
-                />
-                <Button
-                  onClick={authWithFacebook}
-                  block
-                  size={'large'}
-                  icon={
-                    <Icon fontSize={20} icon="mdi:facebook" />
-                  }
-                  className={styles.auth__login_thirty_party}
-                />
-                <Button
-                  onClick={authWithApple}
-                  size={'large'}
-                  block
-                  icon={
-                    <Icon fontSize={20} icon="mdi:apple" />
-                  }
-                  className={styles.auth__login_thirty_party}
-                />
-              </Flex>
+            <Flex align="center" style={{ width: '100%' }} gap={8}>
+              <Button
+                block
+                onClick={authWithGoogle}
+                size={'large'}
+                icon={
+                  <Icon fontSize={20} icon="mdi:google" />
+                }
+                className={styles.auth__login_thirty_party}
+              />
+              <Button
+                onClick={authWithFacebook}
+                block
+                size={'large'}
+                icon={
+                  <Icon fontSize={20} icon="mdi:facebook" />
+                }
+                className={styles.auth__login_thirty_party}
+              />
+              <Button
+                onClick={authWithApple}
+                size={'large'}
+                block
+                icon={
+                  <Icon fontSize={20} icon="mdi:apple" />
+                }
+                className={styles.auth__login_thirty_party}
+              />
             </Flex>
+          </Flex>
         </Flex>
       )}
     </AuthContainer>
