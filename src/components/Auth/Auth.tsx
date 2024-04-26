@@ -37,11 +37,8 @@ const Auth = ({
       {type === 'forgot-password' && (
         <Link to="/login">
           <Button
-            style={{
-              ...resetButtonStyles,
-              color: 'var(--pure-primary)',
-            }}
-            icon={<ArrowLeftOutlined />}
+          className={styles.auth__return_button}
+          icon={<ArrowLeftOutlined />}
           >
             Retornar
           </Button>
