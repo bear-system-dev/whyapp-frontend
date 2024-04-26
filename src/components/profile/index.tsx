@@ -5,7 +5,7 @@ import { Flex } from 'antd'
 import { useContext } from 'react'
 import CargoProfile from './cargo'
 import ImageProfile from './imageProfile'
-import NameProfile from './nameprofile'
+import NameProfile from './ProfileName'
 
 interface ProfileContactProps {
   fromUserId: string | undefined

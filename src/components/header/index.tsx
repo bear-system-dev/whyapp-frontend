@@ -1,5 +1,5 @@
 import ImageProfile from '@/components/profile/imageProfile'
-import NameProfile from '@/components/profile/nameprofile'
+import ProfileName from '@/components/profile/ProfileName'
 import { ChatContext } from '@/contexts/chatContext'
 import { Button, Flex } from 'antd'
 import { useContext, useState } from 'react'
@@ -45,8 +45,8 @@ const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
               onClick={() => setprofileInfoMenuOpen(true)}
               style={{ cursor: 'pointer', userSelect: 'none' }}
             >
-              <Flex vertical gap={5}>
-                <NameProfile user={recipient?.nome} colortext="#FFFFFF" />
+              <Flex vertical gap={4}>
+                <ProfileName user={recipient?.nome ?? 'Sem nome'} />
                 <StatusContact status="online" />
               </Flex>
             </div>
@@ -69,7 +69,7 @@ const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
               style={{ cursor: 'pointer', userSelect: 'none' }}
             >
               <Flex vertical gap={5}>
-                <NameProfile user={recipientGroup?.nome} colortext="#FFFFFF" />
+                <ProfileName user={recipientGroup?.nome} />
                 <ContactGroup />
               </Flex>
             </div>

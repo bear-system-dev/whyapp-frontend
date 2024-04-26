@@ -53,13 +53,13 @@ export const NewChat = () => {
             <h2 className={styles.chat__drawerTitle}>{session}</h2>
             <Flex gap={16} align="center" justify="center">
               <Button
-                icon={<UserAddOutlined style={{ fontSize: '1.25rem' }} />}
+                icon={<UserAddOutlined />}
                 className={styles.chat__drawerAction}
                 onClick={() => setSession('Nova conversa')}
               />
               <Divider type="vertical" className={styles.chat__drawerDivider} />
               <Button
-                icon={<UsergroupAddOutlined style={{ fontSize: '1.25rem' }} />}
+                icon={<UsergroupAddOutlined />}
                 className={styles.chat__drawerAction}
                 onClick={() => setSession('Novo grupo')}
               />
