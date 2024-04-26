@@ -1,5 +1,76 @@
 :root {
-  font-family: "Roboto", "Montserrat", sans-serif;
+  --pure-primary: #39ff14;
+  --pure-secondary: #1481ff;
+  --pure-alert: #ffab14;
+  --pure-warn: #ff142f;
+
+  /*== Tints ==*/
+  --t-primary-10: #64ff47;
+  --t-primary-20: #A0ff8f;
+  --t-primary-30: #bfffb2;
+  --t-primary-40: #e1fff0;
+  --t-primary-50: #f2fff0;
+
+  --t-alert-10: #ffbd47;
+  --t-alert-20: #ffd78f;
+  --t-alert-30: #ffe4b2;
+  --t-alert-40: #fff2db;
+  --t-alert-50: #fffaf0;
+
+  --t-warn-10: #ff475c;
+  --t-warn-20: #ff8f9c;
+  --t-warn-30: #ffb2bb;
+  --t-warn-40: #ffdbdf;
+
+  /*== Shadows ==*/
+  --shadow-primary-100: #23db00;
+  --shadow-primary-200: #1aab00;
+  --shadow-primary-300: #199e00;
+  --shadow-primary-400: #137a00;
+  --shadow-primary-500: #0f6100;
+  --shadow-primary-600: #0c4d00;
+  --shadow-primary-700: #0a3d00;
+
+  --shadow-alert-100: #dbb000;
+  --shadow-alert-200: #a86c00;
+  --shadow-alert-300: #9e6600;
+  --shadow-alert-400: #7a4f00;
+  --shadow-alert-500: #613e00;
+  --shadow-alert-600: #4d3100;
+  --shadow-alert-700: #3d2700;
+
+  --shadow-warn-100: #db0019;
+  --shadow-warn-200: #ab0013;
+  --shadow-warn-300: #9e0012;
+  --shadow-warn-400: #7a000e;
+  --shadow-warn-500: #61000b;
+  --shadow-warn-600: #4d0009;
+  --shadow-warn-700: #3d0007;
+
+
+  /* Fonts */
+  --primary-font: Roboto, system-ui;
+  --secondary-font: Montserrat, system-ui;
+
+
+  /*== Neutral pallete ==*/
+  --neutral-900: #151719;
+  --neutral-800: #1c1e22;
+  --neutral-700: #22262a;
+  --neutral-600: #373d43;
+  --neutral-500: #474E57;
+  --neutral-400: #4C545D;
+  --neutral-300: #636d79;
+  --neutral-200: #7e8995;
+  --neutral-100: #9aa3ac;
+  --neutral-50: #c1c6cd;
+  --neutral-30: #d5d8dd;
+  --neutral-20: #ebedef;
+  --neutral-10: #f7f7f8;
+  --neutral-0: #ffffff;
+
+
+  font-family: "Roboto", "Montserrat", system-ui, sans-serif;
   line-height: 1.5;
 
   font-synthesis: none;
@@ -12,6 +83,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  max-width: 100vw;
+  overflow: hidden scroll;
 }
 
 /* scrollbar styles */

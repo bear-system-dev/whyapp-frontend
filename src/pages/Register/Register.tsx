@@ -35,7 +35,7 @@ const Register = () => {
       window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setAlert({ message: error.response?.data?.message, type: 'error' })
+        setAlert({ message: error.response?.data?.message || 'Algo deu errado.', type: 'error' })
       }
     }
     setIsLoading(false)
@@ -77,7 +77,6 @@ const Register = () => {
           authWithApple={() => console.log('register with apple')}
         />
       </Flex>
-      <div className={styles.auth_container_background_color}></div>
     </Flex>
   )
 }
