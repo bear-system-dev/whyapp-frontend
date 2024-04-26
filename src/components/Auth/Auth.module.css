@@ -23,8 +23,8 @@
 }
 
 .input {
-  background: rgb(241, 241, 241);
-  background: linear-gradient(90deg, rgba(241, 241, 241, 0.386) 0%, rgba(176, 176, 176, 0) 101%) !important;
+  background: var(--neutral-50, rgb(241, 241, 241));
+  background: linear-gradient(90deg, #c1c6cd30 0%, #c1c6cd10 101%) !important;
   color: #fff;
   padding: 12px;
   border: none !important;
@@ -118,6 +118,10 @@
 
   .submit:hover {
     background: var(--t-primary-20)
+  }
+
+  .input {
+    background: linear-gradient(90deg, #474E5740 0%, #474E5710 101%) !important;
   }
 
   .auth__forgot_password {
