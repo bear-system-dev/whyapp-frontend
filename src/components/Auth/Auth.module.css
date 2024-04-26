@@ -1,7 +1,6 @@
 .auth__title {
   font-size: 32px;
   margin: 0 0 4px;
-  line-height: 1;
   text-decoration: underline;
   text-underline-offset: 10px;
   text-decoration-thickness: 1px;
@@ -11,6 +10,24 @@
   font-size: 1rem;
   color: var(--neutral-50);
 }
+
+.auth__return_button {
+  display: flex;
+  align-items: center;
+  background-color: transparent !important;
+  border: none;
+  padding: 8px 0;
+  cursor: pointer;
+  color: var(--pure-primary) !important;
+  transition: background, color, 200ms ease-in;
+}
+
+.auth__return_button:hover {
+  outline: 1px solid var(--pure-primary) !important;
+  padding: 8px;
+  background: transparent !important;
+}
+
 
 .label label {
   color: #fff !important;
@@ -85,15 +102,19 @@
 }
 
 .auth__forgot_password {
-  display: block;
+  align-self: end;
+  width: max-content;
   text-align: right;
-  color: var(--pure-primary) !important;
+  color: var(--neutral-10) !important;
   font-size: 14px;
   padding: 4px 0;
+  transition: color 100ms ease-in;
 }
 
 .auth__forgot_password:hover {
   color: var(--t-primary-20) !important;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .auth__secundary_action {
@@ -112,6 +133,25 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  .auth__return_button {
+    color: var(--t-primary-10) !important;
+  }
+
+  .auth__return_button:hover {
+    padding: 8px;
+    background: transparent !important;
+    color: var(--t-primary-20) !important;
+    outline: 1px solid var(--t-primary-20) !important;
+  }
+
+  .auth__forgot_password {
+    color: var(--neutral-50) !important;
+  }
+
+  .auth__forgot_password:hover {
+    color: var(--neutral-0) !important;
+  }
+
   .submit {
     background: var(--t-primary-10)
   }
@@ -122,10 +162,6 @@
 
   .input {
     background: linear-gradient(90deg, #474E5740 0%, #474E5710 101%) !important;
-  }
-
-  .auth__forgot_password {
-    color: var(--t-primary-10) !important
   }
 
   .auth__login_thirty_party {
