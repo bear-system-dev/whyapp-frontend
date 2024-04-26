@@ -1,5 +1,5 @@
-import Contact from '@/components/menuGroup/contact'
-import ImageProfile from '@/components/profile/imageProfile'
+import Contact from '@/components/MenuGroup/contact'
+import ProfileImage from '@/components/Profile/ProfileImage'
 import { RecipientGroup } from '@/model/RecipientModel'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
 import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
@@ -75,7 +75,7 @@ export const MenuInfoGroup = ({
         }}
       />
       <Flex vertical style={ImageProfileStyle}>
-        <ImageProfile
+        <ProfileImage
           image={recipientGroup.foto}
           key={recipientGroup.id}
           size="180px"

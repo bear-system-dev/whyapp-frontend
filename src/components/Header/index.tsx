@@ -1,10 +1,10 @@
-import ImageProfile from '@/components/profile/imageProfile'
-import ProfileName from '@/components/profile/ProfileName'
+import ProfileImage from '@/components/Profile/ProfileImage'
+import ProfileName from '@/components/Profile/ProfileName'
 import { ChatContext } from '@/contexts/chatContext'
 import { Button, Flex } from 'antd'
 import { useContext, useState } from 'react'
-import MenuInfo from '../menuInfo'
-import { resetButtonStyles } from './../../mocks/mockUserArray'
+import MenuInfo from '../MenuInfo'
+import { resetButtonStyles } from '../../mocks/mockUserArray'
 import ContactGroup from './components/contactsgroups'
 import HeaderContainer from './components/headerConteiner'
 import StatusContact from './components/statusgroups'
@@ -39,7 +39,7 @@ const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
               }}
               onClick={() => setprofileInfoMenuOpen(true)}
             >
-              <ImageProfile size={'45px'} image={recipient?.avatar} />
+              <ProfileImage size={'45px'} image={recipient?.avatar} />
             </Button>
             <div
               onClick={() => setprofileInfoMenuOpen(true)}
@@ -62,7 +62,7 @@ const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
               }}
               onClick={() => setprofileInfoMenuOpen(true)}
             >
-              <ImageProfile size={'45px'} image={recipientGroup?.foto} />
+              <ProfileImage size={'45px'} image={recipientGroup?.foto} />
             </Button>
             <div
               onClick={() => setprofileInfoMenuOpen(true)}

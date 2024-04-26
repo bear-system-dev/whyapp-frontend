@@ -1,4 +1,4 @@
-import { FriendsPostProps } from '@/components/menuInfo/components/modalAlert'
+import { FriendsPostProps } from '@/components/MenuInfo/components/modalAlert'
 import { api } from '@/lib/api'
 import { GroupMessage } from '@/model/GroupMessageModel'
 import { Group, GroupResponse } from '@/model/GroupModel'

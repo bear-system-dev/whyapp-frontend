@@ -1,4 +1,4 @@
-import BubbleChat from '@/components/bubblechat'
+import BubbleChat from '@/components/BubbleChat'
 import { ChatContext } from '@/contexts/chatContext'
 import { SearchContext } from '@/contexts/searchContext'
 import {
@@ -11,7 +11,7 @@ import { Alert, Flex } from 'antd'
 import Cookies from 'js-cookie'
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words'
-import GroupChatBubble from '../bubblechat/GroupChatBubble'
+import GroupChatBubble from '../BubbleChat/GroupChatBubble'
 import './styles.css'
 
 export const Chat = () => {
