@@ -4,7 +4,7 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   padding: 32px;
   backdrop-filter: blur(24px);
-  background: rgb(0, 0, 0);
+  background: var(--neutral-800);
   background: linear-gradient(150deg, rgba(0, 0, 0, 0.13) 0%, rgba(249, 249, 249, 0.146) 100%);
   border-radius: 32px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.13);
