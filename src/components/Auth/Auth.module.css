@@ -58,10 +58,13 @@
   padding: 8px 12px;
   border-radius: 8px;
   color: var(--neutral-500);
-  transition: color, box-shadow, background 100ms ease-in;
+  transition: color, box-shadow, background 100ms ease-in !important;
+  transition-delay: 0ms !important;
 }
 
-.auth__login_thirty_party:hover {
+.auth__login_thirty_party:hover,
+.auth__login_thirty_party:active {
+  color: var(--pure-secondary) !important;
   background: var(--neutral-0) !important;
 }
 
@@ -88,6 +91,7 @@
   font-size: 14px;
   padding: 4px 0;
 }
+
 .auth__forgot_password:hover {
   color: var(--t-primary-20) !important;
 }
@@ -108,10 +112,28 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .submit {background: var(--t-primary-10)}
-  .submit:hover {background: var(--t-primary-20)}
-  .auth__forgot_password{color: var(--t-primary-10) !important}
-  .auth__login_thirty_party {color: var(--neutral-100)}
-  .auth__login_thirty_party {background: var(--neutral-700); box-shadow: 0 0 0 1px var(--neutral-600)}
-  .auth__login_thirty_party:hover {background: var(--neutral-500) !important}
+  .submit {
+    background: var(--t-primary-10)
+  }
+
+  .submit:hover {
+    background: var(--t-primary-20)
+  }
+
+  .auth__forgot_password {
+    color: var(--t-primary-10) !important
+  }
+
+  .auth__login_thirty_party {
+    color: var(--neutral-100)
+  }
+
+  .auth__login_thirty_party {
+    background: var(--neutral-700);
+    box-shadow: 0 0 0 1px var(--neutral-600)
+  }
+
+  .auth__login_thirty_party:hover {
+    background: var(--neutral-500) !important
+  }
 }
