@@ -1,15 +1,16 @@
 import React from 'react'
 
 interface Status {
-  status: string
+  status: "online" | "offline"
 }
 
 const StatusContact: React.FC<Status> = ({ status }) => {
   return (
     <p
       style={{
-        fontSize: '.6rem',
-        color: '#529E66',
+        fontSize: '.7rem',
+        textTransform: 'capitalize',
+        color: status === 'online' ? 'var(--t-primary-20)' : 'var(--neutral-100)',
         fontWeight: '700',
       }}
     >
