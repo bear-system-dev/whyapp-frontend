@@ -1,7 +1,7 @@
 import { Chat } from '@/components/Chat'
 import { ChatContainer } from '@/components/ChatContainer'
 import { InputBar } from '@/components/InputBar'
-import { MainAside } from '@/components/MainAside'
+import { Aside } from '@/components/Aside'
 import HeaderChat from '@/components/header'
 import MenuGroup from '@/components/menuGroup'
 import { Flex } from 'antd'
@@ -20,7 +20,7 @@ export const AppLayout = () => {
   const [openModal, setOpenModal] = useState(false)
   return (
     <Flex className={styles.app__layout}>
-      <MainAside />
+      <Aside />
       <MenuGroup />
       <Flex vertical flex={1}>
         <Flex vertical style={{ height: 60 }}>
