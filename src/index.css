@@ -50,7 +50,7 @@
 
   /* Fonts */
   --primary-font: Roboto, system-ui;
-  --secundary-font: Montserrat, system-ui;
+  --secondary-font: Montserrat, system-ui;
 
 
   /*== Neutral pallete ==*/
@@ -65,7 +65,7 @@
   --neutral-100: #9aa3ac;
   --neutral-50: #c1c6cd;
   --neutral-30: #c1c6cd;
-  --neutral-20: #ebe0ef;
+  --neutral-20: #ebedef;
   --neutral-10: #f7f7f8;
   --neutral-0: #ffffff;
 
