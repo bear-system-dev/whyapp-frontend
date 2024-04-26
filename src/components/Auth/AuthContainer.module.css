@@ -10,3 +10,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.13);
   color: #fff;
 }
+
+@media (prefers-color-scheme: dark) {
+  .auth_container {background: var(--neutral-800)}
+}

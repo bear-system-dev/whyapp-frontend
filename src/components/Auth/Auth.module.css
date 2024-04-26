@@ -1,10 +1,9 @@
 .auth__title {
-  font-family: var(--font-secundary);
   font-size: 32px;
   margin: 0 0 4px;
   line-height: 1;
   text-decoration: underline;
-  text-underline-offset: 8px;
+  text-underline-offset: 10px;
   text-decoration-thickness: 1px;
 }
 
@@ -43,13 +42,13 @@
   letter-spacing: 1px;
   font-weight: 700;
   font-size: 14px;
-  color: #000;
+  color: var(--shadow-primary-700);
   border: none;
   margin-top: 8px;
 }
 
 .submit:hover {
-  background-color: #88ff74 !important;
+  background-color: var(--t-primary-10) !important;
   color: inherit !important;
 }
 
@@ -58,7 +57,12 @@
   border: 0;
   padding: 8px 12px;
   border-radius: 8px;
-  color: var(--neutral-500)
+  color: var(--neutral-500);
+  transition: color, box-shadow, background 100ms ease-in;
+}
+
+.auth__login_thirty_party:hover {
+  background: var(--neutral-0) !important;
 }
 
 .auth__login_thirty_party_label {
@@ -70,7 +74,9 @@
   content: '';
   position: absolute;
   top: -8px;
-  width: 100%;
+  left: 0;
+  width: calc(100% + 32px);
+  transform: translateX(-16px);
   height: 1px;
   border-bottom: 1px solid rgba(255, 255, 255, .5);
 }
@@ -81,6 +87,9 @@
   color: var(--pure-primary) !important;
   font-size: 14px;
   padding: 4px 0;
+}
+.auth__forgot_password:hover {
+  color: var(--t-primary-20) !important;
 }
 
 .auth__secundary_action {
@@ -93,6 +102,16 @@
   padding: 8px 0;
 }
 
+.auth__link,
+.auth__forgot_password {
+  transition: color 100ms ease-in;
+}
+
 @media (prefers-color-scheme: dark) {
-  /* .auth__login_thirty_party {color: var(--neutral-100)} */
+  .submit {background: var(--t-primary-10)}
+  .submit:hover {background: var(--t-primary-20)}
+  .auth__forgot_password{color: var(--t-primary-10) !important}
+  .auth__login_thirty_party {color: var(--neutral-100)}
+  .auth__login_thirty_party {background: var(--neutral-700); box-shadow: 0 0 0 1px var(--neutral-600)}
+  .auth__login_thirty_party:hover {background: var(--neutral-500) !important}
 }
