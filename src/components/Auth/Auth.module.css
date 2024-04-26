@@ -125,15 +125,13 @@
   }
 
   .auth__login_thirty_party {
-    color: var(--neutral-100)
-  }
-
-  .auth__login_thirty_party {
+    color: var(--neutral-100);
     background: var(--neutral-700);
-    box-shadow: 0 0 0 1px var(--neutral-600)
+    box-shadow: 0 0 0 1px var(--neutral-600) !important;
   }
 
   .auth__login_thirty_party:hover {
-    background: var(--neutral-500) !important
+    background: var(--neutral-800) !important;
+    box-shadow: 0 0 0 1px var(--neutral-500) !important;
   }
 }
