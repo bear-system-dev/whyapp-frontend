@@ -1,4 +1,3 @@
-import { resetButtonStyles } from '@/mocks/mockUserArray'
 import { FormValues } from '@/pages/Register/Register'
 import {
   ArrowLeftOutlined,
