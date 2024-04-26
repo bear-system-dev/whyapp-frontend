@@ -2,8 +2,8 @@ import React from 'react'
 import ConteinerContact from './components/ConteinerContact'
 import NameContact from './components/NameContact'
 import { Flex } from 'antd'
-import ImageProfile from '@/components/profile/imageProfile'
-import CargoProfile from '@/components/profile/cargo'
+import ProfileImage from '@/components/Profile/ProfileImage'
+import CargoProfile from '@/components/Profile/Cargo'
 
 interface ContactProps {
   image: string
@@ -21,7 +21,7 @@ const Contact: React.FC<ContactProps> = ({ status, image, name, cargo }) => {
       {status ? (
         <ConteinerContact>
           <Flex style={conteinerCaontactStyle}>
-            <ImageProfile image={image} size="2.5rem" />
+            <ProfileImage image={image} size="2.5rem" />
             <Flex vertical>
               <NameContact color={'#FFFFFF'} name={name} />
               <CargoProfile cargo={cargo} />
@@ -39,7 +39,7 @@ const Contact: React.FC<ContactProps> = ({ status, image, name, cargo }) => {
       ) : (
         <ConteinerContact>
           <Flex style={conteinerCaontactStyle}>
-            <ImageProfile image={image} size="2.5rem" />
+            <ProfileImage image={image} size="2.5rem" />
             <Flex vertical>
               <NameContact color={'#8D8686'} name={name} />
               <CargoProfile cargo={cargo} />

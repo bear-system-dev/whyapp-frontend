@@ -98,7 +98,8 @@ body {
 
 ::-webkit-scrollbar-thumb,
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: #ffffffbf;
+  /* background: #ffffffbf; */
+  background: var(--neutral-100);
   width: 1px;
   height: 1px;
 }

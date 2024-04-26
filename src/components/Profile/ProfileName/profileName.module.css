@@ -1,0 +1,10 @@
+.name {
+    color: var(--neutral-10);
+    margin: 0;
+    width: max-content;
+    line-height: 100%;
+    line-clamp: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    -webkit-text-stroke: 0.25px var(--neutral-800);
+}

@@ -8,6 +8,7 @@ import Contact from './contact'
 import HeaderMenu from './headermenu'
 import OpenMenu from './openMenu'
 import './style.css'
+import styles from "@/pages/App/app.module.css";
 
 const menuConteiner: React.CSSProperties = {
   overflowY: 'scroll',
@@ -66,7 +67,7 @@ const MenuGroup = () => {
         getContainer={document.body}
         style={menuConteiner}
       >
-        <HeaderMenu name={recipientGroup?.nome ?? ''} />
+        <HeaderMenu name={recipientGroup?.nome ?? 'Sem Nome'} />
         <Flex vertical style={{ marginTop: '60px' }}>
           <OnlineConteiner>
             {/* {Members.filter((member) => member.status === true) */}

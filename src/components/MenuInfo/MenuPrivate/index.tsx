@@ -4,7 +4,7 @@ import {
   ImageProfileStyle,
   stutusProfileStyle,
 } from '../style/style'
-import ImageProfile from '@/components/profile/imageProfile'
+import ProfileImage from '@/components/Profile/ProfileImage'
 import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
 import { DescriptionUsers } from '../components/DescriptionUser'
 import NameProfile from '../components/NameProfile'
@@ -34,7 +34,7 @@ export const MenuPrivateUSer = ({
         }}
       />
       <Flex vertical style={ImageProfileStyle}>
-        <ImageProfile
+        <ProfileImage
           image={recipient.avatar}
           key={recipient.nome}
           size="180px"

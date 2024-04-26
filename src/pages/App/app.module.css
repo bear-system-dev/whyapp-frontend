@@ -1,0 +1,37 @@
+.app__layout {
+  position: relative;
+  height: 100svh;
+  width: 100%;
+}
+
+.chat {
+  position: relative;
+  height: 100vh;
+  max-height: 100vh;
+  width: 100vw;
+}
+
+.chat__background {
+  position: relative;
+  background: linear-gradient(rgb(87 132 199) 30%, rgb(162 77 175 / 50%) 100%);
+  mix-blend-mode: screen;
+}
+
+.chat__background::before {
+  position: absolute;
+  /* z-index: -1; */
+  isolation: isolate;
+  content: '';
+  inset: 0;
+  background: url('@/assets/chatBackgroundRepeat.webp');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(-15%) opacity(0.1);
+}
+
+.chat__actionsInUserOrGroup {
+  min-height: 64px;
+  padding: 12px 24px;
+  margin: 0;
+  background-color: var(--neutral-800);
+}

@@ -2,40 +2,14 @@ import whyAppLogo from '@/assets/whyAppLogo.png'
 import { ChatContext } from '@/contexts/chatContext'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
 import { useGetGroupsChats } from '@/utils/hooks/useGroupChats'
-import { Avatar, Button, Divider, Flex } from 'antd'
+import { Avatar, Button, Flex } from 'antd'
 import { useContext } from 'react'
 import { NewChat } from '../NewChat'
 import { Search } from '../Search'
 import { SettingsMenu } from '../SettingsMenu'
-import './styles.css'
+import styles from './aside.module.css'
 
-const mainAsideContainer: React.CSSProperties = {
-  background: 'linear-gradient(to bottom right, #00000040, #C4C4C41A)',
-  height: '100%',
-  padding: '1.5rem 0 1.5rem',
-  width: '100%',
-}
-
-const avatarButtonStyle: React.CSSProperties = {
-  background: 'transparent',
-  border: 'none',
-  padding: '0',
-  height: 50,
-}
-
-const userChatContainerStyle: React.CSSProperties = {
-  maxHeight: '70vh',
-  overflowY: 'auto',
-  scrollbarGutter: 'stable',
-  width: '100%',
-}
-
-const dividerStyle: React.CSSProperties = {
-  background: '#FFFFFFBF',
-  margin: '1rem 0',
-}
-
-export const MainAside = () => {
+export const Aside = () => {
   const { setRecipient, setRecipientGroup } = useContext(ChatContext)
   const { friendsList, usersAndProfileLoading, usersAndProfileError } =
     useGetUsersAndFriends()
@@ -49,14 +23,14 @@ export const MainAside = () => {
   if (groupsError) return 'Ocorreu um erro ao buscar os grupos da sua lista'
 
   return (
-    <Flex vertical style={mainAsideContainer}>
-      <Flex style={userChatContainerStyle} vertical align="center" gap={16}>
+    <aside id='sidebar' className={styles.chat__sidebar}>
+      <Flex className={styles.chat__usersChatContainer} vertical align="center" gap={16}>
         {friendsList?.map((user) => {
           return (
             <Button
               shape="circle"
               key={user.id}
-              style={avatarButtonStyle}
+              className={styles.chat__userAvatar }
               onClick={() => {
                 setRecipient({
                   id: user.id,
@@ -67,7 +41,7 @@ export const MainAside = () => {
               }}
             >
               <Avatar
-                style={{ backgroundColor: '#fff' }}
+                className={styles.chat__avatar}
                 src={user.avatar}
                 size={50}
               />
@@ -80,14 +54,14 @@ export const MainAside = () => {
             <Button
               shape="circle"
               key={group.grupo.id}
-              style={avatarButtonStyle}
+              className={styles.chat__userAvatar}
               onClick={() => {
                 setRecipientGroup(group.grupo)
                 setRecipient(null)
               }}
             >
               <Avatar
-                style={{ backgroundColor: '#fff' }}
+                className={styles.chat__avatar}
                 src={group.grupo.foto}
                 size={50}
               />
@@ -95,14 +69,13 @@ export const MainAside = () => {
           )
         })}
       </Flex>
-      <Divider style={dividerStyle} />
 
-      <Flex vertical flex={1} align="center" justify="end" gap={24}>
+      <Flex vertical align="center" justify="end" gap={24}>
         <NewChat />
         <Search />
         <SettingsMenu />
-        <img src={whyAppLogo} alt="WhyApp Logo" height={24} width={24} />
+        <img src={whyAppLogo} alt="Símbolo de interrogação com partes verdes e brancas que representam a logo da WhyApp" height={24} width={24} />
       </Flex>
-    </Flex>
+    </aside>
   )
 }
