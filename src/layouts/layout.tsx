@@ -39,6 +39,7 @@ const footerStyle: React.CSSProperties = {
 const layoutStyle: React.CSSProperties = {
   zIndex: '3',
   borderRadius: 8,
+  overflow: 'hidden',
   boxSizing: 'border-box',
   height: '100vh',
   maxHeight: '100vh',
