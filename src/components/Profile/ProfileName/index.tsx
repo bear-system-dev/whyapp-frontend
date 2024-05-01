@@ -1,5 +1,5 @@
 import React from 'react'
-import style from "./profileName.module.css"
+import style from './profileName.module.css'
 
 interface Profile {
   user?: string

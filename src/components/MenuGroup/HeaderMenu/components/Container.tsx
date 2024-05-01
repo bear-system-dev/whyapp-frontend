@@ -7,11 +7,11 @@ const headerMenuStyle: React.CSSProperties = {
   padding: '20px 20px',
   width: '100%',
 }
-const Conteiner = ({ children }: { children: ReactNode }) => {
+const Container = ({ children }: { children: ReactNode }) => {
   return (
     <Flex style={headerMenuStyle} justify="space-between">
       {children}
     </Flex>
   )
 }
-export default Conteiner
+export default Container

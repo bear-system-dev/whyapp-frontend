@@ -1,16 +1,16 @@
+import ProfileImage from '@/components/Profile/ProfileImage'
+import { Recipient } from '@/model/RecipientModel'
+import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
+import { ButtonRemove } from '../components/ButtonRemove'
+import { DescriptionUsers } from '../components/DescriptionUser'
+import NameProfile from '../components/NameProfile'
+import { SilenceNotifications } from '../components/SilenceNotification'
 import {
-  ConteinerMenuStyle,
+  ContainerMenuStyle,
   ImageProfileStyle,
   stutusProfileStyle,
 } from '../style/style'
-import ProfileImage from '@/components/Profile/ProfileImage'
-import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
-import { DescriptionUsers } from '../components/DescriptionUser'
-import NameProfile from '../components/NameProfile'
-import { ButtonRemove } from '../components/buttonremove'
-import { SilenceNotifications } from '../components/silenceNotification'
-import { Recipient } from '@/model/RecipientModel'
 
 interface MenuInfoPrivateProps {
   recipient: Recipient
@@ -22,7 +22,7 @@ export const MenuPrivateUSer = ({
   recipient,
 }: MenuInfoPrivateProps) => {
   return (
-    <Flex vertical style={ConteinerMenuStyle}>
+    <Flex vertical style={ContainerMenuStyle}>
       <CloseCircleOutlined
         onClick={onClose}
         style={{

@@ -1,13 +1,12 @@
 import { ReactNode } from 'react'
 
-const ConteinerContact = ({ children }: { children: ReactNode }) => {
+const Container = ({ children }: { children: ReactNode }) => {
   return (
     <div
       style={{
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '12px 28px',
+        alignItems: 'center',
         width: '100%',
       }}
     >
@@ -15,4 +14,4 @@ const ConteinerContact = ({ children }: { children: ReactNode }) => {
     </div>
   )
 }
-export default ConteinerContact
+export default Container

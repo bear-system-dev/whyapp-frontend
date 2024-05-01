@@ -1,5 +1,5 @@
 import { apiFunction } from '@/api/api'
-import { FriendsPostProps } from '@/components/MenuInfo/components/modalAlert'
+import { FriendsPostProps } from '@/components/MenuInfo/components/ModalAlert'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const AddMemberMutation = () => {

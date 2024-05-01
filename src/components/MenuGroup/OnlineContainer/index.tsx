@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-const OnlineConteiner = ({ children }: { children: ReactNode }) => {
+const OnlineContainer = ({ children }: { children: ReactNode }) => {
   return (
     <div style={{ borderBottom: '1px solid #8D8686' }}>
       <p
@@ -17,4 +17,4 @@ const OnlineConteiner = ({ children }: { children: ReactNode }) => {
     </div>
   )
 }
-export default OnlineConteiner
+export default OnlineContainer

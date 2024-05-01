@@ -4,50 +4,56 @@ import { Alert, AlertProps, Flex, Form } from 'antd'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Auth from '../../components/Auth/Auth'
-import styles from '../Auth.module.css'
 import { FormValues } from '../Register/Register'
+import styles from './ResetPasswordCode.module.css'
 
-const Login = () => {
+const ResetPasswordCode = () => {
   const [form] = Form.useForm()
 
   const [isLoading, setIsLoading] = useState(false)
   const [alert, setAlert] = useState<AlertProps | null>(null)
+  const navigate = useNavigate()
 
   const handleSubmit = async (values: FormValues) => {
     setIsLoading(true)
     try {
-      const response = await api.post('/auth/entrar', {
-        email: values.email,
-        senha: values.password,
-      })
-      const inSevenDays = new Date(
-        new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+      const userEmail = Cookies.get('userEmail')
+      const response = await api.post(
+        `/user/reset-password/verify-code?resetCode=${values.code}`,
+        {
+          userEmail,
+        },
       )
-      Cookies.set('token', `${response.data.token}`, { expires: inSevenDays })
-      Cookies.set('userId', response.data.userId, { expires: inSevenDays })
       setAlert({
-        message: 'Login feito com sucesso! Redirecionando para o app!',
+        message: response.data.message,
         type: 'success',
       })
-      window.location.href = import.meta.env.VITE_APP_HOME_URL
+      navigate('/reset-password')
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setAlert({ message: error.response?.data?.message, type: 'error' })
+        console.log(error.response?.data.sessionId)
       }
     }
     setIsLoading(false)
   }
 
   return (
-    <Flex vertical justify="center" gap={40} className={styles.auth_container}>
+    <Flex
+      vertical
+      justify="center"
+      gap={40}
+      className={styles.forgot_password_container}
+    >
       <Flex
         style={{ minHeight: '200px' }}
         vertical
         justify="end"
         align="center"
       >
-        <div className={styles.auth_logo}>
+        <div className={styles.forgot_password_logo}>
           <img src={logo} alt="logo" />
         </div>
       </Flex>
@@ -61,16 +67,15 @@ const Login = () => {
           />
         )}
         <Auth
-          type="login"
+          type="reset-password-code"
           handleForm={form}
           onSubmit={handleSubmit}
           loading={isLoading}
-          authWithGoogle={() => console.log('login with google')}
-          authWithFacebook={() => console.log('login with facebook')}
-          authWithApple={() => console.log('login with apple')}
         />
       </Flex>
+      <div className={styles.forgot_password_container_background_color}></div>
+      <div className={styles.forgot_password_container_background_image}></div>
     </Flex>
   )
 }
-export default Login
+export default ResetPasswordCode

@@ -47,6 +47,14 @@
   border: none !important;
 }
 
+:global(.ant-otp-input) {
+  background: linear-gradient(90deg, #c1c6cd30 0%, #c1c6cd10 101%) !important;
+  border: none;
+  color: #FFF;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
 .input::placeholder,
 .input input::placeholder,
 .input svg {

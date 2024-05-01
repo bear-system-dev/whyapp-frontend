@@ -1,6 +1,7 @@
 .app__layout {
   position: relative;
   height: 100svh;
+  overflow: hidden;
   width: 100%;
 }
 
