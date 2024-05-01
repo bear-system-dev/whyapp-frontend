@@ -23,14 +23,19 @@ export const Aside = () => {
   if (groupsError) return 'Ocorreu um erro ao buscar os grupos da sua lista'
 
   return (
-    <aside id='sidebar' className={styles.chat__sidebar}>
-      <Flex className={styles.chat__usersChatContainer} vertical align="center" gap={16}>
+    <aside id="sidebar" className={styles.chat__sidebar}>
+      <Flex
+        className={styles.chat__usersChatContainer}
+        vertical
+        align="center"
+        gap={16}
+      >
         {friendsList?.map((user) => {
           return (
             <Button
               shape="circle"
               key={user.id}
-              className={styles.chat__userAvatar }
+              className={styles.chat__userAvatar}
               onClick={() => {
                 setRecipient({
                   id: user.id,
@@ -74,7 +79,12 @@ export const Aside = () => {
         <NewChat />
         <Search />
         <SettingsMenu />
-        <img src={whyAppLogo} alt="Símbolo de interrogação com partes verdes e brancas que representam a logo da WhyApp" height={24} width={24} />
+        <img
+          src={whyAppLogo}
+          alt="Símbolo de interrogação com partes verdes e brancas que representam a logo da WhyApp"
+          height={24}
+          width={24}
+        />
       </Flex>
     </aside>
   )

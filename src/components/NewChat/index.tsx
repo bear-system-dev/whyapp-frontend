@@ -7,7 +7,7 @@ import { Button, Divider, Drawer, Flex } from 'antd'
 import { useState } from 'react'
 import { FindUser } from './components/FindUser'
 import { GroupsList } from './components/GroupsList'
-import styles from "./newChat.module.css";
+import styles from './newChat.module.css'
 
 const newChatButtonStyle: React.CSSProperties = {
   background: 'transparent',
@@ -44,11 +44,7 @@ export const NewChat = () => {
         getContainer={document.getElementById('sidebar') || document.body}
         className={styles.chat__drawer}
       >
-        <Flex
-          vertical
-          gap={24}
-          className={styles.chat__drawerContainer}
-        >
+        <Flex vertical gap={24} className={styles.chat__drawerContainer}>
           <Flex align="center" justify="space-between">
             <h2 className={styles.chat__drawerTitle}>{session}</h2>
             <Flex gap={16} align="center" justify="center">

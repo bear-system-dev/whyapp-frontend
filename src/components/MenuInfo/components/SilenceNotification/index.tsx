@@ -1,12 +1,12 @@
+import { DownOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import {
   RadioListStyle,
   SilenceNotificationsStyle,
-  conteinerList,
+  containerList,
   menuSilenceStyle,
   textToggle,
 } from '../../style/style'
-import { DownOutlined } from '@ant-design/icons'
 
 export const SilenceNotifications = () => {
   const [openSilence, setOpenSilence] = useState(false)
@@ -22,15 +22,15 @@ export const SilenceNotifications = () => {
         </div>
         {openSilence && (
           <div style={RadioListStyle}>
-            <div style={conteinerList}>
+            <div style={containerList}>
               <input type="radio" name="min" id="" />
               <label htmlFor="min">Por 30 minutos</label>
             </div>
-            <div style={conteinerList}>
+            <div style={containerList}>
               <input type="radio" name="hour" id="" />
               <label htmlFor="hour">Por 60 minutos</label>
             </div>
-            <div style={conteinerList}>
+            <div style={containerList}>
               <input type="radio" name="infinite" id="" />
               <label htmlFor="infinite">Para sempre</label>
             </div>

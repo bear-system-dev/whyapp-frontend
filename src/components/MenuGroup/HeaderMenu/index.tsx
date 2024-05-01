@@ -1,6 +1,6 @@
 import React from 'react'
+import Container from './components/Container'
 import NameGroup from './components/NameGroup'
-import Conteiner from './components/Conteiner'
 
 interface HeaderMenuProps {
   name: string
@@ -8,9 +8,9 @@ interface HeaderMenuProps {
 
 const HeaderMenu: React.FC<HeaderMenuProps> = ({ name }) => {
   return (
-    <Conteiner>
+    <Container>
       <NameGroup name={name} />
-    </Conteiner>
+    </Container>
   )
 }
 export default HeaderMenu

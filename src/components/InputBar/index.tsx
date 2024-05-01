@@ -8,7 +8,7 @@ import { Button, Flex, Input, Space } from 'antd'
 import { EmojiClickData } from 'emoji-picker-react'
 import { ChangeEvent, KeyboardEvent, useContext, useState } from 'react'
 import { resetButtonStyles } from './../../mocks/mockUserArray'
-import { EmojiLibrary } from './emojiPicker'
+import { EmojiLibrary } from './EmojiPicker'
 import './style.css'
 
 export function InputBar() {

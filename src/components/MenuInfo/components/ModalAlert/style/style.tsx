@@ -1,5 +1,5 @@
 import React from 'react'
-export const modalConteinerStyle: React.CSSProperties = {
+export const modalContainerStyle: React.CSSProperties = {
   position: 'absolute', // Alterado para posição fixa
   top: '50%',
   left: '50%',
@@ -11,7 +11,7 @@ export const modalConteinerStyle: React.CSSProperties = {
   backgroundColor: 'rgba(18, 29, 40, 0.9)',
   borderRadius: '14px',
 }
-export const usersConteinerStyle: React.CSSProperties = {
+export const usersContainerStyle: React.CSSProperties = {
   overflowY: 'scroll',
   height: 'fit-content',
   maxHeight: '150px',
@@ -40,7 +40,7 @@ export const inputStyle: React.CSSProperties = {
   margin: '14px 0',
   border: 'none',
 }
-export const conteinerButtonModal: React.CSSProperties = {
+export const containerButtonModal: React.CSSProperties = {
   margin: '10px 0',
   width: '100%',
 }

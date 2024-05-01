@@ -3,10 +3,10 @@ import ProfileName from '@/components/Profile/ProfileName'
 import { ChatContext } from '@/contexts/chatContext'
 import { Button, Flex } from 'antd'
 import { useContext, useState } from 'react'
-import MenuInfo from '../MenuInfo'
 import { resetButtonStyles } from '../../mocks/mockUserArray'
-import ContactGroup from './components/contactsgroups'
-import HeaderContainer from './components/headerConteiner'
+import MenuInfo from '../MenuInfo'
+import ContactGroup from './components/GroupsContacts'
+import HeaderContainer from './components/HeaderContainer'
 import StatusContact from './components/statusgroups'
 
 interface HeaderProps {

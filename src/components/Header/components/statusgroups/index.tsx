@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface Status {
-  status: "online" | "offline"
+  status: 'online' | 'offline'
 }
 
 const StatusContact: React.FC<Status> = ({ status }) => {
@@ -10,7 +10,8 @@ const StatusContact: React.FC<Status> = ({ status }) => {
       style={{
         fontSize: '.7rem',
         textTransform: 'capitalize',
-        color: status === 'online' ? 'var(--t-primary-20)' : 'var(--neutral-100)',
+        color:
+          status === 'online' ? 'var(--t-primary-20)' : 'var(--neutral-100)',
         fontWeight: '700',
       }}
     >

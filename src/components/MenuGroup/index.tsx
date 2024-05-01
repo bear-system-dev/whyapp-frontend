@@ -1,32 +1,14 @@
 import { ChatContext } from '@/contexts/chatContext'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
 import { Button, Drawer, Flex } from 'antd'
-import React, { useContext, useState } from 'react'
-import OfflineConteiner from './OfflineConteiner'
-import OnlineConteiner from './OnlineConteiner'
-import Contact from './contact'
-import HeaderMenu from './headermenu'
-import OpenMenu from './openMenu'
+import { useContext, useState } from 'react'
+import Contact from './Contact'
+import HeaderMenu from './HeaderMenu'
+import OfflineContainer from './OfflineContainer'
+import OnlineContainer from './OnlineContainer'
+import OpenMenu from './OpenMenu'
+import { MenuContainer, SettingsButtonStyle } from './style'
 import './style.css'
-
-const menuConteiner: React.CSSProperties = {
-  overflowY: 'scroll',
-  backgroundColor: 'rgba(18, 29, 40, 0.9)',
-  backdropFilter: 'blur(2px)',
-  position: 'fixed',
-  left: '66px',
-  bottom: '0',
-  width: '300px',
-  zIndex: 1,
-}
-
-const settingsButtonStyle: React.CSSProperties = {
-  background: 'transparent',
-  position: 'fixed',
-  left: '65px',
-  top: '55px',
-  zIndex: '999',
-}
 
 const MenuGroup = () => {
   const { recipientGroup } = useContext(ChatContext)
@@ -50,7 +32,7 @@ const MenuGroup = () => {
       {recipientGroup !== null && (
         <Button
           className="general-settings-button"
-          style={settingsButtonStyle}
+          style={SettingsButtonStyle}
           shape="circle"
           icon={<OpenMenu />}
           type="primary"
@@ -64,11 +46,11 @@ const MenuGroup = () => {
         onClose={onClose}
         open={settingsMenuOpen}
         getContainer={document.body}
-        style={menuConteiner}
+        style={MenuContainer}
       >
         <HeaderMenu name={recipientGroup?.nome ?? 'Sem Nome'} />
         <Flex vertical style={{ marginTop: '60px' }}>
-          <OnlineConteiner>
+          <OnlineContainer>
             {/* {Members.filter((member) => member.status === true) */}
             {groupUsers?.map(
               (member) =>
@@ -83,8 +65,8 @@ const MenuGroup = () => {
                 ),
             )}
             ,
-          </OnlineConteiner>
-          <OfflineConteiner>
+          </OnlineContainer>
+          <OfflineContainer>
             {groupUsers?.map(
               // .filter((member) => member.status === false)
 
@@ -99,7 +81,7 @@ const MenuGroup = () => {
                   />
                 ),
             )}
-          </OfflineConteiner>
+          </OfflineContainer>
         </Flex>
       </Drawer>
     </>

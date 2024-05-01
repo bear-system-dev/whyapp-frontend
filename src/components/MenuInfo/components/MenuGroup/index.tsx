@@ -1,4 +1,4 @@
-import Contact from '@/components/MenuGroup/contact'
+import Contact from '@/components/MenuGroup/Contact'
 import ProfileImage from '@/components/Profile/ProfileImage'
 import { RecipientGroup } from '@/model/RecipientModel'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
@@ -6,7 +6,7 @@ import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
 import { Tagmodal } from '../..'
 import {
-  ConteinerMenuStyle,
+  ContainerMenuStyle,
   ImageProfileStyle,
   LabelStyle,
   stutusProfileStyle,
@@ -16,7 +16,7 @@ import { ButtonDeleteGroup } from '../ButtonDeleteGroup'
 import { ButtonRemoveMember } from '../ButtonRemoveMember'
 import { DescriptionUsers } from '../DescriptionUser'
 import NameProfile from '../NameProfile'
-import { SilenceNotifications } from '../silenceNotification'
+import { SilenceNotifications } from '../SilenceNotification'
 interface MenuInfoGroupProps {
   recipientGroup: RecipientGroup
   onClose: () => void
@@ -63,7 +63,7 @@ export const MenuInfoGroup = ({
   }
 
   return (
-    <Flex vertical style={ConteinerMenuStyle}>
+    <Flex vertical style={ContainerMenuStyle}>
       <CloseCircleOutlined
         onClick={onClose}
         style={{

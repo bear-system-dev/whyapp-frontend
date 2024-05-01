@@ -1,28 +1,28 @@
+import { newChatButtonStyle } from '@/components/NewChat/components/FindUser'
+import { UserCard } from '@/components/NewChat/components/UserCard'
+import { ChatContext } from '@/contexts/chatContext'
+import { User } from '@/model/UserModel'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
-import { Button, Flex, Modal } from 'antd'
-import React, { useContext, useRef, useState } from 'react'
-import './styles.css'
 import {
   CloseCircleOutlined,
   MinusOutlined,
   PlusOutlined,
 } from '@ant-design/icons'
-import { UserCard } from '@/components/NewChat/components/UserCard'
+import { Button, Flex, Modal } from 'antd'
+import Cookies from 'js-cookie'
+import React, { useContext, useRef, useState } from 'react'
+import { Tagmodal } from '../..'
 import {
+  containerButtonModal,
   headerModalStyle,
   inputStyle,
-  modalConteinerStyle,
+  modalContainerStyle,
+  remModalButton,
   subtitleModalStyle,
   titleModalStyle,
-  usersConteinerStyle,
-  conteinerButtonModal,
-  remModalButton,
+  usersContainerStyle,
 } from './style/style'
-import { User } from '@/model/UserModel'
-import Cookies from 'js-cookie'
-import { ChatContext } from '@/contexts/chatContext'
-import { newChatButtonStyle } from '@/components/NewChat/components/FindUser'
-import { Tagmodal } from '../..'
+import './styles.css'
 
 export type FriendsPostProps = {
   adicionadoPor: string | undefined
@@ -83,11 +83,11 @@ export const ModalAlert = ({
         className="ant-modal-content"
         closable={false}
         getContainer={document.body}
-        style={modalConteinerStyle}
+        style={modalContainerStyle}
         open={isModalOpen}
         onCancel={handleCancel}
       >
-        <Flex vertical align="center" style={modalConteinerStyle}>
+        <Flex vertical align="center" style={modalContainerStyle}>
           <Flex vertical style={headerModalStyle}>
             <Flex justify="space-between">
               <Flex vertical>
@@ -105,7 +105,7 @@ export const ModalAlert = ({
             </Flex>
             <input style={inputStyle} />
           </Flex>
-          <Flex vertical style={usersConteinerStyle}>
+          <Flex vertical style={usersContainerStyle}>
             {tagModal?.title === 'Adicionar membros'
               ? friendsList?.map(
                   (friend) =>
@@ -174,7 +174,7 @@ export const ModalAlert = ({
                     ),
                 )}
           </Flex>
-          <Flex style={conteinerButtonModal} justify="space-around">
+          <Flex style={containerButtonModal} justify="space-around">
             <button className="remModalButton" style={remModalButton}>
               Cancelar
             </button>

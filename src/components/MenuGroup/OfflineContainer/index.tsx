@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-const OfflineConteiner = ({ children }: { children: ReactNode }) => {
+const OfflineContainer = ({ children }: { children: ReactNode }) => {
   return (
     <div>
       <p
@@ -17,4 +17,4 @@ const OfflineConteiner = ({ children }: { children: ReactNode }) => {
     </div>
   )
 }
-export default OfflineConteiner
+export default OfflineContainer

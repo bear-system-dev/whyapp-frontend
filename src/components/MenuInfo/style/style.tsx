@@ -1,4 +1,4 @@
-export const menuConteiner: React.CSSProperties = {
+export const menuContainer: React.CSSProperties = {
   overflowY: 'scroll',
   backgroundColor: 'rgba(18, 29, 40, 0.9)',
   backdropFilter: 'blur(2px)',
@@ -25,7 +25,7 @@ export const stutusProfileStyle: React.CSSProperties = {
   display: 'flex',
   gap: '8px',
 }
-export const ConteinerMenuStyle: React.CSSProperties = {
+export const ContainerMenuStyle: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   height: 'fit-content',
@@ -70,7 +70,7 @@ export const RadioListStyle: React.CSSProperties = {
   gap: '16px',
   borderRadius: '0  0 14px 14px',
 }
-export const conteinerList: React.CSSProperties = {
+export const containerList: React.CSSProperties = {
   display: 'flex',
   gap: '14px',
   fontSize: '.8rem',
