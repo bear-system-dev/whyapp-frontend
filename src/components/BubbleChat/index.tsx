@@ -1,5 +1,4 @@
 import { Message } from '@/model/MessageModel'
-import { Flex } from 'antd'
 import Cookies from 'js-cookie'
 import React, { ReactNode } from 'react'
 import SentAt from './components/sendAt'
@@ -11,35 +10,27 @@ export interface BubbleChatProps extends Message {
 const userId = Cookies.get('userId')
 
 const BubbleChat: React.FC<BubbleChatProps> = ({
-  mensagem,
+  mensagem: message,
   createdAt,
   fromUserId,
 }) => {
   return (
-    <Flex
-      vertical
+    <div
       style={{
-        gap: '0.5rem',
+        flex: '0 1 auto',
+        maxWidth: '100%',
+        height: 'fit-content',
+        padding: '1rem',
+        backgroundColor: `${fromUserId === userId ? 'var(--shadow-primary-500)' : 'var(--neutral-600)'}`,
+        borderRadius: '14px',
+        color: '#FFFFFF',
+        marginLeft: '4rem',
+        wordWrap: 'break-word',
       }}
     >
-      <Flex
-        vertical
-        style={{
-          width: 'fit-content',
-          maxWidth: '70%',
-          height: 'fit-content',
-          padding: '1rem',
-          backgroundColor: `${fromUserId === userId ? '#3F7B40' : '#434455'}`,
-          borderRadius: '14px',
-          color: '#FFFFFF',
-          marginLeft: '4rem',
-          wordWrap: 'break-word',
-        }}
-      >
-        {mensagem}
-        {createdAt && <SentAt time={createdAt} />}
-      </Flex>
-    </Flex>
+      <p style={{ maxWidth: 'min-content' }}>{message}</p>
+      {createdAt && <SentAt time={createdAt} />}
+    </div>
   )
 }
 export default BubbleChat

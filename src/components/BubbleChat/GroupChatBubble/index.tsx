@@ -13,7 +13,7 @@ export interface GroupChatBubbleProps extends GroupMessage {
 const userId = Cookies.get('userId')
 
 const GroupChatBubble: React.FC<GroupChatBubbleProps> = ({
-  mensagem,
+  mensagem:message,
   createdAt,
   usuarioId,
   showProfileContact,
@@ -40,7 +40,7 @@ const GroupChatBubble: React.FC<GroupChatBubbleProps> = ({
           wordWrap: 'break-word',
         }}
       >
-        {mensagem}
+        {message}
         {createdAt && <SentAt time={createdAt} />}
       </Flex>
     </Flex>
