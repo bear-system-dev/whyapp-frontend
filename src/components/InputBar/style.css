@@ -3,19 +3,26 @@
   border-color: transparent;
   outline: none;
 }
+
 *.ant-btn-default:not(:disabled):not(.ant-btn-disabled):active {
-  background: linear-gradient(to bottom right, #C9C9C94D, #C4C4C41A) padding-box, 
-  linear-gradient(to bottom left, #FFFFFF4D, #D3D3D31A) border-box;
+  background: linear-gradient(to bottom right, #C9C9C94D, #C4C4C41A) padding-box,
+    linear-gradient(to bottom left, #FFFFFF4D, #D3D3D31A) border-box;
   border: none;
 }
 
-*, *:focus, *:hover, *:active, *:focus-within, *:focus-visible {
+*,
+*:focus,
+*:hover,
+*:active,
+*:focus-within,
+*:focus-visible {
   box-shadow: none;
   outline: none !important;
   transition: all 0.2s ease;
 }
 
-.ant-btn:active, .ant-btn:focus {
+.ant-btn:active,
+.ant-btn:focus {
   box-shadow: none;
 }
 
@@ -58,29 +65,19 @@
 }
 
 .input-bar {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.268) 0%, rgba(0,0,0,0) 100%);
-  border: 2px solid #454c56;
+  background: linear-gradient(to right, var(--neutral-700) 0%, var(--neutral-900));
+  border: 1px solid var(--neutral-600);
   border-right: none;
-  box-sizing: border-box;
   color: #FFFFFF;
   font-size: 17px;
   height: 100%;
   max-height: 3rem;
-  padding: 0 1rem;
+  padding: 8px 1rem;
   width: 100%;
-  padding-bottom: 5px;
 }
 
 .input-bar::placeholder {
   color: #FFFFFF80;
-}
-
-.input-bar:hover, .input-bar:focus, .input-bar:focus-within, .input-bar:disabled {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.268) 0%, rgba(0,0,0,0) 100%);
-  border: 2px solid #454c56;
-  border-right: none;
-  box-shadow: none;
-  outline: none;
 }
 
 .input-bar .ant-input {
@@ -107,20 +104,23 @@
   transform: scale(1.1);
 }
 
+.send-button:disabled {
+  background: var(--neutral-800) !important;
+}
+
 .send-button.ant-btn-lg.ant-btn-icon-only {
-  background: #454c56;
+  background: var(--neutral-700);
   transition: .2s;
-  border: 2px solid #454c56;
+  border: 1px solid var(--neutral-600);
   border-left: none;
   height: 100%;
   max-height: 3rem;
   width: 6rem;
   max-width: 10vw;
-
 }
 
 .send-button.ant-btn-lg.ant-btn-icon-only:hover {
-  background: #a7adb79b;
+  background: var(--neutral-600)
 }
 
 .send-button svg {
@@ -128,7 +128,7 @@
   transition: transform 0.2s ease;
 }
 
-.send-button svg:hover {
+.send-button:not(:disabled) svg:hover {
   color: #FFFFFF;
   transform: scale(1.1);
 }
