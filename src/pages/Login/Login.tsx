@@ -4,7 +4,6 @@ import { Alert, AlertProps, Flex, Form } from 'antd'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Auth from '../../components/Auth/Auth'
 import styles from '../Auth.module.css'
 import { FormValues } from '../Register/Register'
@@ -14,7 +13,6 @@ const Login = () => {
 
   const [isLoading, setIsLoading] = useState(false)
   const [alert, setAlert] = useState<AlertProps | null>(null)
-  const navigate = useNavigate()
 
   const handleSubmit = async (values: FormValues) => {
     setIsLoading(true)
@@ -32,7 +30,7 @@ const Login = () => {
         message: 'Login feito com sucesso! Redirecionando para o app!',
         type: 'success',
       })
-      navigate('/')
+      window.location.href = import.meta.env.VITE_APP_HOME_URL
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setAlert({ message: error.response?.data?.message, type: 'error' })
