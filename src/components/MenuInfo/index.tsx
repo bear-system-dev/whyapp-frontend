@@ -1,15 +1,15 @@
 import { ChatContext } from '@/contexts/chatContext'
-import { Drawer, notification } from 'antd'
-import React, { useContext, useEffect, useState } from 'react'
-import { menuConteiner } from './style/style.tsx'
-import { FriendsPostProps, ModalAlert } from './components/modalAlert/index.tsx'
-import { AddModalButton } from './components/modalAlert/style/style.tsx'
 import {
   AddMemberMutation,
   RemMemberMutation,
 } from '@/utils/hooks/useAddAndRemMemberGroup.ts'
-import { MenuInfoGroup } from './components/MenuGroup/index.tsx'
+import { Drawer, notification } from 'antd'
+import React, { useContext, useEffect, useState } from 'react'
 import { MenuPrivateUSer } from './MenuPrivate/index.tsx'
+import { MenuInfoGroup } from './components/MenuGroup/index.tsx'
+import { FriendsPostProps, ModalAlert } from './components/ModalAlert/index.tsx'
+import { AddModalButton } from './components/ModalAlert/style/style.tsx'
+import { menuConteiner } from './style/style.tsx'
 
 interface MenuInfoProps {
   open: boolean
@@ -97,6 +97,7 @@ const MenuInfo = ({
 
       {tagModal?.title === 'Adicionar membros' ? (
         <ModalAlert
+          tagModal={tagModal}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           members={members}
@@ -119,6 +120,7 @@ const MenuInfo = ({
         </ModalAlert>
       ) : (
         <ModalAlert
+          tagModal={tagModal}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           members={members}

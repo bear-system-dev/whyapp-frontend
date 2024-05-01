@@ -1,47 +1,44 @@
 import logo from '@/assets/logowhy@2x.png'
+import { api } from '@/lib/api'
 import { Alert, AlertProps, Flex, Form } from 'antd'
+import axios from 'axios'
+import Cookies from 'js-cookie'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Auth from '../../components/Auth/Auth'
+import styles from '../Auth.module.css'
 import { FormValues } from '../Register/Register'
-import styles from '../Auth.module.css';
 
 const ForgotPassword = () => {
   const [form] = Form.useForm()
 
   const [isLoading, setIsLoading] = useState(false)
   const [alert, setAlert] = useState<AlertProps | null>(null)
+  const navigate = useNavigate()
 
   const handleSubmit = async (values: FormValues) => {
     setIsLoading(true)
     try {
-      console.log(values.password)
-      // const response = await api.post('/auth/entrar', {
-      //   email: values.email,
-      //   senha: values.password,
-      // })
-      // const inTenMinutes = new Date(new Date().getTime() + 10 * 60 * 1000)
-      // Cookies.set('token', `${response.data.token}`, { expires: inTenMinutes })
-      // Cookies.set('userId', response.data.userId)
+      const response = await api.post('/user/reset-password/send-code', {
+        userEmail: values.email,
+      })
+      Cookies.set('userEmail', response.data.data.userEmail)
+
       setAlert({
-        message: 'Senha redefinida com sucesso! Redirecionando para o login!',
+        message: 'Código enviado para o e-mail com sucesso!',
         type: 'success',
       })
-      window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
+      navigate('/reset-password/code')
     } catch (error) {
-      // if (axios.isAxiosError(error)) {
-      //   setAlert({ message: error.response?.data?.message, type: 'error' })
-      // }
+      if (axios.isAxiosError(error)) {
+        setAlert({ message: error.response?.data?.message, type: 'error' })
+      }
     }
     setIsLoading(false)
   }
 
   return (
-    <Flex
-      vertical
-      justify="center"
-      gap={40}
-      className={styles.auth_container}
-    >
+    <Flex vertical justify="center" gap={40} className={styles.auth_container}>
       <Flex
         style={{ minHeight: '200px' }}
         vertical

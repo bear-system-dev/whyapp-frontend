@@ -8,7 +8,6 @@ import Contact from './contact'
 import HeaderMenu from './headermenu'
 import OpenMenu from './openMenu'
 import './style.css'
-import styles from "@/pages/App/app.module.css";
 
 const menuConteiner: React.CSSProperties = {
   overflowY: 'scroll',

@@ -1,20 +1,22 @@
+import { Aside } from '@/components/Aside'
 import { Chat } from '@/components/Chat'
 import { ChatContainer } from '@/components/ChatContainer'
-import { InputBar } from '@/components/InputBar'
-import { Aside } from '@/components/Aside'
 import HeaderChat from '@/components/Header'
+import { InputBar } from '@/components/InputBar'
 import MenuGroup from '@/components/MenuGroup'
+import styles from '@/pages/App/app.module.css'
 import { Flex } from 'antd'
 import Cookies from 'js-cookie'
 import { useState } from 'react'
-import styles from "@/pages/App/app.module.css";
+import { useNavigate } from 'react-router-dom'
 
 export const AppLayout = () => {
   const token = Cookies.get('token')
   const userId = Cookies.get('userId')
+  const navigate = useNavigate()
 
   if (!token || !userId) {
-    window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
+    navigate('/login')
   }
 
   const [openModal, setOpenModal] = useState(false)

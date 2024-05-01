@@ -26,6 +26,8 @@ const BubbleChat: React.FC<BubbleChatProps> = ({
         vertical
         style={{
           width: 'fit-content',
+          maxWidth: '70%',
+          height: 'fit-content',
           padding: '1rem',
           backgroundColor: `${fromUserId === userId ? '#3F7B40' : '#434455'}`,
           borderRadius: '14px',
