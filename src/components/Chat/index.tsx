@@ -71,7 +71,10 @@ export const Chat = () => {
             <Flex
               key={index}
               style={{
-                alignSelf: chat.fromUserId === userId ? 'end' : 'start',
+                justifyContent: chat.fromUserId === userId ? 'flex-end' : 'flex-start',
+                maxWidth: '100%',
+                overflow: 'hidden',
+                border: '1px solid red'
               }}
             >
               <BubbleChat
@@ -93,7 +96,7 @@ export const Chat = () => {
                   autoEscape={true}
                   highlightClassName="Highlight"
                   searchWords={[searchTerm]}
-                  textToHighlight={chat.mensagem || ''}
+                  textToHighlight={chat.mensagem}
                 />
               </BubbleChat>
             </Flex>

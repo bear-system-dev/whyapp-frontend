@@ -79,7 +79,7 @@ export function InputBar() {
       </Flex>
       <Space.Compact className="input-bar__container">
         <Input
-          placeholder="type a message..."
+          placeholder="Escreva aqui"
           className="input-bar"
           value={inputValue}
           onChange={handleInputOnChange}
@@ -92,7 +92,7 @@ export function InputBar() {
           size="large"
           type="text"
           onClick={handleSendMessage}
-          disabled={!recipient && !recipientGroup}
+          disabled={!recipient && !recipientGroup || inputValue.trim() === ''}
         />
       </Space.Compact>
     </div>

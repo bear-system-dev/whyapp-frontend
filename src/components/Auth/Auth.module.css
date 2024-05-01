@@ -67,14 +67,14 @@
   letter-spacing: 1px;
   font-weight: 700;
   font-size: 14px;
-  color: var(--shadow-primary-700);
+  color: var(--shadow-primary-700) !important;
   border: none;
   margin-top: 8px;
+  transition: background 200ms ease-in;
 }
 
 .submit:hover {
-  background-color: var(--t-primary-10) !important;
-  color: inherit !important;
+  background-color: var(--shadow-primary-100) !important;
 }
 
 .auth__login_thirty_party {
@@ -90,7 +90,7 @@
 .auth__login_thirty_party:hover,
 .auth__login_thirty_party:active {
   color: var(--pure-secondary) !important;
-  background: var(--neutral-0) !important;
+  background: var(--neutral-20) !important;
 }
 
 .auth__login_thirty_party_label {
@@ -131,6 +131,9 @@
 }
 
 .auth__link {
+  /* Fallback */
+  color: var(--pure-secondary);
+  color: color-mix(in srgb, var(--pure-secondary) 50%, #fff);
   font-weight: 500;
   padding: 8px 0;
 }
@@ -138,6 +141,12 @@
 .auth__link,
 .auth__forgot_password {
   transition: color 100ms ease-in;
+}
+
+.auth__link:hover {
+  /* Fallback */
+  color: var(--pure-secondary);
+  color: color-mix(in srgb, var(--pure-secondary) 20%, #fff);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -161,7 +170,7 @@
   }
 
   .submit {
-    background: var(--t-primary-10)
+    background: var(--t-primary-10);
   }
 
   .submit:hover {
