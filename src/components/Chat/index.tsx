@@ -1,4 +1,3 @@
-import BubbleChat from '@/components/BubbleChat'
 import { ChatContext } from '@/contexts/chatContext'
 import { SearchContext } from '@/contexts/searchContext'
 import {
@@ -11,7 +10,8 @@ import { Alert, Flex } from 'antd'
 import Cookies from 'js-cookie'
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words'
-import GroupChatBubble from '../BubbleChat/GroupChatBubble'
+import ChatBubble from '../ChatBubble'
+import GroupChatBubble from '../ChatBubble/GroupChatBubble'
 import './styles.css'
 
 export const Chat = () => {
@@ -71,13 +71,13 @@ export const Chat = () => {
             <Flex
               key={index}
               style={{
-                justifyContent: chat.fromUserId === userId ? 'flex-end' : 'flex-start',
+                justifyContent:
+                  chat.fromUserId === userId ? 'flex-end' : 'flex-start',
                 maxWidth: '100%',
                 overflow: 'hidden',
-                border: '1px solid red'
               }}
             >
-              <BubbleChat
+              <ChatBubble
                 mensagem={chat.mensagem}
                 createdAt={chat.createdAt}
                 fromUserId={chat.fromUserId}
@@ -98,7 +98,7 @@ export const Chat = () => {
                   searchWords={[searchTerm]}
                   textToHighlight={chat.mensagem}
                 />
-              </BubbleChat>
+              </ChatBubble>
             </Flex>
           )
         })}
