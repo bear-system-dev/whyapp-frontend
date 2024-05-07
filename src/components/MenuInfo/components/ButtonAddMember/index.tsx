@@ -1,6 +1,6 @@
 import { UsergroupAddOutlined } from '@ant-design/icons'
-import { ButtonDefaltStyle } from '../../style/style'
-import '../../style/style.css'
+import { ButtonDefaltStyle } from '../../styles/style'
+import '../../styles/style.css'
 import { ButtonHTMLAttributes } from 'react'
 
 interface ButtonAddMemberProps extends ButtonHTMLAttributes<HTMLButtonElement> {

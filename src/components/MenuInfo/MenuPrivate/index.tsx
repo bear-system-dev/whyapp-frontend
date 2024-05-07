@@ -1,4 +1,5 @@
 import ProfileImage from '@/components/Profile/ProfileImage'
+import defaultAvatar from "@/assets/defaultAvatar.svg"
 import { Recipient } from '@/model/RecipientModel'
 import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
@@ -10,7 +11,7 @@ import {
   ContainerMenuStyle,
   ImageProfileStyle,
   stutusProfileStyle,
-} from '../style/style'
+} from '../styles/style'
 
 interface MenuInfoPrivateProps {
   recipient: Recipient
@@ -35,7 +36,7 @@ export const MenuPrivateUSer = ({
       />
       <Flex vertical style={ImageProfileStyle}>
         <ProfileImage
-          image={recipient.avatar}
+          image={recipient.avatar || defaultAvatar}
           key={recipient.nome}
           size="180px"
         />

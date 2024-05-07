@@ -6,7 +6,7 @@ import {
   containerList,
   menuSilenceStyle,
   textToggle,
-} from '../../style/style'
+} from '../../styles/style'
 
 export const SilenceNotifications = () => {
   const [openSilence, setOpenSilence] = useState(false)

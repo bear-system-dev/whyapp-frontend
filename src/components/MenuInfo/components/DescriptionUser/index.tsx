@@ -1,4 +1,4 @@
-import { LabelStyle, descriptionStyle } from '../../style/style'
+import { LabelStyle, descriptionStyle } from '../../styles/style'
 
 export const DescriptionUsers = ({
   description,

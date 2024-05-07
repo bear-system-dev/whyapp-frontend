@@ -10,7 +10,7 @@ import {
   ImageProfileStyle,
   LabelStyle,
   stutusProfileStyle,
-} from '../../style/style'
+} from '../../styles/style'
 import { ButtonAddMember } from '../ButtonAddMember'
 import { ButtonDeleteGroup } from '../ButtonDeleteGroup'
 import { ButtonRemoveMember } from '../ButtonRemoveMember'

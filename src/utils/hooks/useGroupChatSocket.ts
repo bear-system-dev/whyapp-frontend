@@ -1,4 +1,3 @@
-// useGroupChatSocket.ts
 import { apiFunction } from '@/api/api'
 import { ChatContext } from '@/contexts/chatContext'
 import { GroupMessage } from '@/model/GroupMessageModel'
