@@ -16,7 +16,7 @@ import { ButtonAddMember } from '../ButtonAddMember'
 import { ButtonDeleteGroup } from '../ButtonDeleteGroup'
 import { ButtonRemoveMember } from '../ButtonRemoveMember'
 import { DescriptionUsers } from '../DescriptionUser'
-import NameProfile from '../NameProfile'
+import NameProfile from '../ProfileName'
 import { SilenceNotifications } from '../SilenceNotification'
 interface MenuInfoGroupProps {
   recipientGroup: RecipientGroup

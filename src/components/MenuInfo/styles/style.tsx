@@ -1,24 +1,25 @@
 export const menuContainer: React.CSSProperties = {
-  overflowY: 'scroll',
+  overflowY: 'auto',
   backgroundColor: 'rgba(18, 29, 40, 0.9)',
   backdropFilter: 'blur(2px)',
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   position: 'fixed',
-  right: '0',
-  bottom: '0',
+  insetBlock: 0,
+  right: 0,
   width: '360px',
+  maxWidth: '70vw',
   zIndex: 2,
+  maxHeight: '100%',
 }
 
 export const imageProfileStyle: React.CSSProperties = {
-  margin: '12px 0',
-  marginTop: '54px',
-  padding: '10px 24px',
   display: 'flex',
   alignItems: 'center',
   borderBottom: '.2px solid #848383',
+  padding: '16px 24px',
   width: '100%',
   gap: '16px',
 }
@@ -31,8 +32,10 @@ export const containerMenuStyle: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   height: 'fit-content',
-  overflowY: 'scroll',
+  overflowY: 'auto',
   gap: '24px',
+  padding: '24px',
+  position: 'relative'
 }
 
 export const labelStyle: React.CSSProperties = {
@@ -57,7 +60,7 @@ export const silenceNotificationsStyle: React.CSSProperties = {
   justifyContent: 'center',
   backgroundColor: '#434455',
   flexDirection: 'column',
-  borderRadius: '14px',
+  borderRadius: '8px',
   width: '100%',
 }
 
@@ -95,7 +98,7 @@ export const menuSilenceStyle: React.CSSProperties = {
 
 export const buttonRemoveStyle: React.CSSProperties = {
   cursor: 'pointer',
-  backgroundColor: '#D0454C',
+  backgroundColor: 'var(--shadow-alert-200)',
   color: 'white',
   border: 'none',
   padding: '10px 58px',
@@ -104,9 +107,8 @@ export const buttonRemoveStyle: React.CSSProperties = {
   justifyContent: 'center',
   marginTop: '20px',
   gap: '10px',
-  borderRadius: '14px',
+  borderRadius: '8px',
   fontSize: '1rem',
-  marginBottom: '30px',
 }
 
 export const buttonDefaultStyle: React.CSSProperties = {
@@ -119,6 +121,7 @@ export const buttonDefaultStyle: React.CSSProperties = {
   margin: '0 24px',
   display: 'flex',
   justifyContent: 'center',
+  alignItems: 'center',
   gap: '10px',
   borderRadius: '14px',
   fontSize: '1rem',
