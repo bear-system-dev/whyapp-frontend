@@ -3,7 +3,7 @@ import { RemoveFriendMutation } from '@/utils/hooks/useAddAndRemoveFriends'
 import { UserDeleteOutlined } from '@ant-design/icons'
 import Cookies from 'js-cookie'
 import { useContext } from 'react'
-import { buttonRemoveStyle } from '../../style/style'
+import { buttonRemoveStyle } from '../../styles/style'
 
 interface ButtonRemoveProps {
   onClose: () => void

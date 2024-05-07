@@ -1,6 +1,6 @@
 import { UsergroupAddOutlined } from '@ant-design/icons'
-import { ButtonDefaltStyle } from '../../style/style'
-import '../../style/style.css'
+import { buttonDefaultStyle } from '../../styles/style'
+import '../../styles/style.css'
 import { ButtonHTMLAttributes } from 'react'
 
 interface ButtonAddMemberProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -13,7 +13,7 @@ export const ButtonAddMember = ({
 }: ButtonAddMemberProps) => {
   return (
     <>
-      <button className="button-add-member" style={ButtonDefaltStyle} {...rest}>
+      <button className="button-add-member" style={buttonDefaultStyle} {...rest}>
         <UsergroupAddOutlined />
         {tagButton}
       </button>

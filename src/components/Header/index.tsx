@@ -1,4 +1,5 @@
 import ProfileImage from '@/components/Profile/ProfileImage'
+import defaultAvatar from "@/assets/defaultAvatar.svg"
 import ProfileName from '@/components/Profile/ProfileName'
 import { ChatContext } from '@/contexts/chatContext'
 import { Button, Flex } from 'antd'
@@ -39,14 +40,14 @@ const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
               }}
               onClick={() => setprofileInfoMenuOpen(true)}
             >
-              <ProfileImage size={'45px'} image={recipient?.avatar} />
+              <ProfileImage size={'45px'} image={recipient?.avatar || defaultAvatar} />
             </Button>
             <div
               onClick={() => setprofileInfoMenuOpen(true)}
               style={{ cursor: 'pointer', userSelect: 'none' }}
             >
               <Flex vertical gap={4}>
-                <ProfileName user={recipient?.nome ?? 'Sem nome'} />
+                <ProfileName name={recipient?.nome ?? 'Sem nome'} />
                 <StatusContact status="online" />
               </Flex>
             </div>
@@ -62,14 +63,14 @@ const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
               }}
               onClick={() => setprofileInfoMenuOpen(true)}
             >
-              <ProfileImage size={'45px'} image={recipientGroup?.foto} />
+              <ProfileImage size={'45px'} image={recipientGroup?.foto || defaultAvatar} />
             </Button>
             <div
               onClick={() => setprofileInfoMenuOpen(true)}
               style={{ cursor: 'pointer', userSelect: 'none' }}
             >
               <Flex vertical gap={5}>
-                <ProfileName user={recipientGroup?.nome} />
+                <ProfileName name={recipientGroup?.nome || 'Sem nome'} />
                 <ContactGroup />
               </Flex>
             </div>

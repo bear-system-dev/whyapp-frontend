@@ -28,7 +28,7 @@ export const AddMemberMutation = () => {
 export const RemMemberMutation = () => {
   const queryClient = useQueryClient()
 
-  const remMembersGroup = useMutation({
+  const removeMembersGroup = useMutation({
     mutationFn: ({
       groupId,
       members,
@@ -36,7 +36,7 @@ export const RemMemberMutation = () => {
       groupId: string | undefined
       members: FriendsPostProps[]
     }) => {
-      return apiFunction.remMembersGroup(groupId, members)
+      return apiFunction.removeMembersGroup(groupId, members)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['members'] })
@@ -47,5 +47,5 @@ export const RemMemberMutation = () => {
     },
   })
 
-  return remMembersGroup
+  return removeMembersGroup
 }

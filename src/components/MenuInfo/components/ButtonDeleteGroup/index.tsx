@@ -1,5 +1,5 @@
 import { LogoutOutlined } from '@ant-design/icons'
-import { buttonRemoveStyle } from '../../style/style'
+import { buttonRemoveStyle } from '../../styles/style'
 
 export const ButtonDeleteGroup = () => {
   return (
