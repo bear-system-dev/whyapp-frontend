@@ -11,7 +11,8 @@ export const menuContainer: React.CSSProperties = {
   width: '360px',
   zIndex: 2,
 }
-export const ImageProfileStyle: React.CSSProperties = {
+
+export const imageProfileStyle: React.CSSProperties = {
   margin: '12px 0',
   marginTop: '54px',
   padding: '10px 24px',
@@ -21,31 +22,35 @@ export const ImageProfileStyle: React.CSSProperties = {
   width: '100%',
   gap: '16px',
 }
+
 export const stutusProfileStyle: React.CSSProperties = {
   display: 'flex',
   gap: '8px',
 }
-export const ContainerMenuStyle: React.CSSProperties = {
+export const containerMenuStyle: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   height: 'fit-content',
   overflowY: 'scroll',
   gap: '24px',
 }
-export const LabelStyle: React.CSSProperties = {
+
+export const labelStyle: React.CSSProperties = {
   color: '#A3A3A3',
   fontSize: '.7rem',
   fontWeight: 600,
   textAlign: 'start',
   paddingLeft: '16px',
 }
+
 export const descriptionStyle: React.CSSProperties = {
   color: 'white',
   fontSize: '.8rem',
   padding: '8px 16px',
   width: '98%',
 }
-export const SilenceNotificationsStyle: React.CSSProperties = {
+
+export const silenceNotificationsStyle: React.CSSProperties = {
   cursor: 'pointer',
   display: 'flex',
   alignItems: 'center',
@@ -55,13 +60,15 @@ export const SilenceNotificationsStyle: React.CSSProperties = {
   borderRadius: '14px',
   width: '100%',
 }
+
 export const textToggle: React.CSSProperties = {
   color: 'white',
   padding: '8px 16px',
   minWidth: '100%',
   fontSize: '1rem',
 }
-export const RadioListStyle: React.CSSProperties = {
+
+export const radioListStyle: React.CSSProperties = {
   backgroundColor: '#434455',
   width: '87%',
   padding: '10px 30px',
@@ -70,12 +77,14 @@ export const RadioListStyle: React.CSSProperties = {
   gap: '16px',
   borderRadius: '0  0 14px 14px',
 }
+
 export const containerList: React.CSSProperties = {
   display: 'flex',
   gap: '14px',
   fontSize: '.8rem',
   color: 'white',
 }
+
 export const menuSilenceStyle: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
@@ -83,6 +92,7 @@ export const menuSilenceStyle: React.CSSProperties = {
   justifyContent: 'center',
   gap: '14px',
 }
+
 export const buttonRemoveStyle: React.CSSProperties = {
   cursor: 'pointer',
   backgroundColor: '#D0454C',
@@ -98,7 +108,8 @@ export const buttonRemoveStyle: React.CSSProperties = {
   fontSize: '1rem',
   marginBottom: '30px',
 }
-export const ButtonDefaltStyle: React.CSSProperties = {
+
+export const buttonDefaultStyle: React.CSSProperties = {
   cursor: 'pointer',
   backgroundColor: 'rgba(18, 29, 40, 0.9)',
   color: 'white',

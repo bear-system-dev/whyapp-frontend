@@ -7,9 +7,9 @@ import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
 import { Tagmodal } from '../..'
 import {
-  ContainerMenuStyle,
-  ImageProfileStyle,
-  LabelStyle,
+  containerMenuStyle,
+  imageProfileStyle,
+  labelStyle,
   stutusProfileStyle,
 } from '../../styles/style'
 import { ButtonAddMember } from '../ButtonAddMember'
@@ -64,7 +64,7 @@ export const MenuInfoGroup = ({
   }
 
   return (
-    <Flex vertical style={ContainerMenuStyle}>
+    <Flex vertical style={containerMenuStyle}>
       <CloseCircleOutlined
         onClick={onClose}
         style={{
@@ -75,7 +75,7 @@ export const MenuInfoGroup = ({
           fontSize: '1.5rem',
         }}
       />
-      <Flex vertical style={ImageProfileStyle}>
+      <Flex vertical style={imageProfileStyle}>
         <ProfileImage
           image={recipientGroup.foto || defaultAvatar}
           key={recipientGroup.id}
@@ -106,7 +106,7 @@ export const MenuInfoGroup = ({
               textAlign: 'start',
             }}
           >
-            <p style={LabelStyle}>Membros</p>
+            <p style={labelStyle}>Membros</p>
           </div>
           {groupUsers?.map(
             (member) =>

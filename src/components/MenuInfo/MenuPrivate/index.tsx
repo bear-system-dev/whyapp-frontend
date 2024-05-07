@@ -1,15 +1,16 @@
 import ProfileImage from '@/components/Profile/ProfileImage'
 import defaultAvatar from "@/assets/defaultAvatar.svg"
 import { Recipient } from '@/model/RecipientModel'
-import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
+import { Icon } from '@iconify/react'
+import { UserOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
 import { ButtonRemove } from '../components/ButtonRemove'
 import { DescriptionUsers } from '../components/DescriptionUser'
 import NameProfile from '../components/NameProfile'
 import { SilenceNotifications } from '../components/SilenceNotification'
 import {
-  ContainerMenuStyle,
-  ImageProfileStyle,
+  containerMenuStyle,
+  imageProfileStyle,
   stutusProfileStyle,
 } from '../styles/style'
 
@@ -23,8 +24,9 @@ export const MenuPrivateUSer = ({
   recipient,
 }: MenuInfoPrivateProps) => {
   return (
-    <Flex vertical style={ContainerMenuStyle}>
-      <CloseCircleOutlined
+    <Flex vertical style={containerMenuStyle}>
+      <Icon
+        icon="uil:close"
         onClick={onClose}
         style={{
           color: 'white',
@@ -34,11 +36,11 @@ export const MenuPrivateUSer = ({
           fontSize: '1.5rem',
         }}
       />
-      <Flex vertical style={ImageProfileStyle}>
+      <Flex vertical style={imageProfileStyle}>
         <ProfileImage
           image={recipient.avatar || defaultAvatar}
           key={recipient.nome}
-          size="180px"
+          size="150px"
         />
         <Flex align="center" vertical>
           <NameProfile>{recipient.nome}</NameProfile>

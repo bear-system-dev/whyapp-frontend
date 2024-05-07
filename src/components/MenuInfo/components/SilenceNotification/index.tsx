@@ -1,8 +1,8 @@
 import { DownOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import {
-  RadioListStyle,
-  SilenceNotificationsStyle,
+  radioListStyle,
+  silenceNotificationsStyle,
   containerList,
   menuSilenceStyle,
   textToggle,
@@ -12,7 +12,7 @@ export const SilenceNotifications = () => {
   const [openSilence, setOpenSilence] = useState(false)
   return (
     <>
-      <div style={SilenceNotificationsStyle}>
+      <div style={silenceNotificationsStyle}>
         <div style={menuSilenceStyle}>
           <p style={textToggle}>Silenciar notificações</p>
           <DownOutlined
@@ -21,7 +21,7 @@ export const SilenceNotifications = () => {
           />
         </div>
         {openSilence && (
-          <div style={RadioListStyle}>
+          <div style={radioListStyle}>
             <div style={containerList}>
               <input type="radio" name="min" id="" />
               <label htmlFor="min">Por 30 minutos</label>

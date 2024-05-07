@@ -1,6 +1,6 @@
 import { UsergroupDeleteOutlined } from '@ant-design/icons'
 import '../../styles/style.css'
-import { ButtonDefaltStyle } from '../../styles/style'
+import { buttonDefaultStyle } from '../../styles/style'
 import { ButtonHTMLAttributes } from 'react'
 
 interface ButtonRemMemberProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -13,7 +13,7 @@ export const ButtonRemoveMember = ({
   return (
     <button
       className="button-remove-member"
-      style={ButtonDefaltStyle}
+      style={buttonDefaultStyle}
       {...rest}
     >
       <UsergroupDeleteOutlined />
