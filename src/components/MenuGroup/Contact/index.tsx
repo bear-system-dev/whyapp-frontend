@@ -1,21 +1,21 @@
-import CargoProfile from '@/components/Profile/Role'
+import UserRole from '@/components/Profile/Role'
 import ProfileImage from '@/components/Profile/ProfileImage'
 import { Flex } from 'antd'
 import React from 'react'
 import ContainerContact from './components/ContactContainer'
 import NameContact from './components/NameContact'
 
-interface ContactProps {
+type ContactProps = {
   image: string
   name: string
-  cargo: string
+  role: string
   status: boolean
 }
 const containerCaontactStyle: React.CSSProperties = {
   alignItems: 'center',
   gap: '1rem',
 }
-const Contact: React.FC<ContactProps> = ({ status, image, name, cargo }) => {
+const Contact: React.FC<ContactProps> = ({ status, image, name, role }) => {
   return (
     <>
       {status ? (
@@ -24,7 +24,7 @@ const Contact: React.FC<ContactProps> = ({ status, image, name, cargo }) => {
             <ProfileImage image={image} size="2.5rem" />
             <Flex vertical>
               <NameContact color={'#FFFFFF'} name={name} />
-              <CargoProfile cargo={cargo} />
+              <UserRole role={role} />
             </Flex>
           </Flex>
           <div
@@ -42,7 +42,7 @@ const Contact: React.FC<ContactProps> = ({ status, image, name, cargo }) => {
             <ProfileImage image={image} size="2.5rem" />
             <Flex vertical>
               <NameContact color={'#8D8686'} name={name} />
-              <CargoProfile cargo={cargo} />
+              <UserRole role={role} />
             </Flex>
           </Flex>
           <div

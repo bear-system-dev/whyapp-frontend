@@ -1,4 +1,5 @@
 import Contact from '@/components/MenuGroup/Contact'
+import defaultAvatar from "@/assets/defaultAvatar.svg"
 import ProfileImage from '@/components/Profile/ProfileImage'
 import { RecipientGroup } from '@/model/RecipientModel'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
@@ -76,7 +77,7 @@ export const MenuInfoGroup = ({
       />
       <Flex vertical style={ImageProfileStyle}>
         <ProfileImage
-          image={recipientGroup.foto}
+          image={recipientGroup.foto || defaultAvatar}
           key={recipientGroup.id}
           size="180px"
         />
@@ -114,7 +115,7 @@ export const MenuInfoGroup = ({
                   key={member.id}
                   image={member.avatar}
                   name={member.nome}
-                  cargo=""
+                  role=""
                   status={true}
                 />
               ),
