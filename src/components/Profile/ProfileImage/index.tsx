@@ -1,8 +1,8 @@
 import { Avatar } from 'antd'
 import React from 'react'
 
-interface Image {
-  image?: string
+type Image = {
+  image: string
   size?: string
 }
 const ImageProfile: React.FC<Image> = ({ image, size }) => {

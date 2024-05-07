@@ -1,4 +1,4 @@
-import CargoProfile from '@/components/Profile/Cargo'
+import CargoProfile from '@/components/Profile/Role'
 import ProfileImage from '@/components/Profile/ProfileImage'
 import { Flex } from 'antd'
 import React from 'react'
