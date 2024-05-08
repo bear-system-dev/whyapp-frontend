@@ -7,7 +7,7 @@ const Header = ({ children }: { children: ReactNode }) => {
       flex={1}
       style={{
         backgroundColor: '#17212B',
-        justifyContent: 'space-between',
+        gap: '32px',
         padding: '0 20px',
         alignItems: 'center',
       }}

@@ -52,7 +52,7 @@ export const users = [
 export const username = 'carlin do grau'
 
 export const resetButtonStyles = {
-  backgroundColor: 'transparent',
+  backgroundColor: 'rgba(18, 29, 40, 0.85)',
   border: 'none',
   padding: '0',
   cursor: 'pointer',

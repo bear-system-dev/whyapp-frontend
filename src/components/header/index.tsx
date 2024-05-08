@@ -8,13 +8,16 @@ import { resetButtonStyles } from './../../mocks/mockUserArray'
 import ContactGroup from './components/contactsgroups'
 import HeaderContainer from './components/headerConteiner'
 import StatusContact from './components/statusgroups'
+import { MenuOutlined } from '@ant-design/icons'
 
 interface HeaderProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
   openModal: boolean
+  setOpenMain: React.Dispatch<React.SetStateAction<boolean>>
+  openMain: boolean
 }
 
-const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
+const HeaderChat = ({ setOpenModal, openModal, setOpenMain, openMain }: HeaderProps) => {
   const { recipient, recipientGroup } = useContext(ChatContext)
   const [profileInfoMenuOpen, setprofileInfoMenuOpen] = useState(false)
   const onCloseMenu = () => {
@@ -22,9 +25,21 @@ const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
   }
   return (
     <HeaderContainer>
+        {
+          !openMain && (
+            <MenuOutlined
+            onClick={() => setOpenMain(!openMain)}
+            style={{
+              color: 'white',
+              fontSize: '28px',
+            }} />
+          )
+        }
+
       <Flex
         align="center"
         style={{
+          backgroundColor: 'transparent',
           gap: '20px',
         }}
       >
@@ -39,7 +54,7 @@ const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
               }}
               onClick={() => setprofileInfoMenuOpen(true)}
             >
-              <ImageProfile size={'45px'} image={recipient?.avatar} />
+              <ImageProfile size={'45px'} image={recipient?.avatar}  />
             </Button>
             <div
               onClick={() => setprofileInfoMenuOpen(true)}

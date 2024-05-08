@@ -8,6 +8,7 @@ import { NewChat } from '../NewChat'
 import { Search } from '../Search'
 import { SettingsMenu } from '../SettingsMenu'
 import './styles.css'
+import Drawer from 'antd'
 
 const mainAsideContainer: React.CSSProperties = {
   background: 'linear-gradient(to bottom right, #00000040, #C4C4C41A)',
@@ -35,7 +36,12 @@ const dividerStyle: React.CSSProperties = {
   margin: '1rem 0',
 }
 
-export const MainAside = () => {
+interface MainAsideProps {
+  setOpenMain: React.Dispatch<React.SetStateAction<boolean>>
+  openMain: boolean
+}
+
+export const MainAside = ({openMain, setOpenMain}: MainAsideProps) => {
   const { setRecipient, setRecipientGroup } = useContext(ChatContext)
   const { friendsList, usersAndProfileLoading, usersAndProfileError } =
     useGetUsersAndFriends()
@@ -101,7 +107,7 @@ export const MainAside = () => {
         <NewChat />
         <Search />
         <SettingsMenu />
-        <img src={whyAppLogo} alt="WhyApp Logo" height={24} width={24} />
+        <img onClick={() => setOpenMain(!openMain)} src={whyAppLogo} alt="WhyApp Logo" height={24} width={24} />
       </Flex>
     </Flex>
   )
