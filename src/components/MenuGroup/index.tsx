@@ -59,7 +59,7 @@ const MenuGroup = () => {
                     key={member.id}
                     image={member.avatar}
                     name={member.nome}
-                    cargo=""
+                    role=""
                     status={true}
                   />
                 ),
@@ -76,7 +76,7 @@ const MenuGroup = () => {
                     key={member.id}
                     image={member.avatar}
                     name={member.nome}
-                    cargo=""
+                    role=""
                     status={false}
                   />
                 ),

@@ -3,12 +3,12 @@ import { ChatContext } from '@/contexts/chatContext'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
 import { Flex } from 'antd'
 import { useContext } from 'react'
-import UserRole from './Role'
 import ProfileImage from './ProfileImage'
 import ProfileName from './ProfileName'
+import UserRole from './Role'
 
 type ProfileContactProps = {
-  fromUserId: string
+  fromUserId?: string
 }
 
 export default function ProfileContact({ fromUserId }: ProfileContactProps) {
