@@ -1,0 +1,26 @@
+.theme-select {
+  color: #FFFFFF !important;
+}
+
+:where(.theme-select).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector, 
+.ant-select-dropdown {
+  background-color: #273544FF;
+  border-color: var(--neutral-600);
+}
+
+:where(.theme-select).ant-select-single.ant-select-show-arrow .ant-select-selection-item,
+:where(.theme-select).ant-select-single.ant-select-show-arrow .ant-select-arrow
+ {
+  color: var(--neutral-50);
+  font-weight: 700;
+}
+
+.ant-select-item-option-content {
+  color: var(--neutral-50);
+}
+
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  color: var(--neutral-50);
+  font-weight: 600;
+  background-color: #17212B;
+}

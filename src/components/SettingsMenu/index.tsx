@@ -12,6 +12,7 @@ import Cookies from 'js-cookie'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ChatsMenu } from './components/ChatsMenu'
+import { Customize } from './components/Customize'
 import { ProfileMenu } from './components/ProfileMenu'
 import './style.css'
 
@@ -206,7 +207,7 @@ export const SettingsMenu = () => {
                 {activeButton === 'Gerais' && <></>}
                 {activeButton === 'Perfil' && <ProfileMenu />}
                 {activeButton === 'Chats' && <ChatsMenu />}
-                {activeButton === 'Customização' && <></>}
+                {activeButton === 'Customização' && <Customize />}
                 {activeButton === 'Ajuda' && <></>}
               </Col>
             </Row>
