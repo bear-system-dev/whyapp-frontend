@@ -8,7 +8,7 @@ import { resetButtonStyles } from './../../mocks/mockUserArray'
 import ContactGroup from './components/contactsgroups'
 import HeaderContainer from './components/headerConteiner'
 import StatusContact from './components/statusgroups'
-import { MenuOutlined } from '@ant-design/icons'
+import { AlignLeftOutlined } from '@ant-design/icons'
 
 interface HeaderProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -27,7 +27,8 @@ const HeaderChat = ({ setOpenModal, openModal, setOpenMain, openMain }: HeaderPr
     <HeaderContainer>
         {
           !openMain && (
-            <MenuOutlined
+            
+            <AlignLeftOutlined
             onClick={() => setOpenMain(!openMain)}
             style={{
               color: 'white',
