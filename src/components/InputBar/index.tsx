@@ -18,6 +18,7 @@ export function InputBar() {
   const [inputValue, setInputValue] = useState<string>('')
   const [showEmojis, setShowEmojis] = useState(false)
   const sendNewGroupMessageMutation = SendNewGroupMessage()
+  const [closeIconFile, setcloseIconFile] = useState(true)
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return
@@ -37,6 +38,11 @@ export function InputBar() {
   }
 
   const handleInputOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const message = event?.target.value
+    setcloseIconFile(false)
+    if(message.length === 0) {
+      setcloseIconFile(true)
+    }
     setInputValue(event?.target.value)
   }
 
@@ -48,6 +54,7 @@ export function InputBar() {
   }
 
   const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    event.key === 'Enter' && setcloseIconFile(!closeIconFile)
     event.key === 'Enter' && handleSendMessage()
   }
 
@@ -64,18 +71,21 @@ export function InputBar() {
           <img src={emojiIcon} alt="emoji icon" height={'100%'} />
         </Button>
         <EmojiLibrary open={showEmojis} handleEmoji={handleEmoji} />
-
-        <Button
-          className="attach-button"
-          icon={<PaperClipOutlined style={{ fontSize: 25 }} />}
-          type="text"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          disabled={!recipient && !recipientGroup}
-        />
+        {
+          closeIconFile && (
+            <Button
+              className="attach-button"
+              icon={<PaperClipOutlined style={{ fontSize: 25 }} />}
+              type="text"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              disabled={!recipient && !recipientGroup}
+            />
+          )
+        }
       </Flex>
       <Space.Compact className="input-bar__container">
         <Input

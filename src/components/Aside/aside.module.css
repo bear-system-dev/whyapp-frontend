@@ -13,6 +13,7 @@
   height: 100%;
   padding: 1.5rem 0 1.5rem;
   border-right: .5px solid rgba(255, 255, 255, 0.1);
+  /* animation: to-emerge 1s; */
 }
 
 .chat__sidebar button:not(.chat__userAvatar) {
@@ -26,11 +27,20 @@
 }
 
 .chat__usersChatContainer {
+  animation: to-emerge .5s;
   height: 100%;
   max-height: 70%;
   overflow-y: auto;
   scrollbar-gutter: stable;
   width: 100%;
+  background-color: transparent !important;
+}
+@keyframes to-emerge {
+  from {
+    transform: translateX(-80px);
+  } to {
+    transform: translateX(0);
+  }
 }
 
 .chat__usersChatContainer::after {

@@ -20,13 +20,18 @@ export const AppLayout = () => {
   }
 
   const [openModal, setOpenModal] = useState(false)
+  const [openMainAside, setOpenMainAside] = useState(true)
   return (
     <Flex className={styles.app__layout}>
-      <Aside />
+      {
+        openMainAside && (
+          <Aside openMainAside={openMainAside} setOpenMainAside={setOpenMainAside}/>
+        )
+      }
       <MenuGroup />
       <Flex vertical flex={1}>
         <Flex vertical style={{ height: 60 }}>
-          <HeaderChat openModal={openModal} setOpenModal={setOpenModal} />
+          <HeaderChat openMainAside={openMainAside} setOpenMainAside={setOpenMainAside}  openModal={openModal} setOpenModal={setOpenModal} />
         </Flex>
         <Flex
           flex={1}
