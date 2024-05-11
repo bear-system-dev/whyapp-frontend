@@ -11,7 +11,7 @@ import { resetButtonStyles } from './../../mocks/mockUserArray'
 import { EmojiLibrary } from './EmojiPicker'
 import './style.css'
 
-export function InputBar() {
+export function InputBar({setShowUploud, showUploud}:{showUploud:boolean, setShowUploud: React.Dispatch<React.SetStateAction<boolean>>}) {
   const { recipient, recipientGroup } = useContext(ChatContext)
   const { socket } = useChatSocket()
   const { recipientGroupId } = useGroupChatSocket()
@@ -76,6 +76,7 @@ export function InputBar() {
             <Button
               className="attach-button"
               icon={<PaperClipOutlined style={{ fontSize: 25 }} />}
+              onClick={() => setShowUploud(!showUploud)}
               type="text"
               style={{
                 display: 'flex',

@@ -4,6 +4,7 @@ import { ChatContainer } from '@/components/ChatContainer'
 import HeaderChat from '@/components/Header'
 import { InputBar } from '@/components/InputBar'
 import MenuGroup from '@/components/MenuGroup'
+import { UploudFile } from '@/components/uploudFile'
 import styles from '@/pages/App/app.module.css'
 import { Flex } from 'antd'
 import Cookies from 'js-cookie'
@@ -21,6 +22,7 @@ export const AppLayout = () => {
 
   const [openModal, setOpenModal] = useState(false)
   const [openMainAside, setOpenMainAside] = useState(true)
+  const [showUploud, setShowUploud] = useState(false)
   return (
     <Flex className={styles.app__layout}>
       {
@@ -43,8 +45,13 @@ export const AppLayout = () => {
             <Chat />
           </ChatContainer>
         </Flex>
+          {
+            showUploud && (
+              <UploudFile/>
+            )
+          }
         <Flex className={styles.chat__actionsInUserOrGroup}>
-          <InputBar />
+          <InputBar setShowUploud={setShowUploud} showUploud={showUploud}/>
         </Flex>
       </Flex>
     </Flex>
