@@ -123,8 +123,8 @@
   max-width: 10vw;
 }
 
-.send-button.ant-btn-lg.ant-btn-icon-only:hover:not(:disabled) {
-  background: var(--neutral-600) !important;
+.send-button:not(:disabled).ant-btn-lg.ant-btn-icon-only {
+  background: var(--pure-secondary) !important;
 }
 
 .send-button svg {
