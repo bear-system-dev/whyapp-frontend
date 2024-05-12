@@ -4,6 +4,7 @@ import { ChatContainer } from '@/components/ChatContainer'
 import HeaderChat from '@/components/Header'
 import { InputBar } from '@/components/InputBar'
 import MenuGroup from '@/components/MenuGroup'
+import { UploadFiles } from '@/components/FileUpload'
 import { Welcome } from '@/components/Welcome'
 import { ChatBackgroundContext } from '@/contexts/chatBackgroundContext'
 import { ChatContext } from '@/contexts/chatContext'
@@ -26,6 +27,8 @@ export const AppLayout = () => {
   const { chatBackgroundStyle } = useContext(ChatBackgroundContext)
 
   const [openModal, setOpenModal] = useState(false)
+  const [openMainAside, setOpenMainAside] = useState(true)
+  const [showUpload, setShowUpload] = useState(false)
   return (
     <Flex
       className={
@@ -33,13 +36,17 @@ export const AppLayout = () => {
           ? styles.app__layout
           : styles.chat__welcomeMessageBackground
       }
-    >
-      <Aside />
+    > 
+    {
+      openMainAside && (
+        <Aside openMainAside={openMainAside} setOpenMainAside={setOpenMainAside} />
+      )
+    }
       <MenuGroup />
       {recipient || recipientGroup ? (
         <Flex vertical flex={1}>
           <Flex vertical style={{ height: 60 }}>
-            <HeaderChat openModal={openModal} setOpenModal={setOpenModal} />
+            <HeaderChat openModal={openModal} setOpenModal={setOpenModal} setOpenMainAside={setOpenMainAside} openMainAside={openMainAside}/>
           </Flex>
           <Flex
             flex={1}
@@ -56,9 +63,13 @@ export const AppLayout = () => {
               <Chat />
             </ChatContainer>
           </Flex>
-
+          {
+            showUpload && (
+              <UploadFiles />
+            )
+          }
           <Flex className={styles.chat__actionsInUserOrGroup}>
-            <InputBar />
+            <InputBar setShowUpload={setShowUpload} showUpload={showUpload}/>
           </Flex>
         </Flex>
       ) : (

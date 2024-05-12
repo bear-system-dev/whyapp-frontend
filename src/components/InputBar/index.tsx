@@ -11,13 +11,19 @@ import { resetButtonStyles } from './../../mocks/mockUserArray'
 import { EmojiLibrary } from './EmojiPicker'
 import './style.css'
 
-export function InputBar() {
+type InputBarProps = {
+  setShowUpload: React.Dispatch<React.SetStateAction<boolean>>
+  showUpload: boolean
+}
+
+export function InputBar({setShowUpload, showUpload}:InputBarProps) {
   const { recipient, recipientGroup } = useContext(ChatContext)
   const { socket } = useChatSocket()
   const { recipientGroupId } = useGroupChatSocket()
   const [inputValue, setInputValue] = useState<string>('')
   const [showEmojis, setShowEmojis] = useState(false)
   const sendNewGroupMessageMutation = SendNewGroupMessage()
+  const [closeIconFile, setCloseIconFile] = useState(true)
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return
@@ -37,6 +43,11 @@ export function InputBar() {
   }
 
   const handleInputOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const message = event?.target.value
+    setCloseIconFile(false)
+    if(message.length === 0) {
+      setCloseIconFile(true)
+    }
     setInputValue(event?.target.value)
   }
 
@@ -48,6 +59,7 @@ export function InputBar() {
   }
 
   const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    event.key === 'Enter' && setCloseIconFile(!closeIconFile)
     event.key === 'Enter' && handleSendMessage()
   }
 
@@ -64,18 +76,22 @@ export function InputBar() {
           <img src={emojiIcon} alt="emoji icon" height={'100%'} />
         </Button>
         <EmojiLibrary open={showEmojis} handleEmoji={handleEmoji} />
-
-        <Button
-          className="attach-button"
-          icon={<PaperClipOutlined style={{ fontSize: 25 }} />}
-          type="text"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          disabled={!recipient && !recipientGroup}
-        />
+        {
+          closeIconFile && (
+            <Button
+              className="attach-button"
+              icon={<PaperClipOutlined style={{ fontSize: 25 }} />}
+              onClick={() => setShowUpload(!showUpload)}
+              type="text"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              disabled={!recipient && !recipientGroup}
+            />
+          )
+        }
       </Flex>
       <Space.Compact className="input-bar__container">
         <Input

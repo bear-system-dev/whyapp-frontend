@@ -18,7 +18,7 @@
 .input-bar__background {
   width: 100%;
   display: flex;
-  padding: 0 1rem;
+  /* padding: 0 rem; */
   box-sizing: border-box;
   height: 100%;
   gap: 20px;

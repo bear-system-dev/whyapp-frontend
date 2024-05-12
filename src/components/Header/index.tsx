@@ -9,13 +9,16 @@ import MenuInfo from '../MenuInfo'
 import ContactGroup from './components/GroupsContacts'
 import HeaderContainer from './components/HeaderContainer'
 import StatusContact from './components/statusgroups'
+import { AlignLeftOutlined } from '@ant-design/icons'
 
 interface HeaderProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
   openModal: boolean
+  setOpenMainAside: React.Dispatch<React.SetStateAction<boolean>>
+  openMainAside: boolean
 }
 
-const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
+const HeaderChat = ({ setOpenModal, openModal, setOpenMainAside, openMainAside }: HeaderProps) => {
   const { recipient, recipientGroup } = useContext(ChatContext)
   const [profileInfoMenuOpen, setprofileInfoMenuOpen] = useState(false)
   const onCloseMenu = () => {
@@ -23,6 +26,18 @@ const HeaderChat = ({ setOpenModal, openModal }: HeaderProps) => {
   }
   return (
     <HeaderContainer>
+      {
+        !openMainAside && (
+          <AlignLeftOutlined 
+            onClick={() => setOpenMainAside(!openMainAside)}
+            style={{  
+              color: 'white',
+              fontSize: '1.5rem',
+            }}
+      />
+        )
+      }
+      
       <Flex
         align="center"
         style={{

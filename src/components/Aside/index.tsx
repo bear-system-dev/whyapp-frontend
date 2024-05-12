@@ -9,7 +9,12 @@ import { Search } from '../Search'
 import { SettingsMenu } from '../SettingsMenu'
 import styles from './aside.module.css'
 
-export const Aside = () => {
+interface AsideProps {
+  setOpenMainAside: React.Dispatch<React.SetStateAction<boolean>>
+  openMainAside: boolean
+}
+
+export const Aside = ({openMainAside, setOpenMainAside}: AsideProps) => {
   const { setRecipient, setRecipientGroup } = useContext(ChatContext)
   const { friendsList, usersAndProfileLoading, usersAndProfileError } =
     useGetUsersAndFriends()
@@ -80,6 +85,7 @@ export const Aside = () => {
         <Search />
         <SettingsMenu />
         <img
+          onClick={() => setOpenMainAside(!openMainAside) }
           src={whyAppLogo}
           alt="Símbolo de interrogação com partes verdes e brancas que representam a logo da WhyApp"
           height={24}
