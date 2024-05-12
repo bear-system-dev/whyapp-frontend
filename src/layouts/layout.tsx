@@ -37,12 +37,12 @@ export const AppLayout = () => {
           : styles.chat__welcomeMessageBackground
       }
     > 
-      <Aside />
+      <Aside openMainAside={openMainAside} setOpenMainAside={setOpenMainAside} />
       <MenuGroup />
       {recipient || recipientGroup ? (
         <Flex vertical flex={1}>
           <Flex vertical style={{ height: 60 }}>
-            <HeaderChat openModal={openModal} setOpenModal={setOpenModal} />
+            <HeaderChat openModal={openModal} setOpenModal={setOpenModal} setOpenMainAside={setOpenMainAside} openMainAside={openMainAside}/>
           </Flex>
           <Flex
             flex={1}
@@ -61,7 +61,7 @@ export const AppLayout = () => {
           </Flex>
 
           <Flex className={styles.chat__actionsInUserOrGroup}>
-            <InputBar />
+            <InputBar setShowUploud={setShowUploud} showUploud={showUploud}/>
           </Flex>
         </Flex>
       ) : (
