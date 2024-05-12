@@ -37,7 +37,11 @@ export const AppLayout = () => {
           : styles.chat__welcomeMessageBackground
       }
     > 
-      <Aside openMainAside={openMainAside} setOpenMainAside={setOpenMainAside} />
+    {
+      openMainAside && (
+        <Aside openMainAside={openMainAside} setOpenMainAside={setOpenMainAside} />
+      )
+    }
       <MenuGroup />
       {recipient || recipientGroup ? (
         <Flex vertical flex={1}>
@@ -59,7 +63,11 @@ export const AppLayout = () => {
               <Chat />
             </ChatContainer>
           </Flex>
-
+          {
+            showUploud && (
+              <UploudFile />
+            )
+          }
           <Flex className={styles.chat__actionsInUserOrGroup}>
             <InputBar setShowUploud={setShowUploud} showUploud={showUploud}/>
           </Flex>
