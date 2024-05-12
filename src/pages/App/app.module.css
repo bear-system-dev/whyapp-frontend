@@ -14,7 +14,6 @@
 
 .chat__background {
   position: relative;
-  background: linear-gradient(rgb(87 132 199) 30%, rgb(162 77 175 / 50%) 100%);
   mix-blend-mode: screen;
 }
 
@@ -30,9 +29,18 @@
   filter: brightness(-15%) opacity(0.1);
 }
 
+.chat__welcomeMessageBackground {
+  position: relative;
+  background: #17212B;
+  mix-blend-mode: screen;
+  height: 100svh;
+  overflow: hidden;
+  width: 100%;
+}
+
 .chat__actionsInUserOrGroup {
   min-height: 64px;
   padding: 12px 24px;
   margin: 0;
-  background-color: var(--neutral-800);
+  background-color: #17212B;
 }

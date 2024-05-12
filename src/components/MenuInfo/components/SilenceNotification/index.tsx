@@ -1,27 +1,30 @@
-import { DownOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import {
-  RadioListStyle,
-  SilenceNotificationsStyle,
+  radioListStyle,
+  silenceNotificationsStyle,
   containerList,
   menuSilenceStyle,
   textToggle,
-} from '../../style/style'
+} from '../../styles/style'
+import { Icon } from '@iconify/react/dist/iconify.js'
 
 export const SilenceNotifications = () => {
   const [openSilence, setOpenSilence] = useState(false)
   return (
     <>
-      <div style={SilenceNotificationsStyle}>
-        <div style={menuSilenceStyle}>
+      <div style={silenceNotificationsStyle}>
+        <div style={menuSilenceStyle}
+          onClick={() => setOpenSilence(!openSilence)}>
           <p style={textToggle}>Silenciar notificações</p>
-          <DownOutlined
-            style={{ color: 'white' }}
-            onClick={() => setOpenSilence(!openSilence)}
-          />
+          <div style={{ fontSize: '1rem' }}>
+            <Icon aria-hidden='true'
+              style={{ display: 'block', color: '#fff', opacity: 0.75 }}
+              icon={openSilence ? 'ic:round-keyboard-arrow-up' : 'ic:round-keyboard-arrow-down'}
+            />
+          </div>
         </div>
         {openSilence && (
-          <div style={RadioListStyle}>
+          <div style={radioListStyle}>
             <div style={containerList}>
               <input type="radio" name="min" id="" />
               <label htmlFor="min">Por 30 minutos</label>

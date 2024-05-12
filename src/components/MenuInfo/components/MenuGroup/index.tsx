@@ -1,4 +1,5 @@
 import Contact from '@/components/MenuGroup/Contact'
+import defaultAvatar from "@/assets/defaultAvatar.svg"
 import ProfileImage from '@/components/Profile/ProfileImage'
 import { RecipientGroup } from '@/model/RecipientModel'
 import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
@@ -6,16 +7,16 @@ import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
 import { Tagmodal } from '../..'
 import {
-  ContainerMenuStyle,
-  ImageProfileStyle,
-  LabelStyle,
+  containerMenuStyle,
+  imageProfileStyle,
+  labelStyle,
   stutusProfileStyle,
-} from '../../style/style'
+} from '../../styles/style'
 import { ButtonAddMember } from '../ButtonAddMember'
 import { ButtonDeleteGroup } from '../ButtonDeleteGroup'
 import { ButtonRemoveMember } from '../ButtonRemoveMember'
 import { DescriptionUsers } from '../DescriptionUser'
-import NameProfile from '../NameProfile'
+import NameProfile from '../ProfileName'
 import { SilenceNotifications } from '../SilenceNotification'
 interface MenuInfoGroupProps {
   recipientGroup: RecipientGroup
@@ -63,7 +64,7 @@ export const MenuInfoGroup = ({
   }
 
   return (
-    <Flex vertical style={ContainerMenuStyle}>
+    <Flex vertical style={containerMenuStyle}>
       <CloseCircleOutlined
         onClick={onClose}
         style={{
@@ -74,9 +75,9 @@ export const MenuInfoGroup = ({
           fontSize: '1.5rem',
         }}
       />
-      <Flex vertical style={ImageProfileStyle}>
+      <Flex vertical style={imageProfileStyle}>
         <ProfileImage
-          image={recipientGroup.foto}
+          image={recipientGroup.foto || defaultAvatar}
           key={recipientGroup.id}
           size="180px"
         />
@@ -105,7 +106,7 @@ export const MenuInfoGroup = ({
               textAlign: 'start',
             }}
           >
-            <p style={LabelStyle}>Membros</p>
+            <p style={labelStyle}>Membros</p>
           </div>
           {groupUsers?.map(
             (member) =>
@@ -114,7 +115,7 @@ export const MenuInfoGroup = ({
                   key={member.id}
                   image={member.avatar}
                   name={member.nome}
-                  cargo=""
+                  role=""
                   status={true}
                 />
               ),

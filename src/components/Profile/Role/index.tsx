@@ -1,9 +1,9 @@
 import React from 'react'
 
-interface Cargo {
-  cargo: string
+type Role = {
+  role: string
 }
-const CargoProfile: React.FC<Cargo> = ({ cargo }) => {
+const UserRole: React.FC<Role> = ({ role }) => {
   return (
     <p
       style={{
@@ -16,8 +16,8 @@ const CargoProfile: React.FC<Cargo> = ({ cargo }) => {
         textShadow: 'px 1px 4px #282828',
       }}
     >
-      {cargo}
+      {role}
     </p>
   )
 }
-export default CargoProfile
+export default UserRole

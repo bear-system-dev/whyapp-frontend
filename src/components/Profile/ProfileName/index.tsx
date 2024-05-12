@@ -1,11 +1,11 @@
 import React from 'react'
 import style from './profileName.module.css'
 
-interface Profile {
-  user?: string
+type ProfileNameProps = {
+  name: string
   colortext?: string
 }
-const ProfileName: React.FC<Profile> = ({ user, colortext }) => {
+const ProfileName: React.FC<ProfileNameProps> = ({ name, colortext }) => {
   return (
     <p
       className={style.name}
@@ -13,7 +13,7 @@ const ProfileName: React.FC<Profile> = ({ user, colortext }) => {
         color: colortext,
       }}
     >
-      {user}
+      {name}
     </p>
   )
 }

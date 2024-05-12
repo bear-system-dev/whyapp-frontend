@@ -9,7 +9,7 @@ export interface BubbleChatProps extends Message {
 
 const userId = Cookies.get('userId')
 
-const BubbleChat: React.FC<BubbleChatProps> = ({
+const ChatBubble: React.FC<BubbleChatProps> = ({
   mensagem: message,
   createdAt,
   fromUserId,
@@ -28,9 +28,16 @@ const BubbleChat: React.FC<BubbleChatProps> = ({
         wordWrap: 'break-word',
       }}
     >
-      <p style={{ maxWidth: 'min-content' }}>{message}</p>
+      <p
+        style={{
+          width: 'max-content',
+          maxWidth: '22.5rem',
+        }}
+      >
+        {message}
+      </p>
       {createdAt && <SentAt time={createdAt} />}
     </div>
   )
 }
-export default BubbleChat
+export default ChatBubble

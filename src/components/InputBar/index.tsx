@@ -103,7 +103,7 @@ export function InputBar({setShowUploud, showUploud}:{showUploud:boolean, setSho
           size="large"
           type="text"
           onClick={handleSendMessage}
-          disabled={!recipient && !recipientGroup || inputValue.trim() === ''}
+          disabled={(!recipient && !recipientGroup) || inputValue.trim() === ''}
         />
       </Space.Compact>
     </div>

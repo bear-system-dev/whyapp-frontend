@@ -1,4 +1,4 @@
-import { LabelStyle, descriptionStyle } from '../../style/style'
+import { labelStyle, descriptionStyle } from '../../styles/style'
 
 export const DescriptionUsers = ({
   description,
@@ -21,7 +21,7 @@ export const DescriptionUsers = ({
           textAlign: 'start',
         }}
       >
-        <p style={LabelStyle}>Descrição</p>
+        <p style={labelStyle}>Descrição</p>
       </div>
       <p style={descriptionStyle}>{description}</p>
     </div>

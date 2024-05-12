@@ -13,7 +13,7 @@ export interface GroupChatBubbleProps extends GroupMessage {
 const userId = Cookies.get('userId')
 
 const GroupChatBubble: React.FC<GroupChatBubbleProps> = ({
-  mensagem:message,
+  mensagem: message,
   createdAt,
   usuarioId,
   showProfileContact,
@@ -28,21 +28,29 @@ const GroupChatBubble: React.FC<GroupChatBubbleProps> = ({
       {showProfileContact && usuarioId !== userId && (
         <ProfileContact fromUserId={usuarioId} />
       )}
-      <Flex
-        vertical
+      <div
         style={{
-          width: 'fit-content',
+          flex: '0 1 auto',
+          maxWidth: '100%',
+          height: 'fit-content',
           padding: '1rem',
-          backgroundColor: `${usuarioId === userId ? '#3F7B40' : '#434455'}`,
+          backgroundColor: `${usuarioId === userId ? 'var(--shadow-primary-500)' : 'var(--neutral-600)'}`,
           borderRadius: '14px',
           color: '#FFFFFF',
           marginLeft: '4rem',
           wordWrap: 'break-word',
         }}
       >
-        {message}
+        <p
+          style={{
+            width: 'max-content',
+            maxWidth: '22.5rem',
+          }}
+        >
+          {message}
+        </p>
         {createdAt && <SentAt time={createdAt} />}
-      </Flex>
+      </div>
     </Flex>
   )
 }

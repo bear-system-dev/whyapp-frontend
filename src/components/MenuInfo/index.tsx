@@ -9,7 +9,7 @@ import { MenuPrivateUSer } from './MenuPrivate/index.tsx'
 import { MenuInfoGroup } from './components/MenuGroup/index.tsx'
 import { FriendsPostProps, ModalAlert } from './components/ModalAlert/index.tsx'
 import { AddModalButton } from './components/ModalAlert/style/style.tsx'
-import { menuContainer } from './style/style.tsx'
+import { menuContainer } from './styles/style.tsx'
 
 interface MenuInfoProps {
   open: boolean
@@ -18,7 +18,7 @@ interface MenuInfoProps {
   openModal: boolean
   setprofileInfoMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
-export interface Tagmodal {
+export type Tagmodal = {
   title: string
   subtitle: string
 }
