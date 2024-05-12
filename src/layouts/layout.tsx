@@ -4,7 +4,7 @@ import { ChatContainer } from '@/components/ChatContainer'
 import HeaderChat from '@/components/Header'
 import { InputBar } from '@/components/InputBar'
 import MenuGroup from '@/components/MenuGroup'
-import { UploudFile } from '@/components/uploudFile'
+import { UploadFiles } from '@/components/FileUpload'
 import { Welcome } from '@/components/Welcome'
 import { ChatBackgroundContext } from '@/contexts/chatBackgroundContext'
 import { ChatContext } from '@/contexts/chatContext'
@@ -28,7 +28,7 @@ export const AppLayout = () => {
 
   const [openModal, setOpenModal] = useState(false)
   const [openMainAside, setOpenMainAside] = useState(true)
-  const [showUploud, setShowUploud] = useState(false)
+  const [showUpload, setShowUpload] = useState(false)
   return (
     <Flex
       className={
@@ -64,12 +64,12 @@ export const AppLayout = () => {
             </ChatContainer>
           </Flex>
           {
-            showUploud && (
-              <UploudFile />
+            showUpload && (
+              <UploadFiles />
             )
           }
           <Flex className={styles.chat__actionsInUserOrGroup}>
-            <InputBar setShowUploud={setShowUploud} showUploud={showUploud}/>
+            <InputBar setShowUpload={setShowUpload} showUpload={showUpload}/>
           </Flex>
         </Flex>
       ) : (

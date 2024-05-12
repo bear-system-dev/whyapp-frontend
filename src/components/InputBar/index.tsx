@@ -11,14 +11,19 @@ import { resetButtonStyles } from './../../mocks/mockUserArray'
 import { EmojiLibrary } from './EmojiPicker'
 import './style.css'
 
-export function InputBar({setShowUploud, showUploud}:{showUploud:boolean, setShowUploud: React.Dispatch<React.SetStateAction<boolean>>}) {
+type InputBarProps = {
+  setShowUpload: React.Dispatch<React.SetStateAction<boolean>>
+  showUpload: boolean
+}
+
+export function InputBar({setShowUpload, showUpload}:InputBarProps) {
   const { recipient, recipientGroup } = useContext(ChatContext)
   const { socket } = useChatSocket()
   const { recipientGroupId } = useGroupChatSocket()
   const [inputValue, setInputValue] = useState<string>('')
   const [showEmojis, setShowEmojis] = useState(false)
   const sendNewGroupMessageMutation = SendNewGroupMessage()
-  const [closeIconFile, setcloseIconFile] = useState(true)
+  const [closeIconFile, setCloseIconFile] = useState(true)
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return
@@ -39,9 +44,9 @@ export function InputBar({setShowUploud, showUploud}:{showUploud:boolean, setSho
 
   const handleInputOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const message = event?.target.value
-    setcloseIconFile(false)
+    setCloseIconFile(false)
     if(message.length === 0) {
-      setcloseIconFile(true)
+      setCloseIconFile(true)
     }
     setInputValue(event?.target.value)
   }
@@ -54,7 +59,7 @@ export function InputBar({setShowUploud, showUploud}:{showUploud:boolean, setSho
   }
 
   const handleOnKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    event.key === 'Enter' && setcloseIconFile(!closeIconFile)
+    event.key === 'Enter' && setCloseIconFile(!closeIconFile)
     event.key === 'Enter' && handleSendMessage()
   }
 
@@ -76,7 +81,7 @@ export function InputBar({setShowUploud, showUploud}:{showUploud:boolean, setSho
             <Button
               className="attach-button"
               icon={<PaperClipOutlined style={{ fontSize: 25 }} />}
-              onClick={() => setShowUploud(!showUploud)}
+              onClick={() => setShowUpload(!showUpload)}
               type="text"
               style={{
                 display: 'flex',
