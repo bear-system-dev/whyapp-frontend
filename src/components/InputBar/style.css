@@ -10,17 +10,6 @@
   border: none;
 }
 
-*,
-*:focus,
-*:hover,
-*:active,
-*:focus-within,
-*:focus-visible {
-  box-shadow: none;
-  outline: none !important;
-  transition: all 0.2s ease;
-}
-
 .ant-btn:active,
 .ant-btn:focus {
   box-shadow: none;
