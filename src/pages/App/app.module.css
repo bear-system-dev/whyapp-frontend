@@ -36,6 +36,7 @@
   height: 100svh;
   overflow: hidden;
   width: 100%;
+  text-align: center;
 }
 
 .chat__actionsInUserOrGroup {
