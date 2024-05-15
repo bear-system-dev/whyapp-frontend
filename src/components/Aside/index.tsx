@@ -1,6 +1,6 @@
 import whyAppLogo from '@/assets/whyAppLogo.png'
 import { ChatContext } from '@/contexts/chatContext'
-import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
+import { useGetFriendsList } from '@/utils/hooks/useGetFriendsList'
 import { useGetGroupsChats } from '@/utils/hooks/useGroupChats'
 import { Avatar, Button, Flex } from 'antd'
 import { useContext } from 'react'
@@ -14,18 +14,10 @@ interface AsideProps {
   openMainAside: boolean
 }
 
-export const Aside = ({openMainAside, setOpenMainAside}: AsideProps) => {
+export const Aside = ({ openMainAside, setOpenMainAside }: AsideProps) => {
   const { setRecipient, setRecipientGroup } = useContext(ChatContext)
-  const { friendsList, usersAndProfileLoading, usersAndProfileError } =
-    useGetUsersAndFriends()
-  const { groups, groupsLoading, groupsError } = useGetGroupsChats()
-
-  if (usersAndProfileLoading) return 'Carregando...'
-  if (usersAndProfileError)
-    return 'Ocorreu um erro ao buscar os usuários da sua lista'
-
-  if (groupsLoading) return 'Carregando...'
-  if (groupsError) return 'Ocorreu um erro ao buscar os grupos da sua lista'
+  const { friendsList } = useGetFriendsList()
+  const { groupsList } = useGetGroupsChats()
 
   return (
     <aside id="sidebar" className={styles.chat__sidebar}>
@@ -58,8 +50,7 @@ export const Aside = ({openMainAside, setOpenMainAside}: AsideProps) => {
             </Button>
           )
         })}
-
-        {groups?.map((group) => {
+        {groupsList?.map((group) => {
           return (
             <Button
               shape="circle"
@@ -85,7 +76,7 @@ export const Aside = ({openMainAside, setOpenMainAside}: AsideProps) => {
         <Search />
         <SettingsMenu />
         <img
-          onClick={() => setOpenMainAside(!openMainAside) }
+          onClick={() => setOpenMainAside(!openMainAside)}
           src={whyAppLogo}
           alt="Símbolo de interrogação com partes verdes e brancas que representam a logo da WhyApp"
           height={24}

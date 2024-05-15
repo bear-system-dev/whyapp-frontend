@@ -1,8 +1,8 @@
+import defaultAvatar from '@/assets/defaultAvatar.svg'
 import Contact from '@/components/MenuGroup/Contact'
-import defaultAvatar from "@/assets/defaultAvatar.svg"
 import ProfileImage from '@/components/Profile/ProfileImage'
 import { RecipientGroup } from '@/model/RecipientModel'
-import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
+import { useGetAllUsersList } from '@/utils/hooks/useGetAllUsersList'
 import { CloseCircleOutlined, UserOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
 import { Tagmodal } from '../..'
@@ -36,7 +36,7 @@ export const MenuInfoGroup = ({
   setprofileInfoMenuOpen,
   setIsModalOpen,
 }: MenuInfoGroupProps) => {
-  const { users } = useGetUsersAndFriends()
+  const { users } = useGetAllUsersList()
   const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {
     return users?.find((user) => user.id === groupUser.usuarioId)
   })

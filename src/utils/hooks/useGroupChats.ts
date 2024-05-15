@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 
 export const useGetGroupsChats = () => {
   const {
-    data: groupsData,
+    data,
     isLoading: groupsLoading,
     error: groupsError,
   } = useQuery<GroupResponse[]>({
@@ -20,7 +20,7 @@ export const useGetGroupsChats = () => {
       message: 'Ocorreu um erro ao buscar os usuários da sua lista',
     }
 
-  const groups = groupsData ? Object.values(groupsData).flat() : []
+  const groupsList = data
 
-  return { groups, groupsLoading: false, groupsError: false }
+  return { groupsList, groupsLoading, groupsError }
 }

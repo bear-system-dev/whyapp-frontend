@@ -1,22 +1,24 @@
 import axios from 'axios'
-import getUser from './get/getUser'
-import getMyProfileInfo from './get/getMyProfileInfo'
-import updateMyProfileInfo from './post/updateMyProfileInfo'
 import removeFriend from './delete/removeFriend'
-import addFriend from './post/addFriend'
-import updateMyPassword from './post/updateMyPassword'
-import getUserGroups from './get/getUserGroups'
-import createGroup from './post/createGroup'
 import getGroupMessage from './get/getGroupMessage'
+import getMyProfileInfo from './get/getMyProfileInfo'
+import getUser from './get/getUser'
+import getFriendsList from './get/getUserFriends'
+import getUserGroups from './get/getUserGroups'
+import addFriend from './post/addFriend'
+import createGroup from './post/createGroup'
 import newFriendGroup from './post/newFriendGroup'
-import sendNewGroupMessage from './post/sendNewGroupMessage'
 import removeMembersGroup from './post/removeMembersGroup'
+import sendNewGroupMessage from './post/sendNewGroupMessage'
+import updateMyPassword from './post/updateMyPassword'
+import updateMyProfileInfo from './post/updateMyProfileInfo'
 
 axios.defaults.withCredentials = true
 
 export const apiFunction = {
   getUser,
   getMyProfileInfo,
+  getFriendsList,
   updateMyProfileInfo,
   addFriend,
   removeFriend,

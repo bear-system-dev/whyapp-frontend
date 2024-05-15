@@ -2,7 +2,7 @@ import { ChatContext } from '@/contexts/chatContext'
 import { User } from '@/model/UserModel'
 
 import { RemoveFriendMutation } from '@/utils/hooks/useAddAndRemoveFriends'
-import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
+import { useGetFriendsList } from '@/utils/hooks/useGetFriendsList'
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Flex } from 'antd'
 import Cookies from 'js-cookie'
@@ -22,18 +22,18 @@ const newChatButtonStyle: React.CSSProperties = {
 export const FriendsList = ({ onClose }: FriendsListProps) => {
   const { setRecipient } = useContext(ChatContext)
   const userId = Cookies.get('userId')
-  const { friendsList, usersAndProfileLoading, usersAndProfileError } =
-    useGetUsersAndFriends()
+  const { friendsList, friendsListLoading, friendsListError } =
+    useGetFriendsList()
   const removeFriendMutation = RemoveFriendMutation()
 
   const isFriend = (user: User) => {
-    return friendsList?.some((friend) => friend.id === user.id)
+    return friendsList?.some((friend: User) => friend.id === user.id)
   }
 
   return (
     <Flex vertical style={{ gap: '1.5rem', height: '100%', width: '100%' }}>
-      {usersAndProfileLoading && <h3>carregando...</h3>}
-      {usersAndProfileError && (
+      {friendsListLoading && <h3>carregando...</h3>}
+      {friendsListError && (
         <h3>
           Não foi possível carregar a lista de usuários. Por favor, tente
           novamente.

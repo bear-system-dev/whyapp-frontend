@@ -1,11 +1,11 @@
 import { ChatContext } from '@/contexts/chatContext'
-import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
+import { useGetAllUsersList } from '@/utils/hooks/useGetAllUsersList'
 import { useContext } from 'react'
 import { ContainerStyle, TextStyle } from './style'
 
 const GroupsContacts = () => {
   const { recipientGroup } = useContext(ChatContext)
-  const { users } = useGetUsersAndFriends()
+  const { users } = useGetAllUsersList()
 
   const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {
     return users?.find((user) => user.id === groupUser.usuarioId)

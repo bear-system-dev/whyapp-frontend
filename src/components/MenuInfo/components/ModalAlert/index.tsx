@@ -2,7 +2,8 @@ import { newChatButtonStyle } from '@/components/NewChat/components/FindUser'
 import { UserCard } from '@/components/NewChat/components/UserCard'
 import { ChatContext } from '@/contexts/chatContext'
 import { User } from '@/model/UserModel'
-import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
+import { useGetAllUsersList } from '@/utils/hooks/useGetAllUsersList'
+import { useGetFriendsList } from '@/utils/hooks/useGetFriendsList'
 import {
   CloseCircleOutlined,
   MinusOutlined,
@@ -51,7 +52,7 @@ export const ModalAlert = ({
 }: ModalAlertProps) => {
   const { recipientGroup } = useContext(ChatContext)
   const userId = Cookies.get('userId')
-  const { friendsList } = useGetUsersAndFriends()
+  const { friendsList } = useGetFriendsList()
   const buttonRef = useRef(null)
   const [selectedFriends, setSelectedFriends] = useState<
     Record<string, boolean>
@@ -69,7 +70,7 @@ export const ModalAlert = ({
     }))
   }
 
-  const { users } = useGetUsersAndFriends()
+  const { users } = useGetAllUsersList()
 
   const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {
     return users?.find((user) => user.id === groupUser.usuarioId)
@@ -108,7 +109,7 @@ export const ModalAlert = ({
           <Flex vertical style={usersContainerStyle}>
             {tagModal?.title === 'Adicionar membros'
               ? friendsList?.map(
-                  (friend) =>
+                  (friend: User) =>
                     !groupUsers?.some((member) => member?.id === friend.id) && (
                       <div key={friend.id} className="userCardStyle">
                         <UserCard
@@ -141,7 +142,7 @@ export const ModalAlert = ({
                     ),
                 )
               : friendsList?.map(
-                  (friend) =>
+                  (friend: User) =>
                     groupUsers?.some((member) => member?.id === friend.id) && (
                       <div key={friend.id} className="userCardStyle">
                         <UserCard
