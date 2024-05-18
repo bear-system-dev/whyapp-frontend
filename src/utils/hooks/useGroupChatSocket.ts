@@ -10,7 +10,7 @@ export const useGroupChatSocket = () => {
   const { recipientGroup, setGroupMessages } = useContext(ChatContext)
   const [socket, setSocket] = useState<Socket | null>(null)
 
-  const URL = `${import.meta.env.VITE_APP_BASE_URL}/grupos`
+  const URL = `${import.meta.env.VITE_APP_BASE_URL}/group-chats`
   const userId = Cookies.get('userId')
   const recipientGroupId = recipientGroup?.id
 
