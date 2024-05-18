@@ -1,12 +1,18 @@
+import { Theme, ThemeContext } from '@/contexts/themeContext'
 import { Flex, Select } from 'antd'
+import { useContext } from 'react'
 import { ColorsGrid } from './ColorsGrid'
 import './styles.css'
 
 export const Customize = () => {
-  const handleChange = (value: string) => {
+  const { setTheme } = useContext(ThemeContext)
+
+  const handleThemeChange = (value: Theme) => {
+    setTheme(value)
     console.log(`Tema selecionado ${value}`)
     localStorage.setItem('appTheme', value)
   }
+
   return (
     <Flex vertical align="center" gap={8}>
       <h2 style={{ alignSelf: 'start', fontSize: '1rem' }}>Customização</h2>
@@ -17,7 +23,7 @@ export const Customize = () => {
           <Select
             className="theme-select"
             defaultValue="dark"
-            onChange={handleChange}
+            onChange={handleThemeChange}
             options={[
               { value: 'light', label: 'Claro' },
               { value: 'dark', label: 'Escuro' },

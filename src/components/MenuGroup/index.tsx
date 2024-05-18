@@ -1,5 +1,5 @@
 import { ChatContext } from '@/contexts/chatContext'
-import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
+import { useGetAllUsersList } from '@/utils/hooks/useGetAllUsersList'
 import { Button, Drawer, Flex } from 'antd'
 import { useContext, useState } from 'react'
 import Contact from './Contact'
@@ -13,7 +13,7 @@ import './style.css'
 const MenuGroup = () => {
   const { recipientGroup } = useContext(ChatContext)
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false)
-  const { users } = useGetUsersAndFriends()
+  const { users } = useGetAllUsersList()
 
   const showDrawer = () => {
     setSettingsMenuOpen(true)

@@ -2,12 +2,10 @@ import App from '@/pages/App'
 import ForgotPassword from '@/pages/ForgotPassword/ForgotPassword'
 import ResetPassword from '@/pages/ResetPassword/ResetPassword'
 import ResetPasswordCode from '@/pages/ResetPasswordCode/ResetPasswordCode'
-import Cookies from 'js-cookie'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Login from '../pages/Login/Login'
 import Register from '../pages/Register/Register'
-
-const loggedIn = Cookies.get('token')
+import { RequireAuth } from './RequireAuth'
 
 const router = createBrowserRouter([
   {
@@ -16,7 +14,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: !loggedIn ? <Login /> : <App />,
+    element: (
+      <RequireAuth>
+        <App />
+      </RequireAuth>
+    ),
   },
   {
     path: '/login',

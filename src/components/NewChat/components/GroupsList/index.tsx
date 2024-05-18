@@ -11,7 +11,7 @@ interface GroupsListProps {
 
 export const GroupsList = ({ onClose }: GroupsListProps) => {
   const { setRecipientGroup } = useContext(ChatContext)
-  const { groups, groupsLoading, groupsError } = useGetGroupsChats()
+  const { groupsList, groupsLoading, groupsError } = useGetGroupsChats()
 
   return (
     <Flex vertical gap={16}>
@@ -24,7 +24,7 @@ export const GroupsList = ({ onClose }: GroupsListProps) => {
             novamente.
           </h3>
         )}
-        {groups?.map((group) => {
+        {groupsList?.map((group) => {
           return (
             <div key={group.grupo.id} className="userCardStyle">
               <UserCard

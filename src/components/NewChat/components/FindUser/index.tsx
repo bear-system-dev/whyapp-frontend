@@ -2,7 +2,8 @@ import { ChatContext } from '@/contexts/chatContext'
 import { User } from '@/model/UserModel'
 
 import { AddFriendMutation } from '@/utils/hooks/useAddAndRemoveFriends'
-import { useGetUsersAndFriends } from '@/utils/hooks/useGetUsersAndFriends'
+import { useGetAllUsersList } from '@/utils/hooks/useGetAllUsersList'
+import { useGetFriendsList } from '@/utils/hooks/useGetFriendsList'
 import { PlusOutlined } from '@ant-design/icons'
 import { Button, Flex, Input } from 'antd'
 import Cookies from 'js-cookie'
@@ -37,8 +38,8 @@ export const FindUser = ({ onClose }: FindUserProps) => {
   const { setRecipient } = useContext(ChatContext)
   const [userNameSearchedList, setUserNameSearchedList] = useState('')
   const userId = Cookies.get('userId')
-  const { users, friendsList, usersAndProfileLoading, usersAndProfileError } =
-    useGetUsersAndFriends()
+  const { users, usersListLoading, usersListError } = useGetAllUsersList()
+  const { friendsList } = useGetFriendsList()
   const addFriendMutation = AddFriendMutation()
 
   const onFindInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +48,7 @@ export const FindUser = ({ onClose }: FindUserProps) => {
   }
 
   const isFriend = (user: User) => {
-    return friendsList?.some((friend) => friend.id === user.id)
+    return friendsList?.some((friend: User) => friend.id === user.id)
   }
 
   const filteredUserNameList = users?.filter((user: User) => {
@@ -67,8 +68,8 @@ export const FindUser = ({ onClose }: FindUserProps) => {
         placeholder="busque por um usuário..."
       />
       <Flex vertical style={{ gap: '1.5rem', height: '100%', width: '100%' }}>
-        {usersAndProfileLoading && <h3>carregando...</h3>}
-        {usersAndProfileError && (
+        {usersListLoading && <h3>carregando...</h3>}
+        {usersListError && (
           <h3>
             Não foi possível carregar a lista de usuários. Por favor, tente
             novamente.
