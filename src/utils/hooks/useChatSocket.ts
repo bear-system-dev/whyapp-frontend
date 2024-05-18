@@ -9,7 +9,7 @@ export const useChatSocket = () => {
   const [socket, setSocket] = useState<Socket | null>(null)
   const [chatId, setChatId] = useState<string | null>(null)
 
-  const URL = import.meta.env.VITE_APP_BASE_URL
+  const URL = `${import.meta.env.VITE_APP_BASE_URL}/private-chats`
   const userId = Cookies.get('userId')
   const recipientId = recipient?.id
 
