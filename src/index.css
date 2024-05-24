@@ -92,7 +92,8 @@ body {
 
 /* scrollbar styles */
 ::-webkit-scrollbar {
-  width: 1px;
+  width: 0.1vw;
+  height: 0.1vw;
 }
 
 ::-webkit-scrollbar-thumb,
