@@ -36,7 +36,7 @@ export const AppLayout = () => {
           ? styles.app__layout
           : styles.chat__welcomeMessageBackground
       }
-    > 
+    >
     {
       openMainAside && (
         <Aside openMainAside={openMainAside} setOpenMainAside={setOpenMainAside} />

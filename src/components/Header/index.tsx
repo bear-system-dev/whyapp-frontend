@@ -9,7 +9,7 @@ import MenuInfo from '../MenuInfo'
 import ContactGroup from './components/GroupsContacts'
 import HeaderContainer from './components/HeaderContainer'
 import StatusContact from './components/statusgroups'
-import { AlignLeftOutlined } from '@ant-design/icons'
+import { MenuOutlined } from '@ant-design/icons'
 
 interface HeaderProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -28,7 +28,7 @@ const HeaderChat = ({ setOpenModal, openModal, setOpenMainAside, openMainAside }
     <HeaderContainer>
       {
         !openMainAside && (
-          <AlignLeftOutlined 
+          <MenuOutlined 
             onClick={() => setOpenMainAside(!openMainAside)}
             style={{  
               color: 'white',

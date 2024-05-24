@@ -1,6 +1,7 @@
 .auth_container {
   width: 100%;
   max-width: 420px;
+  height: fit-content;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   padding: 32px;
   backdrop-filter: blur(24px);
