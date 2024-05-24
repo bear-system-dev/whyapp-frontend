@@ -1,10 +1,10 @@
 import { Aside } from '@/components/Aside'
 import { Chat } from '@/components/Chat'
 import { ChatContainer } from '@/components/ChatContainer'
+import { UploadFiles } from '@/components/FileUpload'
 import HeaderChat from '@/components/Header'
 import { InputBar } from '@/components/InputBar'
 import MenuGroup from '@/components/MenuGroup'
-import { UploadFiles } from '@/components/FileUpload'
 import { Welcome } from '@/components/Welcome'
 import { ChatBackgroundContext } from '@/contexts/chatBackgroundContext'
 import { ChatContext } from '@/contexts/chatContext'
@@ -36,17 +36,23 @@ export const AppLayout = () => {
           ? styles.app__layout
           : styles.chat__welcomeMessageBackground
       }
-    > 
-    {
-      openMainAside && (
-        <Aside openMainAside={openMainAside} setOpenMainAside={setOpenMainAside} />
-      )
-    }
+    >
+      {openMainAside && (
+        <Aside
+          openMainAside={openMainAside}
+          setOpenMainAside={setOpenMainAside}
+        />
+      )}
       <MenuGroup />
       {recipient || recipientGroup ? (
-        <Flex vertical flex={1}>
+        <Flex vertical style={{ height: '100dvh' }} flex={1}>
           <Flex vertical style={{ height: 60 }}>
-            <HeaderChat openModal={openModal} setOpenModal={setOpenModal} setOpenMainAside={setOpenMainAside} openMainAside={openMainAside}/>
+            <HeaderChat
+              openModal={openModal}
+              setOpenModal={setOpenModal}
+              setOpenMainAside={setOpenMainAside}
+              openMainAside={openMainAside}
+            />
           </Flex>
           <Flex
             flex={1}
@@ -63,13 +69,9 @@ export const AppLayout = () => {
               <Chat />
             </ChatContainer>
           </Flex>
-          {
-            showUpload && (
-              <UploadFiles />
-            )
-          }
+          {showUpload && <UploadFiles />}
           <Flex className={styles.chat__actionsInUserOrGroup}>
-            <InputBar setShowUpload={setShowUpload} showUpload={showUpload}/>
+            <InputBar setShowUpload={setShowUpload} showUpload={showUpload} />
           </Flex>
         </Flex>
       ) : (
