@@ -65,35 +65,33 @@ const Login = () => {
   }
 
   return (
-    <Flex vertical justify="center" gap={40} className={styles.auth_container}>
-      <Flex
-        style={{ minHeight: '200px' }}
-        vertical
-        justify="end"
-        align="center"
-      >
-        <div className={styles.auth_logo}>
-          <img src={logo} alt="logo" />
-        </div>
-      </Flex>
-      <Flex flex={2} vertical align="center" justify="start">
-        {alert && (
-          <Alert
-            message={alert.message}
-            type={alert.type}
-            showIcon
-            style={{ marginBottom: '1rem' }}
+    <Flex vertical justify="center" gap={30} className={styles.auth_container}>
+      <Flex flex={30} vertical className={styles.auth_sub_conteiner}>
+        <Flex
+          vertical
+          align="center"
+        >
+          <div className={styles.auth_logo}>
+            <img src={logo} alt="logo" />
+          </div>
+        </Flex>
+          {alert && (
+            <Alert
+              message={alert.message}
+              type={alert.type}
+              showIcon
+              style={{ marginBottom: '1rem' }}
+            />
+          )}
+          <Auth
+            type="login"
+            handleForm={form}
+            onSubmit={handleSubmit}
+            loading={isLoading}
+            authWithGoogle={() => console.log('login with google')}
+            authWithFacebook={() => console.log('login with facebook')}
+            authWithApple={() => console.log('login with apple')}
           />
-        )}
-        <Auth
-          type="login"
-          handleForm={form}
-          onSubmit={handleSubmit}
-          loading={isLoading}
-          authWithGoogle={() => console.log('login with google')}
-          authWithFacebook={() => console.log('login with facebook')}
-          authWithApple={() => console.log('login with apple')}
-        />
       </Flex>
     </Flex>
   )

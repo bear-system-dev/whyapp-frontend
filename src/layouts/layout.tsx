@@ -13,6 +13,7 @@ import { Flex } from 'antd'
 import Cookies from 'js-cookie'
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MenuOutlined } from '@ant-design/icons'
 
 export const AppLayout = () => {
   const token = Cookies.get('token')
@@ -36,7 +37,7 @@ export const AppLayout = () => {
           ? styles.app__layout
           : styles.chat__welcomeMessageBackground
       }
-    > 
+    >
     {
       openMainAside && (
         <Aside openMainAside={openMainAside} setOpenMainAside={setOpenMainAside} />
@@ -73,7 +74,27 @@ export const AppLayout = () => {
           </Flex>
         </Flex>
       ) : (
+        <>
+        {
+          !openMainAside && (
+            <>
+               <MenuOutlined
+                onClick={() => setOpenMainAside(!openMainAside)}
+                style={{  
+                  color: 'white',
+                  fontSize: '1.5rem',
+                  position: 'fixed',
+                  top: "0",
+                  padding: '20px',  
+                  zIndex: 1000,  
+                  cursor: 'pointer' 
+                }}
+              />
+            </>
+          )
+        }
         <Welcome />
+        </>
       )}
     </Flex>
   )
