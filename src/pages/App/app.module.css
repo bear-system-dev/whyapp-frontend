@@ -1,6 +1,6 @@
 .app__layout {
   position: relative;
-  height: 100svh;
+  height: 100dvh;
   overflow: hidden;
   width: 100%;
 }
@@ -33,7 +33,7 @@
   position: relative;
   background: #17212B;
   mix-blend-mode: screen;
-  height: 100svh;
+  height: 100dvh;
   overflow: hidden;
   width: 100%;
   text-align: center;
