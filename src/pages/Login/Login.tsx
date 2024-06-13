@@ -1,12 +1,16 @@
+import { apiFunction } from '@/api/api'
 import logo from '@/assets/logowhy@2x.png'
 import { api } from '@/lib/api'
+import { useQueryClient } from '@tanstack/react-query'
 import { Alert, AlertProps, Flex, Form } from 'antd'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useState } from 'react'
+// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Auth from '../../components/Auth/Auth'
-import { FormValues } from '../Register/Register'
 import styles from '../Auth.module.css'
+import { FormValues } from '../Register/Register'
 
 const Login = () => {
   const [form] = Form.useForm()
@@ -14,8 +18,13 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [alert, setAlert] = useState<AlertProps | null>(null)
 
+  const queryClient = useQueryClient()
+
+  const navigate = useNavigate()
+
   const handleSubmit = async (values: FormValues) => {
     setIsLoading(true)
+
     try {
       const response = await api.post('/auth/entrar', {
         email: values.email,
@@ -30,7 +39,23 @@ const Login = () => {
         message: 'Login feito com sucesso! Redirecionando para o app!',
         type: 'success',
       })
-      window.location.href = import.meta.env.VITE_APP_HOME_URL
+
+      await queryClient.prefetchQuery({
+        queryKey: ['friends'],
+        queryFn: apiFunction.getFriendsList,
+      })
+
+      await queryClient.prefetchQuery({
+        queryKey: ['groups'],
+        queryFn: apiFunction.getUserGroups,
+      })
+
+      await queryClient.prefetchQuery({
+        queryKey: ['my-profile-info'],
+        queryFn: apiFunction.getMyProfileInfo,
+      })
+
+      navigate('/')
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setAlert({ message: error.response?.data?.message, type: 'error' })
@@ -40,37 +65,34 @@ const Login = () => {
   }
 
   return (
-    <Flex vertical justify="center" gap={40} className={styles.auth_container}>
-      <Flex
-        style={{ minHeight: '200px' }}
-        vertical
-        justify="end"
-        align="center"
-      >
-        <div className={styles.auth_logo}>
-          <img src={logo} alt="logo" />
-        </div>
-      </Flex>
-      <Flex flex={2} vertical align="center" justify="start">
-        {alert && (
-          <Alert
-            message={alert.message}
-            type={alert.type}
-            showIcon
-            style={{ marginBottom: '1rem' }}
+    <Flex vertical justify="center" gap={30} className={styles.auth_container}>
+      <Flex flex={30} vertical className={styles.auth_sub_conteiner}>
+        <Flex
+          vertical
+          align="center"
+        >
+          <div className={styles.auth_logo}>
+            <img src={logo} alt="logo" />
+          </div>
+        </Flex>
+          {alert && (
+            <Alert
+              message={alert.message}
+              type={alert.type}
+              showIcon
+              style={{ marginBottom: '1rem' }}
+            />
+          )}
+          <Auth
+            type="login"
+            handleForm={form}
+            onSubmit={handleSubmit}
+            loading={isLoading}
+            authWithGoogle={() => console.log('login with google')}
+            authWithFacebook={() => console.log('login with facebook')}
+            authWithApple={() => console.log('login with apple')}
           />
-        )}
-        <Auth
-          type="login"
-          handleForm={form}
-          onSubmit={handleSubmit}
-          loading={isLoading}
-          authWithGoogle={() => console.log('login with google')}
-          authWithFacebook={() => console.log('login with facebook')}
-          authWithApple={() => console.log('login with apple')}
-        />
       </Flex>
-      <div className={styles.auth_container_background_color}></div>
     </Flex>
   )
 }

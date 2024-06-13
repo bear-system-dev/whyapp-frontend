@@ -4,6 +4,7 @@ import { defaultAvatarBase64 } from '@/utils/helpers/toBase64'
 import { Alert, AlertProps, Flex, Form } from 'antd'
 import axios from 'axios'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Auth from '../../components/Auth/Auth'
 import styles from '../Auth.module.css'
 
@@ -11,6 +12,7 @@ export interface FormValues {
   name: string
   email: string
   password: string
+  code: string
 }
 
 const Register = () => {
@@ -18,6 +20,7 @@ const Register = () => {
 
   const [isLoading, setIsLoading] = useState(false)
   const [alert, setAlert] = useState<AlertProps | null>(null)
+  const navigate = useNavigate()
 
   const handleSubmit = async (values: FormValues) => {
     setIsLoading(true)
@@ -32,22 +35,20 @@ const Register = () => {
         message: 'Registro feito com sucesso! Redirecionando para o login!',
         type: 'success',
       })
-      window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
+      navigate('/login')
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setAlert({ message: error.response?.data?.message, type: 'error' })
+        setAlert({
+          message: error.response?.data?.message || 'Algo deu errado.',
+          type: 'error',
+        })
       }
     }
     setIsLoading(false)
   }
 
   return (
-    <Flex
-      vertical
-      justify="center"
-      gap={40}
-      className={styles.auth_container}
-    >
+    <Flex vertical justify="center" gap={40} className={styles.auth_container}>
       <Flex
         style={{ minHeight: '200px' }}
         vertical
@@ -77,7 +78,6 @@ const Register = () => {
           authWithApple={() => console.log('register with apple')}
         />
       </Flex>
-      <div className={styles.auth_container_background_color}></div>
     </Flex>
   )
 }

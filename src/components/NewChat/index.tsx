@@ -7,34 +7,12 @@ import { Button, Divider, Drawer, Flex } from 'antd'
 import { useState } from 'react'
 import { FindUser } from './components/FindUser'
 import { GroupsList } from './components/GroupsList'
+import styles from './newChat.module.css'
 
 const newChatButtonStyle: React.CSSProperties = {
   background: 'transparent',
   border: 'none',
   color: '#E6E6E6',
-}
-
-const drawerStyles: React.CSSProperties = {
-  background: '#1E2C39',
-  borderRadius: '0 8px 8px 0',
-  position: 'absolute',
-  bottom: 60,
-  left: 64,
-  height: 'calc(100vh - 120px)',
-  width: '320px',
-}
-
-const controlButtonStyles: React.CSSProperties = {
-  all: 'unset',
-  color: '#FFFFFF',
-  cursor: 'pointer',
-  fontSize: '1.5rem',
-}
-
-const dividerStyles: React.CSSProperties = {
-  background: '#FFFFFF',
-  height: '2rem',
-  margin: 0,
 }
 
 export const NewChat = () => {
@@ -63,26 +41,22 @@ export const NewChat = () => {
         closable={false}
         onClose={onClose}
         open={newChatDrawerOpen}
-        getContainer={document.body}
-        style={drawerStyles}
+        getContainer={document.getElementById('sidebar') || document.body}
+        className={styles.chat__drawer}
       >
-        <Flex
-          vertical
-          gap={24}
-          style={{ color: '#FFFFFF', height: '100%', padding: '2rem 1rem' }}
-        >
+        <Flex vertical gap={24} className={styles.chat__drawerContainer}>
           <Flex align="center" justify="space-between">
-            <h2 style={{ fontSize: '1.5rem' }}>{session}</h2>
-            <Flex gap={16} align="end" justify="center">
+            <h2 className={styles.chat__drawerTitle}>{session}</h2>
+            <Flex gap={16} align="center" justify="center">
               <Button
-                icon={<UserAddOutlined style={{ fontSize: '1.25rem' }} />}
-                style={controlButtonStyles}
+                icon={<UserAddOutlined />}
+                className={styles.chat__drawerAction}
                 onClick={() => setSession('Nova conversa')}
               />
-              <Divider type="vertical" style={dividerStyles} />
+              <Divider type="vertical" className={styles.chat__drawerDivider} />
               <Button
-                icon={<UsergroupAddOutlined style={{ fontSize: '1.25rem' }} />}
-                style={controlButtonStyles}
+                icon={<UsergroupAddOutlined />}
+                className={styles.chat__drawerAction}
                 onClick={() => setSession('Novo grupo')}
               />
             </Flex>

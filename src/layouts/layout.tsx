@@ -1,88 +1,102 @@
-import chatBackground from '@/assets/chatBackgroundRepeat.webp'
+import { Aside } from '@/components/Aside'
 import { Chat } from '@/components/Chat'
 import { ChatContainer } from '@/components/ChatContainer'
+import { UploadFiles } from '@/components/FileUpload'
+import HeaderChat from '@/components/Header'
 import { InputBar } from '@/components/InputBar'
-import { MainAside } from '@/components/MainAside'
-import HeaderChat from '@/components/header'
-import MenuGroup from '@/components/menuGroup'
+import MenuGroup from '@/components/MenuGroup'
+import { Welcome } from '@/components/Welcome'
+import { ChatBackgroundContext } from '@/contexts/chatBackgroundContext'
+import { ChatContext } from '@/contexts/chatContext'
+import styles from '@/pages/App/app.module.css'
 import { Flex } from 'antd'
 import Cookies from 'js-cookie'
-import React, { useState } from 'react'
-
-const chatDoodleBackgroundStyle: React.CSSProperties = {
-  background: `url(${chatBackground}) center/cover`,
-  backgroundSize: '100%',
-  height: '100%',
-  filter: 'brightness(0) opacity(0.1)',
-  position: 'absolute',
-  width: '100%',
-  top: 0,
-}
-
-const siderStyle: React.CSSProperties = {
-  textAlign: 'center',
-  lineHeight: '120px',
-  color: '#fff',
-  backgroundColor: '#17212B',
-  zIndex: 4,
-  width: 65,
-  minWidth: 65,
-}
-
-const footerStyle: React.CSSProperties = {
-  height: 60,
-  padding: '0 1rem',
-  margin: 0,
-  backgroundColor: '#17212B',
-}
-
-const layoutStyle: React.CSSProperties = {
-  zIndex: '3',
-  borderRadius: 8,
-  boxSizing: 'border-box',
-  height: '100vh',
-  maxHeight: '100vh',
-  width: '100vw',
-}
+import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { MenuOutlined } from '@ant-design/icons'
 
 export const AppLayout = () => {
   const token = Cookies.get('token')
   const userId = Cookies.get('userId')
+  const navigate = useNavigate()
 
   if (!token || !userId) {
-    window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
+    navigate('/login')
   }
 
+  const { recipient, recipientGroup } = useContext(ChatContext)
+  const { chatBackgroundStyle } = useContext(ChatBackgroundContext)
+
   const [openModal, setOpenModal] = useState(false)
+  const [openMainAside, setOpenMainAside] = useState(true)
+  const [showUpload, setShowUpload] = useState(false)
   return (
-    <Flex style={layoutStyle}>
-      <Flex style={siderStyle}>
-        <MainAside />
-      </Flex>
+    <Flex
+      className={
+        recipient || recipientGroup
+          ? styles.app__layout
+          : styles.chat__welcomeMessageBackground
+      }
+    >
+    {
+      openMainAside && (
+        <Aside openMainAside={openMainAside} setOpenMainAside={setOpenMainAside} />
+      )
+    }
       <MenuGroup />
-      <Flex vertical flex={1}>
-        <Flex vertical style={{ height: 60 }}>
-          <HeaderChat openModal={openModal} setOpenModal={setOpenModal} />
+      {recipient || recipientGroup ? (
+        <Flex vertical style={{ height: '100dvh' }} flex={1}>
+          <Flex vertical style={{ height: 60 }}>
+            <HeaderChat
+              openModal={openModal}
+              setOpenModal={setOpenModal}
+              setOpenMainAside={setOpenMainAside}
+              openMainAside={openMainAside}
+            />
+          </Flex>
+          <Flex
+            flex={1}
+            vertical
+            align="center"
+            className={styles.chat__background}
+            style={{
+              background: `linear-gradient(${chatBackgroundStyle.color1}, ${
+                chatBackgroundStyle.color2 || 'transparent'
+              })`,
+            }}
+          >
+            <ChatContainer>
+              <Chat />
+            </ChatContainer>
+          </Flex>
+          {showUpload && <UploadFiles />}
+          <Flex className={styles.chat__actionsInUserOrGroup}>
+            <InputBar setShowUpload={setShowUpload} showUpload={showUpload} />
+          </Flex>
         </Flex>
-        <Flex
-          flex={1}
-          vertical
-          align="center"
-          style={{
-            position: 'relative',
-            background:
-              'linear-gradient(rgb(87 132 199) 30%, rgb(162 77 175 / 50%) 100%)',
-          }}
-        >
-          <ChatContainer>
-            <Chat />
-          </ChatContainer>
-          <div style={chatDoodleBackgroundStyle}></div>
-        </Flex>
-        <Flex style={footerStyle} vertical>
-          <InputBar />
-        </Flex>
-      </Flex>
+      ) : (
+        <>
+        {
+          !openMainAside && (
+            <>
+               <MenuOutlined
+                onClick={() => setOpenMainAside(!openMainAside)}
+                style={{  
+                  color: 'white',
+                  fontSize: '1.5rem',
+                  position: 'fixed',
+                  top: "0",
+                  padding: '20px',  
+                  zIndex: 1000,  
+                  cursor: 'pointer' 
+                }}
+              />
+            </>
+          )
+        }
+        <Welcome />
+        </>
+      )}
     </Flex>
   )
 }

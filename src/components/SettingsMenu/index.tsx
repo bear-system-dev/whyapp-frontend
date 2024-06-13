@@ -10,7 +10,9 @@ import {
 import { Button, Col, Divider, Drawer, Row } from 'antd'
 import Cookies from 'js-cookie'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ChatsMenu } from './components/ChatsMenu'
+import { Customize } from './components/Customize'
 import { ProfileMenu } from './components/ProfileMenu'
 import './style.css'
 
@@ -80,6 +82,7 @@ export const SettingsMenu = () => {
 
   // Menu Button functions
   const [activeButton, setActiveButton] = useState('')
+  const navigate = useNavigate()
   const handleButtonClick = (buttonName: React.SetStateAction<string>) => {
     setActiveButton(buttonName)
   }
@@ -183,13 +186,13 @@ export const SettingsMenu = () => {
                     alert(
                       'Logout feito com sucesso! Redirecionando para a página de Login...',
                     )
-                    window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
+                    navigate('/login')
                   } catch (error) {
                     console.error('Validation failed:', error)
                     alert(
                       'Não foi possível fazer Logout. Redirecionando para a página de Login...',
                     )
-                    window.location.href = `${import.meta.env.VITE_APP_HOME_URL}/login`
+                    navigate('/login')
                   }
                 }}
               >
@@ -204,7 +207,7 @@ export const SettingsMenu = () => {
                 {activeButton === 'Gerais' && <></>}
                 {activeButton === 'Perfil' && <ProfileMenu />}
                 {activeButton === 'Chats' && <ChatsMenu />}
-                {activeButton === 'Customização' && <></>}
+                {activeButton === 'Customização' && <Customize />}
                 {activeButton === 'Ajuda' && <></>}
               </Col>
             </Row>

@@ -1,4 +1,3 @@
-import BubbleChat from '@/components/bubblechat'
 import { ChatContext } from '@/contexts/chatContext'
 import { SearchContext } from '@/contexts/searchContext'
 import {
@@ -11,6 +10,8 @@ import { Alert, Flex } from 'antd'
 import Cookies from 'js-cookie'
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words'
+import ChatBubble from '../ChatBubble'
+import GroupChatBubble from '../ChatBubble/GroupChatBubble'
 import './styles.css'
 
 export const Chat = () => {
@@ -40,6 +41,8 @@ export const Chat = () => {
     return () => clearInterval(checkTokenInterval)
   }, [])
 
+  const previousUserIdRef = useRef<string | undefined>()
+
   return (
     <>
       {tokenExpired && (
@@ -68,10 +71,13 @@ export const Chat = () => {
             <Flex
               key={index}
               style={{
-                alignSelf: chat.fromUserId === userId ? 'end' : 'start',
+                justifyContent:
+                  chat.fromUserId === userId ? 'flex-end' : 'flex-start',
+                maxWidth: '100%',
+                overflow: 'hidden',
               }}
             >
-              <BubbleChat
+              <ChatBubble
                 mensagem={chat.mensagem}
                 createdAt={chat.createdAt}
                 fromUserId={chat.fromUserId}
@@ -90,9 +96,9 @@ export const Chat = () => {
                   autoEscape={true}
                   highlightClassName="Highlight"
                   searchWords={[searchTerm]}
-                  textToHighlight={chat.mensagem || ''}
+                  textToHighlight={chat.mensagem}
                 />
-              </BubbleChat>
+              </ChatBubble>
             </Flex>
           )
         })}
@@ -104,6 +110,10 @@ export const Chat = () => {
             matchCounts,
             index,
           )
+          const showProfileContact =
+            chat.usuarioId !== previousUserIdRef.current
+          previousUserIdRef.current = chat.usuarioId
+
           return (
             <Flex
               key={index}
@@ -111,10 +121,11 @@ export const Chat = () => {
                 alignSelf: chat.usuarioId === userId ? 'end' : 'start',
               }}
             >
-              <BubbleChat
+              <GroupChatBubble
                 mensagem={chat.mensagem || ''}
                 createdAt={chat.createdAt}
-                fromUserId={chat.usuarioId}
+                usuarioId={chat.usuarioId}
+                showProfileContact={showProfileContact}
               >
                 <Highlighter
                   style={{
@@ -132,7 +143,7 @@ export const Chat = () => {
                   searchWords={[searchTerm]}
                   textToHighlight={chat.mensagem || ''}
                 />
-              </BubbleChat>
+              </GroupChatBubble>
             </Flex>
           )
         })}

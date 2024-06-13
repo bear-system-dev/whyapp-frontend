@@ -1,26 +1,24 @@
-import { resetButtonStyles } from '@/mocks/mockUserArray'
 import { FormValues } from '@/pages/Register/Register'
 import {
   ArrowLeftOutlined,
   LockOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Icon } from '@iconify/react';
-import { Button, Flex, Form, FormInstance, Input, Space } from 'antd'
+import { Icon } from '@iconify/react'
+import { Button, Flex, Form, FormInstance, Input } from 'antd'
 import { Dispatch, MouseEventHandler } from 'react'
 import { PiIdentificationCard } from 'react-icons/pi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from './Auth.module.css'
 import AuthContainer from './AuthContainer'
 
-const authButtonStyles = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}
-
 type Props = {
-  type: string
+  type:
+    | 'register'
+    | 'login'
+    | 'forgot-password'
+    | 'reset-password-code'
+    | 'reset-password'
   handleForm: FormInstance<FormValues>
   onSubmit: Dispatch<FormValues>
   authWithGoogle?: MouseEventHandler<HTMLElement>
@@ -38,46 +36,46 @@ const Auth = ({
   authWithFacebook,
   authWithApple,
 }: Props) => {
+  const navigate = useNavigate()
   return (
     <AuthContainer>
-      {type === 'forgot-password' && (
-        <Link to="/login">
-          <Button
-            style={{
-              ...resetButtonStyles,
-              color: '#39FF14',
-            }}
-            icon={<ArrowLeftOutlined />}
-          >
-            Retornar
-          </Button>
-        </Link>
+      {(type === 'forgot-password' ||
+        type === 'reset-password-code' ||
+        type === 'reset-password') && (
+        <Button
+          onClick={() => navigate(-1)}
+          className={styles.auth__return_button}
+          icon={<ArrowLeftOutlined />}
+        >
+          Retornar
+        </Button>
       )}
 
-      <Space direction="vertical" size={5}>
-        <h1
-          className={styles.auth__title}
-        >
+      {/* Title and subtitle */}
+      <Flex style={{ fontFamily: 'var(--secondary-font)' }} vertical gap={10}>
+        <h1 className={styles.auth__title}>
           {type === 'login'
             ? 'Entrar'
-            : type === 'forgot-password'
+            : type === 'forgot-password' ||
+                type === 'reset-password-code' ||
+                type === 'reset-password'
               ? 'Redefinir senha'
               : 'Criar uma conta'}
         </h1>
-        <div className={styles.auth__description}>
+        <p className={styles.auth__description}>
           {type === 'login'
             ? 'Bem-vindo ao WhyApp! Entre com sua conta para retomar suas conversas'
             : type === 'forgot-password'
-              ? 'Esqueceu ou precisa alterar a senha? Sem problemas!'
-              : 'Bem-vindo ao WhyApp! Registre-se para que possa começar a conversar'}
-        </div>
-      </Space>
-      <Form
-        
-        form={handleForm}
-        onFinish={onSubmit}
-        layout="vertical"
-      >
+              ? 'Vamos enviar um código de 6 digitos para o seu e-mail.'
+              : type === 'reset-password-code'
+                ? 'Por favor digite o código de 6 digitos que enviamos para o seu e-mail'
+                : type === 'reset-password'
+                  ? ''
+                  : 'Bem-vindo ao WhyApp! Registre-se para que possa começar a conversar'}
+        </p>
+      </Flex>
+      <Form form={handleForm} onFinish={onSubmit} layout="vertical">
+        {/* username */}
         {type === 'register' && (
           <Form.Item
             label="Nome"
@@ -100,9 +98,12 @@ const Auth = ({
             />
           </Form.Item>
         )}
-        {(type === 'register' || type === 'login') && (
+        {/* email */}
+        {(type === 'register' ||
+          type === 'login' ||
+          type === 'forgot-password') && (
           <Form.Item
-            label="E-mail"
+            label="Email"
             name="email"
             rules={[
               { required: true, message: 'Digite seu e-mail' },
@@ -122,56 +123,52 @@ const Auth = ({
             />
           </Form.Item>
         )}
-
+        {/* password and forgot password link */}
         <Flex vertical style={{ position: 'relative' }}>
-          <Form.Item
-            label={type === 'forgot-password' ? 'Nova senha' : 'Senha'}
-            name="password"
-            rules={[
-              { required: true, message: 'Digite sua senha' },
-              { min: 8, message: 'Mínimo 8 caracteres' },
-            ]}
-            className={styles.label}
-            labelCol={{ className: styles.label__col }}
-            style={{
-              position: 'relative',
-              marginBottom: type === 'login' ? 30 : '',
-            }}
-          >
-            <Input.Password
-              placeholder={
-                type === 'forgot-password'
-                  ? 'Digite a nova senha'
-                  : 'Digite sua senha'
-              }
-              size="large"
-              className={styles.input}
-              name="wa-password"
-              id="wa-password"
-              autoComplete="wa-password"
-              prefix={<LockOutlined />}
-            />
-          </Form.Item>
+          {type !== 'forgot-password' && type !== 'reset-password-code' && (
+            <Form.Item
+              label={type === 'reset-password' ? 'Nova senha' : 'Senha'}
+              name="password"
+              rules={[
+                { required: true, message: 'Digite sua senha' },
+                { min: 8, message: 'Mínimo 8 caracteres' },
+              ]}
+              className={styles.label}
+              labelCol={{ className: styles.label__col }}
+              style={{
+                position: 'relative',
+                marginBottom: type === 'login' ? 30 : '',
+              }}
+            >
+              <Input.Password
+                placeholder={
+                  type === 'reset-password'
+                    ? 'Digite a nova senha'
+                    : 'Digite sua senha'
+                }
+                size="large"
+                className={styles.input}
+                name="wa-password"
+                id="wa-password"
+                autoComplete="wa-password"
+                prefix={<LockOutlined />}
+              />
+            </Form.Item>
+          )}
+          {/* confirm password or enter new password */}
           {type === 'login' && (
             <Link
+              className={styles.auth__forgot_password}
               to="/forgot-password"
-              style={{
-                color: '#39FF14',
-                textDecoration: 'underline',
-                position: 'absolute',
-                right: 0,
-                bottom: 10,
-                fontSize: '.8rem',
-              }}
             >
               Esqueci minha senha
             </Link>
           )}
         </Flex>
-        {(type === 'register' || type === 'forgot-password') && (
+        {(type === 'register' || type === 'reset-password') && (
           <Form.Item
             label={
-              type === 'forgot-password'
+              type === 'reset-password'
                 ? 'Confirmar nova senha'
                 : 'Confirmar senha'
             }
@@ -183,9 +180,7 @@ const Auth = ({
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve()
                   }
-                  return Promise.reject(
-                    new Error('A senha que você digitou não corresponde!'),
-                  )
+                  return Promise.reject(new Error('As senhas não conferem.'))
                 },
               }),
             ]}
@@ -194,7 +189,7 @@ const Auth = ({
           >
             <Input.Password
               placeholder={
-                type === 'forgot-password'
+                type === 'reset-password'
                   ? 'Confirme a nova senha'
                   : 'Confirme sua senha'
               }
@@ -207,6 +202,34 @@ const Auth = ({
             />
           </Form.Item>
         )}
+        {/* forgot password code */}
+        {type === 'reset-password-code' && (
+          <Form.Item
+            label="Código de 6 digitos"
+            name="code"
+            rules={[
+              { required: true, message: 'Digite um código válido' },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('code') === value) {
+                    return Promise.resolve()
+                  }
+                  return Promise.reject(
+                    new Error('O código que você digitou não corresponde!'),
+                  )
+                },
+              }),
+            ]}
+            className={styles.label}
+            labelCol={{ className: styles.label__col }}
+          >
+            <Input.OTP
+              size="large"
+              className={styles.input}
+              id="wa-reset-password-code"
+            />
+          </Form.Item>
+        )}
         <Button
           htmlType="submit"
           style={{ width: '100%' }}
@@ -216,66 +239,48 @@ const Auth = ({
         >
           {type === 'login'
             ? 'Entrar'
-            : type === 'forgot-password'
+            : type === 'reset-password'
               ? 'confirmar'
-              : 'Cadastrar'}
+              : type === 'forgot-password'
+                ? 'enviar código'
+                : type === 'reset-password-code'
+                  ? 'confirmar código'
+                  : 'Cadastrar'}
         </Button>
       </Form>
+      {/* login thirty party */}
       {(type === 'register' || type === 'login') && (
-        <Flex
-          className={styles.auth_alternative}
-          vertical
-          align="center"
-          gap={10}
-        >
-          <div
-            style={{
-              color: 'rgb(255 255 255 / 81%)',
-              borderBottom: '2px solid rgb(255 255 255 / 51%)',
-              paddingBottom: 5,
-            }}
-          >
-            {type === 'login' ? 'Não tem conta?' : 'Ja tem conta?'}{' '}
+        <Flex vertical gap={24}>
+          <div className={styles.auth__secundary_action}>
+            {type === 'login' ? 'Não tem conta?' : 'Já tem conta?'}{' '}
             <Link
               to={type === 'login' ? '/register' : '/login'}
-              style={{
-                color: 'rgb(255 255 255 / 81%)',
-                fontWeight: '600',
-              }}
+              className={styles.auth__link}
             >
               {type === 'login' ? 'Crie uma' : 'Entre'}
             </Link>
           </div>
-          <div style={{ fontSize: '.8rem' }}>
-            {type === 'login' ? 'ou entre com' : 'ou cadastre-se com'}
-          </div>
-          <Flex align="center" gap={10}>
+          <Flex align="center" style={{ width: '100%' }} gap={8}>
             <Button
+              block
               onClick={authWithGoogle}
               size={'large'}
-              shape="circle"
-              icon={
-                <Icon icon="mdi:google" />
-              }
-              style={authButtonStyles}
+              icon={<Icon fontSize={20} icon="mdi:google" />}
+              className={styles.auth__login_thirty_party}
             />
             <Button
               onClick={authWithFacebook}
-              shape="circle"
+              block
               size={'large'}
-              icon={
-                <Icon icon="mdi:facebook" />
-              }
-              style={authButtonStyles}
+              icon={<Icon fontSize={20} icon="mdi:facebook" />}
+              className={styles.auth__login_thirty_party}
             />
             <Button
               onClick={authWithApple}
-              shape="circle"
               size={'large'}
-              icon={
-                <Icon icon="mdi:apple" /> 
-              }
-              style={authButtonStyles}
+              block
+              icon={<Icon fontSize={20} icon="mdi:apple" />}
+              className={styles.auth__login_thirty_party}
             />
           </Flex>
         </Flex>

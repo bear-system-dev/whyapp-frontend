@@ -1,4 +1,4 @@
-import ImageProfile from '@/components/profile/imageProfile'
+import ProfileImage from '@/components/Profile/ProfileImage'
 import { Flex } from 'antd'
 import React from 'react'
 import NameContact from './components/NameContact'
@@ -21,7 +21,7 @@ export const UserCard = ({ image, name, onClick }: UserCardProps) => {
       style={userCardStyle}
       onClick={onClick}
     >
-      <ImageProfile image={image} size="2.5rem" />
+      <ProfileImage image={image} size="2.5rem" />
       <Flex vertical>
         <NameContact name={name} />
       </Flex>

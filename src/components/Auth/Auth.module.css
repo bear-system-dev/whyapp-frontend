@@ -1,43 +1,194 @@
 .auth__title {
   font-size: 32px;
+  margin: 0 0 4px;
   text-decoration: underline;
-  text-underline-offset: 8px;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 1px;
 }
 
-.auth__description{
+.auth__description {
   font-size: 1rem;
-  color:#ffffffaf;
+  color: var(--neutral-50);
 }
+
+.auth__return_button {
+  display: flex;
+  align-items: center;
+  background-color: transparent !important;
+  border: none;
+  padding: 8px 0;
+  cursor: pointer;
+  color: var(--pure-primary) !important;
+  transition: background, color, 200ms ease-in;
+}
+
+.auth__return_button:hover {
+  outline: 1px solid var(--pure-primary) !important;
+  padding: 8px;
+  background: transparent !important;
+}
+
 
 .label label {
   color: #fff !important;
   font-size: 15px !important;
-  font-weight: 500;
+  font-weight: 700;
 }
+
 .label__col {
   padding: 0 !important;
 }
 
 .input {
-  background: rgb(241, 241, 241);
-  background: linear-gradient(90deg, rgba(241, 241, 241, 0.386) 0%, rgba(176, 176, 176, 0) 101%) !important;
+  background: var(--neutral-50, rgb(241, 241, 241));
+  background: linear-gradient(90deg, #c1c6cd30 0%, #c1c6cd10 101%) !important;
   color: #fff;
+  padding: 12px;
   border: none !important;
 }
+
+:global(.ant-otp-input) {
+  background: linear-gradient(90deg, #c1c6cd30 0%, #c1c6cd10 101%) !important;
+  border: none;
+  color: #FFF;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
 .input::placeholder,
 .input input::placeholder,
 .input svg {
-  color: #ffffff92 !important;
+  color: var(--neutral-50) !important;
 }
 
-.submit{
-  background-color: rgb(57,255,20);
+.submit {
+  background-color: var(--pure-primary);
   text-transform: uppercase;
+  letter-spacing: 1px;
   font-weight: 700;
   font-size: 14px;
-  color: #000;
+  color: var(--shadow-primary-700) !important;
   border: none;
+  margin-top: 8px;
+  transition: background 200ms ease-in;
 }
-.submit:hover{
-  background-color: #88ff74 !important;
+
+.submit:hover {
+  background-color: var(--shadow-primary-100) !important;
+}
+
+.auth__login_thirty_party {
+  display: block;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--neutral-500);
+  transition: color, box-shadow, background 100ms ease-in !important;
+  transition-delay: 0ms !important;
+}
+
+.auth__login_thirty_party:hover,
+.auth__login_thirty_party:active {
+  color: var(--pure-secondary) !important;
+  background: var(--neutral-20) !important;
+}
+
+.auth__login_thirty_party_label {
+  font-size: 14px;
+  position: relative;
+}
+
+.auth__login_thirty_party_label::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: calc(100% + 32px);
+  transform: translateX(-16px);
+  height: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, .5);
+}
+
+.auth__forgot_password {
+  align-self: end;
+  width: max-content;
+  text-align: right;
+  color: var(--neutral-10) !important;
+  font-size: 14px;
+  padding: 4px 0;
+  transition: color 100ms ease-in;
+}
+
+.auth__forgot_password:hover {
+  color: var(--t-primary-20) !important;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.auth__secundary_action {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.auth__link {
+  /* Fallback */
+  color: var(--pure-secondary);
+  color: color-mix(in srgb, var(--pure-secondary) 50%, #fff);
+  font-weight: 500;
+  padding: 8px 0;
+}
+
+.auth__link,
+.auth__forgot_password {
+  transition: color 100ms ease-in;
+}
+
+.auth__link:hover {
+  /* Fallback */
+  color: var(--pure-secondary);
+  color: color-mix(in srgb, var(--pure-secondary) 20%, #fff);
+}
+
+@media (prefers-color-scheme: dark) {
+  .auth__return_button {
+    color: var(--t-primary-10) !important;
+  }
+
+  .auth__return_button:hover {
+    padding: 8px;
+    background: transparent !important;
+    color: var(--t-primary-20) !important;
+    outline: 1px solid var(--t-primary-20) !important;
+  }
+
+  .auth__forgot_password {
+    color: var(--neutral-50) !important;
+  }
+
+  .auth__forgot_password:hover {
+    color: var(--neutral-0) !important;
+  }
+
+  .submit {
+    background: var(--t-primary-10);
+  }
+
+  .submit:hover {
+    background: var(--t-primary-20)
+  }
+
+  .input {
+    background: linear-gradient(90deg, #474E5740 0%, #474E5710 101%) !important;
+  }
+
+  .auth__login_thirty_party {
+    color: var(--neutral-100);
+    background: var(--neutral-700);
+    box-shadow: 0 0 0 1px var(--neutral-600) !important;
+  }
+
+  .auth__login_thirty_party:hover {
+    background: var(--neutral-800) !important;
+    box-shadow: 0 0 0 1px var(--neutral-500) !important;
+  }
 }

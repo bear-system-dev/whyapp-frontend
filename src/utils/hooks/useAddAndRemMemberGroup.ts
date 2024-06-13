@@ -1,5 +1,5 @@
 import { apiFunction } from '@/api/api'
-import { FriendsPostProps } from '@/components/menuInfo/components/modalAlert'
+import { FriendsPostProps } from '@/components/MenuInfo/components/ModalAlert'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const AddMemberMutation = () => {
@@ -28,7 +28,7 @@ export const AddMemberMutation = () => {
 export const RemMemberMutation = () => {
   const queryClient = useQueryClient()
 
-  const remMembersGroup = useMutation({
+  const removeMembersGroup = useMutation({
     mutationFn: ({
       groupId,
       members,
@@ -36,7 +36,7 @@ export const RemMemberMutation = () => {
       groupId: string | undefined
       members: FriendsPostProps[]
     }) => {
-      return apiFunction.remMembersGroup(groupId, members)
+      return apiFunction.removeMembersGroup(groupId, members)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['members'] })
@@ -47,5 +47,5 @@ export const RemMemberMutation = () => {
     },
   })
 
-  return remMembersGroup
+  return removeMembersGroup
 }
