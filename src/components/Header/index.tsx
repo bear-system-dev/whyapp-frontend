@@ -2,9 +2,9 @@ import defaultAvatar from '@/assets/defaultAvatar.svg'
 import ProfileImage from '@/components/Profile/ProfileImage'
 import ProfileName from '@/components/Profile/ProfileName'
 import { ChatContext } from '@/contexts/chatContext'
-import { MenuOutlined } from '@ant-design/icons'
+import { LeftOutlined, MenuOutlined } from '@ant-design/icons'
 import { Button, Flex } from 'antd'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { resetButtonStyles } from '../../mocks/mockUserArray'
 import MenuInfo from '../MenuInfo'
 import ContactGroup from './components/GroupsContacts'
@@ -24,13 +24,35 @@ const HeaderChat = ({
   setOpenMainAside,
   openMainAside,
 }: HeaderProps) => {
-  const { recipient, recipientGroup } = useContext(ChatContext)
+  const { recipient, recipientGroup, setRecipient, setRecipientGroup } =
+    useContext(ChatContext)
   const [profileInfoMenuOpen, setprofileInfoMenuOpen] = useState(false)
   const onCloseMenu = () => {
     setprofileInfoMenuOpen(!profileInfoMenuOpen)
   }
+
+  useEffect(() => {
+    function onUsePressEscSetRecipientNull(event: KeyboardEvent) {
+      if (event.key === 'Escape' || event.key === 'Esc') {
+        setRecipient(null)
+        setRecipientGroup(null)
+      }
+    }
+    window.addEventListener('keydown', onUsePressEscSetRecipientNull)
+    return () => {
+      window.removeEventListener('keydown', onUsePressEscSetRecipientNull)
+    }
+  }, [setRecipient, setRecipientGroup])
+
   return (
     <HeaderContainer>
+      <LeftOutlined
+        style={{ color: '#FFFFFF' }}
+        onClick={() => {
+          setRecipient(null)
+          setRecipientGroup(null)
+        }}
+      />
       {!openMainAside && (
         <MenuOutlined
           onClick={() => setOpenMainAside(!openMainAside)}
