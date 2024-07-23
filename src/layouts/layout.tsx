@@ -6,9 +6,10 @@ import HeaderChat from '@/components/Header'
 import { InputBar } from '@/components/InputBar'
 import MenuGroup from '@/components/MenuGroup'
 import { Welcome } from '@/components/Welcome'
-import { ChatBackgroundContext } from '@/contexts/chatBackgroundContext'
 import { ChatContext } from '@/contexts/chatContext'
 import styles from '@/pages/App/app.module.css'
+import { useStateBackGround } from '@/reducer/context/background/backgroundContext'
+import { useGetBackground } from '@/reducer/context/background/useGetBackground'
 import { useNotificationsSocket } from '@/utils/hooks/useNotificationsSocket'
 import { MenuOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
@@ -21,14 +22,14 @@ export const AppLayout = () => {
   const userId = Cookies.get('userId')
   const navigate = useNavigate()
   useNotificationsSocket()
+  useGetBackground()
 
   if (!token || !userId) {
     navigate('/login')
   }
 
+  const { color1, color2 } = useStateBackGround()
   const { recipient, recipientGroup } = useContext(ChatContext)
-  const { chatBackgroundStyle } = useContext(ChatBackgroundContext)
-
   const [openModal, setOpenModal] = useState(false)
   const [openMainAside, setOpenMainAside] = useState(true)
   const [showUpload, setShowUpload] = useState(false)
@@ -63,8 +64,8 @@ export const AppLayout = () => {
             align="center"
             className={styles.chat__background}
             style={{
-              background: `linear-gradient(${chatBackgroundStyle.color1}, ${
-                chatBackgroundStyle.color2 || 'transparent'
+              background: `linear-gradient(${color1}, ${
+                color2 || 'transparent'
               })`,
             }}
           >

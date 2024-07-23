@@ -1,11 +1,14 @@
 import { ChatContext } from '@/contexts/chatContext'
-import { SearchContext } from '@/contexts/searchContext'
+import {
+  useDispatchSearch,
+  useStateSearch,
+} from '@/reducer/context/search/searchContext'
 import { getMatchCounts } from '@/utils/helpers/activeIndex'
 import { ChangeEvent, useContext, useEffect } from 'react'
 
 export const useSearch = () => {
-  const { searchTerm, setSearchTerm, activeIndex, setActiveIndex } =
-    useContext(SearchContext)
+  const { searchTerm, activeIndex } = useStateSearch()
+  const { setActiveIndex, setSearchTerm } = useDispatchSearch()
 
   const { messages } = useContext(ChatContext)
 

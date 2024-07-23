@@ -1,11 +1,10 @@
-import { ChatBackgroundContext } from '@/contexts/chatBackgroundContext'
 import { Button, Col, ColorPicker, Row } from 'antd'
-import { useContext } from 'react'
 import { presetBackgroundColors } from './PresetBackgroundColors'
 import './styles.css'
+import { useDispatchBackGround } from '@/reducer/context/background/backgroundContext'
 
 export const ColorsGrid = () => {
-  const { setChatBackgroundStyle } = useContext(ChatBackgroundContext)
+  const { setBackGroundColors } = useDispatchBackGround()
 
   const generateGradient = (
     color1: string | undefined,
@@ -16,7 +15,7 @@ export const ColorsGrid = () => {
 
   function handleColorSelection(color1: string, color2: string) {
     color2 = color2 || color1
-    setChatBackgroundStyle({ color1, color2 })
+    setBackGroundColors({ color1, color2 })
     localStorage.setItem(
       'chatBackgroundStyle',
       JSON.stringify({ color1, color2 }),

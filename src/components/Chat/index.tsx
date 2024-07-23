@@ -1,5 +1,4 @@
 import { ChatContext } from '@/contexts/chatContext'
-import { SearchContext } from '@/contexts/searchContext'
 import {
   getLocalActiveIndex,
   getMatchCounts,
@@ -13,6 +12,7 @@ import Highlighter from 'react-highlight-words'
 import ChatBubble from '../ChatBubble'
 import GroupChatBubble from '../ChatBubble/GroupChatBubble'
 import './styles.css'
+import { useStateSearch } from '@/reducer/context/search/searchContext'
 
 export const Chat = () => {
   const [tokenExpired, setTokenExpired] = useState(false)
@@ -26,7 +26,7 @@ export const Chat = () => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'auto' })
   }, [messages, groupMessages])
 
-  const { searchTerm, activeIndex } = useContext(SearchContext)
+  const { searchTerm, activeIndex } = useStateSearch()
 
   const matchCounts = getMatchCounts(messages, searchTerm)
 

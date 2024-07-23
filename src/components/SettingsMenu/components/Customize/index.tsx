@@ -1,11 +1,10 @@
-import { Theme, ThemeContext } from '@/contexts/themeContext'
 import { Flex, Select } from 'antd'
-import { useContext } from 'react'
 import { ColorsGrid } from './ColorsGrid'
 import './styles.css'
+import { Theme, useDispatchTheme } from '@/reducer/context/theme/themeContext'
 
 export const Customize = () => {
-  const { setTheme } = useContext(ThemeContext)
+  const { setTheme } = useDispatchTheme()
 
   const handleThemeChange = (value: Theme) => {
     setTheme(value)
