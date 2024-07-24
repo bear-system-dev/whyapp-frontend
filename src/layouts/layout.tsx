@@ -6,15 +6,15 @@ import HeaderChat from '@/components/Header'
 import { InputBar } from '@/components/InputBar'
 import MenuGroup from '@/components/MenuGroup'
 import { Welcome } from '@/components/Welcome'
-import { ChatContext } from '@/contexts/chatContext'
 import styles from '@/pages/App/app.module.css'
 import { useStateBackGround } from '@/reducer/context/background/backgroundContext'
 import { useGetBackground } from '@/reducer/context/background/useGetBackground'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext'
 import { useNotificationsSocket } from '@/utils/hooks/useNotificationsSocket'
 import { MenuOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
 import Cookies from 'js-cookie'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export const AppLayout = () => {
@@ -29,7 +29,7 @@ export const AppLayout = () => {
   }
 
   const { color1, color2 } = useStateBackGround()
-  const { recipient, recipientGroup } = useContext(ChatContext)
+  const { recipient, recipientGroup } = useStateRecipient()
   const [openModal, setOpenModal] = useState(false)
   const [openMainAside, setOpenMainAside] = useState(true)
   const [showUpload, setShowUpload] = useState(false)

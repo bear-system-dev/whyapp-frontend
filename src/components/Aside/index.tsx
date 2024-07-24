@@ -1,13 +1,12 @@
 import whyAppLogo from '@/assets/whyAppLogo.png'
-import { ChatContext } from '@/contexts/chatContext'
 import { useGetFriendsList } from '@/utils/hooks/useGetFriendsList'
 import { useGetGroupsChats } from '@/utils/hooks/useGroupChats'
 import { Avatar, Button, Flex } from 'antd'
-import { useContext } from 'react'
 import { NewChat } from '../NewChat'
 import { Search } from '../Search'
 import { SettingsMenu } from '../SettingsMenu'
 import styles from './aside.module.css'
+import { useDispatchRecipient } from '@/reducer/context/recipient/recipientContext'
 
 interface AsideProps {
   setOpenMainAside: React.Dispatch<React.SetStateAction<boolean>>
@@ -15,7 +14,7 @@ interface AsideProps {
 }
 
 export const Aside = ({ openMainAside, setOpenMainAside }: AsideProps) => {
-  const { setRecipient, setRecipientGroup } = useContext(ChatContext)
+  const { setRecipient, setRecipientGroup } = useDispatchRecipient()
   const { friendsList } = useGetFriendsList()
   const { groupsList } = useGetGroupsChats()
 

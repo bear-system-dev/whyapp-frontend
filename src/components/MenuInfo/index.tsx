@@ -1,15 +1,15 @@
-import { ChatContext } from '@/contexts/chatContext'
 import {
   AddMemberMutation,
   RemMemberMutation,
 } from '@/utils/hooks/useAddAndRemMemberGroup.ts'
 import { Drawer, notification } from 'antd'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MenuPrivateUSer } from './MenuPrivate/index.tsx'
 import { MenuInfoGroup } from './components/MenuGroup/index.tsx'
 import { FriendsPostProps, ModalAlert } from './components/ModalAlert/index.tsx'
 import { AddModalButton } from './components/ModalAlert/style/style.tsx'
 import { menuContainer } from './styles/style.tsx'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext.ts'
 
 interface MenuInfoProps {
   open: boolean
@@ -30,7 +30,7 @@ const MenuInfo = ({
   setprofileInfoMenuOpen,
 }: MenuInfoProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { recipientGroup, recipient } = useContext(ChatContext)
+  const { recipientGroup, recipient } = useStateRecipient()
   const [members, setMembers] = useState<FriendsPostProps[]>([])
   const [tagModal, setTagModal] = useState<Tagmodal>()
   const addMemberMutation = AddMemberMutation()

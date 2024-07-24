@@ -1,11 +1,9 @@
 import defaultAvatar from '@/assets/defaultAvatar.svg'
 import ProfileImage from '@/components/Profile/ProfileImage'
-import { ChatContext } from '@/contexts/chatContext'
 import { useRecipientOnlineStatus } from '@/utils/hooks/useRecipientOnlineStatus'
 import { UserOutlined } from '@ant-design/icons'
 import { Icon } from '@iconify/react'
 import { Flex } from 'antd'
-import { useContext } from 'react'
 import { ButtonRemove } from '../components/ButtonRemove'
 import { DescriptionUsers } from '../components/DescriptionUser'
 import ProfileName from '../components/ProfileName'
@@ -15,13 +13,14 @@ import {
   imageProfileStyle,
   stutusProfileStyle,
 } from '../styles/style'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext'
 
 interface MenuInfoPrivateProps {
   onClose: () => void
 }
 
 export const MenuPrivateUSer = ({ onClose }: MenuInfoPrivateProps) => {
-  const { recipient } = useContext(ChatContext)
+  const { recipient } = useStateRecipient()
   const { recipientOnlineStatus } = useRecipientOnlineStatus()
 
   return (

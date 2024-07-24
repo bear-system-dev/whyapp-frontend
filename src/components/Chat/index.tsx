@@ -1,4 +1,3 @@
-import { ChatContext } from '@/contexts/chatContext'
 import {
   getLocalActiveIndex,
   getMatchCounts,
@@ -7,16 +6,19 @@ import { useChatSocket } from '@/utils/hooks/useChatSocket'
 import { useGroupChatSocket } from '@/utils/hooks/useGroupChatSocket'
 import { Alert, Flex } from 'antd'
 import Cookies from 'js-cookie'
-import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Highlighter from 'react-highlight-words'
 import ChatBubble from '../ChatBubble'
 import GroupChatBubble from '../ChatBubble/GroupChatBubble'
 import './styles.css'
 import { useStateSearch } from '@/reducer/context/search/searchContext'
+import { useStateMessages } from '@/reducer/context/messages/messagesContext'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext'
 
 export const Chat = () => {
   const [tokenExpired, setTokenExpired] = useState(false)
-  const { recipient, messages, groupMessages } = useContext(ChatContext)
+  const { recipient } = useStateRecipient()
+  const { messages, groupMessages } = useStateMessages()
   const { userId } = useChatSocket()
   const { recipientGroupId } = useGroupChatSocket()
 

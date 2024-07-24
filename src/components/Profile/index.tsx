@@ -1,18 +1,17 @@
 import defaultAvatar from '@/assets/defaultAvatar.svg'
-import { ChatContext } from '@/contexts/chatContext'
 import { useGetAllUsersList } from '@/utils/hooks/useGetAllUsersList'
 import { Flex } from 'antd'
-import { useContext } from 'react'
 import ProfileImage from './ProfileImage'
 import ProfileName from './ProfileName'
 import UserRole from './Role'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext'
 
 type ProfileContactProps = {
   fromUserId?: string
 }
 
 export default function ProfileContact({ fromUserId }: ProfileContactProps) {
-  const { recipientGroup } = useContext(ChatContext)
+  const { recipientGroup } = useStateRecipient()
   const { users } = useGetAllUsersList()
 
   const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {

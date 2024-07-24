@@ -1,6 +1,5 @@
 import { newChatButtonStyle } from '@/components/NewChat/components/FindUser'
 import { UserCard } from '@/components/NewChat/components/UserCard'
-import { ChatContext } from '@/contexts/chatContext'
 import { User } from '@/model/UserModel'
 import { useGetAllUsersList } from '@/utils/hooks/useGetAllUsersList'
 import { useGetFriendsList } from '@/utils/hooks/useGetFriendsList'
@@ -11,7 +10,7 @@ import {
 } from '@ant-design/icons'
 import { Button, Flex, Modal } from 'antd'
 import Cookies from 'js-cookie'
-import React, { useContext, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Tagmodal } from '../..'
 import {
   containerButtonModal,
@@ -24,6 +23,7 @@ import {
   usersContainerStyle,
 } from './style/style'
 import './styles.css'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext'
 
 export type FriendsPostProps = {
   adicionadoPor: string | undefined
@@ -50,7 +50,7 @@ export const ModalAlert = ({
   setIsModalOpen,
   tagModal,
 }: ModalAlertProps) => {
-  const { recipientGroup } = useContext(ChatContext)
+  const { recipientGroup } = useStateRecipient()
   const userId = Cookies.get('userId')
   const { friendsList } = useGetFriendsList()
   const buttonRef = useRef(null)

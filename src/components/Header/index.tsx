@@ -1,15 +1,18 @@
 import defaultAvatar from '@/assets/defaultAvatar.svg'
 import ProfileImage from '@/components/Profile/ProfileImage'
 import ProfileName from '@/components/Profile/ProfileName'
-import { ChatContext } from '@/contexts/chatContext'
 import { LeftOutlined, MenuOutlined } from '@ant-design/icons'
 import { Button, Flex } from 'antd'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { resetButtonStyles } from '../../mocks/mockUserArray'
 import MenuInfo from '../MenuInfo'
 import ContactGroup from './components/GroupsContacts'
 import HeaderContainer from './components/HeaderContainer'
 import StatusContact from './components/statusgroups'
+import {
+  useDispatchRecipient,
+  useStateRecipient,
+} from '@/reducer/context/recipient/recipientContext'
 
 interface HeaderProps {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -24,8 +27,8 @@ const HeaderChat = ({
   setOpenMainAside,
   openMainAside,
 }: HeaderProps) => {
-  const { recipient, recipientGroup, setRecipient, setRecipientGroup } =
-    useContext(ChatContext)
+  const { recipient, recipientGroup } = useStateRecipient()
+  const { setRecipient, setRecipientGroup } = useDispatchRecipient()
   const [profileInfoMenuOpen, setprofileInfoMenuOpen] = useState(false)
   const onCloseMenu = () => {
     setprofileInfoMenuOpen(!profileInfoMenuOpen)

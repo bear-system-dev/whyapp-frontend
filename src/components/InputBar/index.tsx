@@ -1,23 +1,23 @@
 import emojiIcon from '@/assets/emojiIcon.png'
-import { ChatContext } from '@/contexts/chatContext'
 import { useChatSocket } from '@/utils/hooks/useChatSocket'
 import { useGroupChatSocket } from '@/utils/hooks/useGroupChatSocket'
 import { SendNewGroupMessage } from '@/utils/hooks/useSendNewGroupMessage'
 import { PaperClipOutlined, SendOutlined } from '@ant-design/icons'
 import { Button, Flex, Input, Space } from 'antd'
 import { EmojiClickData } from 'emoji-picker-react'
-import { ChangeEvent, KeyboardEvent, useContext, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { resetButtonStyles } from './../../mocks/mockUserArray'
 import { EmojiLibrary } from './EmojiPicker'
 import './style.css'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext'
 
 type InputBarProps = {
   setShowUpload: React.Dispatch<React.SetStateAction<boolean>>
   showUpload: boolean
 }
 
-export function InputBar({setShowUpload, showUpload}:InputBarProps) {
-  const { recipient, recipientGroup } = useContext(ChatContext)
+export function InputBar({ setShowUpload, showUpload }: InputBarProps) {
+  const { recipient, recipientGroup } = useStateRecipient()
   const { socket } = useChatSocket()
   const { recipientGroupId } = useGroupChatSocket()
   const [inputValue, setInputValue] = useState<string>('')
@@ -45,7 +45,7 @@ export function InputBar({setShowUpload, showUpload}:InputBarProps) {
   const handleInputOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const message = event?.target.value
     setCloseIconFile(false)
-    if(message.length === 0) {
+    if (message.length === 0) {
       setCloseIconFile(true)
     }
     setInputValue(event?.target.value)
@@ -76,22 +76,20 @@ export function InputBar({setShowUpload, showUpload}:InputBarProps) {
           <img src={emojiIcon} alt="emoji icon" height={'100%'} />
         </Button>
         <EmojiLibrary open={showEmojis} handleEmoji={handleEmoji} />
-        {
-          closeIconFile && (
-            <Button
-              className="attach-button"
-              icon={<PaperClipOutlined style={{ fontSize: 25 }} />}
-              onClick={() => setShowUpload(!showUpload)}
-              type="text"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              disabled={!recipient && !recipientGroup}
-            />
-          )
-        }
+        {closeIconFile && (
+          <Button
+            className="attach-button"
+            icon={<PaperClipOutlined style={{ fontSize: 25 }} />}
+            onClick={() => setShowUpload(!showUpload)}
+            type="text"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            disabled={!recipient && !recipientGroup}
+          />
+        )}
       </Flex>
       <Space.Compact className="input-bar__container">
         <Input

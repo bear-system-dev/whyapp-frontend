@@ -1,8 +1,9 @@
-import { ChatContext } from '@/contexts/chatContext'
-import { useContext } from 'react'
+import { useStateIsOnline } from '@/reducer/context/isOnline/isOnline'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext'
 
 export const useRecipientOnlineStatus = () => {
-  const { isOnline, recipient } = useContext(ChatContext)
+  const { recipient } = useStateRecipient()
+  const { isOnline } = useStateIsOnline()
 
   const recipientOnlineStatus = isOnline.find(
     (isUserOnline) => isUserOnline.id === recipient?.id,

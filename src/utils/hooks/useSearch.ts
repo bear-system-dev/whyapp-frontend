@@ -1,16 +1,16 @@
-import { ChatContext } from '@/contexts/chatContext'
+import { useStateMessages } from '@/reducer/context/messages/messagesContext'
 import {
   useDispatchSearch,
   useStateSearch,
 } from '@/reducer/context/search/searchContext'
 import { getMatchCounts } from '@/utils/helpers/activeIndex'
-import { ChangeEvent, useContext, useEffect } from 'react'
+import { ChangeEvent, useEffect } from 'react'
 
 export const useSearch = () => {
   const { searchTerm, activeIndex } = useStateSearch()
   const { setActiveIndex, setSearchTerm } = useDispatchSearch()
 
-  const { messages } = useContext(ChatContext)
+  const { messages } = useStateMessages()
 
   const matchCounts = getMatchCounts(messages, searchTerm)
   const totalMatches = matchCounts.reduce((a, b) => a + b, 0)

@@ -1,13 +1,15 @@
 import { apiFunction } from '@/api/api'
-import { ChatContext } from '@/contexts/chatContext'
 import { GroupMessage } from '@/model/GroupMessageModel'
+import { useDispatchMessages } from '@/reducer/context/messages/messagesContext'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext'
 import { useQuery } from '@tanstack/react-query'
 import Cookies from 'js-cookie'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Socket, io } from 'socket.io-client'
 
 export const useGroupChatSocket = () => {
-  const { recipientGroup, setGroupMessages } = useContext(ChatContext)
+  const { recipientGroup } = useStateRecipient()
+  const { setGroupMessages, setGroupMessagesArray } = useDispatchMessages()
   const [socket, setSocket] = useState<Socket | null>(null)
 
   const URL = `${import.meta.env.VITE_APP_BASE_URL}/group-chats`
@@ -26,7 +28,7 @@ export const useGroupChatSocket = () => {
 
   useEffect(() => {
     if (groupMessagesData) {
-      setGroupMessages(groupMessagesData)
+      setGroupMessagesArray(groupMessagesData)
     }
   }, [groupMessagesData])
 
@@ -40,17 +42,7 @@ export const useGroupChatSocket = () => {
         }
 
         newSocket.on('newGroupMessage', (newGroupMessage: GroupMessage) => {
-          setGroupMessages((previousGroupMessages) => {
-            const messageExists = previousGroupMessages.some(
-              (message) => message.id === newGroupMessage.id,
-            )
-
-            if (messageExists) {
-              return previousGroupMessages
-            }
-
-            return [...previousGroupMessages, newGroupMessage]
-          })
+          setGroupMessages(newGroupMessage)
         })
 
         newSocket.on('error', (data) => {

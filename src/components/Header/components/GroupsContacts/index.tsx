@@ -1,10 +1,9 @@
-import { ChatContext } from '@/contexts/chatContext'
 import { useGetAllUsersList } from '@/utils/hooks/useGetAllUsersList'
-import { useContext } from 'react'
 import { ContainerStyle, TextStyle } from './style'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext'
 
 const GroupsContacts = () => {
-  const { recipientGroup } = useContext(ChatContext)
+  const { recipientGroup } = useStateRecipient()
   const { users } = useGetAllUsersList()
 
   const groupUsers = recipientGroup?.usuarios?.map((groupUser) => {

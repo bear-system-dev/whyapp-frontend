@@ -1,13 +1,11 @@
-import { ChatContext } from '@/contexts/chatContext'
 import { User } from '@/model/UserModel'
-
 import { RemoveFriendMutation } from '@/utils/hooks/useAddAndRemoveFriends'
 import { useGetFriendsList } from '@/utils/hooks/useGetFriendsList'
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Flex } from 'antd'
 import Cookies from 'js-cookie'
-import { useContext } from 'react'
 import { UserCard } from '../UserCard'
+import { useDispatchRecipient } from '@/reducer/context/recipient/recipientContext'
 
 interface FriendsListProps {
   onClose: () => void
@@ -20,7 +18,7 @@ const newChatButtonStyle: React.CSSProperties = {
 }
 
 export const FriendsList = ({ onClose }: FriendsListProps) => {
-  const { setRecipient } = useContext(ChatContext)
+  const { setRecipient } = useDispatchRecipient()
   const userId = Cookies.get('userId')
   const { friendsList, friendsListLoading, friendsListError } =
     useGetFriendsList()

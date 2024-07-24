@@ -1,13 +1,13 @@
-import { ChatContext } from '@/contexts/chatContext'
 import Cookies from 'js-cookie'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Socket, io } from 'socket.io-client'
 import { useGetAllUsersList } from './useGetAllUsersList'
+import { useDispatchIsOnline } from '@/reducer/context/isOnline/isOnline'
 
 export const useNotificationsSocket = () => {
   const [socket, setSocket] = useState<Socket | null>(null)
   const { users } = useGetAllUsersList()
-  const { setIsOnline } = useContext(ChatContext)
+  const { setIsOnline } = useDispatchIsOnline()
 
   const URL = `${import.meta.env.VITE_APP_BASE_URL}/notifications`
   const userId = Cookies.get('userId')

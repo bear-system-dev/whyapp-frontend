@@ -1,7 +1,6 @@
-import { ChatContext } from '@/contexts/chatContext'
 import { useGetAllUsersList } from '@/utils/hooks/useGetAllUsersList'
 import { Button, Drawer, Flex } from 'antd'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import Contact from './Contact'
 import HeaderMenu from './HeaderMenu'
 import OfflineContainer from './OfflineContainer'
@@ -9,9 +8,10 @@ import OnlineContainer from './OnlineContainer'
 import OpenMenu from './OpenMenu'
 import { MenuContainer, SettingsButtonStyle } from './style'
 import './style.css'
+import { useStateRecipient } from '@/reducer/context/recipient/recipientContext'
 
 const MenuGroup = () => {
-  const { recipientGroup } = useContext(ChatContext)
+  const { recipientGroup } = useStateRecipient()
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false)
   const { users } = useGetAllUsersList()
 

@@ -1,16 +1,15 @@
-import { ChatContext } from '@/contexts/chatContext'
 import { User } from '@/model/UserModel'
-
 import { AddFriendMutation } from '@/utils/hooks/useAddAndRemoveFriends'
 import { useGetAllUsersList } from '@/utils/hooks/useGetAllUsersList'
 import { useGetFriendsList } from '@/utils/hooks/useGetFriendsList'
 import { PlusOutlined } from '@ant-design/icons'
 import { Button, Flex, Input } from 'antd'
 import Cookies from 'js-cookie'
-import { ChangeEvent, useContext, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import '../FindUser/styles.css'
 import { FriendsList } from '../FriendsList'
 import { UserCard } from '../UserCard'
+import { useDispatchRecipient } from '@/reducer/context/recipient/recipientContext'
 
 interface FindUserProps {
   onClose: () => void
@@ -35,7 +34,7 @@ export const newChatButtonStyle: React.CSSProperties = {
 }
 
 export const FindUser = ({ onClose }: FindUserProps) => {
-  const { setRecipient } = useContext(ChatContext)
+  const { setRecipient } = useDispatchRecipient()
   const [userNameSearchedList, setUserNameSearchedList] = useState('')
   const userId = Cookies.get('userId')
   const { users, usersListLoading, usersListError } = useGetAllUsersList()

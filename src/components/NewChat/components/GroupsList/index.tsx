@@ -1,16 +1,15 @@
-import { ChatContext } from '@/contexts/chatContext'
 import { useGetGroupsChats } from '@/utils/hooks/useGroupChats'
 import { Flex } from 'antd'
-import { useContext } from 'react'
 import { CreateNewGroupButton } from '../NewGroup'
 import { UserCard } from '../UserCard'
+import { useDispatchRecipient } from '@/reducer/context/recipient/recipientContext'
 
 interface GroupsListProps {
   onClose: () => void
 }
 
 export const GroupsList = ({ onClose }: GroupsListProps) => {
-  const { setRecipientGroup } = useContext(ChatContext)
+  const { setRecipientGroup } = useDispatchRecipient()
   const { groupsList, groupsLoading, groupsError } = useGetGroupsChats()
 
   return (
