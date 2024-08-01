@@ -3,6 +3,7 @@ import { Message } from '@/model/MessageModel'
 import { RootState } from '@/reducer/store/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { useDispatch, useSelector } from 'react-redux'
+import { useMemo } from 'react'
 
 interface MessagesState {
   messages: Message[]
@@ -57,15 +58,18 @@ export const useStateMessages = () =>
 
 export const useDispatchMessages = () => {
   const dispatch = useDispatch()
-  return {
-    setMessages: (message: Message) => dispatch(setMessages(message)),
-    setMessagesArray: (message: Message[]) =>
-      dispatch(setMessagesArray(message)),
-    setGroupMessages: (groupMessage: GroupMessage) =>
-      dispatch(setGroupMessages(groupMessage)),
-    setGroupMessagesArray: (groupMessage: GroupMessage[]) =>
-      dispatch(setGroupMessagesArray(groupMessage)),
-  }
+  return useMemo(
+    () => ({
+      setMessages: (message: Message) => dispatch(setMessages(message)),
+      setMessagesArray: (messages: Message[]) =>
+        dispatch(setMessagesArray(messages)),
+      setGroupMessages: (groupMessage: GroupMessage) =>
+        dispatch(setGroupMessages(groupMessage)),
+      setGroupMessagesArray: (groupMessages: GroupMessage[]) =>
+        dispatch(setGroupMessagesArray(groupMessages)),
+    }),
+    [dispatch],
+  )
 }
 
 export default messagesReducer.reducer

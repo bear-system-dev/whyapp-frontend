@@ -30,7 +30,7 @@ export const useGroupChatSocket = () => {
     if (groupMessagesData) {
       setGroupMessagesArray(groupMessagesData)
     }
-  }, [groupMessagesData])
+  }, [groupMessagesData, setGroupMessagesArray])
 
   useEffect(() => {
     if (userId && recipientGroupId) {
@@ -56,7 +56,7 @@ export const useGroupChatSocket = () => {
         newSocket.disconnect()
       }
     }
-  }, [recipientGroupId])
+  }, [URL, recipientGroupId, setGroupMessages, userId])
 
   return {
     recipientGroupId,

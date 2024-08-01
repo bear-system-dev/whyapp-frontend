@@ -8,7 +8,6 @@ export const useNotificationsSocket = () => {
   const [socket, setSocket] = useState<Socket | null>(null)
   const { users } = useGetAllUsersList()
   const { setIsOnline } = useDispatchIsOnline()
-
   const URL = `${import.meta.env.VITE_APP_BASE_URL}/notifications`
   const userId = Cookies.get('userId')
 
@@ -47,7 +46,7 @@ export const useNotificationsSocket = () => {
         newSocket.disconnect()
       }
     }
-  }, [])
+  }, [URL, setIsOnline, userId, users])
 
   return { socket, userId }
 }

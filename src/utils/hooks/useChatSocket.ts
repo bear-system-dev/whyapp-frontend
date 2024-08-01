@@ -35,7 +35,7 @@ export const useChatSocket = () => {
     if (!privateMessagesData) {
       setMessagesArray([])
     }
-  }, [privateMessagesData])
+  }, [privateMessagesData, setMessagesArray])
 
   useEffect(() => {
     if (userId && recipientId) {
@@ -66,7 +66,7 @@ export const useChatSocket = () => {
         newSocket.disconnect()
       }
     }
-  }, [recipient])
+  }, [URL, recipient, recipientId, setMessages, userId])
 
   return {
     socket,
